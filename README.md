@@ -328,7 +328,7 @@ The workflow at `.github/workflows/deploy.yml`:
 |---|---|
 | `VITE_API_URL` | `https://sentinelgraph-ai.onrender.com` (your Render URL) |
 
-**Expected URL:** `https://YOUR_USERNAME.github.io/sentinelgraph-ai/`
+**Expected URL:** `https://Hemachandru-BCA.github.io/Thupparivu-SIH26189/`
 
 ---
 
@@ -408,7 +408,7 @@ The demo computer needs only:
 
 To use the demo:
 
-1. Open `https://YOUR_USERNAME.github.io/sentinelgraph-ai/` in a browser
+1. Open `https://Hemachandru-BCA.github.io/Thupparivu-SIH26189/` in a browser
 2. The dashboard loads immediately (static files from GitHub Pages)
 3. API calls go to the Render backend automatically
 4. If the backend is sleeping, click **Retry request** on any section — it
@@ -429,6 +429,17 @@ The demo computer does **NOT** need:
 
 ## 15. Git commands to push
 
+This repo is already initialized with the correct remote. To push:
+
+```bash
+cd sentinelgraph-ai
+
+# Authenticate once (Personal Access Token or `gh auth login`), then:
+git push -u origin main
+```
+
+If you are starting a fresh clone, the full setup is:
+
 ```bash
 cd sentinelgraph-ai
 
@@ -436,7 +447,7 @@ git init
 git add .
 git commit -m "Prepare for GitHub Pages + Render deployment"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/sentinelgraph-ai.git
+git remote add origin https://github.com/Hemachandru-BCA/Thupparivu-SIH26189.git
 git push -u origin main
 ```
 

@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Base path = the GitHub repository name (so the app lives at
-      # https://<user>.github.io/<repo>/). Adjust if your repo is renamed.
-      BASE_PATH: /sentinelgraph-ai
+      # https://<user>.github.io/<repo>/). Change this to your exact repo name.
+      BASE_PATH: /Thupparivu-SIH26189
       # Production backend URL. Set this in GitHub repo Settings -> Secrets
       # and variables -> Actions -> Variables. Example:
       #   VITE_API_URL=https://sentinelgraph-ai.onrender.com
