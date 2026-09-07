@@ -1,0 +1,26 @@
+# Render Blueprint — SentinelGraph AI Backend
+#
+# Deploy with:  render deploy  (requires `render` CLI linked to your account)
+# Or import this file from the Render dashboard (New → Blueprint).
+#
+# IMPORTANT: Set CORS_ORIGINS in the Render dashboard to your GitHub Pages URL.
+# All env vars marked `value: ""` below must be filled in manually.
+
+services:
+  - type: web
+    name: sentinelgraph-api
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m spacy download en_core_web_sm || true
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: CORS_ORIGINS
+        # MUST be set in the Render dashboard to your GitHub Pages URL.
+        # Example:  https://YOUR_USERNAME.github.io
+        value: ""
+      - key: SENTINELGRAPH_LOG_LEVEL
+        value: INFO

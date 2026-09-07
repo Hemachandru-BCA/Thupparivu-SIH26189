@@ -1,0 +1,773 @@
+{
+  "id": "DOSSIER-2ef05724-6a3a-58ab-8edf-e0d63be42fe4",
+  "subject_id": "e1e815f1-4d25-5a12-b5d7-75a89104234f",
+  "title": "Intelligence dossier - Ghost Money Route Intermediary",
+  "classification": "INTELLIGENCE_SUMMARY",
+  "confidence": 0.5286,
+  "status": "DRAFT_FOR_HUMAN_REVIEW",
+  "executive_summary": "This dossier consolidates 1 model finding(s) about the subject with 31 supporting evidence record(s). Highest model confidence: 0.53. All statements derived from model inference are labelled as hypotheses; the subject has not been confirmed and no operational action is recommended by this system.",
+  "timeline": [
+    {
+      "timestamp": "2025-01-01T00:05:26",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000433",
+        "P000433",
+        "P004999"
+      ],
+      "evidence_id": "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
+      "source": "data/processed/cleaned_records.json#T0000017",
+      "excerpt": "Chad Hurley transferred 46195.42 EUR to David Horton via crypto using account ACC-P000433 on 2025-01-01T00:05:26."
+    },
+    {
+      "timestamp": "2025-01-01T00:24:20",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002374-0001906",
+        "P001404",
+        "P002374"
+      ],
+      "evidence_id": "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849",
+      "source": "data/processed/cleaned_records.json#T0001906",
+      "excerpt": "Nicole Bailey transferred 7698.79 GBP to Brandy Rowe via mobile_wallet using account ACC-P002374-0001906 on 2025-01-01T00:24:20."
+    },
+    {
+      "timestamp": "2025-01-01T01:08:09",
+      "event_type": "call",
+      "entity_ids": [
+        "P003265",
+        "P004996"
+      ],
+      "evidence_id": "EV-31e6698e-23b7-5535-8209-042a3006d76a",
+      "source": "data/processed/cleaned_records.json#C0000585",
+      "excerpt": "Pamela Perez called Andrew Harvey for 1273 seconds from TWR-004 on 2025-01-01T01:08:09."
+    },
+    {
+      "timestamp": "2025-01-01T01:52:38",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P003719-0002976",
+        "P001948",
+        "P003719"
+      ],
+      "evidence_id": "EV-f74acd26-fd31-58fc-a392-ea7b18b968fb",
+      "source": "data/processed/cleaned_records.json#T0002976",
+      "excerpt": "Cameron Colon transferred 3440.9 GBP to Alyssa Freeman via crypto using account ACC-P003719-0002976 on 2025-01-01T01:52:38."
+    },
+    {
+      "timestamp": "2025-01-01T02:06:13",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P004029-0004777",
+        "P003143",
+        "P004029"
+      ],
+      "evidence_id": "EV-6dcd4d7b-ee58-5fe2-9ff9-05b6be870a80",
+      "source": "data/processed/cleaned_records.json#T0004777",
+      "excerpt": "Mrs. Dana Rivas transferred 3157.6 GBP to Mark Patterson via crypto using account ACC-P004029-0004777 on 2025-01-01T02:06:13."
+    },
+    {
+      "timestamp": "2025-01-01T05:40:24",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000697-0002195",
+        "P000017",
+        "P000697"
+      ],
+      "evidence_id": "EV-3ff30e64-0786-5827-a72e-a6c309e22c57",
+      "source": "data/processed/cleaned_records.json#T0002195",
+      "excerpt": "James Williams transferred 291.83 GBP to Katherine Nelson via bank_transfer using account ACC-P000697-0002195 on 2025-01-01T05:40:24."
+    },
+    {
+      "timestamp": "2025-01-01T06:27:32",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002104-0002270",
+        "P001214",
+        "P002104"
+      ],
+      "evidence_id": "EV-39451ba3-e364-5ef9-9972-4ce6766a9d4b",
+      "source": "data/processed/cleaned_records.json#T0002270",
+      "excerpt": "Jacqueline Clark transferred 3110.07 EUR to Bethany Davis via mobile_wallet using account ACC-P002104-0002270 on 2025-01-01T06:27:32."
+    },
+    {
+      "timestamp": "2025-01-01T08:37:34",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002586-0002206",
+        "P002586",
+        "P003346"
+      ],
+      "evidence_id": "EV-f6484246-4f29-556e-be93-fec86858cef1",
+      "source": "data/processed/cleaned_records.json#T0002206",
+      "excerpt": "Crystal Gill transferred 4878.15 USD to Kimberly Cook via cash using account ACC-P002586-0002206 on 2025-01-01T08:37:34."
+    },
+    {
+      "timestamp": "2025-01-01T10:47:41",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000190-0003794",
+        "P000190",
+        "P002690"
+      ],
+      "evidence_id": "EV-29ab5495-ab1d-58af-bba6-cb81c8d25079",
+      "source": "data/processed/cleaned_records.json#T0003794",
+      "excerpt": "Gloria Benson transferred 8642.68 GBP to Stacy Fitzgerald via cash using account ACC-P000190-0003794 on 2025-01-01T10:47:41."
+    },
+    {
+      "timestamp": "2025-01-01T11:02:53",
+      "event_type": "call",
+      "entity_ids": [
+        "P002207",
+        "P004996"
+      ],
+      "evidence_id": "EV-568a4ba6-3147-524f-8264-7720d50665d4",
+      "source": "data/processed/cleaned_records.json#C0000586",
+      "excerpt": "Pamela Perez called Nicole Ware for 916 seconds from TWR-025 on 2025-01-01T11:02:53."
+    },
+    {
+      "timestamp": "2025-01-01T13:49:45",
+      "event_type": "call",
+      "entity_ids": [
+        "P003265",
+        "P004996"
+      ],
+      "evidence_id": "EV-bd7079ee-edef-566b-a3b4-374b6d0082e7",
+      "source": "data/processed/cleaned_records.json#C0001056",
+      "excerpt": "Pamela Perez called Andrew Harvey for 235 seconds from TWR-015 on 2025-01-01T13:49:45."
+    },
+    {
+      "timestamp": "2025-01-01T17:21:47",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000343-0004235",
+        "P000343",
+        "P002923"
+      ],
+      "evidence_id": "EV-7a9ac311-87f3-57fb-934e-64aef46ed830",
+      "source": "data/processed/cleaned_records.json#T0004235",
+      "excerpt": "Ryan Powell transferred 4685.82 GBP to Lauren Sanchez via mobile_wallet using account ACC-P000343-0004235 on 2025-01-01T17:21:47."
+    },
+    {
+      "timestamp": "2025-01-01T19:28:02",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002733-0004668",
+        "P001903",
+        "P002733"
+      ],
+      "evidence_id": "EV-051dc7dc-31b6-5caf-8f35-09333b4ae925",
+      "source": "data/processed/cleaned_records.json#T0004668",
+      "excerpt": "Pamela Chapman transferred 8333.45 GBP to Alexander Suarez via mobile_wallet using account ACC-P002733-0004668 on 2025-01-01T19:28:02."
+    },
+    {
+      "timestamp": "2025-01-01T19:45:40",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002323-0004398",
+        "P002323",
+        "P002373"
+      ],
+      "evidence_id": "EV-5235ea49-8165-5894-ad6d-94a71125e7d6",
+      "source": "data/processed/cleaned_records.json#T0004398",
+      "excerpt": "Anna Riddle transferred 11225.48 EUR to George Barker via crypto using account ACC-P002323-0004398 on 2025-01-01T19:45:40."
+    },
+    {
+      "timestamp": "2025-01-01T20:20:41",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-COORD-P004996",
+        "P002207",
+        "P004996"
+      ],
+      "evidence_id": "EV-018c24da-7a9a-5cf6-a24d-5a02aa4f004c",
+      "source": "data/processed/cleaned_records.json#T0000517",
+      "excerpt": "Pamela Perez transferred 38791.44 EUR to Nicole Ware via bank_transfer using account ACC-COORD-P004996 on 2025-01-01T20:20:41."
+    },
+    {
+      "timestamp": "2025-01-01T20:23:46",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001338-0001360",
+        "P001068",
+        "P001338"
+      ],
+      "evidence_id": "EV-9f7c5e23-b3de-508c-a8b6-e45ee6ea9416",
+      "source": "data/processed/cleaned_records.json#T0001360",
+      "excerpt": "Alicia Foster transferred 11613.6 GBP to Jacqueline Ramos via crypto using account ACC-P001338-0001360 on 2025-01-01T20:23:46."
+    },
+    {
+      "timestamp": "2025-01-01T21:08:11",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001155-0003220",
+        "P001155",
+        "P003175"
+      ],
+      "evidence_id": "EV-2845780c-cf64-5450-b726-ea127831d6d9",
+      "source": "data/processed/cleaned_records.json#T0003220",
+      "excerpt": "Kelly Powell transferred 16504.61 EUR to Diane Simpson via crypto using account ACC-P001155-0003220 on 2025-01-01T21:08:11."
+    },
+    {
+      "timestamp": "2025-01-01T22:41:47",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-COORD-P005000",
+        "P002044",
+        "P005000"
+      ],
+      "evidence_id": "EV-b4337774-c8e8-570c-b7b8-0610a8b38ff0",
+      "source": "data/processed/cleaned_records.json#T0000157",
+      "excerpt": "Stephen Jackson transferred 67421.69 USD to Catherine Brooks via crypto using account ACC-COORD-P005000 on 2025-01-01T22:41:47."
+    },
+    {
+      "timestamp": "2025-01-01T23:47:22",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001795-0002687",
+        "P000155",
+        "P001795"
+      ],
+      "evidence_id": "EV-302bce0c-95fd-5faa-b608-cf00151fec16",
+      "source": "data/processed/cleaned_records.json#T0002687",
+      "excerpt": "Krista Fischer transferred 8838.67 GBP to Kimberly Krause via bank_transfer using account ACC-P001795-0002687 on 2025-01-01T23:47:22."
+    },
+    {
+      "timestamp": "2025-01-02T01:39:06",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000422",
+        "P000422",
+        "P005000"
+      ],
+      "evidence_id": "EV-65d3b37e-8e28-5bd8-9424-bcb79152d9fb",
+      "source": "data/processed/cleaned_records.json#T0000406",
+      "excerpt": "Rebecca Mathis transferred 37189.4 GBP to Stephen Jackson via crypto using account ACC-P000422 on 2025-01-02T01:39:06."
+    },
+    {
+      "timestamp": "2025-01-02T04:32:30",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002330-0003569",
+        "P002330",
+        "P002630"
+      ],
+      "evidence_id": "EV-e9935fb7-629c-5f77-966f-59e03b3cb5e9",
+      "source": "data/processed/cleaned_records.json#T0003569",
+      "excerpt": "Christine Gonzalez transferred 18968.63 GBP to Katherine Dawson via bank_transfer using account ACC-P002330-0003569 on 2025-01-02T04:32:30."
+    },
+    {
+      "timestamp": "2025-01-02T04:40:03",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000799",
+        "P000799",
+        "P004997"
+      ],
+      "evidence_id": "EV-43174d8a-1965-51ef-82a9-ae484a72b67a",
+      "source": "data/processed/cleaned_records.json#T0000528",
+      "excerpt": "Sara Barrett transferred 30284.37 USD to Sean Frazier via bank_transfer using account ACC-P000799 on 2025-01-02T04:40:03."
+    },
+    {
+      "timestamp": "2025-01-02T04:56:30",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001604-0004041",
+        "P001604",
+        "P002424"
+      ],
+      "evidence_id": "EV-76272e96-ec45-52f0-bb70-ead3c4ef4821",
+      "source": "data/processed/cleaned_records.json#T0004041",
+      "excerpt": "Ronald Adams transferred 14629.24 GBP to Gregory Cole via mobile_wallet using account ACC-P001604-0004041 on 2025-01-02T04:56:30."
+    },
+    {
+      "timestamp": "2025-01-02T08:00:56",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P003199-0003378",
+        "P002659",
+        "P003199"
+      ],
+      "evidence_id": "EV-0e1535ea-a943-5692-8fd3-7f08f1998953",
+      "source": "data/processed/cleaned_records.json#T0003378",
+      "excerpt": "Kenneth Fowler transferred 1342.77 EUR to Bobby Schultz via crypto using account ACC-P003199-0003378 on 2025-01-02T08:00:56."
+    },
+    {
+      "timestamp": "2025-01-02T09:26:45",
+      "event_type": "meeting",
+      "entity_ids": [
+        "P002327",
+        "P002887",
+        "P004995"
+      ],
+      "evidence_id": "EV-22e4679c-8a27-516d-ae86-409657ea88dd",
+      "source": "data/processed/cleaned_records.json#M000150",
+      "excerpt": "Nicole Jackson, Joe Oconnell, Christopher Bowman met at Storage Facility 12 on 2025-01-02T09:26:45."
+    },
+    {
+      "timestamp": "2025-01-02T09:57:38",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-COORD-P004996",
+        "P003265",
+        "P004996"
+      ],
+      "evidence_id": "EV-62a06b25-1125-5ba6-90eb-654f732644de",
+      "source": "data/processed/cleaned_records.json#T0000682",
+      "excerpt": "Pamela Perez transferred 59699.25 EUR to Andrew Harvey via bank_transfer using account ACC-COORD-P004996 on 2025-01-02T09:57:38."
+    },
+    {
+      "timestamp": "2025-01-02T12:40:31",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001831-0001152",
+        "P001831",
+        "P004949"
+      ],
+      "evidence_id": "EV-02904a9a-de37-5330-ab29-77ed9b10437e",
+      "source": "data/processed/cleaned_records.json#T0001152",
+      "excerpt": "Toni Williams transferred 1062.84 USD to Cory Richardson via cash using account ACC-P001831-0001152 on 2025-01-02T12:40:31."
+    },
+    {
+      "timestamp": "2025-01-02T12:47:36",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001032-0003549",
+        "P000132",
+        "P001032"
+      ],
+      "evidence_id": "EV-405b73a4-a376-53b4-a78b-5b589b27d52e",
+      "source": "data/processed/cleaned_records.json#T0003549",
+      "excerpt": "Jesse Phillips transferred 8646.36 EUR to Christina Christensen via mobile_wallet using account ACC-P001032-0003549 on 2025-01-02T12:47:36."
+    },
+    {
+      "timestamp": "2025-01-02T17:00:20",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-COORD-P004997",
+        "P002215",
+        "P004997"
+      ],
+      "evidence_id": "EV-a89c22b2-86c4-52c6-9c48-e58668503a12",
+      "source": "data/processed/cleaned_records.json#T0000522",
+      "excerpt": "Sean Frazier transferred 27328.6 GBP to Heidi Garrison via bank_transfer using account ACC-COORD-P004997 on 2025-01-02T17:00:20."
+    },
+    {
+      "timestamp": "2025-01-02T18:00:55",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-COORD-P004996",
+        "P002547",
+        "P004996"
+      ],
+      "evidence_id": "EV-0d52a639-d379-5883-a54a-d44c49ae225c",
+      "source": "data/processed/cleaned_records.json#T0000712",
+      "excerpt": "Pamela Perez transferred 96176.62 USD to Sharon Fernandez via bank_transfer using account ACC-COORD-P004996 on 2025-01-02T18:00:55."
+    },
+    {
+      "timestamp": "2025-01-03T06:15:59",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P003232",
+        "P003232",
+        "P005000"
+      ],
+      "evidence_id": "EV-d51938e7-f62a-5266-904f-a6063a7857b7",
+      "source": "data/processed/cleaned_records.json#T0000550",
+      "excerpt": "Dana Gibson transferred 42082.63 USD to Stephen Jackson via crypto using account ACC-P003232 on 2025-01-03T06:15:59."
+    },
+    {
+      "timestamp": "2025-01-03T07:16:01",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001723",
+        "P001723",
+        "P004997"
+      ],
+      "evidence_id": "EV-b3f178af-685a-596e-91fa-9e4e34ebdfab",
+      "source": "data/processed/cleaned_records.json#T0000223",
+      "excerpt": "Brent Warren transferred 67590.66 USD to Sean Frazier via crypto using account ACC-P001723 on 2025-01-03T07:16:01."
+    },
+    {
+      "timestamp": "2025-01-03T07:19:58",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000216-0003019",
+        "P000216",
+        "P001823"
+      ],
+      "evidence_id": "EV-b7bbae6b-0ebc-566b-9b91-e8046d7c9de2",
+      "source": "data/processed/cleaned_records.json#T0003019",
+      "excerpt": "Pamela Gonzalez transferred 3109.24 EUR to Vanessa Barber via mobile_wallet using account ACC-P000216-0003019 on 2025-01-03T07:19:58."
+    },
+    {
+      "timestamp": "2025-01-03T10:27:35",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P001466-0002761",
+        "P000146",
+        "P001466"
+      ],
+      "evidence_id": "EV-74c31d2c-2a91-538c-a945-6c3b44a2de73",
+      "source": "data/processed/cleaned_records.json#T0002761",
+      "excerpt": "Kelli Cross transferred 15190.9 USD to Melissa Stewart via mobile_wallet using account ACC-P001466-0002761 on 2025-01-03T10:27:35."
+    },
+    {
+      "timestamp": "2025-01-03T10:33:07",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P002684-0001972",
+        "P002684",
+        "P002764"
+      ],
+      "evidence_id": "EV-722c48ac-5600-5544-a360-2ac05612df5b",
+      "source": "data/processed/cleaned_records.json#T0001972",
+      "excerpt": "Karen Garcia transferred 1607.22 EUR to Mitchell Howard via crypto using account ACC-P002684-0001972 on 2025-01-03T10:33:07."
+    },
+    {
+      "timestamp": "2025-01-03T10:46:32",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000231-0001903",
+        "P000231",
+        "P001811"
+      ],
+      "evidence_id": "EV-bf493cd1-e2c0-5464-892f-78f894619753",
+      "source": "data/processed/cleaned_records.json#T0001903",
+      "excerpt": "Charles Hernandez transferred 19626.18 EUR to Shawn Johnson via mobile_wallet using account ACC-P000231-0001903 on 2025-01-03T10:46:32."
+    },
+    {
+      "timestamp": "2025-01-03T12:42:46",
+      "event_type": "transaction",
+      "entity_ids": [
+        "ACC-P000790-0002551",
+        "P000790",
+        "P002890"
+      ],
+      "evidence_id": "EV-b542a84e-1f44-52ce-ae15-9f4bddfef407",
+      "source": "data/processed/cleaned_records.json#T0002551",
+      "excerpt": "Christopher Salinas transferred 11389.68 GBP to Karen Miller DVM via bank_transfer using account ACC-P000790-0002551 on 2025-01-03T12:42:46."
+    },
+    {
+      "timestamp": "2025-01-03T14:49:30",
+      "event_type": "call",
+      "entity_ids": [
+        "P000005",
+        "P004995"
+      ],
+      "evidence_id": "EV-40460443-67bb-5d88-8967-0764bcc155c0",
+      "source": "data/processed/cleaned_records.json#C0000147",
+      "excerpt": "Steven Hayes called Nicole Jackson for 429 seconds from TWR-002 on 2025-01-03T14:49:30."
+    },
+    {
+      "timestamp": null,
+      "event_type": "person_profile",
+      "entity_ids": [
+        "P004995"
+      ],
+      "evidence_id": "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
+      "source": "data/processed/cleaned_records.json#P004995",
+      "excerpt": "Nicole Jackson lives in Dpo Aa 54354."
+    },
+    {
+      "timestamp": null,
+      "event_type": "person_profile",
+      "entity_ids": [
+        "P004996"
+      ],
+      "evidence_id": "EV-f09abb1b-4740-5d40-8002-bf879a5ca595",
+      "source": "data/processed/cleaned_records.json#P004996",
+      "excerpt": "Pamela Perez lives in Holmesborough."
+    }
+  ],
+  "findings": [
+    "F-7cbfc411-ae73-5d9c-98ce-cfffef71a8ea"
+  ],
+  "sections": [
+    {
+      "title": "Summary points",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "1 model finding(s) relate to this subject.",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "31 evidence record(s) indexed as supporting context.",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "All hypotheses remain subject to human review.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Observed facts",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'ACC-COORD-P004996' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'ACC-COORD-P004996' is shared by communities 5 and 8 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-f09abb1b-4740-5d40-8002-bf879a5ca595",
+            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
+            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'East Thomas' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'East Thomas' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-0a5620a5-55d0-5507-a281-737f500a47ed",
+            "EV-0fee5e57-507d-5270-a0a2-448aa94187c8",
+            "EV-1470dc39-3fbf-5912-86af-825de26d5904"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Michaelshire' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Michaelshire' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-04156c40-3000-5ce3-9a64-fa2dfbc137ea",
+            "EV-7d70edfc-2913-52cc-ae9c-8319db6b7019",
+            "EV-8a952ba3-48a7-5d73-afa0-919ef450806b"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'North Margaret' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'North Margaret' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-0c3832b6-628d-5934-a8f1-0dd8ab35143e",
+            "EV-0f708e9b-bebe-5372-b2dd-5a08c5ba3bc7",
+            "EV-29d202f0-c302-5e19-8cbf-6d2cf193db31"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Port David' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Port David' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-01e2df18-50ff-5798-98f2-db073d3f19f2",
+            "EV-06a78eb3-1f0a-5386-8499-527fda949c8d",
+            "EV-0ad13a7a-c392-52ab-98e7-2fae9199662c"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Jenniferfurt' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Jenniferfurt' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-0a0af054-dad9-5040-b369-52c4e3f006b3",
+            "EV-25930384-8c72-5a25-9314-8f110bc6e1d3",
+            "EV-abac5ba4-1d7c-5551-819c-e7b4aef1b145"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Davidfurt' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Davidfurt' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-0e5ee685-a5e3-530d-b465-13fcad545108",
+            "EV-38aad39d-f9d1-5cc1-83ee-68ae6cd4a6dc",
+            "EV-4b0aa2f9-ed29-57fa-a3be-ead21da2c578"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'ACC-COORD-P004995' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'ACC-COORD-P004995' is shared by communities 5 and 8 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
+            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
+            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Jonesland' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Jonesland' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-3fbe2e0c-a58f-50a2-bfd3-8dd7c7a34fad",
+            "EV-6adc19e9-3254-5bca-aad8-fc29016eef31",
+            "EV-8cd209e6-e09d-59ab-9b6d-db61941aecb2"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Smithhaven' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Smithhaven' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-169cccce-604f-593f-85b0-323c6f6c0220",
+            "EV-1cbfa598-be09-5f30-b7e4-035f31ec5804",
+            "EV-416d69be-acf9-53c6-adaf-28e94c1cf18b"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Reyesside' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Reyesside' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-6bd46ffc-1759-5ccb-b082-a5ebb3f8a050",
+            "EV-7f26b8af-403b-5298-a95f-632eb58960ce",
+            "EV-9f47ca02-27fa-59fa-a9af-3fd5a1d1879f"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inferred hypotheses",
+      "items": [
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Amanda Frank' (side: cell_a, probability 0.719613): Top structural-hole broker of community 5 (attach score 0.65871); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Jackie Carter' (side: cell_a, probability 0.698949): Top structural-hole broker of community 5 (attach score 0.55539); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Michael Davis' (side: cell_b, probability 0.712657): Top structural-hole broker of community 8 (attach score 0.623926); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Maria Cruz' (side: cell_b, probability 0.703233): Top structural-hole broker of community 8 (attach score 0.576809); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "A single hidden intermediary plausibly connects communities [5, 8]. Subtype: money_intermediary.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Unknowns / missing information",
+      "items": [
+        {
+          "label": "UNKNOWN",
+          "text": "Actual identity of the hidden coordinator (if one exists)",
+          "evidence_ids": []
+        },
+        {
+          "label": "UNKNOWN",
+          "text": "Whether the predicted edges correspond to real communications",
+          "evidence_ids": []
+        },
+        {
+          "label": "UNKNOWN",
+          "text": "Direction and start date of the suspected coordination",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Analyst outline",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "Observed facts",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Inferred hypotheses",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Counter-evidence",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Unknowns",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "supporting_evidence": [
+    "EV-01e2df18-50ff-5798-98f2-db073d3f19f2",
+    "EV-04156c40-3000-5ce3-9a64-fa2dfbc137ea",
+    "EV-06a78eb3-1f0a-5386-8499-527fda949c8d",
+    "EV-0a0af054-dad9-5040-b369-52c4e3f006b3",
+    "EV-0a5620a5-55d0-5507-a281-737f500a47ed",
+    "EV-0ad13a7a-c392-52ab-98e7-2fae9199662c",
+    "EV-0c3832b6-628d-5934-a8f1-0dd8ab35143e",
+    "EV-0e5ee685-a5e3-530d-b465-13fcad545108",
+    "EV-0f708e9b-bebe-5372-b2dd-5a08c5ba3bc7",
+    "EV-0fee5e57-507d-5270-a0a2-448aa94187c8",
+    "EV-1470dc39-3fbf-5912-86af-825de26d5904",
+    "EV-169cccce-604f-593f-85b0-323c6f6c0220",
+    "EV-1cbfa598-be09-5f30-b7e4-035f31ec5804",
+    "EV-25930384-8c72-5a25-9314-8f110bc6e1d3",
+    "EV-29d202f0-c302-5e19-8cbf-6d2cf193db31",
+    "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849",
+    "EV-38aad39d-f9d1-5cc1-83ee-68ae6cd4a6dc",
+    "EV-3fbe2e0c-a58f-50a2-bfd3-8dd7c7a34fad",
+    "EV-416d69be-acf9-53c6-adaf-28e94c1cf18b",
+    "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
+    "EV-4b0aa2f9-ed29-57fa-a3be-ead21da2c578",
+    "EV-6adc19e9-3254-5bca-aad8-fc29016eef31",
+    "EV-6bd46ffc-1759-5ccb-b082-a5ebb3f8a050",
+    "EV-7d70edfc-2913-52cc-ae9c-8319db6b7019",
+    "EV-7f26b8af-403b-5298-a95f-632eb58960ce",
+    "EV-8a952ba3-48a7-5d73-afa0-919ef450806b",
+    "EV-8cd209e6-e09d-59ab-9b6d-db61941aecb2",
+    "EV-9f47ca02-27fa-59fa-a9af-3fd5a1d1879f",
+    "EV-abac5ba4-1d7c-5551-819c-e7b4aef1b145",
+    "EV-f09abb1b-4740-5d40-8002-bf879a5ca595",
+    "EV-ff797dea-b405-5fa9-9810-5e11b216c10d"
+  ],
+  "counter_evidence": [],
+  "methodology": [
+    {
+      "step": "DATA COLLECTION",
+      "description": "Synthetic dataset generated and ingested via CSV loaders; every source record hashed into the evidence index."
+    },
+    {
+      "step": "GRAPH CONSTRUCTION",
+      "description": "NER + relation extraction -> entity resolution -> NetworkX knowledge graph with evidence-linked edges."
+    },
+    {
+      "step": "ANALYTICS",
+      "description": "PageRank / betweenness / community detection computed over the undirected weighted projection."
+    },
+    {
+      "step": "GHOST INFERENCE",
+      "description": "Structural-hole + shared-anchor + temporal analysis proposed hidden-intermediary hypotheses with component confidence scores."
+    },
+    {
+      "step": "XAI / EVIDENCE BINDING",
+      "description": "Findings bound to evidence records via the provenance index; counter-evidence searched and preserved."
+    },
+    {
+      "step": "DOSSIER COMPOSITION",
+      "description": "Context-bounded summary composed with provider 'mock'; output schema-validated; deterministic fallback if invalid."
+    }
+  ],
+  "limitations": [
+    "Generated from a synthetic dataset for research/demo purposes.",
+    "Confidence values are weighted blends of graph signals, not probabilities of guilt.",
+    "Dossier is a DRAFT FOR HUMAN REVIEW and is not court-ready.",
+    "This system never recommends enforcement actions autonomously.",
+    "Ghost candidates are structural hypotheses inferred from network patterns, not confirmed identities.",
+    "Confidence is a weighted blend of graph similarity signals; it is NOT a probability of guilt and NOT proof that a specific person exists.",
+    "Predicted relationships are plausible contact points, not observed events."
+  ],
+  "generated_at": "2026-09-06T17:56:29.804632+00:00",
+  "model_metadata": {
+    "llm_provider": "mock",
+    "deterministic_fallback": true,
+    "findings_used": [
+      "F-7cbfc411-ae73-5d9c-98ce-cfffef71a8ea"
+    ],
+    "model_version": "sentinelgraph-xai-1.0.0",
+    "context_items": 4
+  },
+  "human_review": {
+    "required": false,
+    "reviewer": "pytest",
+    "decision": "endorsed",
+    "note": "ok",
+    "note_on_status": "Human review recorded. This document remains an analytical product and is not automatically court-ready."
+  }
+}

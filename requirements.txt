@@ -1,0 +1,39 @@
+# --- Core pipeline (generator / preprocessing) ---
+pandas>=2.0.0
+pydantic>=2.0.0
+python-dateutil>=2.9.0
+langdetect>=1.0.9
+Pillow>=10.0.0
+pytesseract>=0.3.10
+Faker>=20.0.0
+
+# --- Extraction (NER / relation / event extraction) ---
+spacy>=3.7.0
+# After installing, download the small English model:
+#   python -m spacy download en_core_web_sm
+
+# --- Graph (resolution / graph_builder / analytics / ghost_nodes / embeddings) ---
+networkx>=3.0
+numpy>=1.24.0
+# Optional, only used if graph/graph_embeddings.py's node2vec path is enabled:
+# gensim>=4.3.0
+
+# --- XAI layer (evidence / findings / dossiers) ---
+# pydantic already required above; no extra deps for the offline mock LLM.
+
+# --- API ---
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+# --- Ingestion extras (optional) ---
+# pypdf>=4.0.0            # PDF loader (src/ingestion/pdf_loader.py)
+
+# --- Production adapters (all optional - demo never needs these) ---
+# psycopg[binary]>=3.1.0  # PostgreSQL SourceRepository
+# boto3>=1.34.0           # S3 DocumentStore
+# neo4j>=5.0.0            # Neo4j GraphStore
+# confluent-kafka>=2.2.0  # Kafka EventStream
+
+# --- Tests ---
+pytest>=7.4.0
+httpx>=0.27.0            # FastAPI TestClient

@@ -1,0 +1,1 @@
+"""SentinelGraph AI - generator package."""

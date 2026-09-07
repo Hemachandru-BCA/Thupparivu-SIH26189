@@ -1,0 +1,51 @@
+# ---------------------------------------------------------------
+# SentinelGraph AI — .gitignore
+# ---------------------------------------------------------------
+
+# ----- Environment / secrets (NEVER commit real secrets) -----
+.env
+.env.local
+.env.*.local
+
+# ----- Python -----
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ----- Node / frontend -----
+node_modules/
+**/node_modules/
+dist/
+build/
+
+# ----- IDE / editor -----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ----- Logs -----
+logs/
+*.log
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----- Data (keep tracked for Render deployment) -----
+# DO NOT add data/ to this ignore list — those files are needed
+# by the production backend on Render.com.
+
+# ----- Render -----
+# render.yaml is tracked in the repo root (used for Render Blueprints).

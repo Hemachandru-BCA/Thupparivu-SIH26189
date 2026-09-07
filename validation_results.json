@@ -1,0 +1,37 @@
+{
+  "dataset": {
+    "hidden_coordinators": 6,
+    "graph_nodes": 13146,
+    "graph_edges": 23982,
+    "relation_counts": {
+      "USES_ACCOUNT": 8087,
+      "LOCATED_AT": 5000,
+      "MET": 4132,
+      "TRANSFERRED_TO": 4049,
+      "CALLED": 2553,
+      "ASSOCIATED_WITH": 161
+    }
+  },
+  "ghost_detection": {
+    "ghost_candidates": 3,
+    "planted_coordinator_accounts_recovered": 4,
+    "planted_coordinator_accounts_total": 6,
+    "coordinator_account_recall": 0.667,
+    "ghost_precision_by_planted_account_evidence": 1.0
+  },
+  "controlled_validation": {
+    "planted_money_bridge": {"ghost_candidates": 1, "expected_minimum": 1},
+    "common_location_only": {"ghost_candidates": 0, "expected": 0}
+  },
+  "tests": {"passed": 92, "skipped": 3},
+  "api_smoke": {
+    "GET /api/graph/ghosts": 200,
+    "GET /api/graph/ghosts/{invalid}/evidence": 404,
+    "GET /api/graph/info": 200
+  },
+  "frontend": {
+    "source_changes": true,
+    "build_verified": false,
+    "reason": "frontend dependencies were not installed; npm ci timed out, so no build result is claimed"
+  }
+}

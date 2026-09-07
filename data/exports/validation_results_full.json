@@ -1,0 +1,33 @@
+{
+  "full_dataset": {
+    "hidden_coordinators": 6,
+    "ground_truth_pairs": 11,
+    "ghost_candidates": 3,
+    "true_positive_pairs": 3,
+    "false_positive_pairs": 0,
+    "pair_precision": 1.0,
+    "pair_recall": 0.273,
+    "predicted_planted_accounts": 4,
+    "coordinator_account_recall": 0.667,
+    "ghost_precision_by_planted_account": 1.0,
+    "detected_accounts": [
+      "ACC-COORD-P004995",
+      "ACC-COORD-P004996",
+      "ACC-COORD-P004999",
+      "ACC-COORD-P005000"
+    ],
+    "ghost_ids": [
+      "5c5c657b-a705-5cf8-915e-ea18d0a07ad0",
+      "66bf5812-02c7-5307-b8d8-2c83b41f7fca",
+      "78a31aab-ad45-5cb1-9674-7324051e4641"
+    ]
+  },
+  "planted_money_anchor": {
+    "case": "money",
+    "ghost_candidates": 0
+  },
+  "common_location_only": {
+    "case": "location",
+    "ghost_candidates": 0
+  }
+}
