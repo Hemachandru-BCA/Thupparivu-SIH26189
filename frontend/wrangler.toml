@@ -1,10 +1,10 @@
 # main entry point - your Vite app's build output
+main = "workers-site/index.js"
 site = { bucket = "./dist" }
 
 # Build configuration
 [build]
 command = "pnpm build"
-publish = "./dist"
 
 # Environment variables for production builds
 [build.environment]
