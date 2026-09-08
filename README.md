@@ -451,5 +451,7 @@ git remote add origin https://github.com/Hemachandru-BCA/Thupparivu-SIH26189.git
 git push -u origin main
 ```
 
+force start cloudflare push
+
 **Important:** Make sure to set up the GitHub Pages and Render variables
 described in sections 11 and 12 before pushing, or immediately after.
