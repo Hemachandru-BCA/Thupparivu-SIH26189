@@ -1,5 +1,5 @@
-# main entry point - your Vite app's build output
-main = "workers-site/index.js"
+# Cloudflare Pages configuration
+# Vite builds to ./dist, which is set as the site bucket
 site = { bucket = "./dist" }
 
 # Build configuration
