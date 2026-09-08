@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["python-3.11", "uv"]
+
+[phases.install]
+commands = ["uv sync --frozen"]
+
+[phases.build]
+commands = ["uv build --format wheel"]
+
+[phases.start]
+commands = ["uv run uvicorn src.api.main:app --host 0.0.0.0 --port $PORT"]
+
+[variables]
+PYTHON_VERSION = "3.11"
+PORT = "8000"
