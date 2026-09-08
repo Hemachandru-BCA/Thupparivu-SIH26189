@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
 
     const port = Number(env.PORT) || 5173;
     const basePath = env.BASE_PATH || '/';
-    const backend = env.VITE_API_URL || 'https://thupparivu-sih26189.onrender.com';
+    const backend = env.VITE_API_URL || 'http://localhost:3000';
 
     return {
         base: basePath,
