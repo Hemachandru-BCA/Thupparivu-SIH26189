@@ -1,0 +1,17 @@
+---
+# main entry point - your Vite app's build output
+site = { bucket = "./dist" }
+
+# Build configuration
+[build]
+command = "pnpm build"
+publish = "./dist"
+
+# Environment variables for production builds
+[build.environment]
+NODE_VERSION = "20"
+
+# Cloudflare Pages environment variables
+# Set these in Cloudflare dashboard or .env.production
+[dev]
+port = 5173
