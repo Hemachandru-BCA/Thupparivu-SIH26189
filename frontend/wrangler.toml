@@ -14,5 +14,3 @@ NODE_VERSION = "20"
 # Set these in Cloudflare dashboard or .env.production
 [dev]
 port = 5173
-[dev]
-port = 5173
