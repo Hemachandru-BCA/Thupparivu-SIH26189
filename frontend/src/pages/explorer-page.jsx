@@ -1,5 +1,5 @@
 // src/pages/explorer-page.jsx
-// Redesigned SentinelGraph Network Explorer Workspace
+// Redesigned THUPPARIVU Network Explorer Workspace
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'wouter';
 import {

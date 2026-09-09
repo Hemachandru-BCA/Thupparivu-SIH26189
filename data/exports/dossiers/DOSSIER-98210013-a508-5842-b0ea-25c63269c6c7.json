@@ -1,0 +1,312 @@
+{
+  "id": "DOSSIER-98210013-a508-5842-b0ea-25c63269c6c7",
+  "subject_id": "add9ef2d-7392-5d5d-83ac-34eb98fa39a4",
+  "title": "Intelligence dossier - Ghost Money Route Intermediary",
+  "classification": "INTELLIGENCE_SUMMARY",
+  "confidence": 0.4888,
+  "status": "DRAFT_FOR_HUMAN_REVIEW",
+  "executive_summary": "This dossier consolidates 1 model finding(s) about the subject with 34 supporting evidence record(s). Highest model confidence: 0.49. All statements derived from model inference are labelled as hypotheses; the subject has not been confirmed and no operational action is recommended by this system.",
+  "timeline": [],
+  "findings": [
+    "F-0c83d824-039d-5099-afaf-5d78c2dbb35f"
+  ],
+  "sections": [
+    {
+      "title": "Summary points",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "1 model finding(s) relate to this subject.",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "34 evidence record(s) indexed as supporting context.",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "All hypotheses remain subject to human review.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Observed facts",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'East James' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East James' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-12a193ec-28c6-5667-85ab-b0ac9cf400c6",
+            "EV-13f27284-74b3-5954-b932-0226df6848f0",
+            "EV-1632bbb3-941f-5282-82e8-a2a645f05ddf"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Smithport' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Smithport' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-271ca637-b398-5ab6-b12b-4c88cc762555",
+            "EV-53de5ad3-f978-5297-8c17-23b339d32775",
+            "EV-64bdc9b9-a6e4-503b-b88e-356286005e24"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Port Michael' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Port Michael' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-01ca9b42-b394-5455-b838-6a210b71f752",
+            "EV-02eb6dcc-dd79-5401-921f-c14e900f707c",
+            "EV-05e642ee-767d-5454-b010-48ece0f4105e"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'East Jason' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East Jason' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-1838ba7f-2dd4-5006-a420-1373b92fd960",
+            "EV-22e47331-85f4-59b0-9a82-64a6a4c8fb47",
+            "EV-3390c108-caf7-5106-964f-c1a34b01ce1d"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'East Gary' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East Gary' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-12ab8248-75de-54fb-a239-946348f3f4f7",
+            "EV-2095a54e-c9e8-5cc1-944a-56e8c60bda87",
+            "EV-44016e29-4ba7-5b36-a070-6a76ee74fe2e"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'West Johnville' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'West Johnville' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-1bed7648-4aa7-55ab-9e1e-4bd23b428949",
+            "EV-233869dd-0d75-5deb-9591-1f425dfcdd7c",
+            "EV-357ab53b-8aa4-5fe1-9923-073fa5401c42"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Evansstad' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Evansstad' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-0dd26479-6320-5fc6-8b59-0a1a70a9d72d",
+            "EV-60a8f085-21dc-5b17-90f2-5b78d7f47565",
+            "EV-8f7308ee-85ac-5dcf-8f15-35963187f751"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'North Jessica' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'North Jessica' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-062f6050-4715-51c6-806a-cc5a32b6eac0",
+            "EV-18ce1fb2-b6c7-5cac-a142-bfc05858ed37",
+            "EV-1fdaf0b9-9a98-52a2-9fb8-b81414fa0c57"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'ACC-COORD-P004999' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'ACC-COORD-P004999' is shared by communities 2 and 9 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-4e69cbe8-cee0-5231-90b2-3074c21436ae",
+            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
+            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Jonesview' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Jonesview' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-09be86f6-a09c-5dce-9738-c499878be5c5",
+            "EV-12604a3b-ac01-528d-90de-db3e1d228088",
+            "EV-276f425f-eaf0-510d-aea6-088a44e03b00"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'East David' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East David' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-00744699-befd-5464-b0f2-7c8b3521088c",
+            "EV-0146ae51-0194-54c6-97e9-893c6ed0af98",
+            "EV-01e2df18-50ff-5798-98f2-db073d3f19f2"
+          ]
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Account/node 'Lake Michael' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Lake Michael' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "evidence_ids": [
+            "EV-01ca9b42-b394-5455-b838-6a210b71f752",
+            "EV-029e9bea-fb9f-5f8d-af05-adbc9123b7c0",
+            "EV-02eb6dcc-dd79-5401-921f-c14e900f707c"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inferred hypotheses",
+      "items": [
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Caleb Grant' (side: cell_a, probability 0.689715): Top structural-hole broker of community 2 (attach score 0.598791); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Jack Brown' (side: cell_a, probability 0.68502): Top structural-hole broker of community 2 (attach score 0.575315); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Autumn Walker' (side: cell_b, probability 0.704142): Top structural-hole broker of community 9 (attach score 0.670925); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "Predicted relationship between the ghost intermediary and 'Travis Hernandez' (side: cell_b, probability 0.685206): Top structural-hole broker of community 9 (attach score 0.576246); plausible contact point for the hidden money intermediary.",
+          "evidence_ids": []
+        },
+        {
+          "label": "INFERRED",
+          "text": "A single hidden intermediary plausibly connects communities [2, 9]. Subtype: money_intermediary.",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Unknowns / missing information",
+      "items": [
+        {
+          "label": "UNKNOWN",
+          "text": "Actual identity of the hidden coordinator (if one exists)",
+          "evidence_ids": []
+        },
+        {
+          "label": "UNKNOWN",
+          "text": "Whether the predicted edges correspond to real communications",
+          "evidence_ids": []
+        },
+        {
+          "label": "UNKNOWN",
+          "text": "Direction and start date of the suspected coordination",
+          "evidence_ids": []
+        }
+      ]
+    },
+    {
+      "title": "Analyst outline",
+      "items": [
+        {
+          "label": "OBSERVED",
+          "text": "Observed facts",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Inferred hypotheses",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Counter-evidence",
+          "evidence_ids": []
+        },
+        {
+          "label": "OBSERVED",
+          "text": "Unknowns",
+          "evidence_ids": []
+        }
+      ]
+    }
+  ],
+  "supporting_evidence": [
+    "EV-00744699-befd-5464-b0f2-7c8b3521088c",
+    "EV-0146ae51-0194-54c6-97e9-893c6ed0af98",
+    "EV-01ca9b42-b394-5455-b838-6a210b71f752",
+    "EV-01e2df18-50ff-5798-98f2-db073d3f19f2",
+    "EV-029e9bea-fb9f-5f8d-af05-adbc9123b7c0",
+    "EV-02eb6dcc-dd79-5401-921f-c14e900f707c",
+    "EV-05e642ee-767d-5454-b010-48ece0f4105e",
+    "EV-062f6050-4715-51c6-806a-cc5a32b6eac0",
+    "EV-09be86f6-a09c-5dce-9738-c499878be5c5",
+    "EV-0dd26479-6320-5fc6-8b59-0a1a70a9d72d",
+    "EV-12604a3b-ac01-528d-90de-db3e1d228088",
+    "EV-12a193ec-28c6-5667-85ab-b0ac9cf400c6",
+    "EV-12ab8248-75de-54fb-a239-946348f3f4f7",
+    "EV-13f27284-74b3-5954-b932-0226df6848f0",
+    "EV-1632bbb3-941f-5282-82e8-a2a645f05ddf",
+    "EV-1838ba7f-2dd4-5006-a420-1373b92fd960",
+    "EV-18ce1fb2-b6c7-5cac-a142-bfc05858ed37",
+    "EV-1bed7648-4aa7-55ab-9e1e-4bd23b428949",
+    "EV-1fdaf0b9-9a98-52a2-9fb8-b81414fa0c57",
+    "EV-2095a54e-c9e8-5cc1-944a-56e8c60bda87",
+    "EV-22e47331-85f4-59b0-9a82-64a6a4c8fb47",
+    "EV-233869dd-0d75-5deb-9591-1f425dfcdd7c",
+    "EV-271ca637-b398-5ab6-b12b-4c88cc762555",
+    "EV-276f425f-eaf0-510d-aea6-088a44e03b00",
+    "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849",
+    "EV-3390c108-caf7-5106-964f-c1a34b01ce1d",
+    "EV-357ab53b-8aa4-5fe1-9923-073fa5401c42",
+    "EV-44016e29-4ba7-5b36-a070-6a76ee74fe2e",
+    "EV-4e69cbe8-cee0-5231-90b2-3074c21436ae",
+    "EV-53de5ad3-f978-5297-8c17-23b339d32775",
+    "EV-60a8f085-21dc-5b17-90f2-5b78d7f47565",
+    "EV-64bdc9b9-a6e4-503b-b88e-356286005e24",
+    "EV-8f7308ee-85ac-5dcf-8f15-35963187f751",
+    "EV-ff797dea-b405-5fa9-9810-5e11b216c10d"
+  ],
+  "counter_evidence": [],
+  "methodology": [
+    {
+      "step": "DATA COLLECTION",
+      "description": "Synthetic dataset generated and ingested via CSV loaders; every source record hashed into the evidence index."
+    },
+    {
+      "step": "GRAPH CONSTRUCTION",
+      "description": "NER + relation extraction -> entity resolution -> NetworkX knowledge graph with evidence-linked edges."
+    },
+    {
+      "step": "ANALYTICS",
+      "description": "PageRank / betweenness / community detection computed over the undirected weighted projection."
+    },
+    {
+      "step": "GHOST INFERENCE",
+      "description": "Structural-hole + shared-anchor + temporal analysis proposed hidden-intermediary hypotheses with component confidence scores."
+    },
+    {
+      "step": "XAI / EVIDENCE BINDING",
+      "description": "Findings bound to evidence records via the provenance index; counter-evidence searched and preserved."
+    },
+    {
+      "step": "DOSSIER COMPOSITION",
+      "description": "Context-bounded summary composed with provider 'mock'; output schema-validated; deterministic fallback if invalid."
+    }
+  ],
+  "limitations": [
+    "Generated from a synthetic dataset for research/demo purposes.",
+    "Confidence values are weighted blends of graph signals, not probabilities of guilt.",
+    "Dossier is a DRAFT FOR HUMAN REVIEW and is not court-ready.",
+    "This system never recommends enforcement actions autonomously.",
+    "Ghost candidates are structural hypotheses inferred from network patterns, not confirmed identities.",
+    "Confidence is a weighted blend of graph similarity signals; it is NOT a probability of guilt and NOT proof that a specific person exists.",
+    "Predicted relationships are plausible contact points, not observed events."
+  ],
+  "generated_at": "2026-09-09T18:38:24.030096+00:00",
+  "model_metadata": {
+    "llm_provider": "mock",
+    "deterministic_fallback": true,
+    "findings_used": [
+      "F-0c83d824-039d-5099-afaf-5d78c2dbb35f"
+    ],
+    "model_version": "sentinelgraph-xai-1.0.0",
+    "context_items": 3
+  },
+  "human_review": {
+    "required": false,
+    "reviewer": "pytest",
+    "decision": "endorsed",
+    "note": "ok",
+    "note_on_status": "Human review recorded. This document remains an analytical product and is not automatically court-ready."
+  }
+}

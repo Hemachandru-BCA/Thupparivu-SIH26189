@@ -1,390 +1,11 @@
 {
-  "generated_at": "2026-09-07T08:01:16.337410+00:00",
+  "generated_at": "2026-09-09T18:39:53.868951+00:00",
   "model_version": "sentinelgraph-xai-1.0.0",
   "findings": [
     {
-      "id": "F-7cbfc411-ae73-5d9c-98ce-cfffef71a8ea",
+      "id": "F-0c83d824-039d-5099-afaf-5d78c2dbb35f",
       "finding_type": "HIDDEN_INTERMEDIARY",
-      "subject_id": "e1e815f1-4d25-5a12-b5d7-75a89104234f",
-      "subject_label": "Ghost Money Route Intermediary",
-      "subject_is_ghost": true,
-      "confidence": 0.5286,
-      "confidence_components": [
-        {
-          "name": "attribute_affinity",
-          "value": 0.4265,
-          "weight": 0.7692,
-          "description": "Shared attribute / anchor surface between the two communities"
-        },
-        {
-          "name": "temporal_affinity",
-          "value": 0.0,
-          "weight": 0.0,
-          "description": "Temporal co-activity similarity between the communities"
-        },
-        {
-          "name": "embedding_affinity",
-          "value": 0.0,
-          "weight": 0.0,
-          "description": "Graph-embedding proximity of the two community footprints"
-        },
-        {
-          "name": "structural_hole_signal",
-          "value": 0.869,
-          "weight": 0.2308,
-          "description": "Structural-hole (broker) scores on both sides"
-        },
-        {
-          "name": "graphsage_affinity",
-          "value": 0.0,
-          "weight": 0.0,
-          "description": "GraphSAGE-style inductive embedding affinity"
-        }
-      ],
-      "status": "HYPOTHESIS",
-      "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-07T08:01:16.288551+00:00",
-      "model_version": "sentinelgraph-xai-1.0.0",
-      "observed": [
-        {
-          "text": "Account/node 'ACC-COORD-P004996' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'ACC-COORD-P004996' is shared by communities 5 and 8 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-f09abb1b-4740-5d40-8002-bf879a5ca595",
-            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
-            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
-          ]
-        },
-        {
-          "text": "Account/node 'East Thomas' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'East Thomas' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-0a5620a5-55d0-5507-a281-737f500a47ed",
-            "EV-0fee5e57-507d-5270-a0a2-448aa94187c8",
-            "EV-1470dc39-3fbf-5912-86af-825de26d5904"
-          ]
-        },
-        {
-          "text": "Account/node 'Michaelshire' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Michaelshire' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-04156c40-3000-5ce3-9a64-fa2dfbc137ea",
-            "EV-7d70edfc-2913-52cc-ae9c-8319db6b7019",
-            "EV-8a952ba3-48a7-5d73-afa0-919ef450806b"
-          ]
-        },
-        {
-          "text": "Account/node 'North Margaret' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'North Margaret' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-0c3832b6-628d-5934-a8f1-0dd8ab35143e",
-            "EV-0f708e9b-bebe-5372-b2dd-5a08c5ba3bc7",
-            "EV-29d202f0-c302-5e19-8cbf-6d2cf193db31"
-          ]
-        },
-        {
-          "text": "Account/node 'Port David' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Port David' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-01e2df18-50ff-5798-98f2-db073d3f19f2",
-            "EV-06a78eb3-1f0a-5386-8499-527fda949c8d",
-            "EV-0ad13a7a-c392-52ab-98e7-2fae9199662c"
-          ]
-        },
-        {
-          "text": "Account/node 'Jenniferfurt' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Jenniferfurt' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-0a0af054-dad9-5040-b369-52c4e3f006b3",
-            "EV-25930384-8c72-5a25-9314-8f110bc6e1d3",
-            "EV-abac5ba4-1d7c-5551-819c-e7b4aef1b145"
-          ]
-        },
-        {
-          "text": "Account/node 'Davidfurt' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Davidfurt' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-0e5ee685-a5e3-530d-b465-13fcad545108",
-            "EV-38aad39d-f9d1-5cc1-83ee-68ae6cd4a6dc",
-            "EV-4b0aa2f9-ed29-57fa-a3be-ead21da2c578"
-          ]
-        },
-        {
-          "text": "Account/node 'ACC-COORD-P004995' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'ACC-COORD-P004995' is shared by communities 5 and 8 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
-            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
-            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
-          ]
-        },
-        {
-          "text": "Account/node 'Jonesland' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Jonesland' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-3fbe2e0c-a58f-50a2-bfd3-8dd7c7a34fad",
-            "EV-6adc19e9-3254-5bca-aad8-fc29016eef31",
-            "EV-8cd209e6-e09d-59ab-9b6d-db61941aecb2"
-          ]
-        },
-        {
-          "text": "Account/node 'Smithhaven' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Smithhaven' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-169cccce-604f-593f-85b0-323c6f6c0220",
-            "EV-1cbfa598-be09-5f30-b7e4-035f31ec5804",
-            "EV-416d69be-acf9-53c6-adaf-28e94c1cf18b"
-          ]
-        },
-        {
-          "text": "Account/node 'Reyesside' is shared by communities 5 and 8 with no direct member-to-member edge between them. 'Reyesside' is shared by communities 5 and 8 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
-          "label": "OBSERVED",
-          "evidence_ids": [
-            "EV-6bd46ffc-1759-5ccb-b082-a5ebb3f8a050",
-            "EV-7f26b8af-403b-5298-a95f-632eb58960ce",
-            "EV-9f47ca02-27fa-59fa-a9af-3fd5a1d1879f"
-          ]
-        }
-      ],
-      "inferred": [
-        {
-          "text": "Predicted relationship between the ghost intermediary and 'Amanda Frank' (side: cell_a, probability 0.719613): Top structural-hole broker of community 5 (attach score 0.65871); plausible contact point for the hidden money intermediary.",
-          "label": "INFERRED",
-          "evidence_ids": []
-        },
-        {
-          "text": "Predicted relationship between the ghost intermediary and 'Jackie Carter' (side: cell_a, probability 0.698949): Top structural-hole broker of community 5 (attach score 0.55539); plausible contact point for the hidden money intermediary.",
-          "label": "INFERRED",
-          "evidence_ids": []
-        },
-        {
-          "text": "Predicted relationship between the ghost intermediary and 'Michael Davis' (side: cell_b, probability 0.712657): Top structural-hole broker of community 8 (attach score 0.623926); plausible contact point for the hidden money intermediary.",
-          "label": "INFERRED",
-          "evidence_ids": []
-        },
-        {
-          "text": "Predicted relationship between the ghost intermediary and 'Maria Cruz' (side: cell_b, probability 0.703233): Top structural-hole broker of community 8 (attach score 0.576809); plausible contact point for the hidden money intermediary.",
-          "label": "INFERRED",
-          "evidence_ids": []
-        },
-        {
-          "text": "A single hidden intermediary plausibly connects communities [5, 8]. Subtype: money_intermediary.",
-          "label": "INFERRED",
-          "evidence_ids": []
-        }
-      ],
-      "unknown": [
-        {
-          "text": "Actual identity of the hidden coordinator (if one exists)",
-          "label": "UNKNOWN",
-          "evidence_ids": []
-        },
-        {
-          "text": "Whether the predicted edges correspond to real communications",
-          "label": "UNKNOWN",
-          "evidence_ids": []
-        },
-        {
-          "text": "Direction and start date of the suspected coordination",
-          "label": "UNKNOWN",
-          "evidence_ids": []
-        }
-      ],
-      "supporting_evidence_ids": [
-        "EV-01e2df18-50ff-5798-98f2-db073d3f19f2",
-        "EV-04156c40-3000-5ce3-9a64-fa2dfbc137ea",
-        "EV-06a78eb3-1f0a-5386-8499-527fda949c8d",
-        "EV-0a0af054-dad9-5040-b369-52c4e3f006b3",
-        "EV-0a5620a5-55d0-5507-a281-737f500a47ed",
-        "EV-0ad13a7a-c392-52ab-98e7-2fae9199662c",
-        "EV-0c3832b6-628d-5934-a8f1-0dd8ab35143e",
-        "EV-0e5ee685-a5e3-530d-b465-13fcad545108",
-        "EV-0f708e9b-bebe-5372-b2dd-5a08c5ba3bc7",
-        "EV-0fee5e57-507d-5270-a0a2-448aa94187c8",
-        "EV-1470dc39-3fbf-5912-86af-825de26d5904",
-        "EV-169cccce-604f-593f-85b0-323c6f6c0220",
-        "EV-1cbfa598-be09-5f30-b7e4-035f31ec5804",
-        "EV-25930384-8c72-5a25-9314-8f110bc6e1d3",
-        "EV-29d202f0-c302-5e19-8cbf-6d2cf193db31",
-        "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849",
-        "EV-38aad39d-f9d1-5cc1-83ee-68ae6cd4a6dc",
-        "EV-3fbe2e0c-a58f-50a2-bfd3-8dd7c7a34fad",
-        "EV-416d69be-acf9-53c6-adaf-28e94c1cf18b",
-        "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
-        "EV-4b0aa2f9-ed29-57fa-a3be-ead21da2c578",
-        "EV-6adc19e9-3254-5bca-aad8-fc29016eef31",
-        "EV-6bd46ffc-1759-5ccb-b082-a5ebb3f8a050",
-        "EV-7d70edfc-2913-52cc-ae9c-8319db6b7019",
-        "EV-7f26b8af-403b-5298-a95f-632eb58960ce",
-        "EV-8a952ba3-48a7-5d73-afa0-919ef450806b",
-        "EV-8cd209e6-e09d-59ab-9b6d-db61941aecb2",
-        "EV-9f47ca02-27fa-59fa-a9af-3fd5a1d1879f",
-        "EV-abac5ba4-1d7c-5551-819c-e7b4aef1b145",
-        "EV-f09abb1b-4740-5d40-8002-bf879a5ca595",
-        "EV-ff797dea-b405-5fa9-9810-5e11b216c10d"
-      ],
-      "counter_evidence_ids": [],
-      "graph_signals": [
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'ACC-COORD-P004996' connects to both communities via USES_ACCOUNT",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "00aceaf5-fdd9-5fab-a9b3-925432816682"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'East Thomas' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "1845b1e2-39ce-51e8-9380-70d9fad06419"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Michaelshire' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "1b1ff8a8-a2f1-5b9e-a4c7-0186d3eeffbe"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'North Margaret' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "622a3030-7ddf-5615-8929-9555a7b41e25"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Port David' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "643b2cbb-ef6a-5188-a673-07e0606e1616"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Jenniferfurt' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "911653a4-a31d-56a3-8b8c-8529a06c83ea"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Davidfurt' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "98f54fc6-6d25-5d04-9d54-8cf1a9126666"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'ACC-COORD-P004995' connects to both communities via USES_ACCOUNT",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "c77ed3b4-d5f5-5745-87d5-ea4d71b16789"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Jonesland' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "f5ff6308-2c76-565d-9350-b0b2c519c041"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Smithhaven' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "fcf51a52-46a1-559e-adf9-6b91f1839547"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "SHARED_ANCHOR",
-          "description": "'Reyesside' connects to both communities via LOCATED_IN",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [
-            "ff2298a3-f311-5fd2-ba0b-4c595859a051"
-          ],
-          "strength": null
-        },
-        {
-          "signal_type": "COMMUNITY_BRIDGE",
-          "description": "Structural hole detected between communities 5 and 8 (no observed direct edges)",
-          "communities": [
-            5,
-            8
-          ],
-          "node_ids": [],
-          "strength": null
-        }
-      ],
-      "limitations": [
-        "Ghost candidates are structural hypotheses inferred from network patterns, not confirmed identities.",
-        "Confidence is a weighted blend of graph similarity signals; it is NOT a probability of guilt and NOT proof that a specific person exists.",
-        "Predicted relationships are plausible contact points, not observed events.",
-        "The synthetic dataset bounds what the detector can recover; recall on the planted-coordinator benchmark is incomplete (see VALIDATION_REPORT.md).",
-        "Human review is required before any operational use."
-      ],
-      "human_review": {
-        "required": true,
-        "reviewer": null,
-        "decision": null
-      }
-    },
-    {
-      "id": "F-2bcbe92a-9537-5b5d-b461-a1328f35888b",
-      "finding_type": "HIDDEN_INTERMEDIARY",
-      "subject_id": "21a7cde8-f8cd-5dc3-babe-99696d12d895",
+      "subject_id": "add9ef2d-7392-5d5d-83ac-34eb98fa39a4",
       "subject_label": "Ghost Money Route Intermediary",
       "subject_is_ghost": true,
       "confidence": 0.4888,
@@ -422,11 +43,11 @@
       ],
       "status": "HYPOTHESIS",
       "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-07T08:01:16.326519+00:00",
+      "generated_at": "2026-09-09T18:39:53.860953+00:00",
       "model_version": "sentinelgraph-xai-1.0.0",
       "observed": [
         {
-          "text": "Account/node 'East James' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'East James' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'East James' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East James' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-12a193ec-28c6-5667-85ab-b0ac9cf400c6",
@@ -435,7 +56,7 @@
           ]
         },
         {
-          "text": "Account/node 'Smithport' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'Smithport' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'Smithport' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Smithport' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-271ca637-b398-5ab6-b12b-4c88cc762555",
@@ -444,7 +65,7 @@
           ]
         },
         {
-          "text": "Account/node 'Port Michael' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'Port Michael' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'Port Michael' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Port Michael' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-01ca9b42-b394-5455-b838-6a210b71f752",
@@ -453,7 +74,7 @@
           ]
         },
         {
-          "text": "Account/node 'East Jason' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'East Jason' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'East Jason' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East Jason' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-1838ba7f-2dd4-5006-a420-1373b92fd960",
@@ -462,7 +83,7 @@
           ]
         },
         {
-          "text": "Account/node 'East Gary' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'East Gary' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'East Gary' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East Gary' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-12ab8248-75de-54fb-a239-946348f3f4f7",
@@ -471,7 +92,7 @@
           ]
         },
         {
-          "text": "Account/node 'West Johnville' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'West Johnville' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'West Johnville' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'West Johnville' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-1bed7648-4aa7-55ab-9e1e-4bd23b428949",
@@ -480,7 +101,7 @@
           ]
         },
         {
-          "text": "Account/node 'Evansstad' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'Evansstad' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'Evansstad' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Evansstad' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-0dd26479-6320-5fc6-8b59-0a1a70a9d72d",
@@ -489,7 +110,7 @@
           ]
         },
         {
-          "text": "Account/node 'North Jessica' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'North Jessica' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'North Jessica' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'North Jessica' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-062f6050-4715-51c6-806a-cc5a32b6eac0",
@@ -498,7 +119,7 @@
           ]
         },
         {
-          "text": "Account/node 'ACC-COORD-P004999' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'ACC-COORD-P004999' is shared by communities 3 and 9 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'ACC-COORD-P004999' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'ACC-COORD-P004999' is shared by communities 2 and 9 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-4e69cbe8-cee0-5231-90b2-3074c21436ae",
@@ -507,7 +128,7 @@
           ]
         },
         {
-          "text": "Account/node 'Jonesview' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'Jonesview' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'Jonesview' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Jonesview' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-09be86f6-a09c-5dce-9738-c499878be5c5",
@@ -516,7 +137,7 @@
           ]
         },
         {
-          "text": "Account/node 'East David' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'East David' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'East David' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'East David' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-00744699-befd-5464-b0f2-7c8b3521088c",
@@ -525,7 +146,7 @@
           ]
         },
         {
-          "text": "Account/node 'Lake Michael' is shared by communities 3 and 9 with no direct member-to-member edge between them. 'Lake Michael' is shared by communities 3 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "text": "Account/node 'Lake Michael' is shared by communities 2 and 9 with no direct member-to-member edge between them. 'Lake Michael' is shared by communities 2 and 9 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
           "label": "OBSERVED",
           "evidence_ids": [
             "EV-01ca9b42-b394-5455-b838-6a210b71f752",
@@ -536,27 +157,27 @@
       ],
       "inferred": [
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Caleb Grant' (side: cell_a, probability 0.689714): Top structural-hole broker of community 3 (attach score 0.598791); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Caleb Grant' (side: cell_a, probability 0.689715): Top structural-hole broker of community 2 (attach score 0.598791); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Jack Brown' (side: cell_a, probability 0.685019): Top structural-hole broker of community 3 (attach score 0.575315); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Jack Brown' (side: cell_a, probability 0.68502): Top structural-hole broker of community 2 (attach score 0.575315); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Autumn Walker' (side: cell_b, probability 0.704141): Top structural-hole broker of community 9 (attach score 0.670925); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Autumn Walker' (side: cell_b, probability 0.704142): Top structural-hole broker of community 9 (attach score 0.670925); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Travis Hernandez' (side: cell_b, probability 0.685205): Top structural-hole broker of community 9 (attach score 0.576246); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Travis Hernandez' (side: cell_b, probability 0.685206): Top structural-hole broker of community 9 (attach score 0.576246); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "A single hidden intermediary plausibly connects communities [3, 9]. Subtype: money_intermediary.",
+          "text": "A single hidden intermediary plausibly connects communities [2, 9]. Subtype: money_intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         }
@@ -620,7 +241,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'East James' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -632,7 +253,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'Smithport' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -644,7 +265,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'Port Michael' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -656,7 +277,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'East Jason' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -668,7 +289,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'East Gary' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -680,7 +301,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'West Johnville' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -692,7 +313,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'Evansstad' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -704,7 +325,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'North Jessica' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -716,7 +337,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'ACC-COORD-P004999' connects to both communities via USES_ACCOUNT",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -728,7 +349,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'Jonesview' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -740,7 +361,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'East David' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -752,7 +373,7 @@
           "signal_type": "SHARED_ANCHOR",
           "description": "'Lake Michael' connects to both communities via LOCATED_IN",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [
@@ -762,9 +383,9 @@
         },
         {
           "signal_type": "COMMUNITY_BRIDGE",
-          "description": "Structural hole detected between communities 3 and 9 (no observed direct edges)",
+          "description": "Structural hole detected between communities 2 and 9 (no observed direct edges)",
           "communities": [
-            3,
+            2,
             9
           ],
           "node_ids": [],
@@ -790,11 +411,11 @@
       "subject_id": "896efeaa-19c9-5aca-ac72-3074bcaf9ce3",
       "subject_label": "Ghost Money Route Intermediary",
       "subject_is_ghost": true,
-      "confidence": 0.4842,
+      "confidence": 0.4851,
       "confidence_components": [
         {
           "name": "attribute_affinity",
-          "value": 0.369,
+          "value": 0.3685,
           "weight": 0.7692,
           "description": "Shared attribute / anchor surface between the two communities"
         },
@@ -812,7 +433,7 @@
         },
         {
           "name": "structural_hole_signal",
-          "value": 0.8682,
+          "value": 0.874,
           "weight": 0.2308,
           "description": "Structural-hole (broker) scores on both sides"
         },
@@ -825,7 +446,7 @@
       ],
       "status": "HYPOTHESIS",
       "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-07T08:01:16.337014+00:00",
+      "generated_at": "2026-09-09T18:39:53.863814+00:00",
       "model_version": "sentinelgraph-xai-1.0.0",
       "observed": [
         {
@@ -939,22 +560,22 @@
       ],
       "inferred": [
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Richard Porter' (side: cell_a, probability 0.675806): Top structural-hole broker of community 1 (attach score 0.539662); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Mr. David Smith' (side: cell_a, probability 0.683724): Top structural-hole broker of community 1 (attach score 0.577072); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Miranda Anderson' (side: cell_a, probability 0.674355): Top structural-hole broker of community 1 (attach score 0.532408); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Richard Porter' (side: cell_a, probability 0.676242): Top structural-hole broker of community 1 (attach score 0.539662); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Rebecca Mathis' (side: cell_b, probability 0.692207): Top structural-hole broker of community 7 (attach score 0.62167); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Rebecca Mathis' (side: cell_b, probability 0.692644): Top structural-hole broker of community 7 (attach score 0.62167); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
         {
-          "text": "Predicted relationship between the ghost intermediary and 'Brian Davis' (side: cell_b, probability 0.691469): Top structural-hole broker of community 7 (attach score 0.617981); plausible contact point for the hidden money intermediary.",
+          "text": "Predicted relationship between the ghost intermediary and 'Brian Davis' (side: cell_b, probability 0.691906): Top structural-hole broker of community 7 (attach score 0.617981); plausible contact point for the hidden money intermediary.",
           "label": "INFERRED",
           "evidence_ids": []
         },
@@ -1171,6 +792,505 @@
           "communities": [
             1,
             7
+          ],
+          "node_ids": [],
+          "strength": null
+        }
+      ],
+      "limitations": [
+        "Ghost candidates are structural hypotheses inferred from network patterns, not confirmed identities.",
+        "Confidence is a weighted blend of graph similarity signals; it is NOT a probability of guilt and NOT proof that a specific person exists.",
+        "Predicted relationships are plausible contact points, not observed events.",
+        "The synthetic dataset bounds what the detector can recover; recall on the planted-coordinator benchmark is incomplete (see VALIDATION_REPORT.md).",
+        "Human review is required before any operational use."
+      ],
+      "human_review": {
+        "required": true,
+        "reviewer": null,
+        "decision": null
+      }
+    },
+    {
+      "id": "F-57909c13-d545-5116-9ed9-b4e5d62556e4",
+      "finding_type": "HIDDEN_INTERMEDIARY",
+      "subject_id": "8f91926f-59bd-503a-8ad2-aab3124d3ab9",
+      "subject_label": "Ghost Money Route Intermediary",
+      "subject_is_ghost": true,
+      "confidence": 0.4778,
+      "confidence_components": [
+        {
+          "name": "attribute_affinity",
+          "value": 0.3538,
+          "weight": 0.7692,
+          "description": "Shared attribute / anchor surface between the two communities"
+        },
+        {
+          "name": "temporal_affinity",
+          "value": 0.0,
+          "weight": 0.0,
+          "description": "Temporal co-activity similarity between the communities"
+        },
+        {
+          "name": "embedding_affinity",
+          "value": 0.0,
+          "weight": 0.0,
+          "description": "Graph-embedding proximity of the two community footprints"
+        },
+        {
+          "name": "structural_hole_signal",
+          "value": 0.891,
+          "weight": 0.2308,
+          "description": "Structural-hole (broker) scores on both sides"
+        },
+        {
+          "name": "graphsage_affinity",
+          "value": 0.0,
+          "weight": 0.0,
+          "description": "GraphSAGE-style inductive embedding affinity"
+        }
+      ],
+      "status": "HYPOTHESIS",
+      "method": "STRUCTURAL_HOLE_ANALYSIS",
+      "generated_at": "2026-09-09T18:39:53.868787+00:00",
+      "model_version": "sentinelgraph-xai-1.0.0",
+      "observed": [
+        {
+          "text": "Account/node 'Jamesmouth' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Jamesmouth' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-16ff2b8d-8a57-5146-b4ad-b30e3caf936d",
+            "EV-1b508b0f-dbd0-57e9-9c86-dbdf9c2cc131",
+            "EV-352e4006-7dc7-5250-8477-9fded241f905"
+          ]
+        },
+        {
+          "text": "Account/node 'Lake Joshua' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Lake Joshua' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-0b8e67cf-cc56-5839-b0d8-7d98afb1365d",
+            "EV-1537830b-e00c-59bd-bc01-4af6c0bea2ba",
+            "EV-1804b58e-640d-5850-ba72-1df662ba5726"
+          ]
+        },
+        {
+          "text": "Account/node 'Lake Laura' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Lake Laura' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-0c06fefa-f0e0-5bb7-8e86-bca898f96f3e",
+            "EV-1a59b3ef-9409-5998-93e9-28bf16918427",
+            "EV-1ab7ac01-a76d-5049-8474-b00e54b55c3b"
+          ]
+        },
+        {
+          "text": "Account/node 'Jenkinsmouth' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Jenkinsmouth' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-1567201a-158b-5399-aead-9542009690f2",
+            "EV-27a744dc-e549-5c72-854f-d595b176a2d9",
+            "EV-9beb3090-136a-56ec-ab1d-88d6b8407bcc"
+          ]
+        },
+        {
+          "text": "Account/node 'Port Daniel' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Port Daniel' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-17e3352f-ab59-54c0-8a05-022afe3b43b1",
+            "EV-1880a39b-b64c-53a6-b577-5a00dacc934b",
+            "EV-1d9f0824-ebe1-5a65-8567-6b8334e6cd7c"
+          ]
+        },
+        {
+          "text": "Account/node 'Zacharyborough' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Zacharyborough' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-2c73ab29-f178-51ce-ad5b-b468d13e8b8f",
+            "EV-6f06211e-feac-5263-bb15-19a66e78599b",
+            "EV-8f11f579-cb84-55a8-b95c-361f9a2cb70a"
+          ]
+        },
+        {
+          "text": "Account/node 'Port Eric' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Port Eric' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-0e4726cc-5dc3-5067-88e1-f3aa1c8aa135",
+            "EV-10ba967d-3391-5ac4-9b70-4af9adaa605c",
+            "EV-3c510344-bbf9-55ee-87d2-4daddc890eb8"
+          ]
+        },
+        {
+          "text": "Account/node 'Matthewfort' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Matthewfort' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-1e7ae829-10a5-5d2e-90e2-74ac6849b1a4",
+            "EV-20849d89-7469-5226-afc1-777297ae8cc1",
+            "EV-3e5e95fb-543f-568e-adcb-4c5cd2a6cfd9"
+          ]
+        },
+        {
+          "text": "Account/node 'Port Kimberly' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Port Kimberly' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-02a05898-71d6-5ea6-b46c-76dde44c5c4b",
+            "EV-23227b8a-3707-5ab7-9206-efb9b6a5c75b",
+            "EV-48ac1ecc-2b33-512e-a11f-60ad3abd4e37"
+          ]
+        },
+        {
+          "text": "Account/node 'East Jamesmouth' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'East Jamesmouth' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-1b508b0f-dbd0-57e9-9c86-dbdf9c2cc131",
+            "EV-352e4006-7dc7-5250-8477-9fded241f905",
+            "EV-565ddb7b-c8ec-5742-aad0-9a87bc6ff750"
+          ]
+        },
+        {
+          "text": "Account/node 'North Jennifer' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'North Jennifer' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-0650252f-3ba0-5845-a293-e5a40647b091",
+            "EV-082eaf7c-914c-5f34-9a0b-0b110cb206df",
+            "EV-08e7cf3d-2530-5eae-9d5c-eb269523cf9e"
+          ]
+        },
+        {
+          "text": "Account/node 'ACC-COORD-P004995' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'ACC-COORD-P004995' is shared by communities 3 and 5 via ['USES_ACCOUNT'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
+            "EV-ff797dea-b405-5fa9-9810-5e11b216c10d",
+            "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849"
+          ]
+        },
+        {
+          "text": "Account/node 'Brownchester' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Brownchester' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-075a964c-0fbd-5923-87b7-c38f729511b2",
+            "EV-316f04c8-bbae-56d4-b0c3-fdb395ff83b2",
+            "EV-931709df-51ee-5f0c-9938-10aa9c5c63b8"
+          ]
+        },
+        {
+          "text": "Account/node 'North Daniel' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'North Daniel' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-15cb2781-0198-5efc-bde4-fb4ef3c7a380",
+            "EV-187d4c93-5ab1-5401-8843-f2b4fc94c938",
+            "EV-255a1cec-79da-549d-aca1-f930b0a0b908"
+          ]
+        },
+        {
+          "text": "Account/node 'Port Michaelborough' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'Port Michaelborough' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-1b49c25f-e0e4-57a2-a783-b6e1eb168893",
+            "EV-3bfc1819-48e2-58d9-869d-403758882251",
+            "EV-4a035691-e132-59d1-87fa-3581723e52af"
+          ]
+        },
+        {
+          "text": "Account/node 'South Steven' is shared by communities 3 and 5 with no direct member-to-member edge between them. 'South Steven' is shared by communities 3 and 5 via ['LOCATED_IN'] without any direct member-to-member edge between them.",
+          "label": "OBSERVED",
+          "evidence_ids": [
+            "EV-6adfce70-6c42-5c91-9ca0-7e9a425aa3c5",
+            "EV-8a9e4b5f-754c-5b4c-b4db-6b09bbd7f13b",
+            "EV-defdb436-7329-5416-b90b-5a47c85ded69"
+          ]
+        }
+      ],
+      "inferred": [
+        {
+          "text": "Predicted relationship between the ghost intermediary and 'Ashley Robinson' (side: cell_a, probability 0.67979): Top structural-hole broker of community 3 (attach score 0.573903); plausible contact point for the hidden money intermediary.",
+          "label": "INFERRED",
+          "evidence_ids": []
+        },
+        {
+          "text": "Predicted relationship between the ghost intermediary and 'Andrew Wong' (side: cell_a, probability 0.674133): Top structural-hole broker of community 3 (attach score 0.545619); plausible contact point for the hidden money intermediary.",
+          "label": "INFERRED",
+          "evidence_ids": []
+        },
+        {
+          "text": "Predicted relationship between the ghost intermediary and 'Matthew Jones' (side: cell_b, probability 0.704636): Top structural-hole broker of community 5 (attach score 0.698132); plausible contact point for the hidden money intermediary.",
+          "label": "INFERRED",
+          "evidence_ids": []
+        },
+        {
+          "text": "Predicted relationship between the ghost intermediary and 'Michael Martin' (side: cell_b, probability 0.701864): Top structural-hole broker of community 5 (attach score 0.684275); plausible contact point for the hidden money intermediary.",
+          "label": "INFERRED",
+          "evidence_ids": []
+        },
+        {
+          "text": "A single hidden intermediary plausibly connects communities [3, 5]. Subtype: money_intermediary.",
+          "label": "INFERRED",
+          "evidence_ids": []
+        }
+      ],
+      "unknown": [
+        {
+          "text": "Actual identity of the hidden coordinator (if one exists)",
+          "label": "UNKNOWN",
+          "evidence_ids": []
+        },
+        {
+          "text": "Whether the predicted edges correspond to real communications",
+          "label": "UNKNOWN",
+          "evidence_ids": []
+        },
+        {
+          "text": "Direction and start date of the suspected coordination",
+          "label": "UNKNOWN",
+          "evidence_ids": []
+        }
+      ],
+      "supporting_evidence_ids": [
+        "EV-02a05898-71d6-5ea6-b46c-76dde44c5c4b",
+        "EV-0650252f-3ba0-5845-a293-e5a40647b091",
+        "EV-075a964c-0fbd-5923-87b7-c38f729511b2",
+        "EV-082eaf7c-914c-5f34-9a0b-0b110cb206df",
+        "EV-08e7cf3d-2530-5eae-9d5c-eb269523cf9e",
+        "EV-0b8e67cf-cc56-5839-b0d8-7d98afb1365d",
+        "EV-0c06fefa-f0e0-5bb7-8e86-bca898f96f3e",
+        "EV-0e4726cc-5dc3-5067-88e1-f3aa1c8aa135",
+        "EV-10ba967d-3391-5ac4-9b70-4af9adaa605c",
+        "EV-1537830b-e00c-59bd-bc01-4af6c0bea2ba",
+        "EV-1567201a-158b-5399-aead-9542009690f2",
+        "EV-15cb2781-0198-5efc-bde4-fb4ef3c7a380",
+        "EV-16ff2b8d-8a57-5146-b4ad-b30e3caf936d",
+        "EV-17e3352f-ab59-54c0-8a05-022afe3b43b1",
+        "EV-1804b58e-640d-5850-ba72-1df662ba5726",
+        "EV-187d4c93-5ab1-5401-8843-f2b4fc94c938",
+        "EV-1880a39b-b64c-53a6-b577-5a00dacc934b",
+        "EV-1a59b3ef-9409-5998-93e9-28bf16918427",
+        "EV-1ab7ac01-a76d-5049-8474-b00e54b55c3b",
+        "EV-1b49c25f-e0e4-57a2-a783-b6e1eb168893",
+        "EV-1b508b0f-dbd0-57e9-9c86-dbdf9c2cc131",
+        "EV-1d9f0824-ebe1-5a65-8567-6b8334e6cd7c",
+        "EV-1e7ae829-10a5-5d2e-90e2-74ac6849b1a4",
+        "EV-20849d89-7469-5226-afc1-777297ae8cc1",
+        "EV-23227b8a-3707-5ab7-9206-efb9b6a5c75b",
+        "EV-255a1cec-79da-549d-aca1-f930b0a0b908",
+        "EV-27a744dc-e549-5c72-854f-d595b176a2d9",
+        "EV-2c73ab29-f178-51ce-ad5b-b468d13e8b8f",
+        "EV-2f7e758e-9d5c-5472-b145-f990bd3dd849",
+        "EV-316f04c8-bbae-56d4-b0c3-fdb395ff83b2",
+        "EV-352e4006-7dc7-5250-8477-9fded241f905",
+        "EV-3bfc1819-48e2-58d9-869d-403758882251",
+        "EV-3c510344-bbf9-55ee-87d2-4daddc890eb8",
+        "EV-3e5e95fb-543f-568e-adcb-4c5cd2a6cfd9",
+        "EV-47a100bb-6366-5f48-aed7-a551c0a0b285",
+        "EV-48ac1ecc-2b33-512e-a11f-60ad3abd4e37",
+        "EV-4a035691-e132-59d1-87fa-3581723e52af",
+        "EV-565ddb7b-c8ec-5742-aad0-9a87bc6ff750",
+        "EV-6adfce70-6c42-5c91-9ca0-7e9a425aa3c5",
+        "EV-6f06211e-feac-5263-bb15-19a66e78599b",
+        "EV-8a9e4b5f-754c-5b4c-b4db-6b09bbd7f13b",
+        "EV-8f11f579-cb84-55a8-b95c-361f9a2cb70a",
+        "EV-931709df-51ee-5f0c-9938-10aa9c5c63b8",
+        "EV-9beb3090-136a-56ec-ab1d-88d6b8407bcc",
+        "EV-defdb436-7329-5416-b90b-5a47c85ded69",
+        "EV-ff797dea-b405-5fa9-9810-5e11b216c10d"
+      ],
+      "counter_evidence_ids": [],
+      "graph_signals": [
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Jamesmouth' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "0a3bd01f-204b-5d9d-af6f-1dc80d707a70"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Lake Joshua' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "110db015-e53c-5bc7-85ee-d16d559bfdc8"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Lake Laura' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "2e5357de-fc3e-5fde-9ad9-77118915ae8f"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Jenkinsmouth' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "33eb5bf2-d448-5a4b-b6f9-920df709bba7"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Port Daniel' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "588c2c46-96e1-51db-86e7-f02f5869da5b"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Zacharyborough' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "5dd28795-c1ec-56fb-9a62-217e072a00b0"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Port Eric' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "65a705d6-1d6d-5f2a-92aa-d439e8d54024"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Matthewfort' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "77362367-bc79-579d-92ff-f2f6e0459282"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Port Kimberly' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "ba3ee609-2ea2-52eb-a63c-23d47ecb91a4"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'East Jamesmouth' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "c39ed4ce-ba3d-51c5-9852-2d8850f640a3"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'North Jennifer' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "c66e7dba-f6ca-5912-b5aa-1de50d26f478"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'ACC-COORD-P004995' connects to both communities via USES_ACCOUNT",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "c77ed3b4-d5f5-5745-87d5-ea4d71b16789"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Brownchester' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "d6b48682-7e97-53c0-941d-c79be0c57864"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'North Daniel' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "e4374338-b916-5f8a-82db-8be3daaefe5d"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'Port Michaelborough' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "ec8f29e1-a807-50ae-b585-a0be4903eb77"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "SHARED_ANCHOR",
+          "description": "'South Steven' connects to both communities via LOCATED_IN",
+          "communities": [
+            3,
+            5
+          ],
+          "node_ids": [
+            "f6068323-f7ae-5b60-85dd-ef59cfc138cb"
+          ],
+          "strength": null
+        },
+        {
+          "signal_type": "COMMUNITY_BRIDGE",
+          "description": "Structural hole detected between communities 3 and 5 (no observed direct edges)",
+          "communities": [
+            3,
+            5
           ],
           "node_ids": [],
           "strength": null

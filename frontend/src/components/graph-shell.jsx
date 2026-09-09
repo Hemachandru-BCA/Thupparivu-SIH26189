@@ -128,7 +128,7 @@ function resolveRouteMeta(pathname) {
     const id = decodeURIComponent(pathname.replace('/cases/', ''));
     return { section: 'WORKSPACE', title: 'Case File', desc: `Case ${id}`, detailId: id };
   }
-  return { section: 'COMMAND CENTER', title: 'Analytical Terminal', desc: 'SentinelGraph Workstation', detailId: null };
+  return { section: 'COMMAND CENTER', title: 'Analytical Terminal', desc: 'THUPPARIVU Workstation', detailId: null };
 }
 
 function isNavActive(item, currentPath) {
