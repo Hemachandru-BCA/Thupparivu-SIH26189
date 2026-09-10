@@ -1,0 +1,78 @@
+{
+  "models": {
+    "thupparivu_ensemble_link_predictor": {
+      "name": "thupparivu_ensemble_link_predictor",
+      "latest_version": "1.0.0",
+      "description": "Multi-model link predictor: baselines + Node2Vec + GradientBoosting + LightGNN",
+      "capabilities": [
+        "link_prediction",
+        "missing_relationship_detection"
+      ],
+      "metadata": {
+        "calibration": "isotonic",
+        "disagreement_threshold": 0.2
+      },
+      "updated_at": "2026-09-09T19:31:07.697919+00:00"
+    },
+    "burt_structural_hole_detector": {
+      "name": "burt_structural_hole_detector",
+      "latest_version": "1.0.0",
+      "description": "Burt constraint + cross-community bridge detection for hidden intermediaries",
+      "capabilities": [
+        "ghost_node_detection",
+        "hidden_intermediary_detection"
+      ],
+      "metadata": {
+        "temporal_window_days": 14
+      },
+      "updated_at": "2026-09-09T19:31:07.697927+00:00"
+    },
+    "temporal_multilayer_graph_engine": {
+      "name": "temporal_multilayer_graph_engine",
+      "latest_version": "2.0.0",
+      "description": "Temporal point-in-time graph engine with strict no-leakage guarantees",
+      "capabilities": [
+        "temporal_snapshots",
+        "graph_diff",
+        "community_evolution"
+      ],
+      "metadata": {
+        "layers": [
+          "COMMUNICATION",
+          "FINANCIAL",
+          "LOCATION",
+          "ORGANIZATIONAL",
+          "SOCIAL"
+        ]
+      },
+      "updated_at": "2026-09-09T19:31:07.697930+00:00"
+    },
+    "counterfactual_intervention_engine": {
+      "name": "counterfactual_intervention_engine",
+      "latest_version": "1.0.0",
+      "description": "Counterfactual node/edge removal, entity merge/split and resilience simulation",
+      "capabilities": [
+        "counterfactual_analysis",
+        "network_resilience"
+      ],
+      "metadata": {
+        "all_outputs_labelled": "HYPOTHETICAL"
+      },
+      "updated_at": "2026-09-09T19:31:07.697932+00:00"
+    },
+    "hybrid_entity_resolver": {
+      "name": "hybrid_entity_resolver",
+      "latest_version": "1.0.0",
+      "description": "6-stage entity resolution: deterministic -> fuzzy -> semantic -> graph-consistency",
+      "capabilities": [
+        "entity_resolution",
+        "alias_resolution"
+      ],
+      "metadata": {
+        "algorithm": "complete-linkage-union-find"
+      },
+      "updated_at": "2026-09-09T19:31:07.697934+00:00"
+    }
+  },
+  "runs": []
+}

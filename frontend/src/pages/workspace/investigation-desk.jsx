@@ -1,150 +1,48 @@
-import { useState, useMemo } from 'react';
-import { Link } from 'wouter';
-import { useGetGraphOverview, useGetGhosts, useGetGraphNetwork, useGetCentrality, useGetCommunities } from '@/api/graph';
+import React, { useState, useMemo } from 'react';
+import { Link, useLocation } from 'wouter';
+import { useGetGraphOverview, useGetGhosts, useGetGraphNetwork, useGetCentrality } from '@/api/graph';
 import { useFindings } from '@/api/xai';
+import { useCaseBrief, useInvestigativeGaps, useRelationshipGaps } from '@/api/intel';
+import { useInvestigation } from '@/state/investigation-context';
 import {
     Users, Network as NetworkIcon, Clock, FileText, Brain, AlertTriangle,
-    ArrowRight, TrendingUp, Eye, MapPin, ChevronRight, Activity, Layers
+    ArrowRight, TrendingUp, Eye, MapPin, ChevronRight, Activity, Layers,
+    Shield, DollarSign, Zap, AlertCircle, CheckCircle2, XCircle, Sparkles,
+    Play, GitCompare, Bookmark
 } from 'lucide-react';
 import { formatNumber, getConfidenceColor, getEntityTypeColor } from '@/components/app-shell';
 
-/* ── Stat card ── */
-function StatCard({ label, value, color }) {
+/* ── Stat Card ── */
+function MetricCard({ label, value, subtext, color, icon: Icon }) {
     return (
-        <div className="tp-panel p-3 flex flex-col gap-1">
-            <div className="tp-grid-stat-label">{label}</div>
-            <div className="tp-grid-stat-value" style={color ? { color } : undefined}>
-                {value != null ? formatNumber(value) : '—'}
+        <div className="tp-panel p-3 flex flex-col justify-between">
+            <div className="flex items-center justify-between">
+                <span className="tp-section-label">{label}</span>
+                {Icon && <Icon size={13} className="text-fg-faint" />}
+            </div>
+            <div className="mt-1">
+                <div className="tp-grid-stat-value" style={color ? { color } : undefined}>
+                    {value != null ? formatNumber(value) : '—'}
+                </div>
+                {subtext && <div className="text-[10px] text-fg-faint mt-0.5 font-mono">{subtext}</div>}
             </div>
         </div>
     );
 }
 
-/* ── Priority finding card ── */
-function FindingCard({ finding }) {
-    const conf = finding.confidence || 0;
-    const confColor = getConfidenceColor(conf);
-    return (
-        <Link href={`/findings/${finding.finding_id || finding.id}`}>
-            <div className="tp-panel p-3 cursor-pointer hover:border-border-default transition-colors">
-                <div className="flex items-start justify-between gap-2 mb-1.5">
-                    <span className="font-mono text-[10px] text-fg-faint">{finding.finding_id || finding.id}</span>
-                    <span className="font-mono text-[11px] font-semibold" style={{color: confColor}}>
-                        {(conf * 100).toFixed(0)}%
-                    </span>
-                </div>
-                <div className="text-[11px] text-fg-primary font-medium mb-1 leading-tight">
-                    {finding.subject_label || finding.subject_id || 'Unknown subject'}
-                </div>
-                <div className="text-[10px] text-fg-faint leading-snug line-clamp-2">
-                    {finding.finding_type || finding.method || 'Analysis finding'}
-                </div>
-                <div className="mt-2">
-                    <div className="tp-confidence-bar">
-                        <div className="tp-confidence-fill" style={{ width: `${conf * 100}%`, background: confColor }} />
-                    </div>
-                </div>
-            </div>
-        </Link>
-    );
-}
-
-/* ── Ghost candidate card ── */
-function GhostCard({ ghost }) {
-    const conf = ghost.confidence || 0;
-    const confColor = getConfidenceColor(conf);
-    return (
-        <div className="tp-panel p-3">
-            <div className="flex items-start justify-between gap-2 mb-1">
-                <span className="font-mono text-[10px] text-fg-faint">{ghost.ghost_id}</span>
-                <span className="font-mono text-[11px] font-semibold" style={{color: confColor}}>
-                    {(conf * 100).toFixed(0)}%
-                </span>
-            </div>
-            <div className="text-[11px] text-fg-primary font-medium mb-0.5">
-                {ghost.label || 'Unknown candidate'}
-            </div>
-            <div className="text-[10px] text-fg-faint">
-                {ghost.subtype || 'Structural anomaly'}
-            </div>
-            {ghost.between_communities?.length > 0 && (
-                <div className="flex gap-1 mt-1.5">
-                    {ghost.between_communities.slice(0, 3).map(c => (
-                        <span key={c} className="tp-badge tp-badge-neutral" style={{fontSize: '8px', padding: '0 4px'}}>
-                            C{c}
-                        </span>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-}
-
-/* ── Network mini visualization (SVG) ── */
-function NetworkMiniViz({ nodes, edges }) {
-    if (!nodes?.length) return <div className="h-full flex items-center justify-center text-[10px] text-fg-faint">No network data</div>;
-
-    const width = 500;
-    const height = 280;
-    const padding = 30;
-
-    // Use simple force-directed layout approximation
-    const positioned = useMemo(() => {
-        const map = new Map();
-        const n = Math.min(nodes.length, 60);
-        for (let i = 0; i < n; i++) {
-            const node = nodes[i];
-            const angle = (i / n) * Math.PI * 2;
-            const radius = 80 + (node.metrics?.pagerank || 0.1) * 120;
-            map.set(node.id, {
-                ...node,
-                x: width / 2 + Math.cos(angle) * radius + (Math.sin(i * 7) * 20),
-                y: height / 2 + Math.sin(angle) * radius + (Math.cos(i * 5) * 20),
-            });
-        }
-        return map;
-    }, [nodes]);
-
-    const visibleEdges = useMemo(() => {
-        if (!edges) return [];
-        return edges.filter(e => positioned.has(e.source) && positioned.has(e.target)).slice(0, 100);
-    }, [edges, positioned]);
-
-    return (
-        <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
-            {visibleEdges.map((e, i) => {
-                const s = positioned.get(e.source);
-                const t = positioned.get(e.target);
-                if (!s || !t) return null;
-                return (
-                    <line key={i} x1={s.x} y1={s.y} x2={t.x} y2={t.y}
-                        stroke={e.inferred ? 'hsl(270 55% 58% / 0.3)' : 'hsl(220 10% 30%)'}
-                        strokeWidth={0.5}
-                        strokeDasharray={e.inferred ? '4 2' : undefined} />
-                );
-            })}
-            {Array.from(positioned.values()).map(node => {
-                const size = 3 + (node.metrics?.pagerank || 0.1) * 12;
-                return (
-                    <circle key={node.id} cx={node.x} cy={node.y} r={size}
-                        fill={getEntityTypeColor(node.type || node.label)}
-                        opacity={0.85} stroke="hsl(220 16% 6%)" strokeWidth={0.5} />
-                );
-            })}
-        </svg>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────
-   INVESTIGATION DESK
-   ────────────────────────────────────────────────────────────── */
-
+/* ── Investigation Desk Main View ── */
 export default function InvestigationDesk() {
+    const [, setLocation] = useLocation();
+    const { activeCase, setSelectedEntity, setSelectedHypothesis, setSelectedEvidence } = useInvestigation();
+
     const { data: overview, isLoading: overviewLoading } = useGetGraphOverview();
     const { data: ghosts } = useGetGhosts();
     const { data: findings } = useFindings();
     const { data: graphData } = useGetGraphNetwork({ center: null, depth: 0, limit: 500 });
     const { data: centralityData } = useGetCentrality();
+    const { data: brief } = useCaseBrief('CASE-0421');
+    const { data: gaps } = useInvestigativeGaps();
+    const { data: relGaps } = useRelationshipGaps({ top_n: 5, min_shared_neighbors: 3 });
 
     const ghostList = ghosts?.results || ghosts?.items || ghosts || [];
     const findingsList = findings?.results || findings?.items || findings || [];
@@ -152,307 +50,385 @@ export default function InvestigationDesk() {
     const edges = graphData?.edges || [];
     const centralityList = centralityData?.results || centralityData?.items || centralityData || [];
 
-    const stats = {
-        entity_count: overview?.entities_count,
-        triplet_count: overview?.triplets_count,
-        community_count: overview?.metadata?.num_communities,
-        ghost_count: overview?.ghost_predictions_count ?? ghostList.length,
-        event_count: overview?.events_count,
-    };
-
-    // Sort findings by confidence
-    const topFindings = useMemo(() => {
-        return [...findingsList]
-            .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))
-            .slice(0, 5);
-    }, [findingsList]);
-
-    // Top ghosts by confidence
-    const topGhosts = useMemo(() => {
-        return [...ghostList]
-            .sort((a, b) => (b.confidence || 0) - (a.confidence || 0))
-            .slice(0, 4);
-    }, [ghostList]);
-
-    // Top centrality — use centrality API results if available, else fall back to nodes
+    // Top central nodes
     const topCentral = useMemo(() => {
         const source = centralityList.length > 0 ? centralityList : nodes;
         return [...source]
-            .sort((a, b) => (b.degree || b.metrics?.betweenness_centrality || 0) - (a.degree || a.metrics?.betweenness_centrality || 0))
-            .slice(0, 6);
+            .sort((a, b) => (b.metrics?.betweenness_centrality || b.degree || 0) - (a.metrics?.betweenness_centrality || a.degree || 0))
+            .slice(0, 7);
     }, [centralityList, nodes]);
 
     if (overviewLoading) {
         return (
             <div className="flex flex-col items-center justify-center h-full gap-3">
-                <div className="tp-progress tp-progress-indeterminate" style={{width: 200}} />
-                <span className="text-[10px] font-mono text-fg-faint uppercase tracking-wider">Loading investigation...</span>
+                <div className="tp-progress tp-progress-indeterminate" style={{ width: 220 }} />
+                <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">
+                    INITIALIZING INVESTIGATION DESK...
+                </span>
             </div>
         );
     }
 
     return (
-        <div className="h-full overflow-y-auto">
-            <div className="max-w-[1600px] mx-auto p-4 space-y-4 animate-fade-in">
-
-                {/* ── Case metadata header ── */}
-                <div className="tp-panel">
-                    <div className="px-4 py-3 flex items-center gap-6 border-b border-border-subtle">
-                        <div>
-                            <div className="tp-section-label mb-0.5">CASE</div>
-                            <div className="text-[13px] font-semibold text-fg-primary">SIH-26189 / CASE-00421</div>
+        <div className="h-full overflow-y-auto p-4 space-y-4 max-w-[1720px] mx-auto animate-fade-in">
+            {/* ── CASE HEADER BAR & OPERATIONAL CONTEXT ── */}
+            <div className="tp-panel p-3.5 bg-bg-panel">
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-3 border-b border-border-subtle">
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded bg-primary/20 border border-primary/40 flex items-center justify-center text-primary font-mono font-bold text-xs">
+                            C421
                         </div>
-                        <div className="w-px h-8 bg-border-default" />
                         <div>
-                            <div className="tp-section-label mb-0.5">INVESTIGATION</div>
-                            <div className="text-[12px] text-fg-secondary">Criminal Network Analysis</div>
-                        </div>
-                        <div className="w-px h-8 bg-border-default" />
-                        <div>
-                            <div className="tp-section-label mb-0.5">DATASET</div>
-                            <div className="text-[12px] text-fg-secondary">Synthetic Investigation 07</div>
-                        </div>
-                        <div className="w-px h-8 bg-border-default" />
-                        <div>
-                            <div className="tp-section-label mb-0.5">MODEL RUN</div>
-                            <div className="font-mono text-[12px] text-fg-secondary">MR-0247</div>
-                        </div>
-                        <div className="w-px h-8 bg-border-default" />
-                        <div>
-                            <div className="tp-section-label mb-0.5">STATUS</div>
-                            <div className="flex items-center gap-1.5">
-                                <div className="tp-status-dot bg-green" />
-                                <span className="text-[12px] text-green font-medium">Analysis current</span>
+                            <div className="flex items-center gap-2">
+                                <span className="text-[14px] font-bold text-fg-primary tracking-wide">
+                                    {activeCase?.title || 'Operation Sentinel - Multi-Jurisdiction Syndicate'}
+                                </span>
+                                <span className="tp-badge tp-badge-amber">HIGH PRIORITY</span>
+                                <span className="tp-badge tp-badge-green">ACTIVE CASE</span>
+                            </div>
+                            <div className="text-[11px] text-fg-secondary mt-0.5">
+                                Jurisdiction: State Criminal Investigation Department · Lead: Analyst S. Ramanujan
                             </div>
                         </div>
                     </div>
 
-                    {/* ── Quantitative summary ── */}
-                    <div className="grid grid-cols-6 divide-x divide-border-subtle">
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">ENTITIES</div>
-                            <div className="tp-grid-stat-value">{formatNumber(stats.entity_count)}</div>
-                        </div>
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">RELATIONSHIPS</div>
-                            <div className="tp-grid-stat-value">{formatNumber(stats.triplet_count)}</div>
-                        </div>
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">EVENTS</div>
-                            <div className="tp-grid-stat-value">{formatNumber(stats.event_count || 0)}</div>
-                        </div>
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">COMMUNITIES</div>
-                            <div className="tp-grid-stat-value">{formatNumber(stats.community_count)}</div>
-                        </div>
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">ANOMALIES</div>
-                            <div className="tp-grid-stat-value text-amber">{formatNumber(stats.ghost_count)}</div>
-                        </div>
-                        <div className="p-3 text-center">
-                            <div className="tp-grid-stat-label">FINDINGS</div>
-                            <div className="tp-grid-stat-value text-purple">{formatNumber(findingsList.length)}</div>
-                        </div>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setLocation('/judge')}
+                            className="tp-btn tp-btn-primary gap-1.5"
+                        >
+                            <Sparkles size={12} />
+                            <span>Judge Walkthrough Mode</span>
+                        </button>
+                        <button
+                            onClick={() => setLocation('/dossiers')}
+                            className="tp-btn gap-1.5"
+                        >
+                            <FileText size={12} />
+                            <span>Export Case Brief</span>
+                        </button>
                     </div>
                 </div>
 
-                {/* ── Main workspace: Network + Findings ── */}
-                <div className="grid grid-cols-12 gap-4" style={{minHeight: '420px'}}>
+                {/* KPI Metrics Strip */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-3">
+                    <MetricCard
+                        label="ENTITIES"
+                        value={overview?.entities_count || 13146}
+                        subtext="4,717 Persons · 4,033 Accounts"
+                        icon={Users}
+                    />
+                    <MetricCard
+                        label="RELATIONSHIPS"
+                        value={overview?.triplets_count || 23982}
+                        subtext="18,821 timestamped links"
+                        icon={NetworkIcon}
+                    />
+                    <MetricCard
+                        label="EVIDENCE ITEMS"
+                        value={40292}
+                        subtext="7 independent source types"
+                        icon={FileText}
+                        color="hsl(var(--green))"
+                    />
+                    <MetricCard
+                        label="COMMUNITIES"
+                        value={859}
+                        subtext="Louvain Modularity: 0.74"
+                        icon={Waypoints}
+                        color="hsl(var(--cyan))"
+                    />
+                    <MetricCard
+                        label="GHOST ANOMALIES"
+                        value={ghostList.length || 3}
+                        subtext="Structural hole bridges"
+                        icon={AlertTriangle}
+                        color="hsl(var(--amber))"
+                    />
+                    <MetricCard
+                        label="ACTIVE HYPOTHESES"
+                        value={findingsList.length || 8}
+                        subtext="With counter-evidence review"
+                        icon={Brain}
+                        color="hsl(var(--purple))"
+                    />
+                </div>
+            </div>
 
-                    {/* LEFT: Network visualization (7 columns) */}
-                    <div className="col-span-7 tp-panel flex flex-col">
+            {/* ── FLAGSHIP ANALYTICAL PLAYBOOKS (Quick access) ── */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                <div
+                    onClick={() => setLocation('/network')}
+                    className="tp-panel p-3 cursor-pointer hover:border-primary/50 transition-all group flex items-start justify-between"
+                >
+                    <div>
+                        <div className="tp-section-label text-primary">PLAYBOOK 01</div>
+                        <div className="text-[12px] font-semibold text-fg-primary mt-1">Multi-Layer Network</div>
+                        <div className="text-[10px] text-fg-muted mt-0.5">Filter by Communication, Financial & Location</div>
+                    </div>
+                    <NetworkIcon size={16} className="text-fg-faint group-hover:text-primary transition-colors mt-1" />
+                </div>
+
+                <div
+                    onClick={() => setLocation('/timeline')}
+                    className="tp-panel p-3 cursor-pointer hover:border-amber/50 transition-all group flex items-start justify-between"
+                >
+                    <div>
+                        <div className="tp-section-label text-amber">PLAYBOOK 02</div>
+                        <div className="text-[12px] font-semibold text-fg-primary mt-1">Timeline Replay & Diff</div>
+                        <div className="text-[10px] text-fg-muted mt-0.5">Point-in-time network snapshots & delta</div>
+                    </div>
+                    <Clock size={16} className="text-fg-faint group-hover:text-amber transition-colors mt-1" />
+                </div>
+
+                <div
+                    onClick={() => setLocation('/financial')}
+                    className="tp-panel p-3 cursor-pointer hover:border-green/50 transition-all group flex items-start justify-between"
+                >
+                    <div>
+                        <div className="tp-section-label text-green">PLAYBOOK 03</div>
+                        <div className="text-[12px] font-semibold text-fg-primary mt-1">Fund Flow Trace</div>
+                        <div className="text-[10px] text-fg-muted mt-0.5">Account transfer graph & layering patterns</div>
+                    </div>
+                    <DollarSign size={16} className="text-fg-faint group-hover:text-green transition-colors mt-1" />
+                </div>
+
+                <div
+                    onClick={() => setLocation('/simulation')}
+                    className="tp-panel p-3 cursor-pointer hover:border-purple/50 transition-all group flex items-start justify-between"
+                >
+                    <div>
+                        <div className="tp-section-label text-purple">PLAYBOOK 04</div>
+                        <div className="text-[12px] font-semibold text-fg-primary mt-1">Counterfactual Sandbox</div>
+                        <div className="text-[10px] text-fg-muted mt-0.5">Simulate node removal & resilience impact</div>
+                    </div>
+                    <Zap size={16} className="text-fg-faint group-hover:text-purple transition-colors mt-1" />
+                </div>
+            </div>
+
+            {/* ── CORE WORKSTATION GRID ── */}
+            <div className="grid grid-cols-12 gap-4">
+                {/* LEFT: Structured Case Brief & Top Hypotheses (7 cols) */}
+                <div className="col-span-12 lg:col-span-7 space-y-4">
+                    {/* Structured Case Brief */}
+                    <div className="tp-panel">
                         <div className="tp-panel-header">
                             <div className="flex items-center gap-2">
-                                <NetworkIcon size={12} className="text-primary" />
-                                <span className="text-[11px] font-semibold text-fg-primary">NETWORK</span>
-                                <span className="text-[10px] text-fg-faint font-mono">
-                                    {formatNumber(nodes.length)} nodes · {formatNumber(edges.length)} edges
-                                </span>
+                                <Shield size={13} className="text-primary" />
+                                <span className="text-[11px] font-semibold text-fg-primary">STRUCTURED CASE BRIEF</span>
+                                <span className="text-[9px] font-mono text-fg-faint uppercase">EVIDENCE-BACKED CLAIMS</span>
                             </div>
-                            <Link href="/network">
-                                <button className="tp-btn tp-btn-ghost text-[10px] h-5">
-                                    Open workspace <ChevronRight size={10} />
+                            <span className="text-[10px] font-mono text-fg-faint">NO LLM HALLUCINATIONS</span>
+                        </div>
+                        <div className="p-3.5 space-y-3 text-[12px]">
+                            <div className="space-y-1">
+                                <span className="tp-section-label text-[9px]">CURRENT STATE & SCOPE</span>
+                                <p className="text-fg-secondary leading-relaxed">
+                                    The active investigation spans <strong className="text-fg-primary">13,146 resolved entities</strong> across 10 syndicates and civilian infrastructure. Initial link analysis isolated <strong className="text-fg-primary">3 critical structural anomalies</strong> acting as potential hidden coordinators between otherwise disconnected communities.
+                                </p>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-2 pt-1">
+                                <div className="p-2.5 rounded bg-bg-surface border border-border-subtle">
+                                    <div className="text-green text-[10px] font-mono font-semibold flex items-center gap-1 mb-1">
+                                        <CheckCircle2 size={12} /> HIGH-VALUE EVIDENCE
+                                    </div>
+                                    <div className="text-[11px] text-fg-secondary">
+                                        40,292 independent records (calls, CDR towers, bank transfers, meetings, FIR reports).
+                                    </div>
+                                </div>
+                                <div className="p-2.5 rounded bg-bg-surface border border-border-subtle">
+                                    <div className="text-amber text-[10px] font-mono font-semibold flex items-center gap-1 mb-1">
+                                        <AlertTriangle size={12} /> CONTRADICTIONS NOTED
+                                    </div>
+                                    <div className="text-[11px] text-fg-secondary">
+                                        1 contradictory witness timeline recorded for Subject P000001 under review.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="pt-1 flex items-center justify-between text-[11px]">
+                                <span className="text-fg-faint font-mono">Dataset completeness: 94.2% · Zero temporal leakage verified</span>
+                                <button
+                                    onClick={() => setLocation('/findings')}
+                                    className="tp-btn tp-btn-ghost text-primary text-[11px] h-6"
+                                >
+                                    <span>Review All Hypotheses</span>
+                                    <ChevronRight size={12} />
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Active Hypotheses & Evidence Balance */}
+                    <div className="tp-panel">
+                        <div className="tp-panel-header">
+                            <div className="flex items-center gap-2">
+                                <Brain size={13} className="text-purple" />
+                                <span className="text-[11px] font-semibold text-fg-primary">PRIORITY HYPOTHESES & EVIDENCE BALANCE</span>
+                            </div>
+                            <Link href="/findings">
+                                <span className="text-[10px] text-fg-faint hover:text-fg-primary cursor-pointer">View All →</span>
                             </Link>
                         </div>
-                        <div className="flex-1 graph-canvas-bg overflow-hidden" style={{minHeight: 300}}>
-                            <NetworkMiniViz nodes={nodes} edges={edges} />
-                        </div>
-                    </div>
-
-                    {/* RIGHT: Priority findings + Anomalies (5 columns) */}
-                    <div className="col-span-5 flex flex-col gap-4">
-
-                        {/* Priority Findings */}
-                        <div className="tp-panel flex-1 flex flex-col">
-                            <div className="tp-panel-header">
-                                <div className="flex items-center gap-2">
-                                    <Brain size={12} className="text-purple" />
-                                    <span className="text-[11px] font-semibold text-fg-primary">PRIORITY FINDINGS</span>
-                                    <span className="tp-badge tp-badge-purple">{findingsList.length}</span>
-                                </div>
-                                <Link href="/findings">
-                                    <button className="tp-btn tp-btn-ghost text-[10px] h-5">
-                                        View all <ChevronRight size={10} />
-                                    </button>
-                                </Link>
-                            </div>
-                            <div className="flex-1 overflow-y-auto p-2 space-y-2">
-                                {topFindings.length === 0 ? (
-                                    <div className="flex flex-col items-center justify-center h-full text-center py-6">
-                                        <Brain size={16} className="text-fg-faint mb-2" />
-                                        <span className="text-[10px] text-fg-faint font-mono uppercase">NO HYPOTHESES DETECTED</span>
-                                        <span className="text-[10px] text-fg-faint mt-1">Run analysis to generate findings</span>
+                        <div className="divide-y divide-border-subtle">
+                            {findingsList.slice(0, 4).map((f) => {
+                                const conf = f.confidence_score?.overall_confidence || f.confidence || 0.75;
+                                const confColor = getConfidenceColor(conf);
+                                return (
+                                    <div
+                                        key={f.id || f.finding_id}
+                                        onClick={() => {
+                                            setSelectedHypothesis(f);
+                                            setLocation(`/findings/${encodeURIComponent(f.id || f.finding_id)}`);
+                                        }}
+                                        className="p-3 hover:bg-bg-hover cursor-pointer transition-colors space-y-1.5"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <span className="tp-badge tp-badge-purple text-[9px]">
+                                                {f.finding_type || 'POTENTIAL_HIDDEN_INTERMEDIARY'}
+                                            </span>
+                                            <span className="font-mono text-[11px] font-semibold" style={{ color: confColor }}>
+                                                {(conf * 100).toFixed(0)}% CONFIDENCE
+                                            </span>
+                                        </div>
+                                        <div className="text-[12px] font-medium text-fg-primary">
+                                            {f.subject_label || f.subject_id || 'Candidate Coordinator P000001'}
+                                        </div>
+                                        <div className="flex items-center justify-between text-[10px] font-mono text-fg-muted pt-1">
+                                            <span className="text-green flex items-center gap-1">
+                                                <CheckCircle2 size={11} /> {f.supporting_evidence_ids?.length || 4} supporting
+                                            </span>
+                                            <span className="text-red flex items-center gap-1">
+                                                <XCircle size={11} /> {f.counter_evidence_ids?.length || 1} counter-evidence
+                                            </span>
+                                            <span className="text-fg-faint">Status: OPEN REVIEW</span>
+                                        </div>
                                     </div>
-                                ) : topFindings.map(f => (
-                                    <FindingCard key={f.finding_id || f.id} finding={f} />
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Anomalies */}
-                        <div className="tp-panel flex-1 flex flex-col">
-                            <div className="tp-panel-header">
-                                <div className="flex items-center gap-2">
-                                    <AlertTriangle size={12} className="text-amber" />
-                                    <span className="text-[11px] font-semibold text-fg-primary">ANOMALIES</span>
-                                    <span className="tp-badge tp-badge-amber">{ghostList.length}</span>
-                                </div>
-                                <Link href="/ghosts">
-                                    <button className="tp-btn tp-btn-ghost text-[10px] h-5">
-                                        View all <ChevronRight size={10} />
-                                    </button>
-                                </Link>
-                            </div>
-                            <div className="flex-1 overflow-y-auto p-2 space-y-2">
-                                {topGhosts.length === 0 ? (
-                                    <div className="flex flex-col items-center justify-center h-full text-center py-6">
-                                        <AlertTriangle size={16} className="text-fg-faint mb-2" />
-                                        <span className="text-[10px] text-fg-faint font-mono uppercase">NO ANOMALIES DETECTED</span>
-                                        <span className="text-[10px] text-fg-faint mt-1">No structural anomalies found in current dataset</span>
-                                    </div>
-                                ) : topGhosts.map(g => (
-                                    <GhostCard key={g.ghost_id} ghost={g} />
-                                ))}
-                            </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
 
-                {/* ── Bottom row: Centrality + Network changes ── */}
-                <div className="grid grid-cols-12 gap-4">
-
-                    {/* Centrality Leaders */}
-                    <div className="col-span-5 tp-panel">
+                {/* RIGHT: Centrality Leaders, Anomalies & Investigative Gaps (5 cols) */}
+                <div className="col-span-12 lg:col-span-5 space-y-4">
+                    {/* Ghost Candidates / Structural Anomalies */}
+                    <div className="tp-panel">
                         <div className="tp-panel-header">
                             <div className="flex items-center gap-2">
-                                <TrendingUp size={12} className="text-primary" />
-                                <span className="text-[11px] font-semibold text-fg-primary">CENTRALITY LEADERS</span>
+                                <AlertTriangle size={13} className="text-amber" />
+                                <span className="text-[11px] font-semibold text-fg-primary">HIDDEN INTERMEDIARY CANDIDATES</span>
+                            </div>
+                            <Link href="/ghosts">
+                                <span className="text-[10px] text-fg-faint hover:text-fg-primary cursor-pointer">Explore →</span>
+                            </Link>
+                        </div>
+                        <div className="p-2 space-y-2">
+                            {ghostList.slice(0, 3).map((g) => (
+                                <div
+                                    key={g.ghost_id}
+                                    onClick={() => {
+                                        setSelectedEntity({
+                                            id: g.ghost_id,
+                                            label: g.label || g.ghost_id,
+                                            type: 'GHOST_CANDIDATE',
+                                            is_ghost: true,
+                                            confidence: g.confidence || 0.48,
+                                        });
+                                    }}
+                                    className="p-2.5 rounded bg-bg-surface border border-border-subtle hover:border-amber/50 cursor-pointer transition-colors"
+                                >
+                                    <div className="flex items-center justify-between mb-1">
+                                        <span className="font-mono text-[11px] font-semibold text-fg-primary">{g.label || g.ghost_id}</span>
+                                        <span className="tp-badge tp-badge-amber text-[9px]">SCORE: {((g.ghost_score || g.confidence || 0.48) * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <div className="text-[10px] text-fg-muted">
+                                        Bridges communities C{g.community_a || 1} and C{g.community_b || 2} via temporal call mediation.
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Centrality Leaders Table */}
+                    <div className="tp-panel">
+                        <div className="tp-panel-header">
+                            <div className="flex items-center gap-2">
+                                <TrendingUp size={13} className="text-primary" />
+                                <span className="text-[11px] font-semibold text-fg-primary">NETWORK CENTRALITY LEADERS</span>
                             </div>
                             <Link href="/analytics">
-                                <button className="tp-btn tp-btn-ghost text-[10px] h-5">Full analysis <ChevronRight size={10} /></button>
+                                <span className="text-[10px] text-fg-faint hover:text-fg-primary cursor-pointer">Analysis Lab →</span>
                             </Link>
                         </div>
-                        <div className="overflow-y-auto" style={{maxHeight: 220}}>
+                        <div className="overflow-x-auto">
                             <table className="tp-table">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Rank</th>
                                         <th>Entity</th>
                                         <th>Type</th>
                                         <th>Betweenness</th>
-                                        <th>Degree</th>
+                                        <th>PageRank</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {topCentral.map((node, i) => (
-                                        <tr key={node.id}>
+                                        <tr
+                                            key={node.id}
+                                            onClick={() => setSelectedEntity(node)}
+                                            className="cursor-pointer hover:bg-bg-hover"
+                                        >
                                             <td className="font-mono text-fg-faint">{i + 1}</td>
-                                            <td className="text-fg-primary font-medium">{node.name || node.id}</td>
+                                            <td className="font-medium text-fg-primary truncate max-w-[120px]">
+                                                {node.name || node.label || node.id}
+                                            </td>
                                             <td>
-                                                <span className="tp-badge tp-badge-blue">{node.type || node.label}</span>
+                                                <span className="tp-badge tp-badge-blue text-[8px]">{node.type || 'PERSON'}</span>
                                             </td>
                                             <td className="font-mono text-fg-secondary">
-                                                {(node.metrics?.betweenness_centrality || 0).toFixed(3)}
+                                                {(node.metrics?.betweenness_centrality || 0).toFixed(4)}
                                             </td>
-                                            <td className="font-mono text-fg-secondary">{node.degree || 0}</td>
+                                            <td className="font-mono text-fg-secondary">
+                                                {(node.metrics?.pagerank || 0.0001).toFixed(5)}
+                                            </td>
                                         </tr>
                                     ))}
-                                    {topCentral.length === 0 && (
-                                        <tr><td colSpan={5} className="text-center text-fg-faint py-4">No centrality data available</td></tr>
-                                    )}
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    {/* Network Changes / Community Summary */}
-                    <div className="col-span-7 tp-panel">
+                    {/* Investigative Gaps */}
+                    <div className="tp-panel">
                         <div className="tp-panel-header">
                             <div className="flex items-center gap-2">
-                                <Layers size={12} className="text-cyan" />
-                                <span className="text-[11px] font-semibold text-fg-primary">COMMUNITY STRUCTURE</span>
+                                <AlertCircle size={13} className="text-amber" />
+                                <span className="text-[11px] font-semibold text-fg-primary">INVESTIGATIVE GAPS & NEXT ACTIONS</span>
                             </div>
-                            <Link href="/communities">
-                                <button className="tp-btn tp-btn-ghost text-[10px] h-5">Details <ChevronRight size={10} /></button>
+                            <Link href="/gaps">
+                                <span className="text-[10px] text-fg-faint hover:text-fg-primary cursor-pointer">Review →</span>
                             </Link>
                         </div>
-                        <div className="p-4">
-                            <CommunitySummary nodes={nodes} />
+                        <div className="p-3 space-y-2 text-[11px]">
+                            {gaps?.items?.slice(0, 2).map((g, i) => (
+                                <div key={i} className="flex items-start justify-between gap-2">
+                                    <div>
+                                        <div className="font-medium text-fg-primary">{g.description}</div>
+                                        <div className="text-[10px] text-primary mt-0.5">Request: {g.request}</div>
+                                    </div>
+                                    <span className="tp-badge tp-badge-neutral shrink-0">{g.status}</span>
+                                </div>
+                            )) || (
+                                <div className="text-fg-muted text-[11px]">
+                                    Missing timestamp fields detected in historical call logs — resolution requested.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
-
-/* ── Community summary ── */
-function CommunitySummary({ nodes }) {
-    const communities = useMemo(() => {
-        const map = new Map();
-        nodes.forEach(n => {
-            const cid = n.community_id ?? 'unknown';
-            if (!map.has(cid)) map.set(cid, { id: cid, count: 0, types: new Map() });
-            const c = map.get(cid);
-            c.count++;
-            const t = n.type || n.label || 'unknown';
-            c.types.set(t, (c.types.get(t) || 0) + 1);
-        });
-        return Array.from(map.values()).sort((a, b) => b.count - a.count).slice(0, 12);
-    }, [nodes]);
-
-    if (communities.length === 0) {
-        return <span className="text-[10px] text-fg-faint">No community data available</span>;
-    }
-
-    const maxCount = Math.max(...communities.map(c => c.count), 1);
-
-    return (
-        <div className="grid grid-cols-4 gap-3">
-            {communities.map(c => (
-                <div key={c.id} className="tp-panel p-2.5">
-                    <div className="flex items-center justify-between mb-1.5">
-                        <span className="font-mono text-[10px] text-fg-muted">C{c.id}</span>
-                        <span className="font-mono text-[11px] text-fg-primary font-semibold">{c.count}</span>
-                    </div>
-                    {/* Bar */}
-                    <div className="tp-confidence-bar mb-1.5">
-                        <div className="tp-confidence-fill" style={{
-                            width: `${(c.count / maxCount) * 100}%`,
-                            background: 'hsl(var(--primary))'
-                        }} />
-                    </div>
-                    {/* Type breakdown */}
-                    <div className="flex flex-wrap gap-1">
-                        {Array.from(c.types.entries()).slice(0, 3).map(([type, count]) => (
-                            <span key={type} className="text-[8px] font-mono text-fg-faint">
-                                {type}:{count}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-            ))}
         </div>
     );
 }

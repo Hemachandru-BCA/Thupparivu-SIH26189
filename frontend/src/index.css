@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* Class-based dark mode (src/main.jsx toggles `dark` on <html>). */
@@ -8,9 +9,6 @@
     Professional investigative intelligence platform.
     Color encodes MEANING, not decoration.
 --------------------------------------------------------------------------- */
-
-/* ── Google Fonts: Inter + JetBrains Mono ── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
     /* Base surfaces — deep neutral charcoal/graphite */

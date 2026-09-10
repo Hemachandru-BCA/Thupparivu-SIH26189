@@ -51,6 +51,7 @@ class ModelRegistry:
     # ------------------------------------------------------------------ #
     def _load(self) -> None:
         if not self.path.exists():
+            self._seed_default_models()
             return
         try:
             data = json.loads(self.path.read_text(encoding="utf-8"))
@@ -62,8 +63,64 @@ class ModelRegistry:
                 except Exception:  # pragma: no cover - defensive
                     logger.warning("Skipping malformed model-run record")
             self._models = data.get("models") or {}
+            if not self._models:
+                self._seed_default_models()
         except Exception:
             logger.warning("Could not load model registry at %s", self.path)
+            self._seed_default_models()
+
+    def _seed_default_models(self) -> None:
+        """Seed standard Thupparivu analytical models into registry."""
+        default_cards = [
+            {
+                "name": "thupparivu_ensemble_link_predictor",
+                "version": "1.0.0",
+                "description": "Multi-model link predictor: baselines + Node2Vec + GradientBoosting + LightGNN",
+                "capabilities": ["link_prediction", "missing_relationship_detection"],
+                "metadata": {"calibration": "isotonic", "disagreement_threshold": 0.20},
+            },
+            {
+                "name": "burt_structural_hole_detector",
+                "version": "1.0.0",
+                "description": "Burt constraint + cross-community bridge detection for hidden intermediaries",
+                "capabilities": ["ghost_node_detection", "hidden_intermediary_detection"],
+                "metadata": {"temporal_window_days": 14},
+            },
+            {
+                "name": "temporal_multilayer_graph_engine",
+                "version": "2.0.0",
+                "description": "Temporal point-in-time graph engine with strict no-leakage guarantees",
+                "capabilities": ["temporal_snapshots", "graph_diff", "community_evolution"],
+                "metadata": {"layers": ["COMMUNICATION", "FINANCIAL", "LOCATION", "ORGANIZATIONAL", "SOCIAL"]},
+            },
+            {
+                "name": "counterfactual_intervention_engine",
+                "version": "1.0.0",
+                "description": "Counterfactual node/edge removal, entity merge/split and resilience simulation",
+                "capabilities": ["counterfactual_analysis", "network_resilience"],
+                "metadata": {"all_outputs_labelled": "HYPOTHETICAL"},
+            },
+            {
+                "name": "hybrid_entity_resolver",
+                "version": "1.0.0",
+                "description": "6-stage entity resolution: deterministic -> fuzzy -> semantic -> graph-consistency",
+                "capabilities": ["entity_resolution", "alias_resolution"],
+                "metadata": {"algorithm": "complete-linkage-union-find"},
+            },
+        ]
+        for c in default_cards:
+            self._models[c["name"]] = {
+                "name": c["name"],
+                "latest_version": c["version"],
+                "description": c["description"],
+                "capabilities": c["capabilities"],
+                "metadata": c["metadata"],
+                "updated_at": _utcnow(),
+            }
+        try:
+            self._persist()
+        except Exception:
+            pass
 
     def _persist(self) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)

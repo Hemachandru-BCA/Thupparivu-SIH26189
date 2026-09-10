@@ -279,3 +279,60 @@
 {"timestamp": "2026-09-09T18:39:54.605458+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
 {"timestamp": "2026-09-09T18:39:54.706409+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
 {"timestamp": "2026-09-09T18:53:38.366391+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-0c83d824-039d-5099-afaf-5d78c2dbb35f"], "detail": {}}
+{"timestamp": "2026-09-09T19:24:28.951472+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:24:38.493412+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:24:38.512082+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:24:39.947174+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:24:39.958261+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:31:07.692454+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.272159+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.284996+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.317870+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-09T19:31:09.353886+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-0c83d824-039d-5099-afaf-5d78c2dbb35f", "F-68466f3e-c4d9-5cbb-9b7e-0ce152bf300f", "F-57909c13-d545-5116-9ed9-b4e5d62556e4"], "detail": {"count": 3}}
+{"timestamp": "2026-09-09T19:31:09.359416+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-0c83d824-039d-5099-afaf-5d78c2dbb35f"], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.372205+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-6023ee64-62d3-5d62-8778-218cacd28288", "add9ef2d-7392-5d5d-83ac-34eb98fa39a4"], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.375780+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-6023ee64-62d3-5d62-8778-218cacd28288"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-09T19:31:09.380749+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-733C6F0F"], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.382729+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-733C6F0F"], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.385640+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-733C6F0F"], "detail": {}}
+{"timestamp": "2026-09-09T19:31:09.878673+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-09T19:31:09.984081+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-09T19:31:09.998331+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-09T19:31:10.086017+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-09T19:36:29.966447+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:36:31.493453+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:36:31.506055+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:47:42.801564+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:48:00.535987+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:48:00.555250+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:48:01.951422+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-09T19:48:01.962492+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:15:34.447666+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:15:51.747490+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:15:51.766495+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:15:53.183175+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:15:53.194194+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:09.082884+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:26.436899+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:26.455807+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:27.871963+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:27.883130+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:17:27.896989+00:00", "actor": "anonymous", "action": "hypotheses.generate", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:01.702419+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:18.873793+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:18.892935+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:20.308511+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:20.319606+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T03:25:38.948056+00:00", "actor": "anonymous", "action": "hypotheses.generate", "object_ids": ["H-e1659de6-65b4-5141-ac1f-759246813e59", "H-788a8651-c852-59d0-aa8b-d1436534ecf0", "H-9dec3868-bf6b-5bda-bdcc-406a3c1c5fa1", "H-4e29da8a-63bb-5e40-80ea-37e70f2ee34b", "H-3a509204-7f6b-50c2-af86-1046aa705d8c", "H-09ec31f5-8fcb-54fb-ba7e-398e56392134", "H-39a5c229-6890-5b48-b7e5-2bd31ab163df", "H-a803503b-d76e-5464-9c59-e4994d9e94a2", "H-47fa8210-213a-5134-bd24-4df7fd0f4074", "H-c3f1e0cc-85f2-5a6e-bbdf-db1c9e810c9e", "H-68a8be04-759b-508e-9605-2377736a0d1c", "H-26ba4de4-1fab-5257-ab29-7ab089215b47", "H-2148469d-c3c9-5391-bec3-8cc1341e69cd", "H-edefd57f-780b-5ae7-97b1-9b4c46d5c155", "H-464d3c28-265b-5446-bce1-e5ce7bcaf25c", "H-bb0c2f61-7e49-5ebe-9064-6773f55e66a2", "H-57a2ae87-1958-50ff-a31e-25598ecfe12a", "H-c5491955-1439-5311-99b7-ebe339eb6e20", "H-3cb73f5d-d1af-5f72-b20c-52968566d606", "H-f9d1b5d9-2535-5780-8bd6-02280a113a9e"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:54.653780+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T03:25:54.813528+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-0c83d824-039d-5099-afaf-5d78c2dbb35f", "F-68466f3e-c4d9-5cbb-9b7e-0ce152bf300f", "F-57909c13-d545-5116-9ed9-b4e5d62556e4"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T03:25:54.819105+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-0c83d824-039d-5099-afaf-5d78c2dbb35f"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:54.830410+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-a728957b-ae93-5d19-bad3-7e9e950d8bd1", "add9ef2d-7392-5d5d-83ac-34eb98fa39a4"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:54.833828+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-a728957b-ae93-5d19-bad3-7e9e950d8bd1"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T03:25:54.838449+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-F50F34D1"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:54.840602+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-F50F34D1"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:54.843891+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-F50F34D1"], "detail": {}}
+{"timestamp": "2026-09-10T03:25:55.127772+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T03:25:55.431500+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T03:25:55.570478+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T03:25:55.648330+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}

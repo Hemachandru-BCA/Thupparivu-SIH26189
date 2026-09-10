@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { AppShell } from '@/components/app-shell';
+import { InvestigationProvider } from '@/state/investigation-context';
 import InvestigationDesk from '@/pages/workspace/investigation-desk';
 import NetworkWorkspace from '@/pages/workspace/network-workspace';
 import EntitiesWorkspace from '@/pages/workspace/entities-workspace';
@@ -17,9 +18,23 @@ import AuditWorkspace from '@/pages/workspace/audit-workspace';
 import ReportsWorkspace from '@/pages/workspace/reports-workspace';
 import CasesWorkspace from '@/pages/workspace/cases-workspace';
 import SettingsWorkspace from '@/pages/workspace/settings-workspace';
+import FinancialWorkspace from '@/pages/workspace/financial-workspace';
+import GapsWorkspace from '@/pages/workspace/gaps-workspace';
+import CrossCaseWorkspace from '@/pages/workspace/crosscase-workspace';
+import ModelsWorkspace from '@/pages/workspace/models-workspace';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
-const queryClient = new QueryClient();
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 30 * 1000,
+            refetchOnWindowFocus: false,
+            retry: 1,
+        },
+    },
+});
+
 function Router() {
     return <RoutedErrorBoundary><AppShell><Switch>
     <Route path="/" component={InvestigationDesk}/>
@@ -40,17 +55,33 @@ function Router() {
     <Route path="/pipeline" component={PipelineWorkspace}/>
     <Route path="/audit" component={AuditWorkspace}/>
     <Route path="/settings" component={SettingsWorkspace}/>
-    {/* Legacy routes preserved for backward compatibility */}
+    {/* New intelligence workspaces */}
+    <Route path="/financial" component={FinancialWorkspace}/>
+    <Route path="/gaps" component={GapsWorkspace}/>
+    <Route path="/cross-case" component={CrossCaseWorkspace}/>
+    <Route path="/models" component={ModelsWorkspace}/>
+    {/* Legacy */}
     <Route path="/explorer" component={NetworkWorkspace}/>
     <Route path="/search" component={EvidenceWorkspace}/>
     <Route component={NotFound}/>
   </Switch></AppShell></RoutedErrorBoundary>;
 }
+
 function RoutedErrorBoundary({ children }) {
     const [location] = useLocation();
     return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
 }
+
 function App() {
-  return <QueryClientProvider client={queryClient}><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><Router /></WouterRouter></QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <InvestigationProvider>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+          <Router />
+        </WouterRouter>
+      </InvestigationProvider>
+    </QueryClientProvider>
+  );
 }
+
 export default App;

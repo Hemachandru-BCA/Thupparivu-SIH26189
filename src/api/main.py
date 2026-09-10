@@ -38,14 +38,16 @@ logging.basicConfig(
 logger = logging.getLogger("sentinelgraph.api")
 
 app = FastAPI(
-    title="SentinelGraph AI API",
+    title="Thupparivu API",
     description=(
-        "Synthetic dataset generation -> preprocessing -> NLP extraction -> "
-        "entity resolution -> knowledge graph -> analytics -> ghost-node "
-        "inference -> evidence-grounded XAI (findings, dossiers) and "
-        "counterfactual simulation, exposed for the investigator UI."
+        "Graph-native investigative intelligence: synthetic dataset generation -> "
+        "preprocessing -> NLP extraction -> entity resolution -> knowledge graph -> "
+        "analytics -> ghost-node inference -> temporal multilayer graph -> "
+        "evidence-grounded XAI (findings, dossiers, hypotheses) -> counterfactual "
+        "simulation -> community / financial / cross-case intelligence, exposed for "
+        "the investigator workstation UI."
     ),
-    version="2.0.0",
+    version="3.0.0",
 )
 
 # CORS: comma-separated origins via CORS_ORIGINS env var, defaults cover the
@@ -94,4 +96,4 @@ for router in ALL_ROUTERS:
 
 @app.get("/api/health", tags=["health"])
 def health():
-    return {"status": "ok", "service": "sentinelgraph-ai", "version": "2.0.0"}
+    return {"status": "ok", "service": "thupparivu", "version": "3.0.0"}

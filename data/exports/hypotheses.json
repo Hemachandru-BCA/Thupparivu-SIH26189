@@ -1,0 +1,4423 @@
+{
+  "generated_at": "2026-09-10T03:25:38.945668+00:00",
+  "hypotheses": [
+    {
+      "id": "H-e1659de6-65b4-5141-ac1f-759246813e59",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "7879de1a-0ec9-5bb1-875e-c901621b689a",
+      "confidence": 0.6513,
+      "confidence_score": {
+        "structural_score": 0.6513,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.1283,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0128,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "7879de1a-0ec9-5bb1-875e-c901621b689a",
+        "neighbors": [
+          "3e070155-b39d-5811-8583-7f54d7d0cfdd",
+          "4cc61dc1-ce96-5f3c-8e40-b43570a0117e",
+          "19af0ecd-97bd-54a1-85e2-ca3649e35af8",
+          "488c2323-df92-5278-9d74-2fbbc059eb31",
+          "4b8d9967-29d0-5397-914e-80e5678304f7",
+          "18cac4b2-7e3d-5156-87cc-4e566a6fb6c7",
+          "673089ca-236f-5eca-b701-76a33758ac8b",
+          "ee54d3f5-bd5b-52b9-91f5-e4b90c9f862f",
+          "884d3589-c8c1-55ac-8ad2-0fd1be4a8397",
+          "d0e18cc0-5b90-5e55-b89e-69e9da095a0d"
+        ]
+      },
+      "explanation": "Node 'Brian Davis' (guid 7879de1a-0ec9-5bb1-875e-c901621b689a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270931+00:00",
+      "updated_at": "2026-09-10T03:25:29.270932+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270934+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-788a8651-c852-59d0-aa8b-d1436534ecf0",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "b6f02ece-8071-5747-8800-fa773d3f9244",
+      "confidence": 0.6382,
+      "confidence_score": {
+        "structural_score": 0.6382,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0955,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0095,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "b6f02ece-8071-5747-8800-fa773d3f9244",
+        "neighbors": [
+          "7acacb77-c01a-518e-8a91-4dcabbbeb074",
+          "8f936ba6-0212-52df-b5cb-27f19a2de9c6",
+          "b94f3265-f7df-557d-ad37-c68d007f5c1f",
+          "a92d6d61-77ee-544b-99a6-de5e410c6e64",
+          "de3ccb2c-bf55-5a35-84cc-8957c403a47f",
+          "76391aad-a99f-519b-8fde-3f49b3288adb",
+          "4904b9d7-723a-5a8d-b43a-c6b14688aecc",
+          "88380278-1d75-534b-8394-5e2d6c731ada",
+          "b95d1f0a-b8b4-54dd-bbaa-467ccfd45655",
+          "6d330851-c287-5e45-90cc-debfda134506"
+        ]
+      },
+      "explanation": "Node 'Alexa Guzman' (guid b6f02ece-8071-5747-8800-fa773d3f9244) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270509+00:00",
+      "updated_at": "2026-09-10T03:25:29.270510+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270512+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-9dec3868-bf6b-5bda-bdcc-406a3c1c5fa1",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "b281e345-381b-5e2d-a5f2-41f50b48c44c",
+      "confidence": 0.6202,
+      "confidence_score": {
+        "structural_score": 0.6202,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0504,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "b281e345-381b-5e2d-a5f2-41f50b48c44c",
+        "neighbors": [
+          "cac2aa04-768f-5495-8304-86081d629c89",
+          "824aa033-12fd-5a18-8572-8a8153541e28",
+          "207cf7af-eb74-531c-b1e0-8d5c95e4315a",
+          "d9ae7d69-e512-52bd-8baa-34e329e6c4a1",
+          "d723e5fa-3c7a-5248-aac8-a8b56a3d39a8",
+          "3be6fd41-924b-55e9-8043-b53a06292409",
+          "1b33b321-a6a4-5734-ba95-36c9e5a1e60a",
+          "f59160b9-1cea-5332-93fc-b2cac42ebfb1",
+          "028b1c02-8e8d-53f6-b4da-b6e57b7e2ef0",
+          "20fe7ed2-f858-54a4-9718-cb141ece2159"
+        ]
+      },
+      "explanation": "Node 'Brandon Olson' (guid b281e345-381b-5e2d-a5f2-41f50b48c44c) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270538+00:00",
+      "updated_at": "2026-09-10T03:25:29.270540+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270542+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-4e29da8a-63bb-5e40-80ea-37e70f2ee34b",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "64630c26-4f31-5c3f-83d1-488c6eac0c89",
+      "confidence": 0.6202,
+      "confidence_score": {
+        "structural_score": 0.6202,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0504,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "64630c26-4f31-5c3f-83d1-488c6eac0c89",
+        "neighbors": [
+          "5ae88817-729e-5751-a6ac-544a53f508fe",
+          "f0fef593-2443-53a8-8a24-d29003731a8e",
+          "16ca8793-54dc-5cb7-a045-9c164ee8944e",
+          "06a1573c-376d-5421-ac3e-03df7d46dd4f",
+          "5029aa30-9818-50fd-8b09-441074c01e69",
+          "f2e54e49-f135-5d77-b218-19f45d70c836",
+          "cdaf0677-d090-5a20-a57c-9b106d6a5663",
+          "0534d6ae-1c82-5552-bae4-6ff1c38d3108",
+          "7af51a0f-b84a-5235-a99d-d31c978c02f7",
+          "0f9025c9-ad71-599f-97b1-6758a635343d"
+        ]
+      },
+      "explanation": "Node 'Jackie Carter' (guid 64630c26-4f31-5c3f-83d1-488c6eac0c89) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270686+00:00",
+      "updated_at": "2026-09-10T03:25:29.270687+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270689+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-3a509204-7f6b-50c2-af86-1046aa705d8c",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "2aa634d2-bac9-5909-83aa-2cc5dc69a3f0",
+      "confidence": 0.615,
+      "confidence_score": {
+        "structural_score": 0.615,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0374,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0037,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "2aa634d2-bac9-5909-83aa-2cc5dc69a3f0",
+        "neighbors": [
+          "14a91b77-ff76-515b-bcf7-975132a56b17",
+          "9302996a-ff90-55bc-b9ec-6047573c2e3a",
+          "e5ad434e-3a3a-54c2-9446-ec457241145d",
+          "a1d2ec1d-4c91-53b2-904f-1e44e8679131",
+          "3c2e366c-9ca0-5dcd-ad7c-96c968ac10ab",
+          "38bbed9e-5f66-5398-95bf-2c205717d919",
+          "dc83b2c0-aa35-5177-b413-bfd76d59e6d7",
+          "b51d6fed-3a2e-5f98-8389-a91f9afd4a6c",
+          "33dffe98-8a1f-572d-a46f-ba069ce50716"
+        ]
+      },
+      "explanation": "Node 'Aaron Jimenez' (guid 2aa634d2-bac9-5909-83aa-2cc5dc69a3f0) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271270+00:00",
+      "updated_at": "2026-09-10T03:25:29.271271+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271273+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-09ec31f5-8fcb-54fb-ba7e-398e56392134",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "217173e0-2eb9-51f6-8d52-670b41d6de0e",
+      "confidence": 0.6126,
+      "confidence_score": {
+        "structural_score": 0.6126,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0316,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0032,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "217173e0-2eb9-51f6-8d52-670b41d6de0e",
+        "neighbors": [
+          "60011b43-5222-543b-81b9-a7202b668381",
+          "b6f02ece-8071-5747-8800-fa773d3f9244",
+          "795cd5f1-a281-543e-8142-b1ff227f784b",
+          "828acf11-6f26-54d6-bcb7-ba2c56ef9c03",
+          "e86d1393-cb16-5eda-891a-49109d409e99",
+          "8f09e304-7c2e-5631-82b5-c7f3d96b1d75",
+          "6c78f1cb-7e5b-5341-a262-0cfd68e356e4",
+          "b3c6333e-2844-52e0-8c78-f22027867ae7",
+          "9a2502a8-9458-543e-86f9-7710c4962811",
+          "7c0276eb-824e-5a44-a5a6-bccd7716ac46"
+        ]
+      },
+      "explanation": "Node 'Alexander Edwards' (guid 217173e0-2eb9-51f6-8d52-670b41d6de0e) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270470+00:00",
+      "updated_at": "2026-09-10T03:25:29.270471+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270473+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-39a5c229-6890-5b48-b7e5-2bd31ab163df",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "92c3d999-b071-5f4a-90cd-f2cedd52df76",
+      "confidence": 0.6095,
+      "confidence_score": {
+        "structural_score": 0.6095,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0238,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0024,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "92c3d999-b071-5f4a-90cd-f2cedd52df76",
+        "neighbors": [
+          "78b52003-d166-5c96-852e-01cfadfdf163",
+          "4c20872f-ccbe-5fce-b025-73814d99405b",
+          "52cea6a5-bfba-5db6-9b7b-cd77cbb6d90a",
+          "49be5e89-ba69-5525-9378-d2d52fabd0b6",
+          "c27bf76a-4b3a-5ae6-845b-8c2bea8928ad",
+          "95c834d3-9131-5815-9463-fa66a26dbef0",
+          "15f97726-a962-5ae0-babe-c12da40574ce",
+          "6f96e44f-e284-5346-bd1f-37ef2986b2ac",
+          "b213af53-9f1b-5144-889f-3fb9d0b0853c",
+          "89f01134-4761-5ae7-969c-4ad2d31176da"
+        ]
+      },
+      "explanation": "Node 'Alicia Foster' (guid 92c3d999-b071-5f4a-90cd-f2cedd52df76) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271051+00:00",
+      "updated_at": "2026-09-10T03:25:29.271052+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271055+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-a803503b-d76e-5464-9c59-e4994d9e94a2",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "b6badf74-f8a4-5dcc-a777-077cff3f5b79",
+      "confidence": 0.6084,
+      "confidence_score": {
+        "structural_score": 0.6084,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0211,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0021,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "b6badf74-f8a4-5dcc-a777-077cff3f5b79",
+        "neighbors": [
+          "5942a28c-bc00-537d-83ff-dc412a9f81dc",
+          "fe858af2-9581-52ca-9530-97bf5239bd47",
+          "77752229-ebdf-5509-bd02-3b566a0ecf99",
+          "33ff0a78-b957-52ae-8682-603ad86d7f28",
+          "9e4d2954-664e-5390-bab8-de43464a2962",
+          "77978687-4b03-599b-9dbf-d4277cd0c267",
+          "f7dceb75-1633-5001-a359-84ff1b9f5edc",
+          "90fa54a4-6cd0-5c48-bc62-321cf90540be",
+          "1612404a-255e-5629-bc96-b1acdaf3810d",
+          "5f60f2ec-d914-5f6f-ad02-8aa9c12c7ad8"
+        ]
+      },
+      "explanation": "Node 'Aaron Williams' (guid b6badf74-f8a4-5dcc-a777-077cff3f5b79) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270195+00:00",
+      "updated_at": "2026-09-10T03:25:29.270197+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270199+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-47fa8210-213a-5134-bd24-4df7fd0f4074",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "e1ca49e6-4f46-517f-93b6-8b414c8922aa",
+      "confidence": 0.6084,
+      "confidence_score": {
+        "structural_score": 0.6084,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0209,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0021,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "e1ca49e6-4f46-517f-93b6-8b414c8922aa",
+        "neighbors": [
+          "dfe59252-7a13-518d-9909-8b2f89830d8e",
+          "7c2ca2e0-da1c-5e7a-945a-43adf2ebfa18",
+          "eec1789f-f7ed-5c80-b492-5b6e7f286817",
+          "0fe06be5-33a5-58dd-9830-aa5993d6440b",
+          "c571c8b2-2bba-5947-be5b-3daa22ad2ca3",
+          "6a5a9ab3-b8e5-5835-aeb4-7fc467e3b564",
+          "64311d59-2fba-582a-8c79-3d788b659da4",
+          "2ca3186d-d8ee-5314-a7e8-2fb18bea5aa8",
+          "6dec1a4c-5d58-5aa5-bbf3-5a6a7895eec6",
+          "6f3ba435-6b69-5542-888f-1ebcf3191b39"
+        ]
+      },
+      "explanation": "Node 'Carrie Schneider' (guid e1ca49e6-4f46-517f-93b6-8b414c8922aa) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271178+00:00",
+      "updated_at": "2026-09-10T03:25:29.271179+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271181+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-c3f1e0cc-85f2-5a6e-bbdf-db1c9e810c9e",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "161269fb-81bc-58b4-ac75-cd06009a8c7c",
+      "confidence": 0.6084,
+      "confidence_score": {
+        "structural_score": 0.6084,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.021,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0021,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "161269fb-81bc-58b4-ac75-cd06009a8c7c",
+        "neighbors": [
+          "f945a152-c27e-585d-a2bf-5bc49f8447c4",
+          "bb14f8c1-30a3-5ed3-940b-b52b216b19fb",
+          "e198dc95-7567-5cb1-9e86-f04c76ecfc2d",
+          "8d6868d4-4b8d-573c-9eef-dcd9bd4bcf72",
+          "9af94dbc-1d6d-5422-b78c-6f0c5bb68ce7",
+          "678932e4-a420-536f-904c-dcf76fb70d40",
+          "0a1fe207-983f-5646-a118-d943120cf02c",
+          "3691fce0-91e8-59cf-aa4c-9972dda3abfa",
+          "0ea8f41f-095c-558f-b8eb-e4807f96107e"
+        ]
+      },
+      "explanation": "Node 'David Garrison' (guid 161269fb-81bc-58b4-ac75-cd06009a8c7c) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271210+00:00",
+      "updated_at": "2026-09-10T03:25:29.271211+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271213+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-68a8be04-759b-508e-9605-2377736a0d1c",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "38eecd79-d509-5e64-b659-5411fbf39abb",
+      "confidence": 0.6084,
+      "confidence_score": {
+        "structural_score": 0.6084,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0211,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0021,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "38eecd79-d509-5e64-b659-5411fbf39abb",
+        "neighbors": [
+          "77c1c94c-47d3-5e7e-84a9-2d425f7552f0",
+          "b908bdc3-75f4-56a6-b298-645fa68d3b79",
+          "a3ece0ff-fb80-5214-afa4-71d2b489cff3",
+          "30c39ea7-a173-5630-8e05-44e9ca75c999",
+          "a208f1c1-addc-55cc-a298-e1879e14a24e",
+          "951526aa-a565-5994-975e-2791b25a55b3",
+          "8348d504-5482-54c9-9691-224a50681a93",
+          "d03d0ec7-7892-5182-901d-f75096e7b00e",
+          "54628ec2-81a3-5ac3-be1c-87ad78660e35",
+          "c9c78818-917d-536e-84e4-98982ce921a6"
+        ]
+      },
+      "explanation": "Node 'Brendan Garcia' (guid 38eecd79-d509-5e64-b659-5411fbf39abb) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271362+00:00",
+      "updated_at": "2026-09-10T03:25:29.271363+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271365+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-26ba4de4-1fab-5257-ab29-7ab089215b47",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "dfe59252-7a13-518d-9909-8b2f89830d8e",
+      "confidence": 0.6069,
+      "confidence_score": {
+        "structural_score": 0.6069,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0172,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0017,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "dfe59252-7a13-518d-9909-8b2f89830d8e",
+        "neighbors": [
+          "26a5e82f-44fd-5bef-8b2b-e11addfbbf18",
+          "e1ca49e6-4f46-517f-93b6-8b414c8922aa",
+          "83ae7120-a768-5d27-8f8f-c924a2a0c687",
+          "eec1789f-f7ed-5c80-b492-5b6e7f286817",
+          "0283aab7-16ce-5311-98cb-9b7e542ed31a",
+          "bfc6549d-e509-5fda-8f07-5c2481d45d24",
+          "0fe06be5-33a5-58dd-9830-aa5993d6440b",
+          "a6fd1c6c-945d-5fa8-af1b-53f363e11d5a",
+          "9cecfbe9-986d-5d74-9941-4df5abbab197",
+          "95f6517f-12f1-5f25-bc5c-99e66e0fc391"
+        ]
+      },
+      "explanation": "Node 'Benjamin Williamson' (guid dfe59252-7a13-518d-9909-8b2f89830d8e) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271147+00:00",
+      "updated_at": "2026-09-10T03:25:29.271148+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271150+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-2148469d-c3c9-5391-bec3-8cc1341e69cd",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "d083a415-677c-53e2-a39b-fcd2f490df8d",
+      "confidence": 0.6067,
+      "confidence_score": {
+        "structural_score": 0.6067,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0167,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0017,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "d083a415-677c-53e2-a39b-fcd2f490df8d",
+        "neighbors": [
+          "4f3df0bf-a9de-5aba-8d50-a2a657a08a1d",
+          "63a7d0c3-31df-50ca-90db-943927a6a85a",
+          "5ae88817-729e-5751-a6ac-544a53f508fe",
+          "2e3223f1-721d-5d1f-9581-3ae9515865ec",
+          "b94f3265-f7df-557d-ad37-c68d007f5c1f",
+          "1d0d0711-9994-55e5-ad79-6a1ed9ff0919",
+          "e71fdb80-bb31-5dbf-ad0f-83dc0512a92d",
+          "2227a027-64c3-50a0-9502-a328df3b9f64",
+          "f8ec1d7f-786a-5c8c-830c-8206debd3bed",
+          "a1b70676-cfc1-5744-b629-baacd775d4e4"
+        ]
+      },
+      "explanation": "Node 'Amber Lane' (guid d083a415-677c-53e2-a39b-fcd2f490df8d) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270656+00:00",
+      "updated_at": "2026-09-10T03:25:29.270657+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270659+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-edefd57f-780b-5ae7-97b1-9b4c46d5c155",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "25bd76c0-8abe-5604-bb76-6d810a0e9306",
+      "confidence": 0.6066,
+      "confidence_score": {
+        "structural_score": 0.6066,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0165,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0017,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "25bd76c0-8abe-5604-bb76-6d810a0e9306",
+        "neighbors": [
+          "df623c1f-d6ae-5131-a769-22e7e9526db5",
+          "809c36d3-39b3-51a9-a9e1-87a91fb6cadf",
+          "1c4e6fd2-386d-5748-b350-1634cd1fc343",
+          "4e64ca8e-3ef6-5c70-b40f-0fc0c663ba0a",
+          "8bcf2b99-82bb-5647-abaa-8ab62040fd42",
+          "e36990d9-9d63-52a6-b87c-c785289489dc",
+          "a9f3b40b-daca-560a-a081-4ee0c14d1ef4",
+          "75dab581-d61e-54ff-b104-eb0542b5fb41"
+        ]
+      },
+      "explanation": "Node 'Isabel Simpson' (guid 25bd76c0-8abe-5604-bb76-6d810a0e9306) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.269956+00:00",
+      "updated_at": "2026-09-10T03:25:29.269958+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.269960+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-464d3c28-265b-5446-bce1-e5ce7bcaf25c",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "a036b0e9-2548-50b4-84b1-b938fb3514c0",
+      "confidence": 0.6062,
+      "confidence_score": {
+        "structural_score": 0.6062,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0156,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0016,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "a036b0e9-2548-50b4-84b1-b938fb3514c0",
+        "neighbors": [
+          "b7e257cd-3934-5bcc-b468-ee906fc0c6fe",
+          "73769b0b-3271-50ac-a02f-744a13b7c390",
+          "08024dd2-bf1b-5db5-9ae1-2eaf6ab119df",
+          "ed225e3a-3ad6-5afc-a89a-0427f4fcb1ec",
+          "c10e8da7-37c2-54bb-a48f-f0ef942a6327",
+          "80f1b8f0-3e71-5878-835d-c570da26639e",
+          "ad2cf23e-8bed-5843-9299-ae09f18da6fb",
+          "7a8b9817-dcfa-5fea-8bcb-25d2cefa2938",
+          "00e233f3-bc82-5dc0-805b-36241fe2a6a6",
+          "b2a1717c-8024-5a41-abee-1112f3449843"
+        ]
+      },
+      "explanation": "Node 'Jason Perez' (guid a036b0e9-2548-50b4-84b1-b938fb3514c0) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270779+00:00",
+      "updated_at": "2026-09-10T03:25:29.270781+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270783+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-bb0c2f61-7e49-5ebe-9064-6773f55e66a2",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "645f6066-2893-5a32-909e-bff5f2655bbf",
+      "confidence": 0.606,
+      "confidence_score": {
+        "structural_score": 0.606,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0149,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0015,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "645f6066-2893-5a32-909e-bff5f2655bbf",
+        "neighbors": [
+          "239a02f0-95cc-5885-86c6-3c001af1f9d2",
+          "cdc00a89-37f0-5afa-845b-5f7888bfa990",
+          "b7ee0d50-4baa-5c32-b1db-eda2684c0bd2",
+          "8f7934e9-752a-5b1c-ab84-8a4294a84aaf",
+          "5e0e66fa-ad30-5ba1-81b4-0d0562751932",
+          "1fbf56bc-54cf-5872-8888-8bdc3464674a"
+        ]
+      },
+      "explanation": "Node 'Daniel Schultz Jr.' (guid 645f6066-2893-5a32-909e-bff5f2655bbf) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271451+00:00",
+      "updated_at": "2026-09-10T03:25:29.271452+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271454+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-57a2ae87-1958-50ff-a31e-25598ecfe12a",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "5243ab88-49df-531f-a70d-8097a48604a5",
+      "confidence": 0.6055,
+      "confidence_score": {
+        "structural_score": 0.6055,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0137,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0014,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "5243ab88-49df-531f-a70d-8097a48604a5",
+        "neighbors": [
+          "4b33dea7-dd0b-581c-ad92-f39aa3d58412",
+          "946231d2-8aa0-5655-bdcb-921c398fcab5",
+          "c392da4f-f2a3-5fcd-84be-ed0ae4c86dbb",
+          "23ea54d4-d1bf-5108-8659-db10b99eb169",
+          "177a0559-ad90-57f0-9923-28c326a02a68",
+          "6f6b5a6f-e77e-5488-b020-2ad8a1bc76f9"
+        ]
+      },
+      "explanation": "Node 'Amanda Romero' (guid 5243ab88-49df-531f-a70d-8097a48604a5) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270839+00:00",
+      "updated_at": "2026-09-10T03:25:29.270840+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270842+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-c5491955-1439-5311-99b7-ebe339eb6e20",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "6187a5b1-6d03-57f2-9142-13735da8509a",
+      "confidence": 0.6053,
+      "confidence_score": {
+        "structural_score": 0.6053,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0132,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0013,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "6187a5b1-6d03-57f2-9142-13735da8509a",
+        "neighbors": [
+          "08fba8b1-486a-5516-8950-eba7d3febc1c",
+          "b0adeaa2-72a7-5b7b-abf8-caaafdf27f24",
+          "7444a9e1-335b-507a-99ed-d57686961514",
+          "1ba606aa-f870-5dc2-8fae-2d804f5b25c9",
+          "f73f6b9e-9251-5909-b8a4-b68262f6eda6",
+          "0504d32e-364c-5c12-af2b-e0f0ddd91a42",
+          "3f1ad702-d112-5f70-b094-6f844095a4a0",
+          "a08df9f3-daf8-5c32-85cc-b78c5298a373",
+          "8e0bfa34-45c8-58d3-960d-f8ecf6027e32",
+          "b382804a-646f-5bec-b482-8bb73d63fa92"
+        ]
+      },
+      "explanation": "Node 'Angela Alexander' (guid 6187a5b1-6d03-57f2-9142-13735da8509a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270164+00:00",
+      "updated_at": "2026-09-10T03:25:29.270165+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270167+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-3cb73f5d-d1af-5f72-b20c-52968566d606",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "33e76486-afc1-5bbf-92bf-82a63ed6f388",
+      "confidence": 0.6042,
+      "confidence_score": {
+        "structural_score": 0.6042,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0104,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "33e76486-afc1-5bbf-92bf-82a63ed6f388",
+        "neighbors": [
+          "a9971009-ee71-5d63-a09f-2422749c2484",
+          "f1e81dbb-7a1c-5902-8fd2-e9321045e94e",
+          "20c7c55a-e45f-578a-8fe2-56a1ea84db27",
+          "241dd3d6-c93b-59ca-962a-c54b6bf2b699",
+          "3dca2dc4-1e2a-5acb-b57a-c597af459a3e",
+          "ee6ff605-890b-5577-9c04-a96f6dc8f552",
+          "5a11d13c-f27e-5345-91ed-360c1f1185a5",
+          "a6947095-fb1c-52e1-b62c-cd35ee3ba636",
+          "16ea2c0d-a46e-5612-b0c9-ecdbb1cafa13",
+          "d8203c86-849d-56f7-8041-9c463a525ea6"
+        ]
+      },
+      "explanation": "Node 'Anthony Mccarthy' (guid 33e76486-afc1-5bbf-92bf-82a63ed6f388) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270058+00:00",
+      "updated_at": "2026-09-10T03:25:29.270059+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270061+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-f9d1b5d9-2535-5780-8bd6-02280a113a9e",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "3216c84d-fcb0-5f97-aea6-c0380dbdb0f0",
+      "confidence": 0.6035,
+      "confidence_score": {
+        "structural_score": 0.6035,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0088,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0009,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "3216c84d-fcb0-5f97-aea6-c0380dbdb0f0",
+        "neighbors": [
+          "4fff0d3e-a98b-5dd4-8454-22291d8f3d2d",
+          "d2770820-ec83-5837-a152-a7c8d024dbc9",
+          "870a32eb-89fa-5dab-af21-106f6b96163b",
+          "48a641a4-ad7a-56e9-89c9-ffd54c7a35fe",
+          "2d65df8c-9114-5d7e-ac87-6624bdbfb658",
+          "cb2f7109-a8d7-592b-a846-c94fb6599fdc",
+          "cde57837-f9ff-53e1-8eb9-827c3b7a4557",
+          "ed4aea2e-1f8f-53fa-b306-2a03ec1f27be",
+          "0fe06be5-33a5-58dd-9830-aa5993d6440b",
+          "04840eee-09a3-5c88-9d36-e332bd84e162"
+        ]
+      },
+      "explanation": "Node 'Alexandra Lee' (guid 3216c84d-fcb0-5f97-aea6-c0380dbdb0f0) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270258+00:00",
+      "updated_at": "2026-09-10T03:25:29.270259+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270261+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-b83fc40d-5111-596e-ba24-ad97e1132ee3",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "207cf7af-eb74-531c-b1e0-8d5c95e4315a",
+      "confidence": 0.603,
+      "confidence_score": {
+        "structural_score": 0.603,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0074,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0007,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "207cf7af-eb74-531c-b1e0-8d5c95e4315a",
+        "neighbors": [
+          "b281e345-381b-5e2d-a5f2-41f50b48c44c",
+          "40fdf083-f546-5f81-9d62-b4683c2d566a",
+          "3925f43d-5519-587f-ac3d-4a3b5733909a",
+          "dc64d071-1d47-556b-9baf-40b5860bcad0",
+          "18744f94-aa66-55d2-898f-764d82c1e15e",
+          "1c6de714-98ff-5845-b432-51fc900bde37",
+          "f59160b9-1cea-5332-93fc-b2cac42ebfb1",
+          "cca50943-5010-5057-b249-d696fcc550f7"
+        ]
+      },
+      "explanation": "Node 'Frank Bradley' (guid 207cf7af-eb74-531c-b1e0-8d5c95e4315a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270568+00:00",
+      "updated_at": "2026-09-10T03:25:29.270569+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270571+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-7122020d-4375-5ea0-840f-df9ebba5c5e0",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "0ee372ca-ffa4-5b6d-b8ad-3077acf23045",
+      "confidence": 0.6028,
+      "confidence_score": {
+        "structural_score": 0.6028,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0071,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0007,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "0ee372ca-ffa4-5b6d-b8ad-3077acf23045",
+        "neighbors": [
+          "b53d1952-0f72-535c-ba5e-add72924c6a0",
+          "e202da54-4306-5005-9c17-1822bd7f9e69",
+          "c667ce28-afea-5c65-8f51-3563e2050913",
+          "d66dd770-abe7-5a31-9425-5a802b0c9b75",
+          "6f15699f-e9fe-52c5-a8d0-c3af9d4a443c",
+          "5b52a53b-8b33-5971-a184-6fefd29858fc",
+          "20fe7ed2-f858-54a4-9718-cb141ece2159"
+        ]
+      },
+      "explanation": "Node 'Connor Cole' (guid 0ee372ca-ffa4-5b6d-b8ad-3077acf23045) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270348+00:00",
+      "updated_at": "2026-09-10T03:25:29.270349+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270351+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-562361aa-951f-5f53-bf88-72f7c34fad54",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "a451bf3e-f7db-57f6-94e6-2320053bb21a",
+      "confidence": 0.6028,
+      "confidence_score": {
+        "structural_score": 0.6028,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0007,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "a451bf3e-f7db-57f6-94e6-2320053bb21a",
+        "neighbors": [
+          "9afc66f0-38ea-58dd-a475-c69a072d555a",
+          "23ea54d4-d1bf-5108-8659-db10b99eb169",
+          "f9f595f3-5d99-54a8-9fcc-f77a8c32ad4a",
+          "ca99066e-e23b-5b33-8b0b-40d154886a62",
+          "e202da54-4306-5005-9c17-1822bd7f9e69",
+          "d4f696d2-4d71-589f-9c5e-a15daee16da4",
+          "22c2818b-c542-5656-b908-96e101924aec",
+          "01ad8144-a4e4-56a4-aefb-a442203b63f5",
+          "9ac3a593-318c-5c04-8f32-48b035da422c",
+          "47290274-35d1-5076-8ce2-f029eb178f4d"
+        ]
+      },
+      "explanation": "Node 'Nicole Johnson' (guid a451bf3e-f7db-57f6-94e6-2320053bb21a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270408+00:00",
+      "updated_at": "2026-09-10T03:25:29.270409+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270411+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-663ea5ac-6fa0-5c04-965f-9a26900bb2a5",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "a5ef3c9d-e961-5eb2-9419-70e7a6e9f0d6",
+      "confidence": 0.6028,
+      "confidence_score": {
+        "structural_score": 0.6028,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0069,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0007,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "a5ef3c9d-e961-5eb2-9419-70e7a6e9f0d6",
+        "neighbors": [
+          "0ea7e34f-b205-521c-b347-b346fbe51aa6",
+          "b213af53-9f1b-5144-889f-3fb9d0b0853c",
+          "445b9578-410b-5171-89cd-2e368add1f05",
+          "9107e51c-0be9-5575-9652-8ceda40ec78d",
+          "8cfb8ffc-ebef-55be-ba8a-2d2129044397",
+          "a963c3bb-a554-5cfa-bba0-2bad67fa11a0",
+          "7ced2121-8d62-5fd4-8eb4-68b6131b2697",
+          "f709d836-8a6c-5c34-9891-1083430e5081",
+          "222cbeea-65e4-5f02-b7dd-029b2fa1a6a1"
+        ]
+      },
+      "explanation": "Node 'Amy Russo' (guid a5ef3c9d-e961-5eb2-9419-70e7a6e9f0d6) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271021+00:00",
+      "updated_at": "2026-09-10T03:25:29.271022+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271024+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-555f0a9d-cf8a-5e81-87db-6d5483430a14",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "77752229-ebdf-5509-bd02-3b566a0ecf99",
+      "confidence": 0.6025,
+      "confidence_score": {
+        "structural_score": 0.6025,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0062,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0006,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "77752229-ebdf-5509-bd02-3b566a0ecf99",
+        "neighbors": [
+          "b6badf74-f8a4-5dcc-a777-077cff3f5b79",
+          "a0c6d5e1-5f60-50b0-b9dd-b5017ff10a02",
+          "7e1753cd-3ffe-5ae0-a4b8-f8088f9c3c3e",
+          "4e102bf1-270c-59c8-842c-44f367e1b6f6",
+          "f3983621-6683-56c1-b877-aeede66b8c1f",
+          "2677162d-a20c-551a-b392-32c1a1e73020",
+          "8501e4f7-55d8-542b-8283-8a2c27fff1e7",
+          "0a377008-2b23-5b51-999f-cbd4ac0bc9ce",
+          "d6635f04-f32e-5806-9320-db668632b8f8",
+          "fbda2ba6-2c66-5570-80cf-ce2c65834d0a"
+        ]
+      },
+      "explanation": "Node 'Cindy Castillo' (guid 77752229-ebdf-5509-bd02-3b566a0ecf99) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270227+00:00",
+      "updated_at": "2026-09-10T03:25:29.270228+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270230+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-5506bd0a-038c-50b9-8b85-7a79b06ae360",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "230be29e-26d2-59f8-8b16-d111317392d6",
+      "confidence": 0.6022,
+      "confidence_score": {
+        "structural_score": 0.6022,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0056,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0006,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "230be29e-26d2-59f8-8b16-d111317392d6",
+        "neighbors": [
+          "3541b9b7-d539-5ba1-8620-0e01cb28182a",
+          "b4153e7a-29c9-520e-b398-860afab9a9e6",
+          "111b81a4-4616-5aac-96a5-56a608289c6a",
+          "d537470c-1052-5108-b116-b9dc9c58180d",
+          "a8dcef55-9549-5ced-b964-5d9e75470a65",
+          "e491e257-3c5e-539f-bfb4-c64a8febb879",
+          "4609dd85-b80e-504b-8091-63e76b37a4c1",
+          "268b31de-c93c-50e4-a831-c557c84f4e76",
+          "2f4ef729-10c1-5bfa-910b-ccf75bb5b080",
+          "1aea9b71-16ae-5c0f-b642-9efb39df8673"
+        ]
+      },
+      "explanation": "Node 'Brian Goodwin' (guid 230be29e-26d2-59f8-8b16-d111317392d6) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270991+00:00",
+      "updated_at": "2026-09-10T03:25:29.270992+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270994+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-8e106936-cb14-55c9-92b8-76cab9dfe73f",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "78e4b0ee-19ae-5c96-9530-8bcadc501963",
+      "confidence": 0.602,
+      "confidence_score": {
+        "structural_score": 0.602,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0049,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "78e4b0ee-19ae-5c96-9530-8bcadc501963",
+        "neighbors": [
+          "912eb924-3412-5f83-99eb-84d63e13b32b",
+          "db80ab74-813a-540a-9e33-e184c45afd03",
+          "aa8730f6-70c6-5e77-beb8-939d97e95baa",
+          "fee7a364-b865-58f9-a914-fceead7d40f3",
+          "3925f43d-5519-587f-ac3d-4a3b5733909a",
+          "e9d2fe01-408e-5468-8b3f-5fa4b99efdfc"
+        ]
+      },
+      "explanation": "Node 'Angela Dominguez' (guid 78e4b0ee-19ae-5c96-9530-8bcadc501963) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270626+00:00",
+      "updated_at": "2026-09-10T03:25:29.270627+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270629+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-a161351f-75ff-5f99-80f3-ffebc049dd66",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "0ad5693d-f232-5e29-b18d-bef2dc4f1862",
+      "confidence": 0.6019,
+      "confidence_score": {
+        "structural_score": 0.6019,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0047,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "0ad5693d-f232-5e29-b18d-bef2dc4f1862",
+        "neighbors": [
+          "f0d25651-c575-5225-b9f2-b4a48898a03b",
+          "a3c1fc58-05cc-50f4-adf4-2c6b202c6d3b",
+          "c578ed6f-51da-5a02-b9cc-950ecac4b50d",
+          "aad30012-435a-5fd0-929f-be42da050715",
+          "05eb2114-f6a4-5e8b-87c6-62b8c6c6ac67",
+          "d528f2fb-d5f6-5d6b-9a1d-16e49ade0eb6",
+          "2e02f247-ea8e-53c1-8f56-29354550b2f3",
+          "3176c9d8-1ae9-504e-962d-91176438a976",
+          "83aa3a67-3f13-5ff9-b913-971ac902c820"
+        ]
+      },
+      "explanation": "Node 'Andrew Campbell' (guid 0ad5693d-f232-5e29-b18d-bef2dc4f1862) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.269854+00:00",
+      "updated_at": "2026-09-10T03:25:29.269862+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.269871+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-a0ffba8a-de70-586d-abe6-8381f542ac4f",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "5b392ed4-12ed-540f-9a27-41e5b4d7f6c4",
+      "confidence": 0.6019,
+      "confidence_score": {
+        "structural_score": 0.6019,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0047,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "5b392ed4-12ed-540f-9a27-41e5b4d7f6c4",
+        "neighbors": [
+          "9aa19b30-b342-5bd7-a503-e4d8f9f0d25c",
+          "19d64c3e-c05d-5eb0-a54e-2b38ce1fad66",
+          "0a33663c-f2e5-5908-bc6b-fb17108aad7e",
+          "be53568e-ab1f-5e0d-8a38-734a83030268",
+          "cdd9f1ef-241c-5cd5-a405-cc48d5f9e01a",
+          "90f0f119-8c1b-5caf-8e9a-b1404806eae8",
+          "3430a123-1641-523b-92d9-903d5f68b2ad",
+          "adaaf788-9f3a-5df0-a4b6-760f18c65684",
+          "b108d661-fe6f-5e0c-8c1a-2e588638054d"
+        ]
+      },
+      "explanation": "Node 'James Barnes' (guid 5b392ed4-12ed-540f-9a27-41e5b4d7f6c4) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270900+00:00",
+      "updated_at": "2026-09-10T03:25:29.270901+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270903+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-d324244f-6515-55f0-a6ba-666dadb3490a",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "99b29b49-3485-5556-a978-a225cffd394b",
+      "confidence": 0.6018,
+      "confidence_score": {
+        "structural_score": 0.6018,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0046,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "99b29b49-3485-5556-a978-a225cffd394b",
+        "neighbors": [
+          "c578ed6f-51da-5a02-b9cc-950ecac4b50d",
+          "c6521c35-26d8-5a41-98a2-9d092dde78d5",
+          "2c47d61f-8648-5e91-8132-d00d22311d04",
+          "ec02afe9-26cf-5f47-ad1a-36c054861ec1",
+          "1078813d-0571-5d7f-90d5-447788d22407",
+          "6bbe0165-0c43-5e83-9201-63d61d259c81",
+          "7257257b-f1cd-5022-b76d-c640582d0a68",
+          "785602ec-9bb8-58ee-87d7-bbf2355423a8",
+          "3c3e7107-b5f3-5415-b3c8-1bed606fca0b"
+        ]
+      },
+      "explanation": "Node 'Brian Kim' (guid 99b29b49-3485-5556-a978-a225cffd394b) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.269916+00:00",
+      "updated_at": "2026-09-10T03:25:29.269918+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.269921+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-58c70a76-48f1-5c3b-8e51-05601e97a333",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "251f931e-ec2a-51d7-a2aa-b4258ad56ed7",
+      "confidence": 0.6018,
+      "confidence_score": {
+        "structural_score": 0.6018,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0045,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0005,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "251f931e-ec2a-51d7-a2aa-b4258ad56ed7",
+        "neighbors": [
+          "5d3f65b4-f53f-5ece-88b4-1d26e6c2facc",
+          "0a68d125-42be-51bb-bee4-a3487c3b993a",
+          "d1e55472-fe2c-5785-b7da-8a8dc7df4592",
+          "d0a290bd-0327-5c71-8812-64043cd654a3",
+          "3c2eaaae-9fbb-5eb5-9a68-9e2d84139b22",
+          "9b8ddea0-0b60-57d3-842b-ca15fb74fe38",
+          "893768ee-c345-599c-9331-e10937e1222c",
+          "b109eee3-46ac-5b91-a988-f3ed5a995f32",
+          "e58427e9-0e16-528b-8465-163c1eef31cb",
+          "e3207f38-e73f-5882-8090-59db499b2b25"
+        ]
+      },
+      "explanation": "Node 'Holly Conner' (guid 251f931e-ec2a-51d7-a2aa-b4258ad56ed7) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271421+00:00",
+      "updated_at": "2026-09-10T03:25:29.271422+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271424+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-bcd283b9-d92b-5fa6-91c9-933559807d2e",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "f4d991df-63dc-5307-b2d1-ba9d0005ea6d",
+      "confidence": 0.6017,
+      "confidence_score": {
+        "structural_score": 0.6017,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0043,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0004,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "f4d991df-63dc-5307-b2d1-ba9d0005ea6d",
+        "neighbors": [
+          "ccb564eb-509b-58a8-a1a4-92fd890d4dfc",
+          "b28f8a74-d91a-5a5f-b7ed-7ab1fd88fc8e",
+          "f10eddce-c7d7-59e4-b508-13983ba6526f",
+          "24f07d47-a1cd-5fb9-af25-eceb9b48a495",
+          "5a85d135-193d-5bee-a0e4-6b99e364e20f",
+          "15b6c231-90f6-5a89-bf96-c4521fc1173b",
+          "d2c4c8e5-e182-51f7-a3fb-6346f38886c3",
+          "cf5ccdff-0cab-5e1b-a17c-6b1a30aef6d1"
+        ]
+      },
+      "explanation": "Node 'Christopher Rodriguez' (guid f4d991df-63dc-5307-b2d1-ba9d0005ea6d) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270317+00:00",
+      "updated_at": "2026-09-10T03:25:29.270318+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270320+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-15ee0373-be44-5bd7-84bb-bbccdd22a114",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "242c95ce-23a3-52a7-9bd5-41777b827694",
+      "confidence": 0.6014,
+      "confidence_score": {
+        "structural_score": 0.6014,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0034,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "242c95ce-23a3-52a7-9bd5-41777b827694",
+        "neighbors": [
+          "b5757cc4-fdef-5d3d-b465-d4006d07cdcc",
+          "d0107667-c531-5a04-b5f5-cbeca2fd4f3f",
+          "e5215f72-d55e-5809-a365-7495fc55cea4",
+          "c7ae4cb6-3bf6-5e71-9ea3-7c33078ad2c9",
+          "6bc9bf96-7077-5f8b-8557-c76fde324ee0",
+          "077fe501-56be-5c0f-90ad-67711c750a65",
+          "c28b8fc0-20c8-56d4-a36a-725f0642b490",
+          "a0293ca1-8b48-5781-a9a2-f31005674fbb"
+        ]
+      },
+      "explanation": "Node 'Brendan Sanchez' (guid 242c95ce-23a3-52a7-9bd5-41777b827694) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271087+00:00",
+      "updated_at": "2026-09-10T03:25:29.271089+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271091+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-9fc64197-1947-5739-a2c4-1e5c92bd9030",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "6f2fa80e-2d04-5372-808e-b7c9f4adf32e",
+      "confidence": 0.6012,
+      "confidence_score": {
+        "structural_score": 0.6012,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0031,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "6f2fa80e-2d04-5372-808e-b7c9f4adf32e",
+        "neighbors": [
+          "9f229c5e-bfbe-5d86-aa12-34f41131c51e",
+          "0bc47a65-c010-560b-bce7-11c6df705949",
+          "1e2bb23e-1fdc-5407-949e-60cec1e4a9ed",
+          "31bcda60-b7e3-5ac5-bf6a-ca49d7e70ed5",
+          "529d6ae2-c634-5d6c-a6ee-cb650f5bffef",
+          "cb9b4714-7c15-5ca8-a471-374faf2cbc90",
+          "8a075c3f-8698-57d0-b1bc-33d2ca001919",
+          "47cc3c41-f406-5b6f-a91a-f560babd7221",
+          "903b9e03-b673-5a8d-8371-876c6239458e",
+          "5ddc69ce-4ff3-523b-b93e-e76fc29d33b8"
+        ]
+      },
+      "explanation": "Node 'Cindy Mills' (guid 6f2fa80e-2d04-5372-808e-b7c9f4adf32e) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270024+00:00",
+      "updated_at": "2026-09-10T03:25:29.270025+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270027+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-cb4da7d1-b290-5897-9a57-7e1bddfefcd0",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "17d44498-dc03-59d2-8599-364f0eaa51f3",
+      "confidence": 0.6012,
+      "confidence_score": {
+        "structural_score": 0.6012,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0029,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "17d44498-dc03-59d2-8599-364f0eaa51f3",
+        "neighbors": [
+          "0518e980-f223-57b5-9eb5-12be2ce8b382",
+          "68a08f62-3647-5940-9f67-c2f79e6860fd",
+          "5ed6637a-5148-50ef-be3c-024fa67fc354",
+          "f1e81dbb-7a1c-5902-8fd2-e9321045e94e",
+          "e1c395d1-da07-5381-8082-d7c5fac8290e"
+        ]
+      },
+      "explanation": "Node 'Cheryl Haynes' (guid 17d44498-dc03-59d2-8599-364f0eaa51f3) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270131+00:00",
+      "updated_at": "2026-09-10T03:25:29.270133+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270135+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-6f89588c-f7db-5839-965d-bce6bcf7a933",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "e202da54-4306-5005-9c17-1822bd7f9e69",
+      "confidence": 0.6012,
+      "confidence_score": {
+        "structural_score": 0.6012,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.003,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "e202da54-4306-5005-9c17-1822bd7f9e69",
+        "neighbors": [
+          "713d8208-b9d7-5810-9ed5-ee29ea503e5b",
+          "22c2818b-c542-5656-b908-96e101924aec",
+          "556b5f4a-42c8-5814-ae04-04071a1cab0e",
+          "d66dd770-abe7-5a31-9425-5a802b0c9b75",
+          "0ee372ca-ffa4-5b6d-b8ad-3077acf23045",
+          "b50addae-255d-5016-83c2-43b42ad70021",
+          "a451bf3e-f7db-57f6-94e6-2320053bb21a"
+        ]
+      },
+      "explanation": "Node 'Charles Sloan' (guid e202da54-4306-5005-9c17-1822bd7f9e69) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270377+00:00",
+      "updated_at": "2026-09-10T03:25:29.270378+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270380+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-c3ec1178-ecaa-5888-a5bd-9acec6d2b4b6",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "faa54222-61a6-53cf-ae05-cbd45de3f73c",
+      "confidence": 0.6012,
+      "confidence_score": {
+        "structural_score": 0.6012,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0029,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "faa54222-61a6-53cf-ae05-cbd45de3f73c",
+        "neighbors": [
+          "60b08d1d-148c-5408-be4e-9b11742d04db",
+          "36b1db6e-4b9e-5a75-b43d-484b4838f602",
+          "14a91b77-ff76-515b-bcf7-975132a56b17",
+          "db6a3170-ef23-5ecc-8e73-0b100a7c6068",
+          "2e57a097-959d-53d7-98f7-9fbcfe81dc35"
+        ]
+      },
+      "explanation": "Node 'Ashley Perez' (guid faa54222-61a6-53cf-ae05-cbd45de3f73c) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271240+00:00",
+      "updated_at": "2026-09-10T03:25:29.271241+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271243+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-7b90c043-2f77-52a7-9d02-507d48bbee14",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "a05858b9-9039-56cd-8b1d-135599810aef",
+      "confidence": 0.601,
+      "confidence_score": {
+        "structural_score": 0.601,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0025,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0002,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "a05858b9-9039-56cd-8b1d-135599810aef",
+        "neighbors": [
+          "43ec8c51-a52b-5045-ae4f-74fc5ea9d561",
+          "d03ccc38-c530-5445-ae1a-10f5a98da9a9",
+          "795cd5f1-a281-543e-8142-b1ff227f784b",
+          "b068698c-724f-5f8c-9b7f-f501eeebbf54",
+          "29151787-cd2a-52d3-b877-1426d914481b",
+          "16ccc323-b585-518f-96e6-417660f3a0eb",
+          "a8ee47d8-9bc4-5c1f-bdd0-900c1dbcf437",
+          "1e71bc02-d278-5fa8-949e-e63945e43d1c"
+        ]
+      },
+      "explanation": "Node 'Amanda Austin' (guid a05858b9-9039-56cd-8b1d-135599810aef) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270439+00:00",
+      "updated_at": "2026-09-10T03:25:29.270440+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270442+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-bb0b23a1-618c-58c9-aeac-c5af03d50d4d",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "e24d51da-83d0-5e70-a0b4-29ce90bbe98a",
+      "confidence": 0.601,
+      "confidence_score": {
+        "structural_score": 0.601,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0026,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "e24d51da-83d0-5e70-a0b4-29ce90bbe98a",
+        "neighbors": [
+          "f4d99540-754a-51b5-a1b1-6d249e0078b4",
+          "ed6a416c-cc7e-5f96-bb6c-b36620a3c8f4",
+          "8733cee7-e57e-5f7a-a5a9-8e2944dd345a",
+          "3c747d60-d264-5efc-8b43-811b00f6d513",
+          "aa9439ad-aede-5094-b571-305d13a95347",
+          "ad2cf23e-8bed-5843-9299-ae09f18da6fb",
+          "67ac9624-1d8a-508d-bafa-42e5ea40287a",
+          "9f40fed2-25c7-5ed7-bcc5-5efee24d507e"
+        ]
+      },
+      "explanation": "Node 'Adam Moss' (guid e24d51da-83d0-5e70-a0b4-29ce90bbe98a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270809+00:00",
+      "updated_at": "2026-09-10T03:25:29.270811+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270812+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-1a231ff9-bb9a-51d6-8ed1-257e10db2913",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "9aa19b30-b342-5bd7-a503-e4d8f9f0d25c",
+      "confidence": 0.601,
+      "confidence_score": {
+        "structural_score": 0.601,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0026,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0003,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "9aa19b30-b342-5bd7-a503-e4d8f9f0d25c",
+        "neighbors": [
+          "0c5c88d6-4c19-5c9d-82bd-3e7db7b6415a",
+          "5b392ed4-12ed-540f-9a27-41e5b4d7f6c4",
+          "177a0559-ad90-57f0-9923-28c326a02a68",
+          "90f0f119-8c1b-5caf-8e9a-b1404806eae8",
+          "0fb0a6f7-00e9-5b72-8b94-e8484c79dabb"
+        ]
+      },
+      "explanation": "Node 'Arthur Lin' (guid 9aa19b30-b342-5bd7-a503-e4d8f9f0d25c) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270868+00:00",
+      "updated_at": "2026-09-10T03:25:29.270869+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270871+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-e6d51cf9-85e5-514d-b976-e716863a60c8",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "c8093bb7-daa2-578f-9770-5f1f7e4adc00",
+      "confidence": 0.6009,
+      "confidence_score": {
+        "structural_score": 0.6009,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0023,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0002,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "c8093bb7-daa2-578f-9770-5f1f7e4adc00",
+        "neighbors": [
+          "809c36d3-39b3-51a9-a9e1-87a91fb6cadf",
+          "1f6e0218-1710-579e-b21a-629c94f86f03",
+          "273c730c-969e-57ed-b59c-2b97ef633ec3",
+          "c99d8aac-9ba7-5731-8776-a72126fac09d",
+          "487a4dfc-39bf-5ed2-98b4-f9ac433a52d4",
+          "ac606c75-6c33-5c19-9950-6ac481f19f22"
+        ]
+      },
+      "explanation": "Node 'Danielle Nelson' (guid c8093bb7-daa2-578f-9770-5f1f7e4adc00) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.269991+00:00",
+      "updated_at": "2026-09-10T03:25:29.269992+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.269994+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-262ead86-d2e7-5e99-9895-9cb98c6708a9",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "e5215f72-d55e-5809-a365-7495fc55cea4",
+      "confidence": 0.6009,
+      "confidence_score": {
+        "structural_score": 0.6009,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0022,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0002,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "e5215f72-d55e-5809-a365-7495fc55cea4",
+        "neighbors": [
+          "18142e42-0de0-5945-bae8-4d70a951644c",
+          "ac03021e-0c5e-560b-92d4-75f4fcf07503",
+          "c7ae4cb6-3bf6-5e71-9ea3-7c33078ad2c9",
+          "81290572-3613-5020-8d8d-0ff5e4afc29d",
+          "242c95ce-23a3-52a7-9bd5-41777b827694"
+        ]
+      },
+      "explanation": "Node 'Alexa Powell' (guid e5215f72-d55e-5809-a365-7495fc55cea4) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271117+00:00",
+      "updated_at": "2026-09-10T03:25:29.271118+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271120+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-444bef82-bff9-5070-bce2-98ee80a6ba6e",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "0a68d125-42be-51bb-bee4-a3487c3b993a",
+      "confidence": 0.6005,
+      "confidence_score": {
+        "structural_score": 0.6005,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0012,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "0a68d125-42be-51bb-bee4-a3487c3b993a",
+        "neighbors": [
+          "8deafa85-f5c8-52d0-8afb-556e9a3cba7a",
+          "3c2eaaae-9fbb-5eb5-9a68-9e2d84139b22",
+          "19f66150-d54f-5d71-9130-08dfda6611c4",
+          "251f931e-ec2a-51d7-a2aa-b4258ad56ed7"
+        ]
+      },
+      "explanation": "Node 'Andre Dorsey' (guid 0a68d125-42be-51bb-bee4-a3487c3b993a) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271391+00:00",
+      "updated_at": "2026-09-10T03:25:29.271392+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271394+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-c30acbdd-e66e-5ed8-96ea-28b98036c5a7",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "0518e980-f223-57b5-9eb5-12be2ce8b382",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "0518e980-f223-57b5-9eb5-12be2ce8b382",
+        "neighbors": [
+          "17d44498-dc03-59d2-8599-364f0eaa51f3",
+          "29ad7f0e-bfef-5207-b2c6-96af20545b0e"
+        ]
+      },
+      "explanation": "Node 'Rachel Blair' (guid 0518e980-f223-57b5-9eb5-12be2ce8b382) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270097+00:00",
+      "updated_at": "2026-09-10T03:25:29.270099+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270101+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-a869f250-07ad-5c04-b60e-9177f48a5586",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "ccb564eb-509b-58a8-a1a4-92fd890d4dfc",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "ccb564eb-509b-58a8-a1a4-92fd890d4dfc",
+        "neighbors": [
+          "f4d991df-63dc-5307-b2d1-ba9d0005ea6d",
+          "cc32e90e-3278-5ba9-9b5e-3a61b942f0c1"
+        ]
+      },
+      "explanation": "Node 'Morgan Cox' (guid ccb564eb-509b-58a8-a1a4-92fd890d4dfc) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270288+00:00",
+      "updated_at": "2026-09-10T03:25:29.270289+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270291+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-1eadaeeb-d9f2-5506-b94b-476d4fee2db3",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "912eb924-3412-5f83-99eb-84d63e13b32b",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "912eb924-3412-5f83-99eb-84d63e13b32b",
+        "neighbors": [
+          "78e4b0ee-19ae-5c96-9530-8bcadc501963",
+          "2be91e39-c109-5b8e-b29a-2c4faa9f217e"
+        ]
+      },
+      "explanation": "Node 'Amber Cohen' (guid 912eb924-3412-5f83-99eb-84d63e13b32b) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270597+00:00",
+      "updated_at": "2026-09-10T03:25:29.270598+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270600+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-80fc2c79-a5ce-531a-b6ac-c054326d5ca5",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "b7e257cd-3934-5bcc-b468-ee906fc0c6fe",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "LOCATION"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "b7e257cd-3934-5bcc-b468-ee906fc0c6fe",
+        "neighbors": [
+          "a036b0e9-2548-50b4-84b1-b938fb3514c0",
+          "93122815-b15f-5592-be2b-898c67157dba"
+        ]
+      },
+      "explanation": "Node 'West Nicole' (guid b7e257cd-3934-5bcc-b468-ee906fc0c6fe) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270716+00:00",
+      "updated_at": "2026-09-10T03:25:29.270717+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270749+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-3b756ace-8b91-5fae-bfb3-1bac80bf6be4",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "8ba622b0-ace0-5fe2-904c-f7274318f396",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0008,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "8ba622b0-ace0-5fe2-904c-f7274318f396",
+        "neighbors": [
+          "c5b4f720-f7a2-5ba8-b8fd-4105b244aa35",
+          "11b36e9f-bd39-50dd-afc2-787347b3435c",
+          "26ba0c92-c174-5f66-bfe8-e48c5645dc31",
+          "3541b9b7-d539-5ba1-8620-0e01cb28182a"
+        ]
+      },
+      "explanation": "Node 'Christine Mcgee' (guid 8ba622b0-ace0-5fe2-904c-f7274318f396) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.270961+00:00",
+      "updated_at": "2026-09-10T03:25:29.270962+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.270964+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-ed032b85-b2f4-566c-a112-558311da3367",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "7f933acd-4185-553d-b75a-04f7ae42a9c8",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0008,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "7f933acd-4185-553d-b75a-04f7ae42a9c8",
+        "neighbors": [
+          "f7258182-596f-5f56-8832-2f2bf8ae3a8f",
+          "8a31bb3d-a9d7-5974-9ebd-03545f454358",
+          "971fb67b-f9ab-5cc7-bb3c-7bf4972d8b8f"
+        ]
+      },
+      "explanation": "Node 'Anthony Jensen' (guid 7f933acd-4185-553d-b75a-04f7ae42a9c8) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271299+00:00",
+      "updated_at": "2026-09-10T03:25:29.271300+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271302+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-fcf33a06-4c3d-5614-98fc-5eaa9a806dca",
+      "hypothesis_type": "COMMUNITY_BRIDGE",
+      "subject": "77c1c94c-47d3-5e7e-84a9-2d425f7552f0",
+      "confidence": 0.6003,
+      "confidence_score": {
+        "structural_score": 0.6003,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "articulation",
+            "value": 1.0,
+            "weight": 0.6,
+            "description": "node is an articulation point",
+            "evidence_ids": []
+          },
+          {
+            "component": "betweenness",
+            "value": 0.0007,
+            "weight": 0.4,
+            "description": "normalized betweenness centrality",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 1.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "is_articulation": true,
+        "betweenness": 0.0001,
+        "entity_type": "PERSON"
+      },
+      "temporal_scope": null,
+      "graph_scope": {
+        "node": "77c1c94c-47d3-5e7e-84a9-2d425f7552f0",
+        "neighbors": [
+          "38eecd79-d509-5e64-b659-5411fbf39abb",
+          "f45b3a5d-9851-54d3-a8ab-4b1f3e3a2e6c"
+        ]
+      },
+      "explanation": "Node 'Thomas Foster' (guid 77c1c94c-47d3-5e7e-84a9-2d425f7552f0) is an articulation point: removing it would disconnect the network. This is a structural observation, not an accusation.",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:29.271331+00:00",
+      "updated_at": "2026-09-10T03:25:29.271332+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:29.271334+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-bc58ecc0-329b-5fd8-9995-ca66c1e6a0cb",
+      "hypothesis_type": "ENTITY_COLLISION",
+      "subject": "34668d15-34c1-50d2-b08c-f094382d6030",
+      "confidence": 0.5,
+      "confidence_score": {
+        "structural_score": 0.0,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.5,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "alias_count",
+            "value": 0.5,
+            "weight": 0.6,
+            "description": "many aliases on one node",
+            "evidence_ids": []
+          },
+          {
+            "component": "mention_count",
+            "value": 0.5,
+            "weight": 0.4,
+            "description": "high mention count",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 0.0,
+          "temporal": 0.0,
+          "semantic": 0.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 1.0
+        }
+      },
+      "supporting_evidence_ids": [],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "alias_count": 3,
+        "mention_count": 10
+      },
+      "temporal_scope": null,
+      "graph_scope": {},
+      "explanation": "Entity 'Juan Thomas' carries 3 aliases across 10 mentions. Possible over-merge \u2014 may actually be multiple people.",
+      "status": "REQUIRES_REVIEW",
+      "created_at": "2026-09-10T03:25:38.944299+00:00",
+      "updated_at": "2026-09-10T03:25:38.944309+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:38.944317+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-1f3fbd01-527d-580c-b9c2-b3012a2245d8",
+      "hypothesis_type": "POTENTIAL_HIDDEN_INTERMEDIARY",
+      "subject": "add9ef2d-7392-5d5d-83ac-34eb98fa39a4",
+      "confidence": 0.4888,
+      "confidence_score": {
+        "structural_score": 0.4175,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "attribute_affinity",
+            "value": 0.3709,
+            "weight": 1.0,
+            "description": "ghost signal attribute_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "structural_hole_signal",
+            "value": 0.8817,
+            "weight": 1.0,
+            "description": "ghost signal structural_hole_signal",
+            "evidence_ids": []
+          },
+          {
+            "component": "graphsage_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal graphsage_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "temporal_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal temporal_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "embedding_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal embedding_affinity",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 3.0,
+          "temporal": 1.0,
+          "semantic": 1.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [
+        "1fbee4e9-4182-5ade-9917-0c488861c20f",
+        "2a9f5003-420f-5393-9646-3f423ad1f57b",
+        "2e372b56-1cc4-5807-96f0-69bceb0c7587",
+        "45efd79e-c89b-57d4-aa24-7dedde23e09f",
+        "7f2761d3-6b79-50b5-83b9-79975f6596ba",
+        "7f4a0612-292b-5971-b12e-d02c10bea95b",
+        "8847796a-54be-548f-8725-2b6a741bbdee",
+        "99528a16-9e2d-5524-8c48-e81759fdf671",
+        "b35ea946-32d3-5cdc-8998-264d0248b01c",
+        "d5c81b9d-a9e0-537a-8580-02fb15b9cfac",
+        "f5db0bba-9829-52ae-bd4f-a5e3e8e0d8fe",
+        "ff475517-3446-5228-8bb6-afdf03542119"
+      ],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "attribute_affinity": 0.370932,
+        "temporal_affinity": 0.0,
+        "embedding_affinity": 0.0,
+        "structural_hole_signal": 0.881662,
+        "graphsage_affinity": 0.0
+      },
+      "temporal_scope": null,
+      "graph_scope": {},
+      "explanation": "",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:20.333181+00:00",
+      "updated_at": "2026-09-10T03:25:20.333188+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:20.333196+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-d646d45c-93b6-54c2-b9c7-86b317fc0609",
+      "hypothesis_type": "POTENTIAL_HIDDEN_INTERMEDIARY",
+      "subject": "896efeaa-19c9-5aca-ac72-3074bcaf9ce3",
+      "confidence": 0.4851,
+      "confidence_score": {
+        "structural_score": 0.4142,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "attribute_affinity",
+            "value": 0.3685,
+            "weight": 1.0,
+            "description": "ghost signal attribute_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "structural_hole_signal",
+            "value": 0.874,
+            "weight": 1.0,
+            "description": "ghost signal structural_hole_signal",
+            "evidence_ids": []
+          },
+          {
+            "component": "graphsage_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal graphsage_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "temporal_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal temporal_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "embedding_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal embedding_affinity",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 3.0,
+          "temporal": 1.0,
+          "semantic": 1.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [
+        "058c5d9e-a303-5847-bcc2-0742a8d1df59",
+        "0c4f3b3a-dd67-5a3f-a3c8-ef31e37ccf76",
+        "15b288ef-edeb-51c6-93e3-8f772152a4f1",
+        "16329ac0-3626-5940-9db0-954c908d797b",
+        "412b178e-313c-5c6e-92f0-41fd8459dee2",
+        "4fbce4eb-0919-56ba-a55f-78714ab26735",
+        "50dd5b05-29bc-509d-9091-58d4a03c9537",
+        "540e77d7-f26b-5e65-9c69-d5b12c7e03e7",
+        "865f12e0-42b9-52d0-a670-01f5088d5324",
+        "8b698be3-82a2-5863-9451-fb260af39cbc",
+        "d7c38ad5-24a7-56ec-9b50-60f20f8d68b3",
+        "eaf0e835-5612-5a7e-97a6-04db61033d19"
+      ],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "attribute_affinity": 0.368484,
+        "temporal_affinity": 0.0,
+        "embedding_affinity": 0.0,
+        "structural_hole_signal": 0.873963,
+        "graphsage_affinity": 0.0
+      },
+      "temporal_scope": null,
+      "graph_scope": {},
+      "explanation": "",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:20.333247+00:00",
+      "updated_at": "2026-09-10T03:25:20.333248+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:20.333251+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    },
+    {
+      "id": "H-e033dbcd-a0f0-536f-9d50-dad57c6dbebf",
+      "hypothesis_type": "POTENTIAL_HIDDEN_INTERMEDIARY",
+      "subject": "8f91926f-59bd-503a-8ad2-aab3124d3ab9",
+      "confidence": 0.4778,
+      "confidence_score": {
+        "structural_score": 0.4149,
+        "temporal_score": 0.0,
+        "semantic_score": 0.0,
+        "behavioral_score": 0.0,
+        "evidence_score": 0.0,
+        "entity_resolution_score": 0.0,
+        "counter_evidence_penalty": 0.0,
+        "explanations": [
+          {
+            "component": "attribute_affinity",
+            "value": 0.3538,
+            "weight": 1.0,
+            "description": "ghost signal attribute_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "structural_hole_signal",
+            "value": 0.891,
+            "weight": 1.0,
+            "description": "ghost signal structural_hole_signal",
+            "evidence_ids": []
+          },
+          {
+            "component": "graphsage_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal graphsage_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "temporal_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal temporal_affinity",
+            "evidence_ids": []
+          },
+          {
+            "component": "embedding_affinity",
+            "value": 0.0,
+            "weight": 1.0,
+            "description": "ghost signal embedding_affinity",
+            "evidence_ids": []
+          }
+        ],
+        "weights": {
+          "structural": 3.0,
+          "temporal": 1.0,
+          "semantic": 1.0,
+          "behavioral": 0.0,
+          "evidence": 0.0,
+          "entity_resolution": 0.0
+        }
+      },
+      "supporting_evidence_ids": [
+        "0a3bd01f-204b-5d9d-af6f-1dc80d707a70",
+        "110db015-e53c-5bc7-85ee-d16d559bfdc8",
+        "2e5357de-fc3e-5fde-9ad9-77118915ae8f",
+        "33eb5bf2-d448-5a4b-b6f9-920df709bba7",
+        "588c2c46-96e1-51db-86e7-f02f5869da5b",
+        "5dd28795-c1ec-56fb-9a62-217e072a00b0",
+        "65a705d6-1d6d-5f2a-92aa-d439e8d54024",
+        "77362367-bc79-579d-92ff-f2f6e0459282",
+        "ba3ee609-2ea2-52eb-a63c-23d47ecb91a4",
+        "c39ed4ce-ba3d-51c5-9852-2d8850f640a3",
+        "c66e7dba-f6ca-5912-b5aa-1de50d26f478",
+        "c77ed3b4-d5f5-5745-87d5-ea4d71b16789",
+        "d6b48682-7e97-53c0-941d-c79be0c57864",
+        "e4374338-b916-5f8a-82db-8be3daaefe5d",
+        "ec8f29e1-a807-50ae-b585-a0be4903eb77",
+        "f6068323-f7ae-5b60-85dd-ef59cfc138cb"
+      ],
+      "counter_evidence_ids": [],
+      "model_signals": {
+        "attribute_affinity": 0.353828,
+        "temporal_affinity": 0.0,
+        "embedding_affinity": 0.0,
+        "structural_hole_signal": 0.891035,
+        "graphsage_affinity": 0.0
+      },
+      "temporal_scope": null,
+      "graph_scope": {},
+      "explanation": "",
+      "status": "OPEN",
+      "created_at": "2026-09-10T03:25:20.333291+00:00",
+      "updated_at": "2026-09-10T03:25:20.333293+00:00",
+      "source": "UNKNOWN",
+      "provenance": {
+        "source": {
+          "source": "UNKNOWN",
+          "record_id": null,
+          "uri": null,
+          "page": null,
+          "section": null,
+          "offset": null,
+          "raw": null
+        },
+        "extraction_model": null,
+        "model_version": null,
+        "extracted_at": "2026-09-10T03:25:20.333295+00:00",
+        "confidence": 0.0,
+        "notes": []
+      }
+    }
+  ]
+}

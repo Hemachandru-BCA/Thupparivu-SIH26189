@@ -117,6 +117,15 @@ def _ts_str(dt: Optional[datetime]) -> Optional[str]:
     return dt.isoformat() if dt else None
 
 
+def _as_utc(dt: Optional[datetime]) -> Optional[datetime]:
+    """Normalize to timezone-aware UTC so naive/aware datetimes can sort."""
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
 # --------------------------------------------------------------------------- #
 # Edge temporal record
 # --------------------------------------------------------------------------- #
@@ -144,16 +153,25 @@ class TemporalEdge:
 
     def is_active_at(self, ts: datetime) -> bool:
         """True if this edge was already known/observed at timestamp *ts*."""
-        effective = self.effective_time
+        effective = _as_utc(self.effective_time)
         if effective is None:
             return True  # unknown timestamp → assumed always visible
-        return effective <= ts
+        target = _as_utc(ts)
+        return effective <= target if target else True
 
     def is_active_between(self, start: datetime, end: datetime) -> bool:
-        effective = self.effective_time
+        effective = _as_utc(self.effective_time)
         if effective is None:
             return True
-        return start <= effective <= end
+        s = _as_utc(start)
+        e = _as_utc(end)
+        if s and e:
+            return s <= effective <= e
+        if s:
+            return s <= effective
+        if e:
+            return effective <= e
+        return True
 
 
 # --------------------------------------------------------------------------- #
@@ -207,15 +225,29 @@ class TemporalMultilayerGraph:
             relation = (attrs.get("relation") or "ASSOCIATED_WITH").upper()
             layer = classify_relation(relation)
             a = attrs.get("attributes") or {}
+            # Timestamps may live at the top level of the edge attributes or
+            # nested under ``attributes.attributes`` (real graph.pkl artifacts
+            # carry ``attributes -> {attributes: {timestamp: ...}}``).  Reading
+            # both keeps hand-built test graphs and pipeline-built graphs
+            # consistent so temporal snapshots work on real data.
+            nested = a.get("attributes") or {}
+            ts_raw = (
+                a.get("timestamp")
+                or a.get("observed_at")
+                or nested.get("timestamp")
+                or nested.get("observed_at")
+            )
+            vf_raw = a.get("valid_from") or nested.get("valid_from")
+            vt_raw = a.get("valid_to") or nested.get("valid_to")
             te = TemporalEdge(
                 source=src,
                 target=tgt,
                 key=key,
                 relation=relation,
                 layer=layer,
-                valid_from=_parse_ts(a.get("valid_from")),
-                valid_to=_parse_ts(a.get("valid_to")),
-                observed_at=_parse_ts(a.get("timestamp") or a.get("observed_at")),
+                valid_from=_parse_ts(vf_raw),
+                valid_to=_parse_ts(vt_raw),
+                observed_at=_parse_ts(ts_raw),
                 confidence=float(a.get("confidence", 1.0)),
                 evidence_ids=list(a.get("evidence_ids") or []),
                 attributes=dict(a),
@@ -226,7 +258,7 @@ class TemporalMultilayerGraph:
 
         self._timeline = sorted(
             self._edges,
-            key=lambda e: e.effective_time or datetime.min.replace(tzinfo=timezone.utc),
+            key=lambda e: _as_utc(e.effective_time) or datetime.min.replace(tzinfo=timezone.utc),
         )
         logger.info(
             "Temporal index built: %d edges across %d layers, %d nodes",

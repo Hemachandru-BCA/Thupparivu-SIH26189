@@ -301,7 +301,18 @@ class HypothesisEngine:
 def _signals_of(ghost: Any) -> Dict[str, float]:
     if hasattr(ghost, "signals"):
         return ghost.signals
-    return dict(ghost.get("confidence_breakdown", {}) or {})
+    raw = dict(ghost.get("confidence_breakdown", {}) or {})
+    # Filter to only scalar numeric values (skip lists, dicts, etc.)
+    out: Dict[str, float] = {}
+    for k, v in raw.items():
+        if isinstance(v, (int, float)):
+            out[str(k)] = float(v)
+        elif isinstance(v, str):
+            try:
+                out[str(k)] = float(v)
+            except (ValueError, TypeError):
+                pass
+    return out
 
 
 def _signal_family(name: str) -> str:
