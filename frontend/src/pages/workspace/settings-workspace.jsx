@@ -73,9 +73,9 @@ export default function SettingsWorkspace() {
                     <div className="p-3 space-y-3">
                         <div>
                             <label className="text-[10px] text-fg-faint font-mono uppercase block mb-1">DEFAULT EXPANSION DEPTH</label>
-                            <select className="tp-select w-32">
+                            <select className="tp-select w-32" defaultValue="2">
                                 <option value="1">1 hop</option>
-                                <option value="2" selected>2 hops</option>
+                                <option value="2">2 hops</option>
                                 <option value="3">3 hops</option>
                                 <option value="4">4 hops</option>
                                 <option value="5">5 hops</option>

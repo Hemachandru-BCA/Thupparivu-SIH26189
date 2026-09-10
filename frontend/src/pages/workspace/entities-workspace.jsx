@@ -1,9 +1,11 @@
 import { useState, useMemo } from 'react';
+import { useLocation } from 'wouter';
 import { useGetEntities } from '@/api/graph';
 import { Users, Search, Filter, Download, ChevronDown } from 'lucide-react';
 import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
 
 export default function EntitiesWorkspace() {
+    const [, setLocation] = useLocation();
     const { data: entitiesData, isLoading } = useGetEntities();
     const entities = entitiesData?.results || entitiesData?.items || entitiesData || [];
     const [search, setSearch] = useState('');
@@ -103,9 +105,9 @@ export default function EntitiesWorkspace() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filtered.map(entity => (
-                            <tr key={entity.id} className="cursor-pointer"
-                                onClick={() => window.__thupparivu?.setInspectorEntity(entity)}>
+                        {filtered.map((entity, idx) => (
+                            <tr key={entity.id || `entity-${idx}`} className="cursor-pointer"
+                                onClick={() => setLocation(`/entity/${encodeURIComponent(entity.id)}`)}>
                                 <td className="font-mono text-fg-faint">{entity.id}</td>
                                 <td className="text-fg-primary font-medium">{entity.name || entity.id}</td>
                                 <td>

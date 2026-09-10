@@ -295,23 +295,44 @@ def cross_case(limit: int = Query(30, ge=1, le=200)):
         except Exception:
             continue
 
+    # Build a label/type lookup from the graph node data (if available)
+    label_lookup: Dict[str, Dict[str, str]] = {}
+    try:
+        graph_data = services.graph_document()
+        if graph_data and isinstance(graph_data, dict):
+            for node in graph_data.get("nodes", []) or []:
+                nid = node.get("id") or node.get("label")
+                if nid:
+                    label_lookup[nid] = {
+                        "label": node.get("label") or node.get("type") or nid,
+                        "type": node.get("type") or node.get("entity_type") or "ENTITY",
+                    }
+    except Exception:
+        graph_data = None
+
     entity_in_cases: Dict[str, List[str]] = defaultdict(list)
+    entity_notes: Dict[str, str] = {}
     for case in cases:
         for item in case.get("items", []):
             eid = item.get("id") or item.get("entity_id")
             if eid:
                 entity_in_cases[eid].append(case.get("id"))
+                if item.get("note"):
+                    entity_notes.setdefault(eid, item["note"])
 
     reuse = [
-        {"entity_id": eid, "cases": cids, "case_count": len(cids)}
+        {
+            "entity_id": eid,
+            "cases": cids,
+            "case_count": len(cids),
+            "label": label_lookup.get(eid, {}).get("label", eid[:24]),
+            "entity_type": label_lookup.get(eid, {}).get("type", "ENTITY"),
+            "note": entity_notes.get(eid, ""),
+        }
         for eid, cids in entity_in_cases.items()
         if len(cids) > 1
     ]
     reuse.sort(key=lambda r: -r["case_count"])
-
-    resolved_to_case = {}
-    for r in reuse:
-        resolved_to_case[r["entity_id"]] = r
 
     audit.record_action("intel.cross_case")
     return {

@@ -1,0 +1,49 @@
+{
+  "id": "CASE-0317",
+  "title": "Bengaluru Hawala Network Investigation",
+  "description": "Investigation into a hawala-based financial network operating across Karnataka and Andhra Pradesh, suspected of routing illicit funds through multiple shell accounts.",
+  "classification": "RESTRICTED // INVESTIGATIVE USE ONLY",
+  "status": "CLOSED",
+  "priority": "MEDIUM",
+  "jurisdiction": "State Criminal Investigation Department - Financial Crimes Unit",
+  "investigator": "Inspector K. Venkatesh (ID: I-4512)",
+  "created_at": "2025-03-15T00:00:00Z",
+  "updated_at": "2025-09-20T00:00:00Z",
+  "dataset": "Synthetic Investigation 07",
+  "items": [
+    {
+      "id": "d6579db1-9f01-5440-8d18-1fbb0da139be",
+      "type": "PERSON",
+      "label": "Nicole Jackson",
+      "note": "Shared with CASE-0421. Suspected financial intermediary."
+    },
+    {
+      "id": "05b97a3a-e407-5e05-9078-00cfa4795b88",
+      "type": "PERSON",
+      "label": "Matthew Jones",
+      "note": "Shared with CASE-0421. High-degree financial node."
+    },
+    {
+      "id": "06a1573c-376d-5421-ac3e-03df7d46dd4f",
+      "type": "PERSON",
+      "label": "Amanda Frank",
+      "note": "Shared with CASE-0421. Identified as bridge between communities."
+    },
+    {
+      "id": "c56be195-aa33-5366-946c-3c8b3c6c47cb",
+      "type": "PERSON",
+      "label": "John Smith",
+      "note": "Shared with CASE-0421."
+    }
+  ],
+  "notes": [
+    {
+      "id": "N-001",
+      "text": "Hawala network appeared dormant after September 2025 raid.",
+      "author": "Inspector K. Venkatesh",
+      "timestamp": "2025-09-22T14:30:00Z"
+    }
+  ],
+  "dossier_ids": [],
+  "disclaimer": "Working case file - not an official legal record."
+}

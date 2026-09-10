@@ -31,13 +31,8 @@ def list_models():
     return {"items": _registry().list_models(), "total": len(_registry().list_models())}
 
 
-@router.get("/{model_name}")
-def model_detail(model_name: str):
-    model = _registry().get_model(model_name)
-    if model is None:
-        raise HTTPException(status_code=404, detail=f"Model not found: {model_name}")
-    runs = [r for r in _registry().list_runs() if r.model == model_name]
-    return {"model": model, "runs": [r.model_dump(mode="json") for r in runs]}
+# NOTE: Specific routes (runs, capabilities, benchmark) MUST come before
+# the catch-all /{model_name} route so FastAPI matches them first.
 
 
 @router.get("/runs")
@@ -105,3 +100,13 @@ def run_benchmark():
         raise HTTPException(status_code=500, detail=f"Benchmark failed: {exc}")
     audit.record_action("models.benchmark_run")
     return summary
+
+
+# ── Catch-all route AFTER all specific routes ──────────────────
+@router.get("/{model_name}")
+def model_detail(model_name: str):
+    model = _registry().get_model(model_name)
+    if model is None:
+        raise HTTPException(status_code=404, detail=f"Model not found: {model_name}")
+    runs = [r for r in _registry().list_runs() if r.model == model_name]
+    return {"model": model, "runs": [r.model_dump(mode="json") for r in runs]}

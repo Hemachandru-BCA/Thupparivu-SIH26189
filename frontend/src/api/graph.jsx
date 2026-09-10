@@ -94,5 +94,59 @@ export function useGetGhosts() {
     });
 }
 
+export const getGraphMetricsQueryKey = () => ['/api/graph/metrics'];
+
+export function useGraphMetrics() {
+    return useQuery({
+        queryKey: getGraphMetricsQueryKey(),
+        queryFn: () => request('/api/graph/metrics'),
+        staleTime: 5 * 60 * 1000,
+    });
+}
+
+// ---------------------------------------------------------------------------
+// Progressive large-graph endpoints (P0 overhaul)
+// ---------------------------------------------------------------------------
+
+export const getGraphSummaryQueryKey = () => ['/api/graph/summary'];
+
+export function useGetGraphSummary() {
+    return useQuery({
+        queryKey: getGraphSummaryQueryKey(),
+        queryFn: () => request('/api/graph/summary'),
+        staleTime: 5 * 60 * 1000,
+    });
+}
+
+export const getGraphCommunityQueryKey = (communityId, maxNodes) => [
+    '/api/graph/community', communityId, maxNodes,
+];
+
+export function useGetGraphCommunity(communityId, maxNodes = 300) {
+    return useQuery({
+        queryKey: getGraphCommunityQueryKey(communityId, maxNodes),
+        queryFn: () => request(`/api/graph/community/${communityId}`, { max_nodes: maxNodes }),
+        enabled: Boolean(communityId),
+        staleTime: 60 * 1000,
+    });
+}
+
+export const getGraphNeighborhoodQueryKey = (nodeId, depth, maxNodes, relationshipType) => [
+    '/api/graph/node/neighborhood', nodeId, depth, maxNodes, relationshipType,
+];
+
+export function useGetGraphNeighborhood(nodeId, depth = 1, maxNodes = 200, relationshipType) {
+    return useQuery({
+        queryKey: getGraphNeighborhoodQueryKey(nodeId, depth, maxNodes, relationshipType),
+        queryFn: () => request(`/api/graph/node/${nodeId}/neighborhood`, {
+            depth,
+            max_nodes: maxNodes,
+            relationship_type: relationshipType,
+        }),
+        enabled: Boolean(nodeId),
+        staleTime: 60 * 1000,
+    });
+}
+
 // Pipeline
 export { getJobsQueryKey, useListJobs, useTriggerPipeline } from './client';

@@ -1,0 +1,49 @@
+{
+  "id": "CASE-0198",
+  "title": "Hyderabad Narcotics Trafficking Ring",
+  "description": "Investigation into an organized narcotics distribution network operating through Hyderabad, leveraging commercial establishments as fronts.",
+  "classification": "CONFIDENTIAL // LAW ENFORCEMENT ONLY",
+  "status": "ACTIVE",
+  "priority": "HIGH",
+  "jurisdiction": "State Anti-Narcotics Bureau",
+  "investigator": "Inspector Priya Sharma (ID: I-7823)",
+  "created_at": "2024-11-01T00:00:00Z",
+  "updated_at": "2026-01-15T00:00:00Z",
+  "dataset": "Synthetic Investigation 07",
+  "items": [
+    {
+      "id": "d6579db1-9f01-5440-8d18-1fbb0da139be",
+      "type": "PERSON",
+      "label": "Nicole Jackson",
+      "note": "Shared with CASE-0421 and CASE-0317. Cross-case nexus entity."
+    },
+    {
+      "id": "743532d8-ed9e-59c0-bf0d-1b56d4cdab77",
+      "type": "PERSON",
+      "label": "Michael Martin",
+      "note": "Shared with CASE-0421."
+    },
+    {
+      "id": "014f2f34-f33d-5fa0-a2d5-89b6ea822ed8",
+      "type": "PERSON",
+      "label": "Carl Khan",
+      "note": "Shared with CASE-0421."
+    },
+    {
+      "id": "92ad9891-6710-5687-a505-d260ad764080",
+      "type": "PERSON",
+      "label": "Rebecca Mathis",
+      "note": "Shared with CASE-0421."
+    }
+  ],
+  "notes": [
+    {
+      "id": "N-001",
+      "text": "Cross-referenced Nicole Jackson with financial flow from CASE-0317. Three shared identifiers detected.",
+      "author": "Inspector Priya Sharma",
+      "timestamp": "2026-01-20T09:15:00Z"
+    }
+  ],
+  "dossier_ids": [],
+  "disclaimer": "Working case file - not an official legal record."
+}

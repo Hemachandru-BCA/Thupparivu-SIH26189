@@ -8,7 +8,7 @@ import {
     Users, Network as NetworkIcon, Clock, FileText, Brain, AlertTriangle,
     ArrowRight, TrendingUp, Eye, MapPin, ChevronRight, Activity, Layers,
     Shield, DollarSign, Zap, AlertCircle, CheckCircle2, XCircle, Sparkles,
-    Play, GitCompare, Bookmark
+    Play, GitCompare, Bookmark, Waypoints
 } from 'lucide-react';
 import { formatNumber, getConfidenceColor, getEntityTypeColor } from '@/components/app-shell';
 
@@ -304,6 +304,20 @@ export default function InvestigationDesk() {
                                             </span>
                                             <span className="text-fg-faint">Status: OPEN REVIEW</span>
                                         </div>
+                                        <div className="flex gap-1.5 pt-1">
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); setLocation(`/entity/${encodeURIComponent(f.subject_id || f.id)}`); }}
+                                                className="tp-btn h-5 text-[9px]"
+                                            >
+                                                WHY IMPORTANT?
+                                            </button>
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); setLocation(`/evidence?node=${encodeURIComponent(f.subject_id || f.id)}`); }}
+                                                className="tp-btn h-5 text-[9px]"
+                                            >
+                                                VIEW EVIDENCE
+                                            </button>
+                                        </div>
                                     </div>
                                 );
                             })}
@@ -346,6 +360,26 @@ export default function InvestigationDesk() {
                                     <div className="text-[10px] text-fg-muted">
                                         Bridges communities C{g.community_a || 1} and C{g.community_b || 2} via temporal call mediation.
                                     </div>
+                                    <div className="flex gap-1.5 pt-1.5 mt-1 border-t border-border-subtle">
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setLocation(`/entity/${encodeURIComponent(g.ghost_id)}`);
+                                            }}
+                                            className="tp-btn h-5 text-[9px]"
+                                        >
+                                            WHY IMPORTANT?
+                                        </button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setLocation(`/evidence?node=${encodeURIComponent(g.ghost_id)}`);
+                                            }}
+                                            className="tp-btn h-5 text-[9px]"
+                                        >
+                                            VIEW EVIDENCE
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -371,6 +405,7 @@ export default function InvestigationDesk() {
                                         <th>Type</th>
                                         <th>Betweenness</th>
                                         <th>PageRank</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -391,7 +426,19 @@ export default function InvestigationDesk() {
                                                 {(node.metrics?.betweenness_centrality || 0).toFixed(4)}
                                             </td>
                                             <td className="font-mono text-fg-secondary">
-                                                {(node.metrics?.pagerank || 0.0001).toFixed(5)}
+                                                {(node.metrics?.pagerank || 0).toExponential(2)}
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setLocation(`/entity/${encodeURIComponent(node.id)}`);
+                                                    }}
+                                                    className="tp-btn h-4 text-[8px]"
+                                                    title="Why is this important?"
+                                                >
+                                                    WHY?
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}

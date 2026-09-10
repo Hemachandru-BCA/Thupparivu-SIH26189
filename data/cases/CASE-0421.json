@@ -1,0 +1,60 @@
+{
+  "id": "CASE-0421",
+  "title": "Operation Sentinel - Multi-Jurisdiction Syndicate",
+  "description": "Synthetic investigation of a multi-jurisdiction syndicate using structured communication, financial layering and hidden coordinators.",
+  "classification": "RESTRICTED // INVESTIGATIVE USE ONLY",
+  "status": "ACTIVE",
+  "priority": "HIGH",
+  "jurisdiction": "State Criminal Investigation Department",
+  "investigator": "Analyst S. Ramanujan (ID: S-8902)",
+  "created_at": "2026-08-01T00:00:00Z",
+  "updated_at": "2026-08-01T00:00:00Z",
+  "dataset": "Synthetic Investigation 07",
+  "items": [
+    {
+      "id": "d6579db1-9f01-5440-8d18-1fbb0da139be",
+      "type": "PERSON",
+      "label": "Nicole Jackson",
+      "note": "High-degree entity shared across CASE-0317, CASE-0198."
+    },
+    {
+      "id": "05b97a3a-e407-5e05-9078-00cfa4795b88",
+      "type": "PERSON",
+      "label": "Matthew Jones",
+      "note": "High-degree entity shared with CASE-0317."
+    },
+    {
+      "id": "743532d8-ed9e-59c0-bf0d-1b56d4cdab77",
+      "type": "PERSON",
+      "label": "Michael Martin",
+      "note": "High-degree entity shared with CASE-0198."
+    },
+    {
+      "id": "06a1573c-376d-5421-ac3e-03df7d46dd4f",
+      "type": "PERSON",
+      "label": "Amanda Frank",
+      "note": "Bridge entity shared with CASE-0317."
+    },
+    {
+      "id": "014f2f34-f33d-5fa0-a2d5-89b6ea822ed8",
+      "type": "PERSON",
+      "label": "Carl Khan",
+      "note": "Shared with CASE-0198."
+    },
+    {
+      "id": "92ad9891-6710-5687-a505-d260ad764080",
+      "type": "PERSON",
+      "label": "Rebecca Mathis",
+      "note": "Shared with CASE-0198."
+    },
+    {
+      "id": "c56be195-aa33-5366-946c-3c8b3c6c47cb",
+      "type": "PERSON",
+      "label": "John Smith",
+      "note": "Shared with CASE-0317."
+    }
+  ],
+  "notes": [],
+  "dossier_ids": [],
+  "disclaimer": "Working case file - not an official legal record."
+}

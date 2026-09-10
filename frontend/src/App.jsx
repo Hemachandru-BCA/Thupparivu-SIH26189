@@ -22,6 +22,13 @@ import FinancialWorkspace from '@/pages/workspace/financial-workspace';
 import GapsWorkspace from '@/pages/workspace/gaps-workspace';
 import CrossCaseWorkspace from '@/pages/workspace/crosscase-workspace';
 import ModelsWorkspace from '@/pages/workspace/models-workspace';
+import EntityAnalysisWorkspace from '@/pages/workspace/entity-analysis-workspace';
+import BookmarksWorkspace from '@/pages/workspace/bookmarks-workspace';
+import P1AnalysisWorkspace from '@/pages/workspace/p1-analysis-workspace';
+import GeospatialWorkspace from '@/pages/workspace/geospatial-workspace';
+import NLQueryWorkspace from '@/pages/workspace/nl-query-workspace';
+import NextBestActionWorkspace from '@/pages/workspace/next-best-action-workspace';
+import CaseSimilarityWorkspace from '@/pages/workspace/case-similarity-workspace';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
@@ -59,6 +66,13 @@ function Router() {
     <Route path="/financial" component={FinancialWorkspace}/>
     <Route path="/gaps" component={GapsWorkspace}/>
     <Route path="/cross-case" component={CrossCaseWorkspace}/>
+    <Route path="/entity/:id" component={EntityAnalysisWorkspace}/>
+    <Route path="/bookmarks" component={BookmarksWorkspace}/>
+    <Route path="/p1-analysis" component={P1AnalysisWorkspace}/>
+    <Route path="/geospatial" component={GeospatialWorkspace}/>
+    <Route path="/nl-query" component={NLQueryWorkspace}/>
+    <Route path="/next-best" component={NextBestActionWorkspace}/>
+    <Route path="/case-similarity" component={CaseSimilarityWorkspace}/>
     <Route path="/models" component={ModelsWorkspace}/>
     {/* Legacy */}
     <Route path="/explorer" component={NetworkWorkspace}/>

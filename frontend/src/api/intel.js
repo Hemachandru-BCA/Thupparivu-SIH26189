@@ -246,6 +246,118 @@ export async function traceFunds(payload) {
 }
 
 // ─────────────────────────────────────────────────────────────
+// P1 ANALYTICAL INTELLIGENCE
+// ─────────────────────────────────────────────────────────────
+
+export function useReplayBuckets(nBuckets = 12, options) {
+    return useQuery({
+        queryKey: ['/api/replay/buckets', nBuckets],
+        queryFn: () => request('/api/replay/buckets', { n_buckets: nBuckets }),
+        staleTime: 5 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useReplaySnapshot(timestamp, mode = 'cumulative', options) {
+    return useQuery({
+        queryKey: ['/api/replay/snapshot', timestamp, mode],
+        queryFn: () => request('/api/replay/snapshot', { timestamp, mode }),
+        enabled: Boolean(timestamp),
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useReplayDiff(from, to, options) {
+    return useQuery({
+        queryKey: ['/api/replay/diff', from, to],
+        queryFn: () => request('/api/replay/diff', { from, to }),
+        enabled: Boolean(from && to),
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useReplayEvents(options) {
+    return useQuery({
+        queryKey: ['/api/replay/events'],
+        queryFn: () => request('/api/replay/events'),
+        staleTime: 5 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useMotifs(params, options) {
+    return useQuery({
+        queryKey: ['/api/motifs', params ?? null],
+        queryFn: () => request('/api/motifs/', params),
+        staleTime: 5 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useDataQuality(entityIds, options) {
+    return useQuery({
+        queryKey: ['/api/data-quality', entityIds ?? null],
+        queryFn: () => request('/api/data-quality/', entityIds ? { entity_ids: entityIds.join(',') } : undefined),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useEntityDataQuality(entityId, options) {
+    return useQuery({
+        queryKey: ['/api/data-quality/entity', entityId],
+        queryFn: () => request(`/api/data-quality/entity/${encodeURIComponent(entityId)}`),
+        enabled: Boolean(entityId),
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useMethodAgreement(entityIds, options) {
+    return useQuery({
+        queryKey: ['/api/method-agreement', entityIds ?? null],
+        queryFn: () => request('/api/method-agreement/', entityIds ? { entity_ids: entityIds.join(',') } : undefined),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useEntityMethodAgreement(entityId, options) {
+    return useQuery({
+        queryKey: ['/api/method-agreement/entity', entityId],
+        queryFn: () => request(`/api/method-agreement/entity/${encodeURIComponent(entityId)}`),
+        enabled: Boolean(entityId),
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useFinancialSignals(options) {
+    return useQuery({
+        queryKey: ['/api/financial-enhanced/signals'],
+        queryFn: () => request('/api/financial-enhanced/signals'),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useFinancialAggregated(params, options) {
+    return useQuery({
+        queryKey: ['/api/financial-enhanced/aggregated', params ?? null],
+        queryFn: () => request('/api/financial-enhanced/aggregated', params),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useCounterEvidence(findingId, options) {
+    return useQuery({
+        queryKey: ['/api/counter-evidence/finding', findingId],
+        queryFn: () => request(`/api/counter-evidence/finding/${encodeURIComponent(findingId)}`),
+        enabled: Boolean(findingId),
+        ...(options?.query ?? {}),
+    });
+}
+
+// ─────────────────────────────────────────────────────────────
 // INTEL & GAPS & CROSS-CASE
 // ─────────────────────────────────────────────────────────────
 
@@ -271,5 +383,104 @@ export function useCrossCase(params, options) {
         queryKey: ['/api/intel/cross-case', params ?? null],
         queryFn: () => request('/api/intel/cross-case', params),
         ...(options?.query ?? {}),
+    });
+}
+
+// ─────────────────────────────────────────────────────────────
+// P2 — CASE DNA / SIMILARITY
+// ─────────────────────────────────────────────────────────────
+
+export function useCaseFingerprint(caseId = 'CASE-0421', options) {
+    return useQuery({
+        queryKey: ['/api/case-dna/fingerprint', caseId],
+        queryFn: () => request('/api/case-dna/fingerprint', { case_id: caseId }),
+        staleTime: 5 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useCaseSimilarity(caseId = 'CASE-0421', weights, options) {
+    return useQuery({
+        queryKey: ['/api/case-dna/similarity', caseId, weights],
+        queryFn: () => request('/api/case-dna/similarity', { case_id: caseId, ...weights }),
+        staleTime: 5 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useCaseCompare(caseA, caseB, options) {
+    return useQuery({
+        queryKey: ['/api/case-dna/compare', caseA, caseB],
+        queryFn: () => request('/api/case-dna/compare', { case_a: caseA, case_b: caseB }),
+        enabled: Boolean(caseA && caseB),
+        ...(options?.query ?? {}),
+    });
+}
+
+// ─────────────────────────────────────────────────────────────
+// P2 — GEOSPATIAL INTELLIGENCE
+// ─────────────────────────────────────────────────────────────
+
+export function useGeoObservations(params, options) {
+    return useQuery({
+        queryKey: ['/api/geo/observations', params ?? null],
+        queryFn: () => request('/api/geo/observations', params),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useGeoClusters(gridSizeKm = 5, options) {
+    return useQuery({
+        queryKey: ['/api/geo/clusters', gridSizeKm],
+        queryFn: () => request('/api/geo/clusters', { grid_size_km: gridSizeKm }),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useGeoProximity(maxDistanceKm = 5, options) {
+    return useQuery({
+        queryKey: ['/api/geo/proximity', maxDistanceKm],
+        queryFn: () => request('/api/geo/proximity', { max_distance_km: maxDistanceKm }),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+// ─────────────────────────────────────────────────────────────
+// P2 — NATURAL LANGUAGE QUERY
+// ─────────────────────────────────────────────────────────────
+
+export function useDemoQueries(options) {
+    return useQuery({
+        queryKey: ['/api/nl-query/demo-queries'],
+        queryFn: () => request('/api/nl-query/demo-queries'),
+        staleTime: 10 * 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export async function askAnalystQuery(query) {
+    return requestJson('/api/nl-query/ask', { method: 'POST', body: { query } });
+}
+
+// ─────────────────────────────────────────────────────────────
+// P2 — NEXT-BEST ACTION
+// ─────────────────────────────────────────────────────────────
+
+export function useRecommendations(params, options) {
+    return useQuery({
+        queryKey: ['/api/recommendations', params ?? null],
+        queryFn: () => request('/api/recommendations/', params),
+        staleTime: 60 * 1000,
+        ...(options?.query ?? {}),
+    });
+}
+
+export async function submitRecommendationFeedback(recommendationId, action) {
+    return requestJson('/api/recommendations/feedback', {
+        method: 'POST',
+        body: { recommendation_id: recommendationId, action },
     });
 }

@@ -464,6 +464,251 @@ def _bottlenecks(projection, path):
     return [str(node) for node in path[1:-1] if node in art][:5]
 
 
+# --------------------------------------------------------------------------- #
+# Large-graph progressive endpoints (P0 network overhaul)
+#
+# These endpoints never serialize the whole graph. Each returns exactly the
+# slice the investigator needs — aggregates, one community's members, or a
+# relevance-ranked neighborhood — with hard caps so payloads stay small.
+# --------------------------------------------------------------------------- #
+
+@router.get("/summary")
+def graph_summary():
+    """Compact graph summary for progressive rendering: counts, top
+    communities, top entities, and bridge candidates. Never includes the
+    full node list."""
+    metrics = _load_json(paths.GRAPH_METRICS_PATH) or {}
+
+    # Prefer the in-memory NetworkX graph (has real UUIDs, labels, metrics).
+    graph = None
+    try:
+        graph = services.load_graph()
+    except Exception:  # noqa: BLE001 - fall back to triplets file below
+        graph = None
+
+    node_count = graph.number_of_nodes() if graph else 0
+    edge_count = graph.number_of_edges() if graph else 0
+
+    top_entities: list[dict] = []
+    top_communities: list[dict] = []
+
+    if graph is not None:
+        def _score(n):
+            metrics_map = graph.nodes[n].get("metrics") or {}
+            return (
+                float(metrics_map.get("pagerank") or 0.0),
+                float(metrics_map.get("betweenness_centrality") or 0.0),
+                int(graph.nodes[n].get("mention_count") or 0),
+            )
+
+        ranked = sorted(graph.nodes, key=_score, reverse=True)[:50]
+        for n in ranked:
+            attrs = graph.nodes[n]
+            metrics_map = attrs.get("metrics") or {}
+            top_entities.append({
+                "id": str(n),
+                "label": attrs.get("canonical_name") or attrs.get("label") or str(n),
+                "type": attrs.get("entity_type") or attrs.get("type"),
+                "degree": int(graph.degree(n)),
+                "pagerank": metrics_map.get("pagerank"),
+                "betweenness": metrics_map.get("betweenness_centrality"),
+                "mention_count": attrs.get("mention_count", 0),
+            })
+
+# Communities from graph_metrics.json (has rich members with labels/types).
+    communities = metrics.get("communities", []) if isinstance(metrics, dict) else []
+    top_communities = sorted(
+        (c for c in communities if isinstance(c, dict)),
+        key=lambda c: int(c.get("size") or len(c.get("members") or []) or 0),
+        reverse=True,
+    )[:50]
+    top_communities = [
+        {
+            "id": c.get("id") or c.get("community_id"),
+            "size": int(c.get("size") or len(c.get("members") or []) or 0),
+            "members": [
+                {
+                    "id": str(m.get("guid") or m.get("id") or m.get("label") or m),
+                    "label": m.get("label") if isinstance(m, dict) else str(m),
+                    "type": m.get("type") if isinstance(m, dict) else None,
+                }
+                for m in (c.get("members") or [])[:10]
+            ],
+            "modularity": c.get("modularity"),
+        }
+        for c in top_communities
+    ]
+
+    return {
+        "node_count": node_count,
+        "edge_count": edge_count,
+        "community_count": len(top_communities),
+        "top_entities": top_entities,
+        "top_communities": top_communities,
+        "has_full_graph": bool(graph),
+        "truncated": True,
+    }
+
+
+@router.get("/community/{community_id}")
+def get_community_members(
+    community_id: str,
+    max_nodes: int = Query(300, ge=1, le=2000, description="Hard member cap"),
+):
+    """Members (with their intra-community edges) of one community. Used by
+    the Level-1 cluster expansion — the investigator never loads more than
+    one community at a time."""
+    metrics = _load_json(paths.GRAPH_METRICS_PATH)
+    if not isinstance(metrics, dict) or "communities" not in metrics:
+        raise HTTPException(status_code=404, detail="No communities computed yet")
+
+    target = None
+    for c in metrics["communities"]:
+        cid = c.get("id") if c.get("id") is not None else c.get("community_id")
+        if str(cid) == str(community_id):
+            target = c
+            break
+    if target is None:
+        raise HTTPException(status_code=404, detail=f"Community not found: {community_id}")
+
+    # members may be plain IDs or rich dicts {guid, label, type}
+    raw_members = list(target.get("members") or [])[:max_nodes]
+    members = [str(m.get("guid") or m.get("id") or m.get("label") or m) if isinstance(m, dict) else str(m)
+               for m in raw_members]
+    member_set = {m for m in members}
+
+    try:
+        graph = services.load_graph()
+    except FileNotFoundError:
+        return {
+            "community_id": community_id,
+            "members": [
+                {"id": str(m), "label": str(m), "type": None} for m in members
+            ],
+            "edges": [],
+            "member_count": len(members),
+            "truncated": len(target.get("members") or []) > len(members),
+        }
+
+    nodes, edges = [], []
+    seen_edges = set()
+    member_attr = {}
+    for m in members:
+        if m in graph:
+            member_attr[m] = graph.nodes[m]
+
+    for raw, key in zip(raw_members, members):
+        attrs = member_attr.get(key) or {}
+        metrics_map = attrs.get("metrics") or {}
+        nodes.append({
+            "id": key,
+            "label": attrs.get("canonical_name") or (raw.get("label") if isinstance(raw, dict) else None) or key,
+            "type": attrs.get("entity_type") or (raw.get("type") if isinstance(raw, dict) else None),
+            "mention_count": attrs.get("mention_count", 0),
+            "metrics": metrics_map,
+        })
+
+    for u, v, attrs in graph.edges(data=True):
+        su, sv = str(u), str(v)
+        if su in member_set and sv in member_set:
+            ekey = (su, sv) if su <= sv else (sv, su)
+            if ekey in seen_edges:
+                continue
+            seen_edges.add(ekey)
+            edges.append({
+                "id": attrs.get("id"),
+                "source": su,
+                "target": sv,
+                "type": attrs.get("relation"),
+                "attributes": attrs.get("attributes", {}),
+            })
+
+    return {
+        "community_id": community_id,
+        "members": nodes,
+        "edges": edges,
+        "member_count": len(nodes),
+        "edge_count": len(edges),
+        "truncated": len(target.get("members") or []) > len(members),
+    }
+
+
+@router.get("/node/{node_id}/neighborhood")
+def get_node_neighborhood(
+    node_id: str,
+    depth: int = Query(1, ge=1, le=3, description="Neighborhood depth"),
+    max_nodes: int = Query(200, ge=1, le=2000, description="Hard node cap"),
+    relationship_type: Optional[str] = Query(None, description="e.g. FINANCIAL"),
+):
+    """Relevance-ranked neighborhood expansion (Level 2/3 progressive load).
+    Returns only the highest-signal nodes around the focus entity as ranked
+    by PageRank/degree, with hard caps."""
+    try:
+        graph = services.load_graph()
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    if node_id not in graph:
+        raise HTTPException(status_code=404, detail=f"Node not found: {node_id}")
+
+    projection = _projection_of(graph)
+    visited: dict = {node_id: 0}
+    frontier = [node_id]
+    for level in range(1, depth + 1):
+        nxt = []
+        for current in frontier:
+            for nbr in projection.neighbors(current):
+                if nbr not in visited:
+                    visited[nbr] = level
+                    nxt.append(nbr)
+        frontier = nxt
+        if len(visited) >= max_nodes * 4:
+            break
+
+    if relationship_type:
+        upper = relationship_type.upper()
+
+        def rel_ok(u, v):
+            data = graph.get_edge_data(u, v) or {}
+            for attrs in data.values():
+                r = str(attrs.get("relation") or "").upper()
+                if upper in r or r in upper:
+                    return True
+            return False
+
+        visited = {n: d for n, d in visited.items()
+                   if n == node_id or rel_ok(node_id, n) or any(
+                       rel_ok(n, nb) for nb in projection.neighbors(n) if nb in visited)}
+
+    selected = [node_id] + _rank_nodes([n for n in visited if n != node_id], graph, max_nodes - 1)
+    selected = [n for n in selected if n in graph][:max_nodes]
+    sub = graph.subgraph(selected)
+
+    nodes, edges = _serialize_sub(sub, include_evidence=True)
+    audit.record_action(
+        "graph.neighborhood",
+        object_ids=[node_id],
+        detail={
+            "depth": depth,
+            "max_nodes": max_nodes,
+            "relationship_type": relationship_type,
+            "returned_nodes": len(nodes),
+            "returned_edges": len(edges),
+            "truncated": len(visited) > len(selected),
+        },
+    )
+    return {
+        "focus_node_id": node_id,
+        "depth": depth,
+        "max_nodes": max_nodes,
+        "nodes": nodes,
+        "edges": edges,
+        "node_count": len(nodes),
+        "edge_count": len(edges),
+        "truncated": len(visited) > len(selected),
+        "method": "SERVER_SIDE_NEIGHBORHOOD",
+    }
+
+
 def _projection_of(graph):
     from src.graph.graph_embeddings import undirected_weighted_projection
 

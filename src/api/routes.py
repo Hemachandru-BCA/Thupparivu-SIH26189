@@ -43,6 +43,18 @@ from src.api.routers import (  # noqa: F401
     search as search_router,
     simulation as simulation_router,
     temporal as temporal_router,
+    # ── P1 analytical route groups ──────────────────────────────
+    motifs as motifs_router,
+    data_quality as data_quality_router,
+    method_agreement as method_agreement_router,
+    counter_evidence as counter_evidence_router,
+    network_replay as network_replay_router,
+    enhanced_financial as enhanced_financial_router,
+    # ── P2 intelligence route groups ──────────────────────────
+    case_dna as case_dna_router,
+    geospatial as geospatial_router,
+    nl_query as nl_query_router,
+    next_best_action as next_best_action_router,
 )
 
 ALL_ROUTERS = [
@@ -64,4 +76,16 @@ ALL_ROUTERS = [
     communities_router.router,
     financial_router.router,
     intel_router.router,
+    # ── P1 analytical route groups ──────────────────────────────
+    motifs_router.router,
+    data_quality_router.router,
+    method_agreement_router.router,
+    counter_evidence_router.router,
+    network_replay_router.router,
+    enhanced_financial_router.router,
+    # ── P2 intelligence route groups ──────────────────────────
+    case_dna_router.router,
+    geospatial_router.router,
+    nl_query_router.router,
+    next_best_action_router.router,
 ]

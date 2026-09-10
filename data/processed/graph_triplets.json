@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "generated_at": "2026-09-08T04:27:28.504795+00:00",
-    "source_file": "/home/user/Documents/hackathon-temp/temp/sentinelgraph-ai/data/processed/cleaned_records.json",
+    "generated_at": "2026-09-10T05:19:44.037759+00:00",
+    "source_file": "/home/chandru/Documents/programming/python/hackathon/Thupparivu-SIH26189/data/processed/cleaned_records.json",
     "num_records": 16310,
-    "spacy_backend": "en_core_web_sm",
-    "num_entities": 10891,
+    "spacy_backend": "fallback",
+    "num_entities": 10795,
     "num_triplets": 23982,
     "num_events": 0,
     "relation_counts": {
@@ -70053,13 +70053,6 @@
       "sentence_index": 0
     },
     {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 133,
-      "end_char": 140,
-      "sentence_index": 0
-    },
-    {
       "text": "Samantha Russo",
       "label": "PERSON",
       "start_char": 30,
@@ -70093,13 +70086,6 @@
       "start_char": 129,
       "end_char": 142,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 208,
-      "end_char": 211,
-      "sentence_index": 1
     },
     {
       "text": "Jessica Preston",
@@ -70179,13 +70165,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 163,
-      "end_char": 167,
-      "sentence_index": 2
-    },
-    {
       "text": "Adrian Carroll",
       "label": "PERSON",
       "start_char": 0,
@@ -70205,13 +70184,6 @@
       "start_char": 150,
       "end_char": 164,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
     },
     {
       "text": "New Joshua",
@@ -70487,13 +70459,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 216,
-      "end_char": 219,
-      "sentence_index": 1
-    },
-    {
       "text": "John Robinson DVM",
       "label": "PERSON",
       "start_char": 85,
@@ -70536,13 +70501,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 165,
-      "end_char": 169,
-      "sentence_index": 2
-    },
-    {
       "text": "Ashley Wright",
       "label": "PERSON",
       "start_char": 13,
@@ -70564,13 +70522,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 209,
-      "end_char": 212,
-      "sentence_index": 1
-    },
-    {
       "text": "Elizabeth Boyd",
       "label": "PERSON",
       "start_char": 0,
@@ -70590,13 +70541,6 @@
       "start_char": 151,
       "end_char": 161,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 163,
-      "end_char": 167,
-      "sentence_index": 2
     },
     {
       "text": "David Moore",
@@ -70641,13 +70585,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 212,
-      "end_char": 215,
-      "sentence_index": 1
-    },
-    {
       "text": "Timothy Mclean",
       "label": "PERSON",
       "start_char": 15,
@@ -70667,13 +70604,6 @@
       "start_char": 136,
       "end_char": 151,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 217,
-      "end_char": 220,
-      "sentence_index": 1
     },
     {
       "text": "Christopher Hall",
@@ -70732,13 +70662,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 169,
-      "end_char": 173,
-      "sentence_index": 2
-    },
-    {
       "text": "James Wyatt",
       "label": "PERSON",
       "start_char": 0,
@@ -70757,13 +70680,6 @@
       "label": "PERSON",
       "start_char": 147,
       "end_char": 165,
-      "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
       "sentence_index": 1
     },
     {
@@ -70816,13 +70732,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 213,
-      "end_char": 216,
-      "sentence_index": 1
-    },
-    {
       "text": "Russell Hodges",
       "label": "PERSON",
       "start_char": 15,
@@ -70842,13 +70751,6 @@
       "start_char": 142,
       "end_char": 157,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 223,
-      "end_char": 226,
-      "sentence_index": 1
     },
     {
       "text": "Danielle Price",
@@ -70907,13 +70809,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 165,
-      "end_char": 169,
-      "sentence_index": 2
-    },
-    {
       "text": "Jeffery Castillo",
       "label": "PERSON",
       "start_char": 16,
@@ -70954,13 +70849,6 @@
       "start_char": 153,
       "end_char": 165,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 167,
-      "end_char": 171,
-      "sentence_index": 2
     },
     {
       "text": "Eric Waters",
@@ -71110,25 +70998,11 @@
       "sentence_index": 0
     },
     {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 75,
-      "end_char": 82,
-      "sentence_index": 0
-    },
-    {
       "text": "Brett Clark",
       "label": "PERSON",
       "start_char": 134,
       "end_char": 145,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 211,
-      "end_char": 214,
-      "sentence_index": 1
     },
     {
       "text": "Emily Davidson",
@@ -71208,13 +71082,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 162,
-      "end_char": 166,
-      "sentence_index": 2
-    },
-    {
       "text": "North Autumntown",
       "label": "LOCATION",
       "start_char": 28,
@@ -71276,13 +71143,6 @@
       "start_char": 141,
       "end_char": 155,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 221,
-      "end_char": 224,
-      "sentence_index": 1
     },
     {
       "text": "New Victoria",
@@ -71383,13 +71243,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 157,
-      "end_char": 161,
-      "sentence_index": 2
-    },
-    {
       "text": "Christopher Perkins",
       "label": "PERSON",
       "start_char": 16,
@@ -71481,13 +71334,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 211,
-      "end_char": 214,
-      "sentence_index": 1
-    },
-    {
       "text": "William Flowers",
       "label": "PERSON",
       "start_char": 86,
@@ -71565,13 +71411,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
-    },
-    {
       "text": "Pamela Wilkins",
       "label": "PERSON",
       "start_char": 32,
@@ -71605,13 +71444,6 @@
       "start_char": 133,
       "end_char": 144,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 210,
-      "end_char": 213,
-      "sentence_index": 1
     },
     {
       "text": "Lake Julie",
@@ -71654,13 +71486,6 @@
       "start_char": 147,
       "end_char": 165,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 231,
-      "end_char": 234,
-      "sentence_index": 1
     },
     {
       "text": "Penny Finley",
@@ -71733,13 +71558,6 @@
       "sentence_index": 0
     },
     {
-      "text": "23/10/2025",
-      "label": "ORGANIZATION",
-      "start_char": 66,
-      "end_char": 76,
-      "sentence_index": 0
-    },
-    {
       "text": "Jason Cabrera",
       "label": "PERSON",
       "start_char": 150,
@@ -71789,13 +71607,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 161,
-      "end_char": 165,
-      "sentence_index": 2
-    },
-    {
       "text": "Melissa Wilson",
       "label": "PERSON",
       "start_char": 0,
@@ -71843,13 +71654,6 @@
       "start_char": 139,
       "end_char": 150,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 216,
-      "end_char": 219,
-      "sentence_index": 1
     },
     {
       "text": "New Emilyshire",
@@ -71978,13 +71782,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 159,
-      "end_char": 163,
-      "sentence_index": 2
-    },
-    {
       "text": "Juan Scott",
       "label": "PERSON",
       "start_char": 32,
@@ -72041,13 +71838,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 218,
-      "end_char": 221,
-      "sentence_index": 1
-    },
-    {
       "text": "Jessica King",
       "label": "PERSON",
       "start_char": 42,
@@ -72097,24 +71887,10 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 213,
-      "end_char": 216,
-      "sentence_index": 1
-    },
-    {
       "text": "West Stacey",
       "label": "LOCATION",
       "start_char": 28,
       "end_char": 39,
-      "sentence_index": 0
-    },
-    {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 41,
-      "end_char": 48,
       "sentence_index": 0
     },
     {
@@ -72167,13 +71943,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 212,
-      "end_char": 215,
-      "sentence_index": 1
-    },
-    {
       "text": "Amber White",
       "label": "PERSON",
       "start_char": 15,
@@ -72193,13 +71962,6 @@
       "start_char": 139,
       "end_char": 152,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 218,
-      "end_char": 221,
-      "sentence_index": 1
     },
     {
       "text": "New Scottville",
@@ -72227,13 +71989,6 @@
       "label": "LOCATION",
       "start_char": 29,
       "end_char": 44,
-      "sentence_index": 0
-    },
-    {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 46,
-      "end_char": 53,
       "sentence_index": 0
     },
     {
@@ -72272,13 +72027,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 159,
-      "end_char": 163,
-      "sentence_index": 2
-    },
-    {
       "text": "Tracy Schmitt",
       "label": "PERSON",
       "start_char": 0,
@@ -72298,13 +72046,6 @@
       "start_char": 150,
       "end_char": 164,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
     },
     {
       "text": "Eric Gonzalez",
@@ -72384,13 +72125,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
-    },
-    {
       "text": "Peggy Savage",
       "label": "PERSON",
       "start_char": 30,
@@ -72433,25 +72167,11 @@
       "sentence_index": 0
     },
     {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 76,
-      "end_char": 83,
-      "sentence_index": 0
-    },
-    {
       "text": "Diane Cummings",
       "label": "PERSON",
       "start_char": 135,
       "end_char": 149,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
     },
     {
       "text": "Douglas Herring",
@@ -72517,13 +72237,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 220,
-      "end_char": 223,
-      "sentence_index": 1
-    },
-    {
       "text": "Kristen Lane",
       "label": "PERSON",
       "start_char": 14,
@@ -72545,13 +72258,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
-    },
-    {
       "text": "Teresa Ellis",
       "label": "PERSON",
       "start_char": 0,
@@ -72571,13 +72277,6 @@
       "start_char": 145,
       "end_char": 158,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 160,
-      "end_char": 164,
-      "sentence_index": 2
     },
     {
       "text": "Paula Cook",
@@ -72678,13 +72377,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 221,
-      "end_char": 224,
-      "sentence_index": 1
-    },
-    {
       "text": "Donna Hamilton",
       "label": "PERSON",
       "start_char": 15,
@@ -72704,13 +72396,6 @@
       "start_char": 138,
       "end_char": 149,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
     },
     {
       "text": "Larry Montes",
@@ -72809,13 +72494,6 @@
       "start_char": 132,
       "end_char": 143,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 209,
-      "end_char": 212,
-      "sentence_index": 1
     },
     {
       "text": "Laura Krause",
@@ -72930,13 +72608,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 210,
-      "end_char": 213,
-      "sentence_index": 1
-    },
-    {
       "text": "Mr. Thomas Randolph",
       "label": "PERSON",
       "start_char": 0,
@@ -72956,13 +72627,6 @@
       "start_char": 153,
       "end_char": 166,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 168,
-      "end_char": 172,
-      "sentence_index": 2
     },
     {
       "text": "John Hays",
@@ -73019,13 +72683,6 @@
       "start_char": 135,
       "end_char": 147,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 213,
-      "end_char": 216,
-      "sentence_index": 1
     },
     {
       "text": "Aaron Gross",
@@ -73091,13 +72748,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 210,
-      "end_char": 213,
-      "sentence_index": 1
-    },
-    {
       "text": "Michael Russo",
       "label": "PERSON",
       "start_char": 42,
@@ -73116,13 +72766,6 @@
       "label": "PERSON",
       "start_char": 16,
       "end_char": 25,
-      "sentence_index": 0
-    },
-    {
-      "text": "8/6/2025",
-      "label": "LOCATION",
-      "start_char": 41,
-      "end_char": 49,
       "sentence_index": 0
     },
     {
@@ -73196,13 +72839,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 168,
-      "end_char": 172,
-      "sentence_index": 2
-    },
-    {
       "text": "Dean Patel",
       "label": "PERSON",
       "start_char": 42,
@@ -73236,13 +72872,6 @@
       "start_char": 141,
       "end_char": 154,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 220,
-      "end_char": 223,
-      "sentence_index": 1
     },
     {
       "text": "Samuel Pugh",
@@ -73427,13 +73056,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
-    },
-    {
       "text": "Caitlinport",
       "label": "LOCATION",
       "start_char": 28,
@@ -73511,13 +73133,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 210,
-      "end_char": 213,
-      "sentence_index": 1
-    },
-    {
       "text": "John Mason",
       "label": "PERSON",
       "start_char": 0,
@@ -73553,13 +73168,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 214,
-      "end_char": 217,
-      "sentence_index": 1
-    },
-    {
       "text": "Richard Miller",
       "label": "PERSON",
       "start_char": 15,
@@ -73579,13 +73187,6 @@
       "start_char": 134,
       "end_char": 145,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 211,
-      "end_char": 214,
-      "sentence_index": 1
     },
     {
       "text": "East David",
@@ -73630,20 +73231,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
-    },
-    {
-      "text": "8/6/2025",
-      "label": "LOCATION",
-      "start_char": 3,
-      "end_char": 11,
-      "sentence_index": 0
-    },
-    {
       "text": "Jeffrey Bishop",
       "label": "PERSON",
       "start_char": 30,
@@ -73677,13 +73264,6 @@
       "start_char": 151,
       "end_char": 166,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 168,
-      "end_char": 172,
-      "sentence_index": 2
     },
     {
       "text": "Gregory Jenkins",
@@ -73740,13 +73320,6 @@
       "start_char": 152,
       "end_char": 164,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
     },
     {
       "text": "Renee Taylor",
@@ -73903,13 +73476,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 165,
-      "end_char": 169,
-      "sentence_index": 2
-    },
-    {
       "text": "Elizabeth Sanchez",
       "label": "PERSON",
       "start_char": 0,
@@ -74022,13 +73588,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
-    },
-    {
       "text": "Espinozahaven",
       "label": "LOCATION",
       "start_char": 29,
@@ -74113,13 +73672,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 164,
-      "end_char": 168,
-      "sentence_index": 2
-    },
-    {
       "text": "Jonesland",
       "label": "LOCATION",
       "start_char": 29,
@@ -74176,13 +73728,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 209,
-      "end_char": 212,
-      "sentence_index": 1
-    },
-    {
       "text": "Michael Liu",
       "label": "PERSON",
       "start_char": 42,
@@ -74216,13 +73761,6 @@
       "start_char": 148,
       "end_char": 161,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 163,
-      "end_char": 167,
-      "sentence_index": 2
     },
     {
       "text": "Tyler Allen",
@@ -74344,13 +73882,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 212,
-      "end_char": 215,
-      "sentence_index": 1
-    },
-    {
       "text": "Joel Garcia",
       "label": "PERSON",
       "start_char": 0,
@@ -74428,13 +73959,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 173,
-      "end_char": 177,
-      "sentence_index": 2
-    },
-    {
       "text": "Meagan Thompson",
       "label": "PERSON",
       "start_char": 14,
@@ -74454,13 +73978,6 @@
       "start_char": 138,
       "end_char": 152,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 218,
-      "end_char": 221,
-      "sentence_index": 1
     },
     {
       "text": "Port Anthony",
@@ -74517,13 +74034,6 @@
       "start_char": 137,
       "end_char": 153,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 219,
-      "end_char": 222,
-      "sentence_index": 1
     },
     {
       "text": "Kimberly Bates",
@@ -74827,13 +74337,6 @@
       "sentence_index": 0
     },
     {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 224,
-      "end_char": 227,
-      "sentence_index": 1
-    },
-    {
       "text": "Tanya Cole",
       "label": "PERSON",
       "start_char": 14,
@@ -74853,13 +74356,6 @@
       "start_char": 129,
       "end_char": 145,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 211,
-      "end_char": 214,
-      "sentence_index": 1
     },
     {
       "text": "Latasha Mcmillan",
@@ -74951,13 +74447,6 @@
       "start_char": 136,
       "end_char": 150,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 216,
-      "end_char": 219,
-      "sentence_index": 1
     },
     {
       "text": "Heather Abbott",
@@ -75077,13 +74566,6 @@
       "start_char": 139,
       "end_char": 150,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 216,
-      "end_char": 219,
-      "sentence_index": 1
     },
     {
       "text": "Andrew Cobb",
@@ -75240,13 +74722,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 168,
-      "end_char": 172,
-      "sentence_index": 2
-    },
-    {
       "text": "James Weaver",
       "label": "PERSON",
       "start_char": 13,
@@ -75261,25 +74736,11 @@
       "sentence_index": 0
     },
     {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 76,
-      "end_char": 83,
-      "sentence_index": 0
-    },
-    {
       "text": "Marc Bell",
       "label": "PERSON",
       "start_char": 135,
       "end_char": 144,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 210,
-      "end_char": 213,
-      "sentence_index": 1
     },
     {
       "text": "Patricia Sloan",
@@ -75314,13 +74775,6 @@
       "label": "LOCATION",
       "start_char": 27,
       "end_char": 39,
-      "sentence_index": 0
-    },
-    {
-      "text": "UNKNOWN",
-      "label": "ORGANIZATION",
-      "start_char": 41,
-      "end_char": 48,
       "sentence_index": 0
     },
     {
@@ -75392,13 +74846,6 @@
       "start_char": 137,
       "end_char": 152,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 218,
-      "end_char": 221,
-      "sentence_index": 1
     },
     {
       "text": "Valerie Mcneil",
@@ -75513,13 +74960,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 159,
-      "end_char": 163,
-      "sentence_index": 2
-    },
-    {
       "text": "James Frank",
       "label": "PERSON",
       "start_char": 16,
@@ -75625,13 +75065,6 @@
       "sentence_index": 0
     },
     {
-      "text": "7/2/2025",
-      "label": "LOCATION",
-      "start_char": 60,
-      "end_char": 68,
-      "sentence_index": 0
-    },
-    {
       "text": "New Kristineborough",
       "label": "LOCATION",
       "start_char": 74,
@@ -75644,13 +75077,6 @@
       "start_char": 158,
       "end_char": 174,
       "sentence_index": 1
-    },
-    {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 176,
-      "end_char": 180,
-      "sentence_index": 2
     },
     {
       "text": "West Grant",
@@ -75734,13 +75160,6 @@
       "label": "PERSON",
       "start_char": 0,
       "end_char": 11,
-      "sentence_index": 0
-    },
-    {
-      "text": "28/9/2025",
-      "label": "ORGANIZATION",
-      "start_char": 60,
-      "end_char": 69,
       "sentence_index": 0
     },
     {
@@ -75856,13 +75275,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 167,
-      "end_char": 171,
-      "sentence_index": 2
-    },
-    {
       "text": "Dakota Lynch",
       "label": "PERSON",
       "start_char": 42,
@@ -75881,13 +75293,6 @@
       "label": "PERSON",
       "start_char": 42,
       "end_char": 53,
-      "sentence_index": 0
-    },
-    {
-      "text": "8/3/2025",
-      "label": "LOCATION",
-      "start_char": 57,
-      "end_char": 65,
       "sentence_index": 0
     },
     {
@@ -75917,13 +75322,6 @@
       "start_char": 137,
       "end_char": 149,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 215,
-      "end_char": 218,
-      "sentence_index": 1
     },
     {
       "text": "Box 4359",
@@ -75966,13 +75364,6 @@
       "start_char": 137,
       "end_char": 147,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 213,
-      "end_char": 216,
-      "sentence_index": 1
     },
     {
       "text": "Maria Mason",
@@ -76045,13 +75436,6 @@
       "sentence_index": 1
     },
     {
-      "text": "CCTV",
-      "label": "ORGANIZATION",
-      "start_char": 166,
-      "end_char": 170,
-      "sentence_index": 2
-    },
-    {
       "text": "Paul Woods",
       "label": "PERSON",
       "start_char": 14,
@@ -76071,13 +75455,6 @@
       "start_char": 132,
       "end_char": 145,
       "sentence_index": 0
-    },
-    {
-      "text": "FIR",
-      "label": "ORGANIZATION",
-      "start_char": 211,
-      "end_char": 214,
-      "sentence_index": 1
     },
     {
       "text": "Mathewsfurt",
@@ -76150,25 +75527,11 @@
       "sentence_index": 3
     },
     {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 418,
-      "end_char": 426,
-      "sentence_index": 4
-    },
-    {
       "text": "Ronald Murphy",
       "label": "PERSON",
       "start_char": 347,
       "end_char": 360,
       "sentence_index": 3
-    },
-    {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 420,
-      "end_char": 428,
-      "sentence_index": 4
     },
     {
       "text": "Carol Riddle",
@@ -76178,25 +75541,11 @@
       "sentence_index": 3
     },
     {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 419,
-      "end_char": 427,
-      "sentence_index": 4
-    },
-    {
       "text": "Michael Nichols",
       "label": "PERSON",
       "start_char": 347,
       "end_char": 362,
       "sentence_index": 3
-    },
-    {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 422,
-      "end_char": 430,
-      "sentence_index": 4
     },
     {
       "text": "Kristen Ray",
@@ -76206,13 +75555,6 @@
       "sentence_index": 3
     },
     {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 418,
-      "end_char": 426,
-      "sentence_index": 4
-    },
-    {
       "text": "Patrick Sullivan",
       "label": "PERSON",
       "start_char": 347,
@@ -76220,25 +75562,11 @@
       "sentence_index": 3
     },
     {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 423,
-      "end_char": 431,
-      "sentence_index": 4
-    },
-    {
       "text": "John Grant",
       "label": "PERSON",
       "start_char": 347,
       "end_char": 357,
       "sentence_index": 3
-    },
-    {
-      "text": "CRITICAL",
-      "label": "ORGANIZATION",
-      "start_char": 417,
-      "end_char": 425,
-      "sentence_index": 4
     },
     {
       "text": "Kevin Rush",

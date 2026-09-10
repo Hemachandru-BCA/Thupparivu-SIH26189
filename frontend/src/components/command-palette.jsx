@@ -11,7 +11,7 @@ import {
     Search, LayoutDashboard, Network, Users, Clock, FileText, Brain,
     AlertTriangle, BarChart3, Zap, Waypoints, BookOpen, ClipboardList,
     Upload, Settings, Shield, ArrowRight, CornerDownLeft, Filter,
-    Layers, DollarSign, Database, Activity, Sparkles, FolderOpen, AlertCircle
+    Layers, DollarSign, Database, Activity, Sparkles, FolderOpen, AlertCircle, Bookmark
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { useGlobalSearch } from '@/api/xai';
@@ -29,6 +29,7 @@ const COMMANDS = [
     { id: 'gaps', label: 'Investigative Gaps', desc: 'Unresolved links & missing evidence', path: '/gaps', icon: AlertCircle, section: 'NAVIGATION' },
     { id: 'crosscase', label: 'Cross-Case Intelligence', desc: 'Entity reuse across cases', path: '/cross-case', icon: FolderOpen, section: 'NAVIGATION' },
     { id: 'simulation', label: 'Counterfactual Sandbox', desc: 'Node removal & network resilience', path: '/simulation', icon: Zap, section: 'NAVIGATION' },
+    { id: 'bookmarks', label: 'My Findings', desc: 'Bookmarked entities & notes', path: '/bookmarks', icon: Bookmark, section: 'NAVIGATION' },
     { id: 'analytics', label: 'Analysis Lab', desc: 'Centrality & graph metrics', path: '/analytics', icon: BarChart3, section: 'NAVIGATION' },
     { id: 'models', label: 'Model Registry & Benchmark', desc: 'Model cards & measured metrics', path: '/models', icon: Activity, section: 'NAVIGATION' },
     { id: 'reports', label: 'Intelligence Reports', desc: 'Evidence-grounded dossiers', path: '/dossiers', icon: BookOpen, section: 'NAVIGATION' },

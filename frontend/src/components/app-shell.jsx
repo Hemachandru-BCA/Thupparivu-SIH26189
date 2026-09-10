@@ -5,7 +5,8 @@ import {
     AlertTriangle, BarChart3, Zap, Waypoints, DollarSign, FolderOpen,
     BookOpen, Activity, ClipboardList, Upload, Settings, ChevronLeft,
     ChevronRight, Search, Shield, Eye, Database, MapPin, Sparkles,
-    AlertCircle, HelpCircle, Terminal, Layers
+    AlertCircle, HelpCircle, Terminal, Layers, Bookmark, Radar,
+    Target, Dna
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { CommandPalette } from '@/components/command-palette';
@@ -31,6 +32,12 @@ export const NAV_ITEMS = [
     // 03 ANALYSIS
     { path: '/simulation', label: 'SIMULATION', icon: Zap, section: 'ANALYSIS', title: 'Counterfactual Sandbox' },
     { path: '/analytics', label: 'ANALYSIS LAB', icon: BarChart3, section: 'ANALYSIS', title: 'Centrality & Graph Lab' },
+    { path: '/bookmarks', label: 'MY FINDINGS', icon: Bookmark, section: 'ANALYSIS', title: 'Bookmarked Entities & Hypotheses' },
+    { path: '/p1-analysis', label: 'P1 WORKBENCH', icon: Radar, section: 'ANALYSIS', title: 'Advanced Analytical Workbench' },
+    { path: '/geospatial', label: 'GEOSPATIAL', icon: MapPin, section: 'ANALYSIS', title: 'Geospatial Intelligence' },
+    { path: '/nl-query', label: 'ANALYST QUERY', icon: Search, section: 'ANALYSIS', title: 'Natural-Language Analyst Query' },
+    { path: '/next-best', label: 'NEXT BEST', icon: Target, section: 'ANALYSIS', title: 'Next-Best Analytical Action' },
+    { path: '/case-similarity', label: 'CASE DNA', icon: Dna, section: 'ANALYSIS', title: 'Case Similarity / Network DNA' },
     { path: '/models', label: 'MODELS', icon: Activity, section: 'ANALYSIS', title: 'Model Registry & Benchmark' },
     { path: '/dossiers', label: 'REPORTS', icon: BookOpen, section: 'ANALYSIS', title: 'Intelligence Reports' },
     { path: '/judge', label: 'JUDGE DEMO', icon: Sparkles, section: 'ANALYSIS', title: 'Judge Walkthrough' },
