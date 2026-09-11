@@ -1,12 +1,14 @@
-import { useFindingDetail } from '@/api/xai';
+import { useFindingDetail, useEvidenceChainForFinding } from '@/api/xai';
 import { useRoute, Link } from 'wouter';
 import { Brain, ChevronLeft, AlertTriangle, FileText, CheckCircle, HelpCircle, XCircle } from 'lucide-react';
 import { getConfidenceColor } from '@/components/app-shell';
+import { EvidenceChainWidget } from '@/components/evidence-chain';
 
 export default function FindingDetailPage() {
     const [, params] = useRoute('/findings/:id');
     const findingId = params?.id;
     const { data: findingData, isLoading } = useFindingDetail(findingId);
+    const { data: chainData, isLoading: isChainLoading } = useEvidenceChainForFinding(findingId);
     const finding = findingData?.result || findingData;
 
     if (isLoading) return (
@@ -170,6 +172,13 @@ export default function FindingDetailPage() {
                         </div>
                     </div>
                 )}
+
+                {/* Traceable Evidence Chain Widget (5-stage) */}
+                <EvidenceChainWidget
+                    chainData={chainData}
+                    isLoading={isChainLoading}
+                    title="End-to-End Provenance & Evidence Chain"
+                />
 
                 {/* Limitations */}
                 {finding.limitations?.length > 0 && (

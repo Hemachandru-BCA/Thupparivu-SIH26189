@@ -29,6 +29,7 @@ import GeospatialWorkspace from '@/pages/workspace/geospatial-workspace';
 import NLQueryWorkspace from '@/pages/workspace/nl-query-workspace';
 import NextBestActionWorkspace from '@/pages/workspace/next-best-action-workspace';
 import CaseSimilarityWorkspace from '@/pages/workspace/case-similarity-workspace';
+import JudgeDemoWalkthrough from '@/pages/workspace/demo-walkthrough';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
@@ -74,6 +75,7 @@ function Router() {
     <Route path="/next-best" component={NextBestActionWorkspace}/>
     <Route path="/case-similarity" component={CaseSimilarityWorkspace}/>
     <Route path="/models" component={ModelsWorkspace}/>
+    <Route path="/judge" component={JudgeDemoWalkthrough}/>
     {/* Legacy */}
     <Route path="/explorer" component={NetworkWorkspace}/>
     <Route path="/search" component={EvidenceWorkspace}/>

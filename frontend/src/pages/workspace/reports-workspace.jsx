@@ -1,8 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useRoute } from 'wouter';
 import { useDossiers, useDossierDetail, generateDossier } from '@/api/xai';
-import { BookOpen, ChevronRight, Plus, FileText, AlertTriangle } from 'lucide-react';
+import { BookOpen, ChevronRight, Plus, FileText, AlertTriangle, Download, FileArchive, CheckCircle2 } from 'lucide-react';
 import { formatTimestamp } from '@/components/app-shell';
+import { requestJson } from '@/api/client';
 
 export default function ReportsWorkspace() {
     const [, params] = useRoute('/dossiers/:id');
@@ -16,6 +17,8 @@ export default function ReportsWorkspace() {
 
     const [generateTarget, setGenerateTarget] = useState('');
     const [generating, setGenerating] = useState(false);
+    const [exporting, setExporting] = useState(false);
+    const [exportSuccess, setExportSuccess] = useState(false);
 
     const { data: detailData } = useDossierDetail(selectedId);
     const detail = detailData?.result || detailData;
@@ -30,6 +33,31 @@ export default function ReportsWorkspace() {
             console.error('Dossier generation failed:', e);
         } finally {
             setGenerating(false);
+        }
+    };
+
+    const handleExportPack = async () => {
+        setExporting(true);
+        try {
+            const pack = await requestJson('/api/dossiers/export/investigation-pack?case_id=CASE-0421', { method: 'GET' });
+            // Download as JSON file
+            const blob = new Blob([JSON.stringify(pack, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sentinelgraph_investigation_pack_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            setExportSuccess(true);
+            setTimeout(() => setExportSuccess(false), 3000);
+        } catch (e) {
+            console.error('Export failed:', e);
+            alert('Export failed. See console for details.');
+        } finally {
+            setExporting(false);
         }
     };
 
@@ -49,9 +77,17 @@ export default function ReportsWorkspace() {
                     <span className="tp-badge tp-badge-neutral">{dossiers.length}</span>
                 </div>
 
-                {/* Generate */}
-                <div className="px-3 py-2 border-b border-border-subtle">
-                    <div className="flex gap-2">
+                {/* Generate & Export */}
+                <div className="px-3 py-2 border-b border-border-subtle space-y-2">
+                    <button 
+                        onClick={handleExportPack} 
+                        disabled={exporting}
+                        className={`w-full tp-btn h-8 text-[10px] gap-2 ${exportSuccess ? 'tp-btn-green' : 'tp-btn-ghost hover:bg-bg-hover'}`}
+                    >
+                        {exportSuccess ? <CheckCircle2 size={12} /> : <FileArchive size={12} />}
+                        {exportSuccess ? 'EXPORT COMPLETE' : 'EXPORT FULL INVESTIGATION PACK'}
+                    </button>
+                    <div className="flex gap-2 pt-1 border-t border-border-subtle">
                         <input value={generateTarget} onChange={e => setGenerateTarget(e.target.value)}
                             placeholder="Subject ID..."
                             className="tp-input h-7 text-[10px] flex-1" />

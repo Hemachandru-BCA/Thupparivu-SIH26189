@@ -23,10 +23,11 @@ import {
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { useGraphMetrics, useGetGraphNeighborhood } from '@/api/graph';
-import { useEvidenceForNode, useEvidenceTimeline, runNodeRemovalSimulation } from '@/api/xai';
+import { useEvidenceForNode, useEvidenceTimeline, useEvidenceChainForEntity, runNodeRemovalSimulation } from '@/api/xai';
 import { useCrossCase } from '@/api/intel';
 import { useCaseDetail, updateCase } from '@/api/xai';
 import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
+import { EvidenceChainWidget } from '@/components/evidence-chain';
 
 /* ── Helpers ── */
 function pct(v) { return `${Math.round((v || 0) * 100)}%`; }
@@ -117,6 +118,7 @@ export default function EntityAnalysisWorkspace() {
     const { data: neighborhood } = useGetGraphNeighborhood(entityId, 1, 100);
     const { data: evidence } = useEvidenceForNode(entityId);
     const { data: timeline } = useEvidenceTimeline(entityId);
+    const { data: chainData, isLoading: isChainLoading } = useEvidenceChainForEntity(entityId);
     const { data: crossData } = useCrossCase();
     const { data: caseDetail, refetch: refetchCase } = useCaseDetail(activeCase?.id || 'CASE-0421');
 
@@ -336,6 +338,11 @@ export default function EntityAnalysisWorkspace() {
                             </div>
                         )}
                     </div>
+                </div>
+
+                {/* Traceable Evidence Chain */}
+                <div className="lg:col-span-2">
+                    <EvidenceChainWidget chainData={chainData} isLoading={isChainLoading} title="Detailed Evidence Provenance Chain" />
                 </div>
             </div>
 

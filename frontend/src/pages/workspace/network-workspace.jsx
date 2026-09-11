@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useLocation, Link } from 'wouter';
 import { useGetGraphSummary, useGetGraphCommunity, useGetGraphNeighborhood } from '@/api/graph';
 import { useEvidenceForNode } from '@/api/xai';
 import {
     Network as NetworkIcon, Search, Maximize2, Minimize2, ZoomIn, ZoomOut,
     RefreshCw, Eye, EyeOff, Filter, Layers, Users, MapPin, Database,
-    BarChart3, Clock, FileText, X, Pin, PinOff, Expand, Focus, Crosshair
+    BarChart3, Clock, FileText, X, Pin, PinOff, Expand, Focus, Crosshair,
+    ShieldCheck, Sparkles, AlertTriangle, CheckCircle2, ArrowRight
 } from 'lucide-react';
 import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
 import { MassiveGraphCanvas } from '@/components/massive-graph-canvas';
@@ -101,6 +103,7 @@ function TopConnections({ connections, onFocus }) {
    NETWORK WORKSPACE — investigator-first, progressive, 100k-ready
 ============================================================================ */
 export default function NetworkWorkspace() {
+    const [location] = useLocation();
     const [selectedNode, setSelectedNode] = useState(null);
     const [pinnedNodes, setPinnedNodes] = useState([]);
     const [showFilters, setShowFilters] = useState(true);
@@ -112,8 +115,22 @@ export default function NetworkWorkspace() {
     const [showPerf, setShowPerf] = useState(false);
     const [stats, setStats] = useState({ nodes: 0, edges: 0, last_expansion_ms: 0 });
 
+    // Epistemic & category filters
+    const [epistemicFilter, setEpistemicFilter] = useState('ALL'); // 'ALL' | 'OBSERVED' | 'INFERRED' | 'UNKNOWN'
+    const [relationCategory, setRelationCategory] = useState('ALL'); // 'ALL' | 'COMMUNICATION' | 'FINANCIAL' | 'MOVEMENT' | 'ORGANIZATION'
+    const [focusMode, setFocusMode] = useState(false);
+
     const graphHostRef = useRef(null);
     const graphRef = useRef(null);
+
+    // Read focus/center parameter from window.location.search or location
+    const urlFocus = useMemo(() => {
+        if (typeof window !== 'undefined' && window.location.search) {
+            const sp = new URLSearchParams(window.location.search);
+            return sp.get('focus') || sp.get('center');
+        }
+        return null;
+    }, [location]);
 
     // Level 0: graph summary (aggregates only — never the whole graph)
     const { data: summary, isLoading, error, refetch } = useGetGraphSummary();
@@ -123,8 +140,17 @@ export default function NetworkWorkspace() {
     const communityQuery = useGetGraphCommunity(activeCommunity, 300);
 
     // Level 2: neighborhood expansion of the focus node
-    const [focusNode, setFocusNode] = useState(null);
+    const [focusNode, setFocusNode] = useState(urlFocus || null);
     const neighborhoodQuery = useGetGraphNeighborhood(focusNode, depth, 200);
+
+    // Auto-enable focus mode if urlFocus is given
+    useEffect(() => {
+        if (urlFocus) {
+            setFocusNode(urlFocus);
+            setFocusMode(true);
+            setExpandedIds((prev) => new Set(prev).add(urlFocus));
+        }
+    }, [urlFocus]);
 
     // selected entity evidence
     const { data: evidence } = useEvidenceForNode(selectedNode?.id);
@@ -132,6 +158,23 @@ export default function NetworkWorkspace() {
     // ── build visible graph layer ──
     const visibleNodes = useMemo(() => {
         const nodeMap = new Map();
+
+        // If focusMode is on and neighborhoodQuery has returned, focus strictly on neighborhood
+        if (focusMode && focusNode && neighborhoodQuery.data) {
+            (neighborhoodQuery.data.nodes || []).forEach((n) => {
+                const key = String(n.id);
+                nodeMap.set(key, {
+                    id: key,
+                    label: n.label || n.id,
+                    type: n.type,
+                    community: n.community_id ?? n.community,
+                    size: key === String(focusNode) ? 22 : (6 + Math.sqrt(n.metrics?.pagerank || 0) * 16),
+                    pagerank: n.metrics?.pagerank || 0,
+                    priority: key === String(focusNode) ? 10 : 0,
+                });
+            });
+            return Array.from(nodeMap.values());
+        }
 
         // seed with top entities from summary (Level 0)
         (summary?.top_entities || []).forEach((e) => {
@@ -180,32 +223,64 @@ export default function NetworkWorkspace() {
         }
 
         return Array.from(nodeMap.values());
-    }, [summary, communityQuery.data, neighborhoodQuery.data, activeCommunity]);
+    }, [summary, communityQuery.data, neighborhoodQuery.data, activeCommunity, focusMode, focusNode]);
 
     const visibleEdges = useMemo(() => {
         const edgeKey = new Set();
         const edges = [];
 
+        const matchesEpistemic = (isInferred) => {
+            if (epistemicFilter === 'ALL') return true;
+            if (epistemicFilter === 'OBSERVED') return !isInferred;
+            if (epistemicFilter === 'INFERRED') return Boolean(isInferred);
+            return true;
+        };
+
+        const matchesCategory = (relType = '') => {
+            if (relationCategory === 'ALL') return true;
+            const r = String(relType).toUpperCase();
+            if (relationCategory === 'COMMUNICATION') return r.includes('CALL') || r.includes('MESSAGE') || r.includes('COMM');
+            if (relationCategory === 'FINANCIAL') return r.includes('TRANS') || r.includes('ACC') || r.includes('MONEY');
+            if (relationCategory === 'MOVEMENT') return r.includes('LOC') || r.includes('MET') || r.includes('TRAVEL');
+            if (relationCategory === 'ORGANIZATION') return r.includes('MEM') || r.includes('WORK') || r.includes('ASSOC');
+            return true;
+        };
+
         const addEdge = (source, target, type, extra = {}) => {
+            if (!matchesEpistemic(extra.dashed || extra.inferred)) return;
+            if (!matchesCategory(type)) return;
+
             const key = source < target ? `${source}|${target}` : `${target}|${source}`;
             if (edgeKey.has(key)) return;
             edgeKey.add(key);
             edges.push({ source: String(source), target: String(target), type, ...extra });
         };
 
+        if (focusMode && focusNode && neighborhoodQuery.data) {
+            (neighborhoodQuery.data?.edges || []).forEach((e) => {
+                addEdge(e.source, e.target, e.type || e.relation, {
+                    color: e.inferred ? '#a855f7' : '#38bdf8',
+                    dashed: Boolean(e.inferred),
+                    inferred: Boolean(e.inferred),
+                });
+            });
+            return edges;
+        }
+
         (communityQuery.data?.edges || []).forEach((e) => {
-            addEdge(e.source, e.target, e.type, { color: '#38bdf8' });
+            addEdge(e.source, e.target, e.type || e.relation, { color: '#38bdf8' });
         });
 
         (neighborhoodQuery.data?.edges || []).forEach((e) => {
-            addEdge(e.source, e.target, e.type, {
+            addEdge(e.source, e.target, e.type || e.relation, {
                 color: e.inferred ? '#a855f7' : '#64748b',
                 dashed: Boolean(e.inferred),
+                inferred: Boolean(e.inferred),
             });
         });
 
         return edges;
-    }, [communityQuery.data, neighborhoodQuery.data]);
+    }, [communityQuery.data, neighborhoodQuery.data, epistemicFilter, relationCategory, focusMode, focusNode]);
 
     const graphNodeCount = visibleNodes.length;
     const graphEdgeCount = visibleEdges.length;
@@ -278,6 +353,79 @@ export default function NetworkWorkspace() {
                                 <button key={m.id} onClick={() => setViewMode(m.id)}
                                     className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-[10px] transition-colors ${viewMode === m.id ? 'bg-bg-hover text-fg-primary' : 'text-fg-secondary hover:bg-bg-hover/60'}`}>
                                     <m.icon size={11} /> {m.label}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="px-3 py-2 border-b border-border-subtle">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="tp-section-label">FOCUS MODE</span>
+                            <button
+                                onClick={() => setFocusMode(!focusMode)}
+                                className={`tp-badge ${focusMode ? 'tp-badge-purple' : 'tp-badge-neutral'} cursor-pointer`}
+                            >
+                                {focusMode ? 'ENABLED' : 'OFF'}
+                            </button>
+                        </div>
+                        {focusNode && (
+                            <div className="p-1.5 rounded bg-bg-root border border-border-subtle text-[10px] space-y-1">
+                                <div className="text-[8px] font-mono text-fg-faint">FOCUSED ENTITY:</div>
+                                <div className="font-mono text-fg-primary truncate">{focusNode}</div>
+                                <div className="flex gap-1 pt-1">
+                                    <button
+                                        onClick={() => { setFocusNode(null); setFocusMode(false); }}
+                                        className="tp-btn tp-btn-ghost text-[8px] h-4 px-1 flex-1"
+                                    >
+                                        RESET
+                                    </button>
+                                    <Link href={`/entity/${encodeURIComponent(focusNode)}`}>
+                                        <button className="tp-btn tp-btn-primary text-[8px] h-4 px-1.5">
+                                            360°
+                                        </button>
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="px-3 py-2 border-b border-border-subtle">
+                        <div className="tp-section-label mb-2">EPISTEMIC STATUS</div>
+                        <div className="grid grid-cols-2 gap-1">
+                            {['ALL', 'OBSERVED', 'INFERRED', 'UNKNOWN'].map((st) => (
+                                <button
+                                    key={st}
+                                    onClick={() => setEpistemicFilter(st)}
+                                    className={`tp-btn text-[8px] h-5 px-1 ${
+                                        epistemicFilter === st ? 'tp-btn-primary' : 'tp-btn-ghost'
+                                    }`}
+                                >
+                                    {st}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="px-3 py-2 border-b border-border-subtle">
+                        <div className="tp-section-label mb-2">RELATION CATEGORY</div>
+                        <div className="space-y-1">
+                            {[
+                                { id: 'ALL', label: 'ALL RELATIONS' },
+                                { id: 'COMMUNICATION', label: 'COMMUNICATION (Calls)' },
+                                { id: 'FINANCIAL', label: 'FINANCIAL (Transfers)' },
+                                { id: 'MOVEMENT', label: 'MOVEMENT (Locations)' },
+                                { id: 'ORGANIZATION', label: 'ORGANIZATION (Roles)' },
+                            ].map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => setRelationCategory(cat.id)}
+                                    className={`w-full text-left px-2 py-1 rounded text-[9px] font-mono transition-colors ${
+                                        relationCategory === cat.id
+                                            ? 'bg-primary/20 text-primary font-bold border border-primary/40'
+                                            : 'text-fg-secondary hover:bg-bg-hover'
+                                    }`}
+                                >
+                                    {cat.label}
                                 </button>
                             ))}
                         </div>
@@ -357,6 +505,43 @@ export default function NetworkWorkspace() {
                 </div>
 
                 <div className="flex-1 relative graph-canvas-bg">
+                    {/* Focus Mode Banner */}
+                    {focusMode && focusNode && (
+                        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-bg-panel/95 border border-primary/50 shadow-xl rounded px-4 py-2 flex items-center gap-3 animate-fade-in backdrop-blur-sm">
+                            <div className="flex items-center gap-2">
+                                <Sparkles size={14} className="text-primary" />
+                                <span className="text-[10px] font-mono text-fg-faint">FOCUS MODE ACTIVE:</span>
+                                <span className="text-[12px] font-bold text-fg-primary font-mono">{focusNode}</span>
+                            </div>
+                            <div className="w-px h-4 bg-border-default" />
+                            <div className="flex items-center gap-1">
+                                {[1, 2, 3].map((h) => (
+                                    <button
+                                        key={h}
+                                        onClick={() => setDepth(h)}
+                                        className={`tp-btn text-[9px] h-5 px-1.5 ${depth === h ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                                    >
+                                        {h}-HOP
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="w-px h-4 bg-border-default" />
+                            <Link href={`/entity/${encodeURIComponent(focusNode)}`}>
+                                <button className="tp-btn tp-btn-ghost text-[10px] h-5 px-2 gap-1">
+                                    <span>WHY IMPORTANT?</span>
+                                    <ArrowRight size={10} />
+                                </button>
+                            </Link>
+                            <button
+                                onClick={() => { setFocusMode(false); setFocusNode(null); graphRef.current?.fit(); }}
+                                className="tp-btn tp-btn-ghost p-1 text-fg-faint hover:text-fg-primary"
+                                title="Exit Focus Mode"
+                            >
+                                <X size={12} />
+                            </button>
+                        </div>
+                    )}
+
                     {isLoading ? (
                         <LoadingState />
                     ) : error ? (

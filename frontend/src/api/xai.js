@@ -50,6 +50,24 @@ export function useEvidenceDetail(evidenceId, options) {
     });
 }
 
+export function useEvidenceChainForFinding(findingId, options) {
+    return useQuery({
+        queryKey: ['/api/evidence/chain/finding', findingId],
+        queryFn: () => request(`/api/evidence/chain/finding/${encodeURIComponent(findingId)}`),
+        enabled: Boolean(findingId),
+        ...(options?.query ?? {}),
+    });
+}
+
+export function useEvidenceChainForEntity(entityId, options) {
+    return useQuery({
+        queryKey: ['/api/evidence/chain/entity', entityId],
+        queryFn: () => request(`/api/evidence/chain/entity/${encodeURIComponent(entityId)}`),
+        enabled: Boolean(entityId),
+        ...(options?.query ?? {}),
+    });
+}
+
 // ---------------------------------------------------------------- findings --
 export const getFindingsQueryKey = (params) => ['/api/findings', params ?? null];
 export function useFindings(params, options) {
