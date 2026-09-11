@@ -135,6 +135,7 @@ class MassiveGraphRenderer {
         this.dirty = true;
         this.running = false;
 
+        this._listeners = [];
         this._bindEvents();
         this._resizeObserver = new ResizeObserver(() => this.resize());
         this._resizeObserver.observe(canvas);
@@ -321,19 +322,24 @@ class MassiveGraphRenderer {
     }
 
     // ---- interaction -------------------------------------------------------
+    _on(type, fn, opts) {
+        this.canvas.addEventListener(type, fn, opts);
+        this._listeners.push({ type, fn, opts });
+    }
+
     _bindEvents() {
         const canvas = this.canvas;
 
         let dragStart = null;
         let pointerDown = false;
 
-        canvas.addEventListener('pointerdown', (e) => {
+        this._on('pointerdown', (e) => {
             pointerDown = true;
             dragStart = { sx: e.clientX, sy: e.clientY, vx: this.view.x, vy: this.view.y, moved: false };
             canvas.setPointerCapture?.(e.pointerId);
         });
 
-        canvas.addEventListener('pointermove', (e) => {
+        this._on('pointermove', (e) => {
             const rect = canvas.getBoundingClientRect();
             const sx = e.clientX - rect.left;
             const sy = e.clientY - rect.top;
@@ -378,10 +384,10 @@ class MassiveGraphRenderer {
             pointerDown = false;
             dragStart = null;
         };
-        canvas.addEventListener('pointerup', endDrag);
-        canvas.addEventListener('pointercancel', endDrag);
+        this._on('pointerup', endDrag);
+        this._on('pointercancel', endDrag);
 
-        canvas.addEventListener('wheel', (e) => {
+        this._on('wheel', (e) => {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
             const sx = e.clientX - rect.left;
@@ -400,7 +406,7 @@ class MassiveGraphRenderer {
         }, { passive: false });
 
         // keyboard: Esc clears selection, Space expands (handled by parent)
-        canvas.addEventListener('keydown', (e) => {
+        this._on('keydown', (e) => {
             if (e.key === 'Escape' && this.selected) {
                 this.setSelected(null);
                 this.onSelect?.(null, null);
@@ -643,7 +649,10 @@ class MassiveGraphRenderer {
         this.running = false;
         if (this.rafId) cancelAnimationFrame(this.rafId);
         this._resizeObserver?.disconnect();
-        this.canvas.removeEventListener?.();
+        for (const { type, fn, opts } of this._listeners) {
+            this.canvas.removeEventListener(type, fn, opts);
+        }
+        this._listeners = [];
     }
 }
 

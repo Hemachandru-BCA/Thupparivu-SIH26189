@@ -601,3 +601,100 @@
 {"timestamp": "2026-09-10T13:21:55.000449+00:00", "actor": "anonymous", "action": "geo.clusters", "object_ids": [], "detail": {"grid_km": 5.0, "count": 2653}}
 {"timestamp": "2026-09-10T13:22:03.749959+00:00", "actor": "anonymous", "action": "geo.observations", "object_ids": [], "detail": {"entity_type": null, "count": 500}}
 {"timestamp": "2026-09-10T13:22:05.453683+00:00", "actor": "anonymous", "action": "geo.proximity", "object_ids": [], "detail": {"max_km": 5.0, "count": 0}}
+{"timestamp": "2026-09-10T13:22:21.097837+00:00", "actor": "anonymous", "action": "method-agreement.report", "object_ids": [], "detail": {"entity_count": 0}}
+{"timestamp": "2026-09-10T13:22:33.883180+00:00", "actor": "anonymous", "action": "recommendations.get", "object_ids": [], "detail": {"count": 7}}
+{"timestamp": "2026-09-10T13:23:03.483318+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:23:03.610315+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:23:11.434840+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:23:48.965549+00:00", "actor": "anonymous", "action": "method-agreement.report", "object_ids": [], "detail": {"entity_count": 0}}
+{"timestamp": "2026-09-10T13:28:01.653380+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:28:01.863655+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:28:10.246441+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:28:48.277013+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:28:48.505858+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:28:57.439173+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:10.955772+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:11.111941+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:31:11.838925+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:12.359974+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:31:13.157083+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:13.797510+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:31:24.187012+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:26.002290+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T13:31:26.534996+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-10T13:31:36.553088+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.476004+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T15:44:47.509920+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T15:44:47.515178+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.528051+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-83eb3c4d-f046-52ed-8898-09b84a25c6c6", "0e3ae01a-46ac-5966-8129-c2cd0d0d9e86"], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.531333+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-83eb3c4d-f046-52ed-8898-09b84a25c6c6"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T15:44:47.536020+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-2EB58243"], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.538106+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-2EB58243"], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.541438+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-2EB58243"], "detail": {}}
+{"timestamp": "2026-09-10T15:44:47.860799+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T15:44:48.174227+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T15:44:48.318574+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T15:44:48.427028+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T15:50:14.037638+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T15:50:14.072329+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T15:50:14.077861+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-10T15:50:14.090981+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-a1e29e71-d15a-5941-a11b-a65c2e52cd2a", "0e3ae01a-46ac-5966-8129-c2cd0d0d9e86"], "detail": {}}
+{"timestamp": "2026-09-10T15:50:14.094697+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-a1e29e71-d15a-5941-a11b-a65c2e52cd2a"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T15:50:14.099513+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-BF7E6B01"], "detail": {}}
+{"timestamp": "2026-09-10T15:50:14.101678+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-BF7E6B01"], "detail": {}}
+{"timestamp": "2026-09-10T15:50:14.105348+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-BF7E6B01"], "detail": {}}
+{"timestamp": "2026-09-10T15:50:14.455897+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T15:50:14.776114+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T15:50:14.919341+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T15:50:15.032028+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T15:51:07.460907+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:51:07.514878+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:51:07.531701+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:56:47.868088+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:56:47.914087+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T15:56:47.929304+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:35:38.738268+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T16:35:38.768760+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T16:35:38.774065+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-10T16:35:38.784563+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-2765cf96-f568-58d8-8027-d7a20f34afc8", "0e3ae01a-46ac-5966-8129-c2cd0d0d9e86"], "detail": {}}
+{"timestamp": "2026-09-10T16:35:38.787795+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-2765cf96-f568-58d8-8027-d7a20f34afc8"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T16:35:38.792485+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-A5197F0B"], "detail": {}}
+{"timestamp": "2026-09-10T16:35:38.794482+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-A5197F0B"], "detail": {}}
+{"timestamp": "2026-09-10T16:35:38.798122+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-A5197F0B"], "detail": {}}
+{"timestamp": "2026-09-10T16:35:39.127835+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T16:35:39.436347+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T16:35:39.577400+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T16:35:39.687451+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T16:41:58.354494+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:41:58.403233+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:41:58.419992+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.183918+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T16:51:33.213602+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T16:51:33.218657+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.229301+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-def643d5-76e3-5d8d-890e-9ee248f5ecc6", "0e3ae01a-46ac-5966-8129-c2cd0d0d9e86"], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.232382+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-def643d5-76e3-5d8d-890e-9ee248f5ecc6"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T16:51:33.237094+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-3B9256D2"], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.239260+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-3B9256D2"], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.242213+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-3B9256D2"], "detail": {}}
+{"timestamp": "2026-09-10T16:51:33.796941+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T16:51:33.890458+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T16:51:34.106246+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T16:51:34.217610+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T16:57:49.757666+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:57:49.812701+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T16:57:49.829237+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.156769+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T17:35:59.187026+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-10T17:35:59.191741+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.202191+00:00", "actor": "anonymous", "action": "dossiers.generate", "object_ids": ["DOSSIER-bdcac0b3-f6c1-5152-bc77-b0fb233604ed", "0e3ae01a-46ac-5966-8129-c2cd0d0d9e86"], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.205670+00:00", "actor": "anonymous", "action": "dossiers.review", "object_ids": ["DOSSIER-bdcac0b3-f6c1-5152-bc77-b0fb233604ed"], "detail": {"decision": "endorsed"}}
+{"timestamp": "2026-09-10T17:35:59.210066+00:00", "actor": "anonymous", "action": "cases.create", "object_ids": ["CASE-A34F5769"], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.211789+00:00", "actor": "anonymous", "action": "cases.update", "object_ids": ["CASE-A34F5769"], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.214547+00:00", "actor": "anonymous", "action": "cases.delete", "object_ids": ["CASE-A34F5769"], "detail": {}}
+{"timestamp": "2026-09-10T17:35:59.533324+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-10T17:35:59.841920+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-10T17:35:59.981226+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-10T17:36:00.088647+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-10T17:42:20.299710+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T17:42:20.344481+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-10T17:42:20.358811+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}

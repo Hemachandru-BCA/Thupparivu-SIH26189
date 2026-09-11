@@ -97,3 +97,22 @@ for router in ALL_ROUTERS:
 @app.get("/api/health", tags=["health"])
 def health():
     return {"status": "ok", "service": "thupparivu", "version": "3.0.0"}
+
+
+# ── Copilot UI (static) ──────────────────────────────────────────────────────
+from pathlib import Path
+
+from fastapi.responses import FileResponse
+
+_COPILOT_HTML = Path(__file__).resolve().parents[2] / "static" / "copilot.html"
+
+
+@app.get("/copilot", include_in_schema=False)
+async def copilot_ui():
+    """Serve the Investigation Copilot chat interface."""
+    if _COPILOT_HTML.exists():
+        return FileResponse(_COPILOT_HTML)
+    return JSONResponse(
+        status_code=404,
+        content={"error": "COPILOT_UI_NOT_FOUND", "detail": "static/copilot.html missing"},
+    )

@@ -55,6 +55,11 @@ from src.api.routers import (  # noqa: F401
     geospatial as geospatial_router,
     nl_query as nl_query_router,
     next_best_action as next_best_action_router,
+    # ── LLM-powered investigation copilot ──────────────────────
+    copilot as copilot_router,
+    evidence_conflicts as evidence_conflicts_router,
+    # ── Hybrid RAG retrieval ───────────────────────────────────
+    rag as rag_router,
 )
 
 ALL_ROUTERS = [
@@ -88,4 +93,9 @@ ALL_ROUTERS = [
     geospatial_router.router,
     nl_query_router.router,
     next_best_action_router.router,
+    # ── LLM-powered investigation copilot ──────────────────────
+    evidence_conflicts_router.router,
+    copilot_router.router,
+    # ── Hybrid RAG retrieval ───────────────────────────────────
+    rag_router.router,
 ]
