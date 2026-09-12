@@ -60,10 +60,18 @@ def domain_uuid5(kind: str, seed: str) -> str:
 
 
 class FactStatus(str, Enum):
-    """Core truth-semantics used across every model output."""
+    """Core truth-semantics used across every model output.
+
+    Never upgrade INFERRED -> OBSERVED, POSSIBLE -> FACT, or UNKNOWN -> FALSE.
+    NEGATED marks statements explicitly negated in the source ("did not call").
+    POSSIBLE marks modal statements ("may have transferred") - these must stay
+    weaker than OBSERVED and must never be elevated automatically.
+    """
 
     OBSERVED = "OBSERVED"
     INFERRED = "INFERRED"
+    POSSIBLE = "POSSIBLE"
+    NEGATED = "NEGATED"
     UNKNOWN = "UNKNOWN"
     CONTRADICTED = "CONTRADICTED"
     HYPOTHETICAL = "HYPOTHETICAL"
@@ -72,6 +80,8 @@ class FactStatus(str, Enum):
 class RelationshipStatus(str, Enum):
     OBSERVED = "OBSERVED"
     INFERRED = "INFERRED"
+    POSSIBLE = "POSSIBLE"
+    NEGATED = "NEGATED"
     PREDICTED_FUTURE = "PREDICTED_FUTURE"
     HYPOTHETICAL = "HYPOTHETICAL"
     CONTRADICTED = "CONTRADICTED"
@@ -86,6 +96,10 @@ class SourceRef(BaseModel):
     uri: Optional[str] = None
     page: Optional[str] = None
     section: Optional[str] = None
+    paragraph: Optional[str] = None
+    sentence: Optional[str] = None
+    start_char: Optional[int] = None
+    end_char: Optional[int] = None
     offset: Optional[int] = None
     raw: Any = None
 

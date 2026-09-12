@@ -88,4 +88,5 @@ def test_constrained_summarizer():
     }
     brief = ConstrainedSummarizer.generate_entity_brief(ctx)
     assert "Ravi Kumar" in brief["title"]
-    assert brief["status"] == "DRAFT_FOR_HUMAN_REVIEW"
+    assert brief["dossier_status"] == "DRAFT_FOR_HUMAN_REVIEW"
+    assert brief["status"] == "OBSERVED"

@@ -38,6 +38,8 @@ class ModalityType(str, Enum):
     UNCONFIRMED = "UNCONFIRMED"  # Awaiting independent corroboration
     SPECULATIVE = "SPECULATIVE"  # Unsubstantiated inference
     INFERRED = "INFERRED"        # Model / graph derivation
+    UNCERTAIN = "UNCERTAIN"      # Unverifiable / ambiguous
+    POSSIBLE = "POSSIBLE"        # Modal possibility ("may have")
 
 
 class PolarityType(str, Enum):
@@ -130,6 +132,8 @@ class EntitySpan:
     sentence_index: int = 0
     confidence: float = 1.0
     extractor: str = "rule_ner"
+    document_id: Optional[str] = None
+    evidence_id: Optional[str] = None
     attributes: Dict[str, Any] = field(default_factory=dict)
     resolved_entity_id: Optional[str] = None
 
@@ -143,6 +147,8 @@ class EntitySpan:
             "sentence_index": self.sentence_index,
             "confidence": round(self.confidence, 4),
             "extractor": self.extractor,
+            "document_id": self.document_id,
+            "evidence_id": self.evidence_id,
             "attributes": self.attributes,
             "resolved_entity_id": self.resolved_entity_id,
         }

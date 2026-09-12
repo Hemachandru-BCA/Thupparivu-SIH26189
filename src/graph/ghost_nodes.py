@@ -757,6 +757,43 @@ def _synthesise_ghost(
             }
         )
 
+    # --- Alternative explanations & unknowns (MASTER DIRECTIVE §22-23) ----------
+    # A ghost candidate is NEVER a criminal identity.  We attach structured
+    # alternative explanations, unknowns, and explicit INFERRED status so the
+    # LLM/UI can surface "possible", "candidate", "alternative" rather than
+    # asserting a hidden mastermind.
+    alternative_explanations = [
+        {
+            "explanation": (
+                "Shared infrastructure (e.g. common bank, logistics hub, or "
+                "supplier) can create structural similarity without coordination."
+            ),
+            "evidence_category": "shared_infrastructure",
+            "plausibility": "HIGH" if dominant == "suppliers" else "MEDIUM",
+        },
+        {
+            "explanation": (
+                "Legitimate employment or business relationships can bridge "
+                "communities without a hidden intermediary."
+            ),
+            "evidence_category": "legitimate_business",
+            "plausibility": "MEDIUM",
+        },
+        {
+            "explanation": (
+                "Temporal co-occurrence may reflect coincidental activity "
+                "rather than synchronization."
+            ),
+            "evidence_category": "coincidence",
+            "plausibility": "LOW",
+        },
+    ]
+    unknowns = [
+        "No direct evidence establishes coordination between the two communities.",
+        "The ghost node is synthetic - it is never observed in source data.",
+        "Temporal alignment may be explained by external events (e.g. market cycles).",
+    ]
+
     return {
         "ghost_id": ghost_id,
         "label": label,
@@ -777,6 +814,20 @@ def _synthesise_ghost(
         "predicted_edges": predicted_edges,
         "evidence": evidence,
         "per_category": per_category,
+        "epistemic_status": "INFERRED",
+        "alternative_explanations": alternative_explanations,
+        "unknowns": unknowns,
+        "counter_evidence": [
+            {
+                "description": "Ghost nodes are synthetic inferences - no observed entity occupies this role.",
+                "evidence_ids": [],
+            }
+        ],
+        "disclaimer": (
+            "Potential hidden intermediary - a structural candidate, never a "
+            "criminal identity. Requires human review; alternative explanations "
+            "must be considered."
+        ),
         "synthetic": True,
     }
 
