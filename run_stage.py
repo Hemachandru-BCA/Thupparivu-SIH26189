@@ -47,7 +47,7 @@ def run_findings(_overrides=None):
                 break
     elif isinstance(ghost_doc, list):
         ghosts = [g for g in ghost_doc if isinstance(g, dict)]
-    builder = FindingBuilder(store)
+    builder = FindingBuilder(store, calibrator_path="data/models/confidence_calibrator.pkl")
     findings = builder.build_all(ghosts)
     reports = [validate_finding(f, store) for f in findings]
     builder.link_store(findings)

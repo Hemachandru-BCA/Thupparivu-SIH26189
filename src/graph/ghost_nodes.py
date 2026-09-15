@@ -175,6 +175,22 @@ class GhostConfig:
     use_graphsage: bool = False
     embedding: EmbeddingConfig = field(default_factory=EmbeddingConfig)
 
+    # trained classifier (Task 1: ghost detection as trained classifier)
+    use_classifier: bool = True
+    """Use the offline-trained ghost classifier (data/models/ghost_classifier.pkl)
+    when the artifact exists; fall back to pure heuristic otherwise."""
+    classifier_model_path: str = "data/models/ghost_classifier.pkl"
+    classifier_weight: float = 0.35
+    """How much of the final confidence comes from the classifier's probability
+    (rest stays heuristic) — keeps component-level transparency."""
+
+    # confidence calibration (Task 2: isotonic/Platt recalibration)
+    use_calibration: bool = True
+    """Apply confidence calibration when a calibrator artifact exists."""
+    calibrator_path: str = "data/models/confidence_calibrator.pkl"
+    """Path to the ``ConfidenceCalibrator`` pickle produced by
+    ``src.xai.calibration.fit_calibration``."""
+
     # misc
     seed: int = 42
     member_name_cap: int = 100
@@ -228,6 +244,54 @@ def _json_safe(obj: Any) -> Any:
 def _display_name(graph: nx.Graph, node: Hashable) -> str:
     data = graph.nodes[node]
     return str(data.get("canonical_name") or data.get("label") or node)
+
+
+def _load_ghost_classifier(path: str | Path):
+    """Lazily load the offline-trained ghost classifier (None if missing)."""
+    try:
+        from src.graph.ml.classifier import GhostClassifier
+        return GhostClassifier.load(path)
+    except Exception as exc:  # noqa: BLE001 - never hard-fail
+        logger.warning("ghost classifier unavailable (%s); using heuristic only", exc)
+        return None
+
+
+def _load_confidence_calibrator(path: str | Path):
+    """Lazily load the confidence calibrator (None if missing)."""
+    try:
+        from src.xai.calibration import ConfidenceCalibrator
+        return ConfidenceCalibrator.load(path)
+    except Exception as exc:  # noqa: BLE001 - never hard-fail
+        logger.warning("confidence calibrator unavailable (%s); using raw scores", exc)
+        return None
+
+
+def _classifier_node_scores(
+    graph: nx.MultiDiGraph,
+    model_path: str | Path,
+) -> Optional[Dict[Hashable, float]]:
+    """Compute per-node classifier probabilities once per graph.
+
+    Returns ``None`` when no trained artifact exists (callers fall back to the
+    pure heuristic).  Probabilities are on [0, 1] and are *one component* of
+    the final confidence breakdown, not a replacement for it.
+    """
+    try:
+        from src.graph.ml.classifier import GhostClassifier
+        from src.graph.ml.feature_extraction import extract_features_for_graph
+
+        model = GhostClassifier.load(model_path)
+        if model is None:
+            return None
+        nodes, X, context = extract_features_for_graph(graph, fast=False)
+        heuristic = np.array([
+            float(context["hole_scores"].get(n, 0.0)) for n in nodes
+        ])
+        proba = model.predict_proba(X, heuristic)
+        return {n: float(p) for n, p in zip(nodes, proba)}
+    except Exception as exc:  # noqa: BLE001 - graceful degradation
+        logger.warning("classifier inference failed (%s); using heuristic only", exc)
+        return None
 
 
 def _percentile_scores(values: Mapping[Hashable, float]) -> Dict[Hashable, float]:
@@ -1023,6 +1087,17 @@ def detect_ghost_nodes(
     logger.info("stage 4/4: evaluating community pairs")
     ghosts: List[Dict[str, Any]] = []
     evaluated: List[Dict[str, Any]] = []
+    classifier_scores: Optional[Dict[Hashable, float]] = None
+    if config.use_classifier:
+        classifier_scores = _classifier_node_scores(graph, config.classifier_model_path)
+        if classifier_scores is None:
+            logger.info("classifier artifact missing; falling back to pure heuristic")
+        else:
+            logger.info("classifier loaded; blending %s of confidence from model",
+                        config.classifier_weight)
+    calibrator = _load_confidence_calibrator(config.calibrator_path) if config.use_calibration else None
+    if calibrator is not None:
+        logger.info("confidence calibrator loaded; recalibrating raw confidence")
     for ci, cj in sorted(candidate_pairs_set):
         if ci in infrastructure_ids or cj in infrastructure_ids:
             continue
@@ -1064,6 +1139,30 @@ def detect_ghost_nodes(
             use_graphsage=bool(sage), embedding_available=bool(embeddings)
         )
 
+        # ---- trained-classifier extension (Task 1) -------------------------
+        # The classifier's per-node probability on the top broker on each side
+        # becomes one additional, transparent confidence component.  It is
+        # blended with the heuristic (never replacing it) and never changes
+        # the OBSERVED/INFERRED epistemic labels.
+        classifier_affinity = 0.0
+        if classifier_scores is not None:
+            brokers_i = [n for n, _ in _broker_scores(graph, communities[ci], hole_scores, shared_nodes, taxonomy, exclude_nodes=anchors)[: config.broker_pool]]
+            brokers_j = [n for n, _ in _broker_scores(graph, communities[cj], hole_scores, shared_nodes, taxonomy, exclude_nodes=anchors)[: config.broker_pool]]
+            probs = [classifier_scores.get(n, 0.0) for n in brokers_i + brokers_j]
+            classifier_affinity = float(np.mean(probs)) if probs else 0.0
+        if classifier_affinity > 0:
+            weight_classifier = config.classifier_weight
+            weight_heuristic = 1.0 - weight_classifier
+            confidence = weight_heuristic * confidence + weight_classifier * classifier_affinity
+
+        # ---- confidence calibration (Task 2) --------------------------------
+        # Map the blended raw confidence through the isotonic/Platt map so
+        # that a reported 0.7 actually means "~70% of these are real ghosts".
+        # Only the numeric value changes; epistemic labels are untouched.
+        confidence_raw = float(confidence)
+        if calibrator is not None:
+            confidence = float(calibrator.apply([confidence])[0])
+
         connected = (
             not config.allow_connected_pairs
             and direct > config.max_direct_member_edges
@@ -1085,7 +1184,10 @@ def detect_ghost_nodes(
             "temporal_affinity": _round(temporal_affinity),
             "negative_evidence_penalty": _round(negative_penalty),
             "embedding_affinity": _round(embed_affinity),
+            "classifier_affinity": _round(classifier_affinity),
             "confidence": _round(confidence),
+            "calibrated": calibrator is not None,
+            "confidence_raw": _round(confidence_raw) if calibrator is not None else _round(confidence),
             "ghost_proposed": bool(proposed),
             "per_category": per_category,
         }
@@ -1132,6 +1234,18 @@ def detect_ghost_nodes(
                     "embedding": config.weight_embedding,
                     "structural_hole": config.weight_structural_hole,
                     "graphsage": config.weight_graphsage if config.use_graphsage else 0.0,
+                },
+                "classifier": {
+                    "enabled": config.use_classifier,
+                    "model_path": config.classifier_model_path,
+                    "weight": config.classifier_weight,
+                    "model_loaded": classifier_scores is not None,
+                },
+                "calibration": {
+                    "enabled": config.use_calibration,
+                    "model_path": config.calibrator_path,
+                    "loaded": calibrator is not None,
+                    "method": getattr(calibrator, "method", None) if calibrator is not None else None,
                 },
                 "embedding": {"requested": bool(config.use_embeddings),
                               "source": "node2vec" if embeddings_available() and config.use_embeddings else ("spectral_fallback" if config.use_embeddings else "disabled"),

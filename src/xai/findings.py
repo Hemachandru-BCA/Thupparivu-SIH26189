@@ -36,6 +36,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence
 
+import numpy as np
 from pydantic import BaseModel, Field
 
 from src.xai.evidence_tracer import EvidenceRecord, EvidenceStore
@@ -100,6 +101,7 @@ class Finding(BaseModel):
 
     graph_signals: List[GraphSignal] = Field(default_factory=list)
     limitations: List[str] = Field(default_factory=list)
+    calibrated: bool = Field(default=False, description="True when isotonic calibration has been applied to confidence")
     human_review: Dict[str, Any] = Field(
         default_factory=lambda: {"required": True, "reviewer": None, "decision": None}
     )
@@ -133,8 +135,27 @@ DEFAULT_GHOST_LIMITATIONS = [
 class FindingBuilder:
     """Builds :class:`Finding` objects from ghost predictions + evidence."""
 
-    def __init__(self, evidence_store: EvidenceStore) -> None:
+    def __init__(self, evidence_store: EvidenceStore, calibrator_path: str = "") -> None:
         self.evidence = evidence_store
+        self._calibrator = None
+        if calibrator_path:
+            try:
+                from src.xai.calibration import ConfidenceCalibrator
+                self._calibrator = ConfidenceCalibrator.load(calibrator_path)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("calibrator unavailable (%s); confidence left raw", exc)
+
+    def _maybe_calibrate(self, raw_confidence: float) -> Optional[float]:
+        """Apply the trained confidence calibrator if present, else None."""
+        if self._calibrator is None or not raw_confidence:
+            return None
+        try:
+            mapped = float(self._calibrator.apply([float(raw_confidence)])[0])
+            if not np.isfinite(mapped):
+                return None
+            return round(float(np.clip(mapped, 0.0, 0.999)), 4)
+        except Exception:  # noqa: BLE001
+            return None
 
     # ------------------------------------------------------------------ #
     def from_ghost(self, ghost: Dict[str, Any]) -> Finding:
@@ -275,6 +296,10 @@ class FindingBuilder:
             )
 
         confidence = round(float(ghost.get("confidence", 0.0)), 4)
+        calibrated_raw = self._maybe_calibrate(confidence)
+        calibrated = calibrated_raw is not None
+        if calibrated:
+            confidence = calibrated_raw
         return Finding(
             id=finding_id,
             finding_type=FINDING_TYPE_HIDDEN_INTERMEDIARY,
@@ -292,6 +317,7 @@ class FindingBuilder:
             counter_evidence_ids=counter,
             graph_signals=graph_signals,
             limitations=list(DEFAULT_GHOST_LIMITATIONS),
+            calibrated=calibrated,
         )
 
     # ------------------------------------------------------------------ #
@@ -375,10 +401,13 @@ def validate_finding(finding: Finding, evidence_store: EvidenceStore) -> Finding
         if abs(sum(weights) - 1.0) > 0.05 and any(w > 0 for w in weights):
             warnings.append("confidence component weights do not sum to ~1.0")
         total_w = sum(weights) or 1.0
-        calibrated = sum(c.value * c.weight for c in finding.confidence_components) / total_w
-        if abs(calibrated - finding.confidence) > 0.15:
+        component_avg = sum(c.value * c.weight for c in finding.confidence_components) / total_w
+        # when isotonic calibration intentionally remaps the score, the
+        # weighted component average is the *pre*-calibration estimate, so the
+        # diff check applies only to raw scores.
+        if not finding.calibrated and abs(component_avg - finding.confidence) > 0.15:
             warnings.append(
-                f"calibrated confidence ({calibrated:.3f}) differs from reported "
+                f"calibrated confidence ({component_avg:.3f}) differs from reported "
                 f"({finding.confidence:.3f}) by more than 0.15"
             )
 

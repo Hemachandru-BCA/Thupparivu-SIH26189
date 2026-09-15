@@ -508,6 +508,83 @@ def save_artifacts(
     with json_path.open("w", encoding="utf-8") as fh:
         json.dump(data_document, fh, indent=2, ensure_ascii=False)
 
+
+# ---------------------------------------------------------------------------
+# Negation → edge polarity wiring (Task 4, Tier-1 accuracy directive)
+# ---------------------------------------------------------------------------
+
+def mark_negation_edges(
+    graph: nx.MultiDiGraph,
+    source_texts: Mapping[str, str],
+) -> int:
+    """Detect negation in source texts and stamp ``polarity: NEGATED`` on
+    graph edges whose endpoints are mentioned inside a negation scope.
+
+    ``source_texts`` maps document_id (or any key) to raw text.  For each
+    source sentence that contains a negation cue (``"did not call"``,
+    ``"no evidence of transfer"`` etc.), every edge whose head *and* tail
+    canonical names appear within the negation scope is flagged with
+    ``"polarity": "NEGATED"`` and ``"negation_cue": "<cue>"``.
+
+    Returns the number of edges flagged.
+    """
+    from src.nlp.negation_modality import detect_negations
+    from src.nlp.document import SentenceUnit, ModalityType
+
+    if not source_texts:
+        return 0
+
+    flagged = 0
+
+    # Collect all canonical names already in the graph so we can match them
+    # against the text inside negation scopes.
+    name_to_guid: Dict[str, str] = {}
+    for node, attrs in graph.nodes(data=True):
+        cname = (attrs.get("canonical_name") or "").lower().strip()
+        if cname:
+            name_to_guid[cname] = node
+        for alias in attrs.get("aliases", []):
+            a = alias.lower().strip()
+            if a and a not in name_to_guid:
+                name_to_guid[a] = node
+
+    for doc_id, text in source_texts.items():
+        if not text or not text.strip():
+            continue
+
+        # Simple sentence split on boundary punctuation
+        import re as _re
+        sentences = _re.split(r'(?<=[.!?])\s+', text)
+        char_offset = 0
+        for sent_idx, sentence in enumerate(sentences):
+            sent_start = text.find(sentence, char_offset)
+            sent_end = sent_start + len(sentence)
+            char_offset = sent_end
+
+            negations = detect_negations(sentence, sentence_index=sent_idx)
+            for neg in negations:
+                # Find all entity mentions inside the negation scope
+                scope_start = neg.scope_span.start_char
+                scope_end = neg.scope_span.end_char
+                scope_text = sentence[
+                    scope_start - sent_start: scope_end - sent_start
+                ].lower() if scope_start >= sent_start and scope_end <= sent_end else sentence.lower()
+
+                # Match graph node names that appear in the negation scope
+                scope_guids = set()
+                for name, guid in name_to_guid.items():
+                    if name in scope_text:
+                        scope_guids.add(guid)
+
+                # Flag edges where BOTH endpoints are in the negation scope
+                for src, dst, key, attrs in list(graph.edges(keys=True, data=True)):
+                    if src in scope_guids and dst in scope_guids:
+                        graph[src][dst][key]["polarity"] = "NEGATED"
+                        graph[src][dst][key]["negation_cue"] = neg.cue_text
+                        flagged += 1
+
+    return flagged
+
     logger.info("Saved %s and %s", pkl_path, json_path)
     return pkl_path, json_path
 

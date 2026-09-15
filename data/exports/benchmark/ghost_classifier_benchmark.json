@@ -1,0 +1,154 @@
+{
+  "n_graphs_total": 30,
+  "n_train_graphs": 24,
+  "n_eval_graphs": 6,
+  "positive_rate_eval": 0.0111,
+  "heuristic_baseline": {
+    "pair_precision_mean": 0.0,
+    "pair_recall_mean": 0.0,
+    "per_graph": [
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 25,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 3
+      },
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 6,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 12
+      },
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 11,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 13
+      },
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 8,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 21
+      },
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 15,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 24
+      },
+      {
+        "precision": 0.0,
+        "recall": 0.0,
+        "n_truth_pairs": 7,
+        "n_detected": 0,
+        "tp": 0,
+        "graph_idx": 29
+      }
+    ]
+  },
+  "classifier_curve": [
+    {
+      "threshold": 0.3,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.35,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.4,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.45,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.5,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.55,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.6,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.65,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    },
+    {
+      "threshold": 0.7,
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "tp": 18,
+      "fp": 0,
+      "fn": 6
+    }
+  ],
+  "best_f1_point": {
+    "threshold": 0.3,
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1": 0.8571,
+    "tp": 18,
+    "fp": 0,
+    "fn": 6
+  },
+  "mean_classifier_positive_minus_negative": 0.7278,
+  "n_eval_positives_total": 24
+}

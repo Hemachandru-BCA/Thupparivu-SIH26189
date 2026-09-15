@@ -96,3 +96,39 @@ def test_gazetteer_organisation(with_model):
     entities = with_model.extract("He met the board of Blue Horizon Trading.")
     assert "Blue Horizon Trading" in [e.text for e in entities
                                       if e.label == "ORGANIZATION"]
+
+
+# ------------- model-selection env var (SENTINELGRAPH_NER_MODEL) ------------- #
+
+def test_model_override_disabled_forces_regex_only(monkeypatch):
+    """SENTINELGRAPH_NER_MODEL=disabled must force the regex-only path."""
+    import warnings
+    from src.nlp.advanced_ner import _load_spacy_model, _MODEL_OVERRIDE
+    monkeypatch.setenv(_MODEL_OVERRIDE, "disabled")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        assert _load_spacy_model() is None
+
+
+def test_model_override_bogus_model_falls_back_to_preference(monkeypatch):
+    """A bogus override name must fall through to the standard preference
+    chain (and eventually return None in an offline env, never raise)."""
+    import warnings
+    from src.nlp.advanced_ner import _load_spacy_model, _MODEL_OVERRIDE
+    monkeypatch.setenv(_MODEL_OVERRIDE, "en_core_web_md_does_not_exist")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        result = _load_spacy_model()
+    # either a real model loads, or (offline) None — but never an exception
+    assert result is None or hasattr(result, "ents")
+
+
+def test_model_override_not_set_uses_default_preference(monkeypatch):
+    """Without the env var the normal preference chain runs."""
+    import warnings
+    from src.nlp.advanced_ner import _load_spacy_model, _MODEL_OVERRIDE
+    monkeypatch.delenv(_MODEL_OVERRIDE, raising=False)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        result = _load_spacy_model()
+    assert result is None or hasattr(result, "ents")

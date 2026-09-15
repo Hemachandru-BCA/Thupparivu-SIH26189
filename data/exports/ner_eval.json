@@ -1,0 +1,126 @@
+{
+  "tp": 197,
+  "fp": 18,
+  "fn": 5,
+  "precision": 0.9163,
+  "recall": 0.9752,
+  "f1": 0.9448,
+  "per_label": {
+    "PERSON": {
+      "tp": 46,
+      "fp": 4,
+      "fn": 4
+    },
+    "PHONE": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
+    },
+    "TIME": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
+    },
+    "LOCATION": {
+      "tp": 27,
+      "fp": 0,
+      "fn": 0
+    },
+    "BANK": {
+      "tp": 7,
+      "fp": 0,
+      "fn": 0
+    },
+    "ACCOUNT": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 1
+    },
+    "VEHICLE_NUMBER": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    "COURT": {
+      "tp": 1,
+      "fp": 5,
+      "fn": 0
+    },
+    "TRANSACTION": {
+      "tp": 6,
+      "fp": 0,
+      "fn": 0
+    },
+    "POLICE_STATION": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "VEHICLE": {
+      "tp": 13,
+      "fp": 0,
+      "fn": 0
+    },
+    "ORGANIZATION": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    "FIR": {
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    "UPI": {
+      "tp": 5,
+      "fp": 1,
+      "fn": 0
+    },
+    "MONEY": {
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
+    },
+    "DATE": {
+      "tp": 4,
+      "fp": 6,
+      "fn": 0
+    },
+    "WEAPON": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0
+    },
+    "EMAIL": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0
+    },
+    "IP_ADDRESS": {
+      "tp": 3,
+      "fp": 0,
+      "fn": 0
+    },
+    "CRIME": {
+      "tp": 13,
+      "fp": 1,
+      "fn": 0
+    },
+    "DOCUMENT": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "DOMAIN": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0
+    },
+    "SOCIAL_HANDLE": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0
+    }
+  },
+  "model": "regex_only"
+}

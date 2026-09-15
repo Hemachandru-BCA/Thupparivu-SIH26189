@@ -1,0 +1,558 @@
+{
+  "n_test_pairs": 76,
+  "n_positive": 41,
+  "n_negative": 35,
+  "soundex_baseline": {
+    "tp": 41,
+    "fp": 19,
+    "tn": 16,
+    "fn": 0,
+    "precision": 0.6833,
+    "recall": 1.0,
+    "f1": 0.8119
+  },
+  "embeddings_augmented": {
+    "tp": 41,
+    "fp": 1,
+    "tn": 34,
+    "fn": 0,
+    "precision": 0.9762,
+    "recall": 1.0,
+    "f1": 0.988
+  },
+  "threshold": 0.55,
+  "augmented_details": [
+    {
+      "a": "Ramesh Kumar",
+      "b": "R. Kumar",
+      "label": 1,
+      "score": 0.6215,
+      "pred": 1
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Ramesh Kumar",
+      "label": 1,
+      "score": 1.0,
+      "pred": 1
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Ramesh Kumarr",
+      "label": 1,
+      "score": 0.9296,
+      "pred": 1
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Kumar Ramesh",
+      "label": 1,
+      "score": 1.0,
+      "pred": 1
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "P. Sharma",
+      "label": 1,
+      "score": 0.6829,
+      "pred": 1
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "Priya Sharmma",
+      "label": 1,
+      "score": 0.8968,
+      "pred": 1
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "Sharma Priya",
+      "label": 1,
+      "score": 1.0,
+      "pred": 1
+    },
+    {
+      "a": "Akash Verma",
+      "b": "A. Verma",
+      "label": 1,
+      "score": 0.6503,
+      "pred": 1
+    },
+    {
+      "a": "Akash Verma",
+      "b": "Akash Vermaa",
+      "label": 1,
+      "score": 0.9239,
+      "pred": 1
+    },
+    {
+      "a": "Suresh Patel",
+      "b": "Suresh Patell",
+      "label": 1,
+      "score": 0.9296,
+      "pred": 1
+    },
+    {
+      "a": "Suresh Patel",
+      "b": "S. Patel",
+      "label": 1,
+      "score": 0.6215,
+      "pred": 1
+    },
+    {
+      "a": "Vikram Singh",
+      "b": "Vikram Sinhg",
+      "label": 1,
+      "score": 0.7881,
+      "pred": 1
+    },
+    {
+      "a": "Vikram Singh",
+      "b": "V. Singh",
+      "label": 1,
+      "score": 0.6215,
+      "pred": 1
+    },
+    {
+      "a": "Vikram Singh",
+      "b": "Singh Vikram",
+      "label": 1,
+      "score": 1.0,
+      "pred": 1
+    },
+    {
+      "a": "Deepak Nair",
+      "b": "Deepak Nairr",
+      "label": 1,
+      "score": 0.9214,
+      "pred": 1
+    },
+    {
+      "a": "Deepak Nair",
+      "b": "D. Nair",
+      "label": 1,
+      "score": 0.5825,
+      "pred": 1
+    },
+    {
+      "a": "Sanjay Gupta",
+      "b": "Sanjay Guptha",
+      "label": 1,
+      "score": 0.8632,
+      "pred": 1
+    },
+    {
+      "a": "Sanjay Gupta",
+      "b": "S. Gupta",
+      "label": 1,
+      "score": 0.6215,
+      "pred": 1
+    },
+    {
+      "a": "Sanjay Gupta",
+      "b": "Gupta Sanjay",
+      "label": 1,
+      "score": 1.0,
+      "pred": 1
+    },
+    {
+      "a": "Arjun Reddy",
+      "b": "Arjun Reddi",
+      "label": 1,
+      "score": 0.8733,
+      "pred": 1
+    },
+    {
+      "a": "Arjun Reddy",
+      "b": "A. Reddy",
+      "label": 1,
+      "score": 0.6814,
+      "pred": 1
+    },
+    {
+      "a": "Rohit Mehta",
+      "b": "Rohit Metha",
+      "label": 1,
+      "score": 0.7145,
+      "pred": 1
+    },
+    {
+      "a": "Rohit Mehta",
+      "b": "R. Mehta",
+      "label": 1,
+      "score": 0.6503,
+      "pred": 1
+    },
+    {
+      "a": "Meera Iyer",
+      "b": "M. Iyer",
+      "label": 1,
+      "score": 0.6102,
+      "pred": 1
+    },
+    {
+      "a": "Meera Iyer",
+      "b": "Meera Aiyyer",
+      "label": 1,
+      "score": 0.7077,
+      "pred": 1
+    },
+    {
+      "a": "Kiran Rao",
+      "b": "K. Rao",
+      "label": 1,
+      "score": 0.5595,
+      "pred": 1
+    },
+    {
+      "a": "Kiran Rao",
+      "b": "Kiran Raj",
+      "label": 1,
+      "score": 0.7595,
+      "pred": 1
+    },
+    {
+      "a": "Anil Kapoor",
+      "b": "Anil Kappor",
+      "label": 1,
+      "score": 0.8111,
+      "pred": 1
+    },
+    {
+      "a": "Anil Kapoor",
+      "b": "A. Kapoor",
+      "label": 1,
+      "score": 0.7174,
+      "pred": 1
+    },
+    {
+      "a": "Rajesh Khanna",
+      "b": "Rajesh Khana",
+      "label": 1,
+      "score": 0.895,
+      "pred": 1
+    },
+    {
+      "a": "Rajesh Khanna",
+      "b": "R. Khanna",
+      "label": 1,
+      "score": 0.6539,
+      "pred": 1
+    },
+    {
+      "a": "Manoj Tiwari",
+      "b": "Manoj Tiwary",
+      "label": 1,
+      "score": 0.8861,
+      "pred": 1
+    },
+    {
+      "a": "Manoj Tiwari",
+      "b": "M. Tiwari",
+      "label": 1,
+      "score": 0.6829,
+      "pred": 1
+    },
+    {
+      "a": "Sunil Joshi",
+      "b": "Sunil Joshii",
+      "label": 1,
+      "score": 0.9239,
+      "pred": 1
+    },
+    {
+      "a": "Sunil Joshi",
+      "b": "S. Joshi",
+      "label": 1,
+      "score": 0.6503,
+      "pred": 1
+    },
+    {
+      "a": "Naveen Pandey",
+      "b": "Navin Pandey",
+      "label": 1,
+      "score": 0.7473,
+      "pred": 1
+    },
+    {
+      "a": "Naveen Pandey",
+      "b": "N. Pandey",
+      "label": 1,
+      "score": 0.7069,
+      "pred": 1
+    },
+    {
+      "a": "Vijay Kumar",
+      "b": "Vijay Kummar",
+      "label": 1,
+      "score": 0.8861,
+      "pred": 1
+    },
+    {
+      "a": "Vijay Kumar",
+      "b": "V. Kumar",
+      "label": 1,
+      "score": 0.6503,
+      "pred": 1
+    },
+    {
+      "a": "Gaurav Mishra",
+      "b": "Gaurav Misra",
+      "label": 1,
+      "score": 0.8344,
+      "pred": 1
+    },
+    {
+      "a": "Gaurav Mishra",
+      "b": "G. Mishra",
+      "label": 1,
+      "score": 0.6539,
+      "pred": 1
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Rajesh Kumar",
+      "label": 0,
+      "score": 0.7208,
+      "pred": 1
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Ramesh Gupta",
+      "label": 0,
+      "score": 0.4963,
+      "pred": 0
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "Priya Singh",
+      "label": 0,
+      "score": 0.4806,
+      "pred": 0
+    },
+    {
+      "a": "Akash Verma",
+      "b": "Ankit Verma",
+      "label": 0,
+      "score": 0.4674,
+      "pred": 0
+    },
+    {
+      "a": "Suresh Patel",
+      "b": "Sunil Patel",
+      "label": 0,
+      "score": 0.4919,
+      "pred": 0
+    },
+    {
+      "a": "Vikram Singh",
+      "b": "Vishal Singh",
+      "label": 0,
+      "score": 0.5192,
+      "pred": 0
+    },
+    {
+      "a": "Deepak Nair",
+      "b": "Dinesh Nair",
+      "label": 0,
+      "score": 0.4029,
+      "pred": 0
+    },
+    {
+      "a": "Sanjay Gupta",
+      "b": "Sandeep Gupta",
+      "label": 0,
+      "score": 0.5257,
+      "pred": 0
+    },
+    {
+      "a": "Arjun Reddy",
+      "b": "Aditya Reddy",
+      "label": 0,
+      "score": 0.4541,
+      "pred": 0
+    },
+    {
+      "a": "Rohit Mehta",
+      "b": "Rakesh Mehta",
+      "label": 0,
+      "score": 0.4438,
+      "pred": 0
+    },
+    {
+      "a": "Meera Iyer",
+      "b": "Mohan Iyer",
+      "label": 0,
+      "score": 0.4335,
+      "pred": 0
+    },
+    {
+      "a": "Kiran Rao",
+      "b": "Kavitha Rao",
+      "label": 0,
+      "score": 0.3929,
+      "pred": 0
+    },
+    {
+      "a": "Anil Kapoor",
+      "b": "Ajay Kapoor",
+      "label": 0,
+      "score": 0.5305,
+      "pred": 0
+    },
+    {
+      "a": "Rajesh Khanna",
+      "b": "Rohit Khanna",
+      "label": 0,
+      "score": 0.4724,
+      "pred": 0
+    },
+    {
+      "a": "Manoj Tiwari",
+      "b": "Mahesh Tiwari",
+      "label": 0,
+      "score": 0.5185,
+      "pred": 0
+    },
+    {
+      "a": "Ramesh Kumar",
+      "b": "Rahul Sharma",
+      "label": 0,
+      "score": 0.2025,
+      "pred": 0
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "Vikram Patel",
+      "label": 0,
+      "score": 0.075,
+      "pred": 0
+    },
+    {
+      "a": "Akash Verma",
+      "b": "Deepak Nair",
+      "label": 0,
+      "score": 0.0118,
+      "pred": 0
+    },
+    {
+      "a": "Suresh Patel",
+      "b": "Meera Rao",
+      "label": 0,
+      "score": 0.0,
+      "pred": 0
+    },
+    {
+      "a": "Vikram Singh",
+      "b": "Rajesh Gupta",
+      "label": 0,
+      "score": 0.0105,
+      "pred": 0
+    },
+    {
+      "a": "Sunil Joshi",
+      "b": "Sunil Shah",
+      "label": 0,
+      "score": 0.5005,
+      "pred": 0
+    },
+    {
+      "a": "Naveen Pandey",
+      "b": "Naveen Jain",
+      "label": 0,
+      "score": 0.483,
+      "pred": 0
+    },
+    {
+      "a": "Vijay Kumar",
+      "b": "Vijay Das",
+      "label": 0,
+      "score": 0.4828,
+      "pred": 0
+    },
+    {
+      "a": "Gaurav Mishra",
+      "b": "Gaurav Bose",
+      "label": 0,
+      "score": 0.4755,
+      "pred": 0
+    },
+    {
+      "a": "Deepak Nair",
+      "b": "Sanjay Nair",
+      "label": 0,
+      "score": 0.3947,
+      "pred": 0
+    },
+    {
+      "a": "Arjun Reddy",
+      "b": "Rohit Sharma",
+      "label": 0,
+      "score": 0.1343,
+      "pred": 0
+    },
+    {
+      "a": "Kiran Rao",
+      "b": "Vijay Kumar",
+      "label": 0,
+      "score": 0.1394,
+      "pred": 0
+    },
+    {
+      "a": "Manoj Tiwari",
+      "b": "Ramesh Patel",
+      "label": 0,
+      "score": 0.0,
+      "pred": 0
+    },
+    {
+      "a": "Rajesh Khanna",
+      "b": "Akash Mishra",
+      "label": 0,
+      "score": 0.0211,
+      "pred": 0
+    },
+    {
+      "a": "Anil Kapoor",
+      "b": "Suresh Gupta",
+      "label": 0,
+      "score": 0.0,
+      "pred": 0
+    },
+    {
+      "a": "Rohit Mehta",
+      "b": "Vikram Shah",
+      "label": 0,
+      "score": 0.0,
+      "pred": 0
+    },
+    {
+      "a": "Priya Sharma",
+      "b": "Deepak Verma",
+      "label": 0,
+      "score": 0.034,
+      "pred": 0
+    },
+    {
+      "a": "Sanjay Gupta",
+      "b": "Sunil Joshi",
+      "label": 0,
+      "score": 0.101,
+      "pred": 0
+    },
+    {
+      "a": "Meera Iyer",
+      "b": "Rajesh Pandey",
+      "label": 0,
+      "score": 0.0111,
+      "pred": 0
+    },
+    {
+      "a": "Gaurav Mishra",
+      "b": "Anil Reddy",
+      "label": 0,
+      "score": 0.0,
+      "pred": 0
+    }
+  ]
+}

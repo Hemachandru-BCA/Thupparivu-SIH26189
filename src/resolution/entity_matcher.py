@@ -334,6 +334,40 @@ def _soundex_pair_score(t1: str, t2: str, initials_enabled: bool) -> float:
 
 
 # --------------------------------------------------------------------------
+# Character n-gram overlap (Task 4: Indian name transliterations)
+# --------------------------------------------------------------------------
+
+def _char_ngrams(name: str, n: int = 3) -> Dict[str, int]:
+    """Character n-gram frequency map for a normalized name."""
+    norm = "".join(ch for ch in name.lower() if ch.isalnum())
+    if len(norm) < n:
+        return {norm: 1} if norm else {}
+    out: Dict[str, int] = {}
+    for i in range(len(norm) - n + 1):
+        g = norm[i:i + n]
+        out[g] = out.get(g, 0) + 1
+    return out
+
+
+def char_ngram_overlap(name_a: str, name_b: str) -> float:
+    """Jaccard-style blended 2-gram + 3-gram overlap in [0, 1].
+
+    Useful for Indian transliteration variants that Soundex and Levenshtein
+    both miss (e.g. *Aiyyer* vs *Iyer*, *Guptha* vs *Gupta*).
+    """
+    def _jaccard(ngrams_a: Dict[str, int], ngrams_b: Dict[str, int]) -> float:
+        if not ngrams_a or not ngrams_b:
+            return 0.0
+        all_keys = set(ngrams_a) | set(ngrams_b)
+        inter = sum(min(ngrams_a.get(k, 0), ngrams_b.get(k, 0)) for k in all_keys)
+        union = sum(max(ngrams_a.get(k, 0), ngrams_b.get(k, 0)) for k in all_keys)
+        return inter / max(1.0, union)
+    g2_a, g2_b = _char_ngrams(name_a, 2), _char_ngrams(name_b, 2)
+    g3_a, g3_b = _char_ngrams(name_a, 3), _char_ngrams(name_b, 3)
+    return 0.5 * _jaccard(g2_a, g2_b) + 0.5 * _jaccard(g3_a, g3_b)
+
+
+# --------------------------------------------------------------------------
 # Configuration and pairwise comparison
 # --------------------------------------------------------------------------
 
@@ -366,14 +400,15 @@ class MatchConfig:
     """
 
     # Component weights (renormalized over active components at scoring time).
-    weight_levenshtein: float = 0.35
-    weight_fuzzy: float = 0.15
+    weight_levenshtein: float = 0.30
+    weight_fuzzy: float = 0.10
     weight_token: float = 0.25
-    weight_soundex: float = 0.25
+    weight_soundex: float = 0.20
+    weight_ngram: float = 0.15
 
     # Decision thresholds.
-    combined_threshold: float = 0.80
-    levenshtein_threshold: float = 0.85
+    combined_threshold: float = 0.70
+    levenshtein_threshold: float = 0.92
     initials_min_levenshtein: float = 0.55
     soundex_min_levenshtein: float = 0.75
     token_min_levenshtein: float = 0.50
@@ -382,6 +417,7 @@ class MatchConfig:
     initial_match_score: float = 1.0
     soundex_enabled: bool = True
     fuzzy_enabled: bool = True
+    ngram_enabled: bool = True
     initials_enabled: bool = True
     allow_token_reorder: bool = True
     use_first_letter_prefilter: bool = True
@@ -398,6 +434,8 @@ class MatchConfig:
         weights["token"] = self.weight_token
         if self.soundex_enabled:
             weights["soundex"] = self.weight_soundex
+        if self.ngram_enabled:
+            weights["ngram"] = self.weight_ngram
         total = sum(weights.values())
         if total <= 0:
             raise EntityResolutionError("At least one component weight must be positive")
@@ -481,6 +519,10 @@ def compare_names(name_a: str, name_b: str, config: Optional[MatchConfig] = None
             snd_pairs.append(_soundex_pair_score(ta, tb, cfg.initials_enabled))
         soundex_score = (sum(snd_pairs) / max(len(tokens_a), len(tokens_b))) if snd_pairs else 0.0
         components["soundex"] = soundex_score
+
+    # Character n-gram overlap (Task 4: Indian transliterations)
+    if cfg.ngram_enabled:
+        components["ngram"] = char_ngram_overlap(norm_a, norm_b)
 
     weights = cfg.active_weights()
     score = sum(weights[k] * components[k] for k in weights)

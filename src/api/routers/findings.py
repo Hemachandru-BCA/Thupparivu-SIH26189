@@ -77,7 +77,7 @@ def generate_findings(min_confidence: float = Query(0.0, ge=0.0, le=1.0)):
 
     from src.xai.findings import FindingBuilder, save_findings, validate_finding
 
-    builder = FindingBuilder(store)
+    builder = FindingBuilder(store, calibrator_path="data/models/confidence_calibrator.pkl")
     findings = builder.build_all(ghosts, min_confidence=min_confidence)
     reports = [validate_finding(f, store) for f in findings]
     builder.link_store(findings)

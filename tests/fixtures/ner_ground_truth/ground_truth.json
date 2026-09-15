@@ -1,0 +1,1544 @@
+[
+  {
+    "doc_id": "fixture_001",
+    "text": "On 12-Feb-2024, Ramesh Kumar (8745098712) called Priya Sharma at 22:14. The call lasted 4 minutes and originated from Chennai. No transfer was made.",
+    "entities": [
+      {
+        "text": "Ramesh Kumar",
+        "type": "PERSON",
+        "start_char": 16,
+        "end_char": 28
+      },
+      {
+        "text": "8745098712",
+        "type": "PHONE",
+        "start_char": 30,
+        "end_char": 40
+      },
+      {
+        "text": "Priya Sharma",
+        "type": "PERSON",
+        "start_char": 49,
+        "end_char": 61
+      },
+      {
+        "text": "22:14",
+        "type": "TIME",
+        "start_char": 65,
+        "end_char": 70
+      },
+      {
+        "text": "Chennai",
+        "type": "LOCATION",
+        "start_char": 118,
+        "end_char": 125
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_002",
+    "text": "Akash Verma visited the Chennai branch of SBI Bank on 03-Mar-2024. He did not transfer any money to account 3001234567. His vehicle TN-01-AB-1234 was seen near the court.",
+    "entities": [
+      {
+        "text": "Akash Verma",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 11
+      },
+      {
+        "text": "Chennai",
+        "type": "LOCATION",
+        "start_char": 24,
+        "end_char": 31
+      },
+      {
+        "text": "SBI Bank",
+        "type": "BANK",
+        "start_char": 42,
+        "end_char": 50
+      },
+      {
+        "text": "3001234567",
+        "type": "ACCOUNT",
+        "start_char": 108,
+        "end_char": 118
+      },
+      {
+        "text": "TN-01-AB-1234",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 132,
+        "end_char": 145
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_003",
+    "text": "Meera called Mohan but there was no confirmation of the meeting. Rahul reportedly sent a transaction (reference UPI-REF-928374) to Neha on Monday.",
+    "entities": [
+      {
+        "text": "Meera",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "Mohan",
+        "type": "PERSON",
+        "start_char": 13,
+        "end_char": 18
+      },
+      {
+        "text": "Rahul",
+        "type": "PERSON",
+        "start_char": 65,
+        "end_char": 70
+      },
+      {
+        "text": "UPI-REF-928374",
+        "type": "TRANSACTION",
+        "start_char": 112,
+        "end_char": 126
+      },
+      {
+        "text": "Neha",
+        "type": "PERSON",
+        "start_char": 131,
+        "end_char": 135
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_004",
+    "text": "The FIR at Police Station Koyambedu lists Vikram (8000111222) and Deepak as suspects. They allegedly used a Fortuner vehicle, registration WB-02-CY-8890, registered in Kolkata.",
+    "entities": [
+      {
+        "text": "Police Station Koyambedu",
+        "type": "POLICE_STATION",
+        "start_char": 11,
+        "end_char": 35
+      },
+      {
+        "text": "Vikram",
+        "type": "PERSON",
+        "start_char": 42,
+        "end_char": 48
+      },
+      {
+        "text": "8000111222",
+        "type": "PHONE",
+        "start_char": 50,
+        "end_char": 60
+      },
+      {
+        "text": "Deepak",
+        "type": "PERSON",
+        "start_char": 66,
+        "end_char": 72
+      },
+      {
+        "text": "Fortuner",
+        "type": "VEHICLE",
+        "start_char": 108,
+        "end_char": 116
+      },
+      {
+        "text": "WB-02-CY-8890",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 139,
+        "end_char": 152
+      },
+      {
+        "text": "Kolkata",
+        "type": "LOCATION",
+        "start_char": 168,
+        "end_char": 175
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_005",
+    "text": "Sudhir Gowda wired money to account 9028837465 at HDFC. No call was recorded between Sudhir and Arjun on 05-May-2024.",
+    "entities": [
+      {
+        "text": "Sudhir Gowda",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 12
+      },
+      {
+        "text": "9028837465",
+        "type": "ACCOUNT",
+        "start_char": 36,
+        "end_char": 46
+      },
+      {
+        "text": "HDFC",
+        "type": "BANK",
+        "start_char": 50,
+        "end_char": 54
+      },
+      {
+        "text": "Sudhir",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "Arjun",
+        "type": "PERSON",
+        "start_char": 96,
+        "end_char": 101
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_006",
+    "text": "Pooja Nair met Sanjay Kumar at Hotel Saravana Bhavan. They discussed the case no. FIR-2024-8890 but denied any involvement in the incident.",
+    "entities": [
+      {
+        "text": "Pooja Nair",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 10
+      },
+      {
+        "text": "Sanjay Kumar",
+        "type": "PERSON",
+        "start_char": 15,
+        "end_char": 27
+      },
+      {
+        "text": "Hotel Saravana Bhavan",
+        "type": "ORGANIZATION",
+        "start_char": 31,
+        "end_char": 52
+      },
+      {
+        "text": "FIR-2024-8890",
+        "type": "FIR",
+        "start_char": 82,
+        "end_char": 95
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_007",
+    "text": "Manish and Kavitha exchanged UPI payments via GPay (4102837465) on multiple occasions, but reports say no direct phone contact occurred.",
+    "entities": [
+      {
+        "text": "Manish",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "Kavitha",
+        "type": "PERSON",
+        "start_char": 11,
+        "end_char": 18
+      },
+      {
+        "text": "GPay",
+        "type": "UPI",
+        "start_char": 46,
+        "end_char": 50
+      },
+      {
+        "text": "4102837465",
+        "type": "PHONE",
+        "start_char": 52,
+        "end_char": 62
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_008",
+    "text": "In Chennai, Inspector Ramesh seized a Hero Honda motorcycle (TN-09-BX-4455) from accused Ashok without any court order. Ramesh's statement was recorded at the court premises.",
+    "entities": [
+      {
+        "text": "Chennai",
+        "type": "LOCATION",
+        "start_char": 3,
+        "end_char": 10
+      },
+      {
+        "text": "Ramesh",
+        "type": "PERSON",
+        "start_char": 22,
+        "end_char": 28
+      },
+      {
+        "text": "Hero Honda",
+        "type": "VEHICLE",
+        "start_char": 38,
+        "end_char": 48
+      },
+      {
+        "text": "TN-09-BX-4455",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 61,
+        "end_char": 74
+      },
+      {
+        "text": "Ashok",
+        "type": "PERSON",
+        "start_char": 89,
+        "end_char": 94
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_009",
+    "text": "Ramesh Kumar sent 50000 rupees to account 3001234567 at ICICI bank on 12 Mar 2024.",
+    "entities": [
+      {
+        "text": "Ramesh Kumar",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 12
+      },
+      {
+        "text": "50000 rupees",
+        "type": "MONEY",
+        "start_char": 18,
+        "end_char": 30
+      },
+      {
+        "text": "3001234567",
+        "type": "ACCOUNT",
+        "start_char": 42,
+        "end_char": 52
+      },
+      {
+        "text": "ICICI bank",
+        "type": "BANK",
+        "start_char": 56,
+        "end_char": 66
+      },
+      {
+        "text": "12 Mar 2024",
+        "type": "DATE",
+        "start_char": 70,
+        "end_char": 81
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_010",
+    "text": "Priya Sharma called Vikram at 21:30 on 2024-04-15 from Mumbai.",
+    "entities": [
+      {
+        "text": "Priya Sharma",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 12
+      },
+      {
+        "text": "Vikram",
+        "type": "PERSON",
+        "start_char": 20,
+        "end_char": 26
+      },
+      {
+        "text": "Mumbai",
+        "type": "LOCATION",
+        "start_char": 55,
+        "end_char": 61
+      },
+      {
+        "text": "21:30",
+        "type": "TIME",
+        "start_char": 30,
+        "end_char": 35
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_011",
+    "text": "The knife was seized from Manoj near the old harbour pier on 05/06/2024.",
+    "entities": [
+      {
+        "text": "knife",
+        "type": "WEAPON",
+        "start_char": 4,
+        "end_char": 9
+      },
+      {
+        "text": "Manoj",
+        "type": "PERSON",
+        "start_char": 26,
+        "end_char": 31
+      },
+      {
+        "text": "old harbour pier",
+        "type": "LOCATION",
+        "start_char": 41,
+        "end_char": 57
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_012",
+    "text": "Suresh Reddy owns a black Toyota Fortuner with registration KA-03-MN-2211.",
+    "entities": [
+      {
+        "text": "Suresh Reddy",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 12
+      },
+      {
+        "text": "black Toyota Fortuner",
+        "type": "VEHICLE",
+        "start_char": 20,
+        "end_char": 41
+      },
+      {
+        "text": "KA-03-MN-2211",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 60,
+        "end_char": 73
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_013",
+    "text": "Akash transferred 100000 rupees via GPay to account 4001234567.",
+    "entities": [
+      {
+        "text": "Akash",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "100000 rupees",
+        "type": "MONEY",
+        "start_char": 18,
+        "end_char": 31
+      },
+      {
+        "text": "GPay",
+        "type": "UPI",
+        "start_char": 36,
+        "end_char": 40
+      },
+      {
+        "text": "4001234567",
+        "type": "ACCOUNT",
+        "start_char": 52,
+        "end_char": 62
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_014",
+    "text": "An email from contact@example.org was traced to IP address 103.21.58.12.",
+    "entities": [
+      {
+        "text": "contact@example.org",
+        "type": "EMAIL",
+        "start_char": 14,
+        "end_char": 33
+      },
+      {
+        "text": "103.21.58.12",
+        "type": "IP_ADDRESS",
+        "start_char": 59,
+        "end_char": 71
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_015",
+    "text": "One 9mm pistol along with ammunition was found in the abandoned factory.",
+    "entities": [
+      {
+        "text": "pistol",
+        "type": "WEAPON",
+        "start_char": 8,
+        "end_char": 14
+      },
+      {
+        "text": "abandoned factory",
+        "type": "LOCATION",
+        "start_char": 54,
+        "end_char": 71
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_016",
+    "text": "Vikram and Deepak are suspected in the theft at the parking garage b.",
+    "entities": [
+      {
+        "text": "Vikram",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "Deepak",
+        "type": "PERSON",
+        "start_char": 11,
+        "end_char": 17
+      },
+      {
+        "text": "theft",
+        "type": "CRIME",
+        "start_char": 39,
+        "end_char": 44
+      },
+      {
+        "text": "parking garage b",
+        "type": "LOCATION",
+        "start_char": 52,
+        "end_char": 68
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_017",
+    "text": "The FIR no. FIR-2024-8890 was registered at police station Adyar.",
+    "entities": [
+      {
+        "text": "FIR-2024-8890",
+        "type": "FIR",
+        "start_char": 12,
+        "end_char": 25
+      },
+      {
+        "text": "Adyar",
+        "type": "POLICE_STATION",
+        "start_char": 59,
+        "end_char": 64
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_018",
+    "text": "Rakesh Gupta was seen driving a white Swift near the downtown cafe on 15 Aug 2024.",
+    "entities": [
+      {
+        "text": "Rakesh Gupta",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 12
+      },
+      {
+        "text": "white Swift",
+        "type": "VEHICLE",
+        "start_char": 32,
+        "end_char": 43
+      },
+      {
+        "text": "downtown cafe",
+        "type": "LOCATION",
+        "start_char": 53,
+        "end_char": 66
+      },
+      {
+        "text": "15 Aug 2024",
+        "type": "DATE",
+        "start_char": 70,
+        "end_char": 81
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_019",
+    "text": "The court issued an order but Karthik received no FIR regarding the fraud.",
+    "entities": [
+      {
+        "text": "Karthik",
+        "type": "PERSON",
+        "start_char": 30,
+        "end_char": 37
+      },
+      {
+        "text": "fraud",
+        "type": "CRIME",
+        "start_char": 68,
+        "end_char": 73
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_020",
+    "text": "Kavita Nair transferred funds to account 7001234567 via BHIMPay on 12-08-2024.",
+    "entities": [
+      {
+        "text": "Kavita Nair",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 11
+      },
+      {
+        "text": "7001234567",
+        "type": "ACCOUNT",
+        "start_char": 41,
+        "end_char": 51
+      },
+      {
+        "text": "BHIMPay",
+        "type": "UPI",
+        "start_char": 56,
+        "end_char": 63
+      },
+      {
+        "text": "12-08-2024",
+        "type": "DATE",
+        "start_char": 67,
+        "end_char": 77
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_021",
+    "text": "Sandeep Singh met Imran at Hotel Saravana Bhavan and discussed case no. CASE-2024-556.",
+    "entities": [
+      {
+        "text": "Sandeep Singh",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 13
+      },
+      {
+        "text": "Imran",
+        "type": "PERSON",
+        "start_char": 18,
+        "end_char": 23
+      },
+      {
+        "text": "Hotel Saravana Bhavan",
+        "type": "ORGANIZATION",
+        "start_char": 27,
+        "end_char": 48
+      },
+      {
+        "text": "CASE-2024-556",
+        "type": "FIR",
+        "start_char": 72,
+        "end_char": 85
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_022",
+    "text": "Nilesh's phone number 9876543210 was linked to the red viper syndicate.",
+    "entities": [
+      {
+        "text": "Nilesh",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "9876543210",
+        "type": "PHONE",
+        "start_char": 22,
+        "end_char": 32
+      },
+      {
+        "text": "red viper syndicate",
+        "type": "ORGANIZATION",
+        "start_char": 51,
+        "end_char": 70
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_023",
+    "text": "The transaction ref TXN-2024-77124 was queried by Mahesh at 07:45.",
+    "entities": [
+      {
+        "text": "TXN-2024-77124",
+        "type": "TRANSACTION",
+        "start_char": 20,
+        "end_char": 34
+      },
+      {
+        "text": "Mahesh",
+        "type": "PERSON",
+        "start_char": 50,
+        "end_char": 56
+      },
+      {
+        "text": "07:45",
+        "type": "TIME",
+        "start_char": 60,
+        "end_char": 65
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_024",
+    "text": "Mohit collected a knife from the warehouse district and left in a truck.",
+    "entities": [
+      {
+        "text": "Mohit",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "knife",
+        "type": "WEAPON",
+        "start_char": 18,
+        "end_char": 23
+      },
+      {
+        "text": "warehouse district",
+        "type": "LOCATION",
+        "start_char": 33,
+        "end_char": 51
+      },
+      {
+        "text": "truck",
+        "type": "VEHICLE",
+        "start_char": 66,
+        "end_char": 71
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_025",
+    "text": "The court order was served but Varun received no FIR regarding the bribery.",
+    "entities": [
+      {
+        "text": "Varun",
+        "type": "PERSON",
+        "start_char": 31,
+        "end_char": 36
+      },
+      {
+        "text": "bribery",
+        "type": "CRIME",
+        "start_char": 67,
+        "end_char": 74
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_026",
+    "text": "Gayatri deposited 20000 rupees into account 8001234567 at State Bank of India.",
+    "entities": [
+      {
+        "text": "Gayatri",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 7
+      },
+      {
+        "text": "20000 rupees",
+        "type": "MONEY",
+        "start_char": 18,
+        "end_char": 30
+      },
+      {
+        "text": "8001234567",
+        "type": "ACCOUNT",
+        "start_char": 44,
+        "end_char": 54
+      },
+      {
+        "text": "State Bank of India",
+        "type": "BANK",
+        "start_char": 58,
+        "end_char": 77
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_027",
+    "text": "An anonymous call from +91-98450-12345 warned about an extortion attempt at the riverside docks.",
+    "entities": [
+      {
+        "text": "+91-98450-12345",
+        "type": "PHONE",
+        "start_char": 23,
+        "end_char": 38
+      },
+      {
+        "text": "extortion",
+        "type": "CRIME",
+        "start_char": 55,
+        "end_char": 64
+      },
+      {
+        "text": "riverside docks",
+        "type": "LOCATION",
+        "start_char": 80,
+        "end_char": 95
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_028",
+    "text": "Faisal Khan owns a silver Creta with plate DL-03-CA-7788 and a registered SIM 9900112233.",
+    "entities": [
+      {
+        "text": "Faisal Khan",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 11
+      },
+      {
+        "text": "silver Creta",
+        "type": "VEHICLE",
+        "start_char": 19,
+        "end_char": 31
+      },
+      {
+        "text": "DL-03-CA-7788",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 43,
+        "end_char": 56
+      },
+      {
+        "text": "9900112233",
+        "type": "PHONE",
+        "start_char": 78,
+        "end_char": 88
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_029",
+    "text": "The smuggling ring used a wall of the warehouse at storage facility 12 to hide counterfeit currency.",
+    "entities": [
+      {
+        "text": "smuggling",
+        "type": "CRIME",
+        "start_char": 4,
+        "end_char": 13
+      },
+      {
+        "text": "storage facility 12",
+        "type": "LOCATION",
+        "start_char": 51,
+        "end_char": 70
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_030",
+    "text": "Transaction id TXN-9901-2233 was flagged after 45000 rupees moved to account 5123456789.",
+    "entities": [
+      {
+        "text": "TXN-9901-2233",
+        "type": "TRANSACTION",
+        "start_char": 15,
+        "end_char": 28
+      },
+      {
+        "text": "45000 rupees",
+        "type": "MONEY",
+        "start_char": 47,
+        "end_char": 59
+      },
+      {
+        "text": "5123456789",
+        "type": "ACCOUNT",
+        "start_char": 77,
+        "end_char": 87
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_031",
+    "text": "Rekha's Honda Activa (MH-12-DE-3321) was spotted near the private villa on 2024-06-01.",
+    "entities": [
+      {
+        "text": "Rekha",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "Honda Activa",
+        "type": "VEHICLE",
+        "start_char": 8,
+        "end_char": 20
+      },
+      {
+        "text": "MH-12-DE-3321",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 22,
+        "end_char": 35
+      },
+      {
+        "text": "private villa",
+        "type": "LOCATION",
+        "start_char": 58,
+        "end_char": 71
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_032",
+    "text": "Chetan used a stolen passport document ID DOC-4482 and a fake phone number to open the account.",
+    "entities": [
+      {
+        "text": "Chetan",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "DOC-4482",
+        "type": "DOCUMENT",
+        "start_char": 42,
+        "end_char": 50
+      },
+      {
+        "text": "account",
+        "type": "ACCOUNT",
+        "start_char": 87,
+        "end_char": 94
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_033",
+    "text": "The fraud involved misuse of a corporate email accounts@sentinel.logistics and a website domain sentinel-logistics.in.",
+    "entities": [
+      {
+        "text": "fraud",
+        "type": "CRIME",
+        "start_char": 4,
+        "end_char": 9
+      },
+      {
+        "text": "accounts@sentinel.logistics",
+        "type": "EMAIL",
+        "start_char": 47,
+        "end_char": 74
+      },
+      {
+        "text": "sentinel-logistics.in",
+        "type": "DOMAIN",
+        "start_char": 96,
+        "end_char": 117
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_034",
+    "text": "Reports say three motorcycle riders wearing helmets were seen near the abandoned factory after the arson on 22/07/2024.",
+    "entities": [
+      {
+        "text": "motorcycle",
+        "type": "VEHICLE",
+        "start_char": 18,
+        "end_char": 28
+      },
+      {
+        "text": "abandoned factory",
+        "type": "LOCATION",
+        "start_char": 71,
+        "end_char": 88
+      },
+      {
+        "text": "arson",
+        "type": "CRIME",
+        "start_char": 99,
+        "end_char": 104
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_035",
+    "text": "Prakash was charged with corruption after 3 lakh rupees changed hands at the court premises.",
+    "entities": [
+      {
+        "text": "Prakash",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 7
+      },
+      {
+        "text": "corruption",
+        "type": "CRIME",
+        "start_char": 25,
+        "end_char": 35
+      },
+      {
+        "text": "3 lakh rupees",
+        "type": "MONEY",
+        "start_char": 42,
+        "end_char": 55
+      },
+      {
+        "text": "court",
+        "type": "COURT",
+        "start_char": 77,
+        "end_char": 82
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_036",
+    "text": "Sumit deposited 75000 rupees at the HDFC branch in Pune and took a receipt for txn id 775544332211.",
+    "entities": [
+      {
+        "text": "Sumit",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "75000 rupees",
+        "type": "MONEY",
+        "start_char": 16,
+        "end_char": 28
+      },
+      {
+        "text": "HDFC",
+        "type": "BANK",
+        "start_char": 36,
+        "end_char": 40
+      },
+      {
+        "text": "Pune",
+        "type": "LOCATION",
+        "start_char": 51,
+        "end_char": 55
+      },
+      {
+        "text": "775544332211",
+        "type": "TRANSACTION",
+        "start_char": 86,
+        "end_char": 98
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_037",
+    "text": "The police seized a 9mm pistol and 12 rounds from an Audi sedan parked at parking garage b after the robbery.",
+    "entities": [
+      {
+        "text": "9mm pistol",
+        "type": "WEAPON",
+        "start_char": 20,
+        "end_char": 30
+      },
+      {
+        "text": "Audi",
+        "type": "VEHICLE",
+        "start_char": 53,
+        "end_char": 57
+      },
+      {
+        "text": "parking garage b",
+        "type": "LOCATION",
+        "start_char": 74,
+        "end_char": 90
+      },
+      {
+        "text": "robbery",
+        "type": "CRIME",
+        "start_char": 101,
+        "end_char": 108
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_038",
+    "text": "Gaurav's social handle @gaurav_2024 was used to coordinate the kidnapping; his IP resolved to 45.33.12.90.",
+    "entities": [
+      {
+        "text": "Gaurav",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 6
+      },
+      {
+        "text": "kidnapping",
+        "type": "CRIME",
+        "start_char": 63,
+        "end_char": 73
+      },
+      {
+        "text": "45.33.12.90",
+        "type": "IP_ADDRESS",
+        "start_char": 94,
+        "end_char": 105
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_039",
+    "text": "The transaction of 12 lakh rupees to account 6001234567 at Bank of India took place at 18:22 on 08-09-2024.",
+    "entities": [
+      {
+        "text": "12 lakh rupees",
+        "type": "MONEY",
+        "start_char": 19,
+        "end_char": 33
+      },
+      {
+        "text": "6001234567",
+        "type": "ACCOUNT",
+        "start_char": 45,
+        "end_char": 55
+      },
+      {
+        "text": "Bank of India",
+        "type": "BANK",
+        "start_char": 59,
+        "end_char": 72
+      },
+      {
+        "text": "18:22",
+        "type": "TIME",
+        "start_char": 87,
+        "end_char": 92
+      },
+      {
+        "text": "08-09-2024",
+        "type": "DATE",
+        "start_char": 96,
+        "end_char": 106
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_040",
+    "text": "Divya was arrested for embezzlement after cash and a knife were recovered from her room in Chennai.",
+    "entities": [
+      {
+        "text": "Divya",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "embezzlement",
+        "type": "CRIME",
+        "start_char": 23,
+        "end_char": 35
+      },
+      {
+        "text": "knife",
+        "type": "WEAPON",
+        "start_char": 53,
+        "end_char": 58
+      },
+      {
+        "text": "Chennai",
+        "type": "LOCATION",
+        "start_char": 91,
+        "end_char": 98
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_041",
+    "text": "A blue Bolero with plate RJ-14-AX-5566 was chased from the old harbour pier to Pune at 23:10.",
+    "entities": [
+      {
+        "text": "blue Bolero",
+        "type": "VEHICLE",
+        "start_char": 2,
+        "end_char": 13
+      },
+      {
+        "text": "RJ-14-AX-5566",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 25,
+        "end_char": 38
+      },
+      {
+        "text": "old harbour pier",
+        "type": "LOCATION",
+        "start_char": 59,
+        "end_char": 75
+      },
+      {
+        "text": "Pune",
+        "type": "LOCATION",
+        "start_char": 79,
+        "end_char": 83
+      },
+      {
+        "text": "23:10",
+        "type": "TIME",
+        "start_char": 87,
+        "end_char": 92
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_042",
+    "text": "The ID reference ID-7788-2233 matched a transaction made by Sandeep on the night of the burglary.",
+    "entities": [
+      {
+        "text": "ID-7788-2233",
+        "type": "TRANSACTION",
+        "start_char": 17,
+        "end_char": 29
+      },
+      {
+        "text": "Sandeep",
+        "type": "PERSON",
+        "start_char": 60,
+        "end_char": 67
+      },
+      {
+        "text": "burglary",
+        "type": "CRIME",
+        "start_char": 88,
+        "end_char": 96
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_043",
+    "text": "Contact number 9988776655 belongs to the owner of a white Mercedes parked at the downtown cafe.",
+    "entities": [
+      {
+        "text": "9988776655",
+        "type": "PHONE",
+        "start_char": 15,
+        "end_char": 25
+      },
+      {
+        "text": "white Mercedes",
+        "type": "VEHICLE",
+        "start_char": 52,
+        "end_char": 66
+      },
+      {
+        "text": "downtown cafe",
+        "type": "LOCATION",
+        "start_char": 81,
+        "end_char": 94
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_044",
+    "text": "Inspector Joshi filed FIR-2024-9912 against the smuggling operation at Police Station Egmore on 30 Apr 2024.",
+    "entities": [
+      {
+        "text": "Joshi",
+        "type": "PERSON",
+        "start_char": 10,
+        "end_char": 15
+      },
+      {
+        "text": "FIR-2024-9912",
+        "type": "FIR",
+        "start_char": 22,
+        "end_char": 35
+      },
+      {
+        "text": "smuggling",
+        "type": "CRIME",
+        "start_char": 48,
+        "end_char": 57
+      },
+      {
+        "text": "Police Station Egmore",
+        "type": "POLICE_STATION",
+        "start_char": 71,
+        "end_char": 92
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_045",
+    "text": "An amount of 90000 rupees was withdrawn from account 4567890123 at an ATM near the private villa by an unknown male.",
+    "entities": [
+      {
+        "text": "90000 rupees",
+        "type": "MONEY",
+        "start_char": 13,
+        "end_char": 25
+      },
+      {
+        "text": "4567890123",
+        "type": "ACCOUNT",
+        "start_char": 53,
+        "end_char": 63
+      },
+      {
+        "text": "private villa",
+        "type": "LOCATION",
+        "start_char": 83,
+        "end_char": 96
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_046",
+    "text": "The suspects used a Tata truck registered as GJ-01-XX-9988 to move goods from the warehouse district.",
+    "entities": [
+      {
+        "text": "Tata truck",
+        "type": "VEHICLE",
+        "start_char": 20,
+        "end_char": 30
+      },
+      {
+        "text": "GJ-01-XX-9988",
+        "type": "VEHICLE_NUMBER",
+        "start_char": 45,
+        "end_char": 58
+      },
+      {
+        "text": "warehouse district",
+        "type": "LOCATION",
+        "start_char": 82,
+        "end_char": 100
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_047",
+    "text": "Kiran sent 25000 rupees via PhonePe to 9830012345 and the reference REF-2024-4488 was logged at 20:05.",
+    "entities": [
+      {
+        "text": "Kiran",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "25000 rupees",
+        "type": "MONEY",
+        "start_char": 11,
+        "end_char": 23
+      },
+      {
+        "text": "PhonePe",
+        "type": "UPI",
+        "start_char": 28,
+        "end_char": 35
+      },
+      {
+        "text": "9830012345",
+        "type": "PHONE",
+        "start_char": 39,
+        "end_char": 49
+      },
+      {
+        "text": "REF-2024-4488",
+        "type": "TRANSACTION",
+        "start_char": 68,
+        "end_char": 81
+      },
+      {
+        "text": "20:05",
+        "type": "TIME",
+        "start_char": 96,
+        "end_char": 101
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_048",
+    "text": "The murder weapon was a knife found in the drainage near the riverside docks; the body was moved at 01:12.",
+    "entities": [
+      {
+        "text": "knife",
+        "type": "WEAPON",
+        "start_char": 24,
+        "end_char": 29
+      },
+      {
+        "text": "riverside docks",
+        "type": "LOCATION",
+        "start_char": 61,
+        "end_char": 76
+      },
+      {
+        "text": "01:12",
+        "type": "TIME",
+        "start_char": 100,
+        "end_char": 105
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_049",
+    "text": "Vijay Kumar was seen taking a 50000 rupees payment in cash from the counter of the hotel at 14:30.",
+    "entities": [
+      {
+        "text": "Vijay Kumar",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 11
+      },
+      {
+        "text": "50000 rupees",
+        "type": "MONEY",
+        "start_char": 30,
+        "end_char": 42
+      },
+      {
+        "text": "14:30",
+        "type": "TIME",
+        "start_char": 92,
+        "end_char": 97
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_050",
+    "text": "The device seized from Naveen contained chat logs referencing 'cobra gang' and a phone 7712345678.",
+    "entities": [
+      {
+        "text": "Naveen",
+        "type": "PERSON",
+        "start_char": 23,
+        "end_char": 29
+      },
+      {
+        "text": "cobra gang",
+        "type": "ORGANIZATION",
+        "start_char": 63,
+        "end_char": 73
+      },
+      {
+        "text": "7712345678",
+        "type": "PHONE",
+        "start_char": 87,
+        "end_char": 97
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_051",
+    "text": "Manjunath's motorcycle was caught on camera at 02:15 travelling from the abandoned factory towards Mumbai.",
+    "entities": [
+      {
+        "text": "Manjunath",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 9
+      },
+      {
+        "text": "motorcycle",
+        "type": "VEHICLE",
+        "start_char": 12,
+        "end_char": 22
+      },
+      {
+        "text": "abandoned factory",
+        "type": "LOCATION",
+        "start_char": 73,
+        "end_char": 90
+      },
+      {
+        "text": "Mumbai",
+        "type": "LOCATION",
+        "start_char": 99,
+        "end_char": 105
+      },
+      {
+        "text": "02:15",
+        "type": "TIME",
+        "start_char": 47,
+        "end_char": 52
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_052",
+    "text": "A cash payment of 1 crore rupees was reported against account 9001234567 held at Axis Bank.",
+    "entities": [
+      {
+        "text": "1 crore rupees",
+        "type": "MONEY",
+        "start_char": 18,
+        "end_char": 32
+      },
+      {
+        "text": "9001234567",
+        "type": "ACCOUNT",
+        "start_char": 62,
+        "end_char": 72
+      },
+      {
+        "text": "Axis Bank",
+        "type": "BANK",
+        "start_char": 81,
+        "end_char": 90
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_053",
+    "text": "The FIR number 448/2024 was registered after a stolen mobile was traced to IP 192.168.10.4 in Bangalore.",
+    "entities": [
+      {
+        "text": "448/2024",
+        "type": "FIR",
+        "start_char": 15,
+        "end_char": 23
+      },
+      {
+        "text": "192.168.10.4",
+        "type": "IP_ADDRESS",
+        "start_char": 78,
+        "end_char": 90
+      },
+      {
+        "text": "Bangalore",
+        "type": "LOCATION",
+        "start_char": 94,
+        "end_char": 103
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_054",
+    "text": "Swati transferred 30000 rupees through BHIMPay to UPI id swati@okhdfc on 14-11-2024.",
+    "entities": [
+      {
+        "text": "Swati",
+        "type": "PERSON",
+        "start_char": 0,
+        "end_char": 5
+      },
+      {
+        "text": "30000 rupees",
+        "type": "MONEY",
+        "start_char": 18,
+        "end_char": 30
+      },
+      {
+        "text": "BHIMPay",
+        "type": "UPI",
+        "start_char": 39,
+        "end_char": 46
+      }
+    ]
+  },
+  {
+    "doc_id": "fixture_055",
+    "text": "The weapon cache included a revolver and two knives hidden inside storage facility 12.",
+    "entities": [
+      {
+        "text": "revolver",
+        "type": "WEAPON",
+        "start_char": 28,
+        "end_char": 36
+      },
+      {
+        "text": "knives",
+        "type": "WEAPON",
+        "start_char": 45,
+        "end_char": 51
+      },
+      {
+        "text": "storage facility 12",
+        "type": "LOCATION",
+        "start_char": 66,
+        "end_char": 85
+      }
+    ]
+  }
+]
