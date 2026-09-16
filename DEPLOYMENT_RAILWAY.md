@@ -11,7 +11,7 @@ This project is now deployed on Railway with:
 ### Step 1: Update Environment Variable
 In Railway, set the environment variable:
 ```
-VITE_API_BASE_URL=https://your-backend-url.onrender.com
+VITE_API_BASE_URL=https://enthusiastic-creativity-production-27af.up.railway.app
 ```
 
 ### Step 2: Deploy to Railway
@@ -43,7 +43,7 @@ In Railway, set `CORS_ORIGINS` to include your frontend URL. The backend code
 value below only needs your custom frontend URL:
 
 ```
-CORS_ORIGINS=https://your-frontend.onrender.com
+CORS_ORIGINS=https://hemachandru-bca.github.io
 ```
 
 > **Note:** `https://Hemachandru-BCA.github.io` and `https://hemachandru-bca.github.io`
@@ -55,12 +55,12 @@ CORS_ORIGINS=https://your-frontend.onrender.com
 ### Frontend (Railway)
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `VITE_API_BASE_URL` | `https://your-backend.onrender.com` | Your backend URL |
+| `VITE_API_BASE_URL` | `https://enthusiastic-creativity-production-27af.up.railway.app` | Your backend URL |
 
 ### Backend (Railway)
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `CORS_ORIGINS` | `https://your-frontend.onrender.com` | Your frontend URL |
+| `CORS_ORIGINS` | `https://hemachandru-bca.github.io` | Your frontend URL |
 | `DATABASE_URL` | Your database URL | Optional |
 | `SENTINELGRAPH_LOG_LEVEL` | `INFO` | Logging level |
 

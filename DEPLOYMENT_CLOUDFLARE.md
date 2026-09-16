@@ -5,7 +5,7 @@
 ### Step 1: Update Environment Variable
 Update your `frontend/.env.production` with your backend URL:
 ```
-VITE_API_BASE_URL=https://your-backend.onrender.com
+VITE_API_BASE_URL=https://enthusiastic-creativity-production-27af.up.railway.app
 ```
 
 ### Step 2: Build and Deploy
@@ -37,7 +37,7 @@ Your Python backend (FastAPI + ML pipeline) should stay on Render:
 ### Cloudflare Pages (Frontend)
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `VITE_API_BASE_URL` | `https://your-backend.onrender.com` | Your Render backend URL |
+| `VITE_API_BASE_URL` | `https://enthusiastic-creativity-production-27af.up.railway.app` | Your Render backend URL |
 
 ### Render (Backend)
 | Variable | Value | Description |

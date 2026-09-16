@@ -311,7 +311,7 @@ code is pushed to `main`.
 1. Push this repository to GitHub
 2. Go to **Settings → Pages** and set **Source** to **GitHub Actions**
 3. Set **Settings → Secrets and variables → Actions → Variables**:
-   - `VITE_API_URL` = `https://YOUR_RENDER_SERVICE_URL.onrender.com`
+   - `VITE_API_URL` = `https://enthusiastic-creativity-production-27af.up.railway.app`
 
 ### What happens on push
 
@@ -326,7 +326,7 @@ The workflow at `.github/workflows/deploy.yml`:
 
 | Variable | Value |
 |---|---|
-| `VITE_API_URL` | `https://sentinelgraph-ai.onrender.com` (your Render URL) |
+| `VITE_API_URL` | `https://enthusiastic-creativity-production-27af.up.railway.app` (your Render URL) |
 
 **Expected URL:** `https://Hemachandru-BCA.github.io/Thupparivu-SIH26189/`
 
