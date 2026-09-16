@@ -50,14 +50,18 @@ app = FastAPI(
     version="3.0.0",
 )
 
-# CORS: comma-separated origins via CORS_ORIGINS env var, defaults cover the
-# usual React dev servers plus the GitHub Pages frontend origin.
-_default_origins = (
-    "http://localhost:3000,http://127.0.0.1:3000,"
-    "http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:8000,"
-    "https://Hemachandru-BCA.github.io,https://hemachandru-bca.github.io"
-)
-_origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", _default_origins).split(",") if o.strip()]
+# CORS: comma-separated origins via CORS_ORIGINS env var, merged with
+# always-present dev and GitHub Pages origins so they can never be
+# accidentally dropped when Railway overrides CORS_ORIGINS.
+_dev_origins = [
+    "http://localhost:3000", "http://127.0.0.1:3000",
+    "http://localhost:5173", "http://127.0.0.1:5173", "http://127.0.0.1:8000",
+]
+_github_pages_origins = [
+    "https://Hemachandru-BCA.github.io", "https://hemachandru-bca.github.io",
+]
+_extra = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
+_origins = list(dict.fromkeys(_dev_origins + _github_pages_origins + _extra))
 
 app.add_middleware(
     CORSMiddleware,
