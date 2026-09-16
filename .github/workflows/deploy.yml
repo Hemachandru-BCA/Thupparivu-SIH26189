@@ -25,8 +25,8 @@ jobs:
       # Production backend URL. Set this in GitHub repo Settings ->
       # Secrets and variables -> Actions -> Variables. Defaults to the Railway
       # backend when no repo variable is configured.
-      VITE_API_URL: ${{ vars.VITE_API_URL || 'https://thupparivu-sih26189-ahalya-private-production.up.railway.app' }}
-      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://thupparivu-sih26189-ahalya-private-production.up.railway.app' }}
+      VITE_API_URL: ${{ vars.VITE_API_URL || 'https://enthusiastic-creativity-production-27af.up.railway.app' }}
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://enthusiastic-creativity-production-27af.up.railway.app' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

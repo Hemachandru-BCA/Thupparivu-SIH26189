@@ -5,7 +5,7 @@ import { setBaseUrl } from '@/api/client';
 import './index.css';
 document.documentElement.classList.add('dark');
 
-const DEFAULT_API_URL = 'https://thupparivu-sih26189-ahalya-private-production.up.railway.app';
+const DEFAULT_API_URL = 'https://enthusiastic-creativity-production-27af.up.railway.app';
 const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || DEFAULT_API_URL;
 setBaseUrl(apiBase);
 
