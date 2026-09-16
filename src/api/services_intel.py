@@ -59,6 +59,7 @@ _cache_temporal = _IntCached()
 _cache_hypothesis = _IntCached()
 _cache_link = _IntCached()
 _cache_ghost_detector = _IntCached()
+_cache_priority = _IntCached()
 _registry: Optional[ModelRegistry] = None
 _registry_lock = threading.Lock()
 
@@ -104,6 +105,23 @@ def hidden_intermediary_detector() -> Any:
         services.paths.GRAPH_PKL_PATH,
         lambda: HiddenIntermediaryDetector(seed=42).fit(pkl),
     )
+
+
+def priority_engine(builder=None) -> Any:
+    """Shared InvestigationPriorityEngine (rebuilt when graph.pkl changes).
+
+    ``builder`` optionally supplies the engine constructor (used by the
+    priority router to inject the evidence store); default builds the
+    standard engine with graph only.
+    """
+    if builder is None:
+        from src.analysis.investigation_priority import InvestigationPriorityEngine
+
+        def _default_builder():
+            return InvestigationPriorityEngine(graph=services.load_graph())
+
+        builder = _default_builder
+    return _cache_priority.get(services.paths.GRAPH_PKL_PATH, builder)
 
 
 def model_registry() -> ModelRegistry:

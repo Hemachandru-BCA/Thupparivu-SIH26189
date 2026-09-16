@@ -38,10 +38,17 @@ Railway automatically uses `nixpacks.toml` for build configuration:
    - Any other required variables from `.env.example`
 
 ### Step 2: Update CORS Settings
-In Railway, set `CORS_ORIGINS` to include your frontend URL:
+In Railway, set `CORS_ORIGINS` to include your frontend URL. The backend code
+**always** merges the local dev origins and the GitHub Pages origins, so the
+value below only needs your custom frontend URL:
+
 ```
-CORS_ORIGINS=https://your-frontend.onrender.com,http://localhost:3000,http://localhost:5173
+CORS_ORIGINS=https://your-frontend.onrender.com
 ```
+
+> **Note:** `https://Hemachandru-BCA.github.io` and `https://hemachandru-bca.github.io`
+> are always allowed regardless of `CORS_ORIGINS`, so the GitHub Pages frontend
+> will work even if you never set this variable.
 
 ## Environment Variables
 

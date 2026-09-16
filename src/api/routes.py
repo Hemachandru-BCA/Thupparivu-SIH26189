@@ -27,6 +27,8 @@ Intelligence route groups (deeper analytical engines):
 
 from src.api.routers import (  # noqa: F401
     audit as audit_router,
+    behavior as behavior_router,
+    briefs as briefs_router,
     cases as cases_router,
     communities as communities_router,
     data as data_router,
@@ -36,10 +38,12 @@ from src.api.routers import (  # noqa: F401
     findings as findings_router,
     graph as graph_router,
     hypotheses as hypotheses_router,
+    incident_window as incident_window_router,
     intel as intel_router,
     investigation as investigation_router,
     models as models_router,
     pipeline as pipeline_router,
+    priority as priority_router,
     search as search_router,
     simulation as simulation_router,
     temporal as temporal_router,
@@ -75,12 +79,16 @@ ALL_ROUTERS = [
     audit_router.router,
     # ── intelligence route groups ──────────────────────────────
     temporal_router.router,
+    incident_window_router.router,
     hypotheses_router.router,
     investigation_router.router,
     models_router.router,
     communities_router.router,
     financial_router.router,
     intel_router.router,
+    priority_router.router,
+    behavior_router.router,
+    briefs_router.router,
     # ── P1 analytical route groups ──────────────────────────────
     motifs_router.router,
     data_quality_router.router,
