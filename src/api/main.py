@@ -51,8 +51,12 @@ app = FastAPI(
 )
 
 # CORS: comma-separated origins via CORS_ORIGINS env var, defaults cover the
-# usual React dev servers (CRA on 3000, Vite on 5173).
-_default_origins = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:8000"
+# usual React dev servers plus the GitHub Pages frontend origin.
+_default_origins = (
+    "http://localhost:3000,http://127.0.0.1:3000,"
+    "http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:8000,"
+    "https://Hemachandru-BCA.github.io,https://hemachandru-bca.github.io"
+)
 _origins = [o.strip() for o in os.environ.get("CORS_ORIGINS", _default_origins).split(",") if o.strip()]
 
 app.add_middleware(

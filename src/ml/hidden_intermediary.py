@@ -100,8 +100,13 @@ class HiddenIntermediaryDetector:
     """Detects plausible hidden intermediaries between community pairs."""
 
     def __init__(self, config: Optional[GhostScoreConfig] = None,
-                 use_embeddings: bool = True) -> None:
-        self.config = config or GhostScoreConfig()
+                 use_embeddings: bool = True, seed: Optional[int] = None) -> None:
+        if config is None:
+            self.config = GhostScoreConfig(seed=seed if seed is not None else 42)
+        else:
+            self.config = config
+            if seed is not None:
+                self.config.seed = seed
         self.use_embeddings = use_embeddings
         self.embedder = EmbeddingLinkPredictor(seed=self.config.seed) if use_embeddings else None
 

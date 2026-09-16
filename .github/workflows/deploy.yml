@@ -23,9 +23,9 @@ jobs:
       # https://<user>.github.io/<repo>/). Change this to your exact repo name.
       BASE_PATH: /Thupparivu-SIH26189
       # Production backend URL. Set this in GitHub repo Settings -> Secrets
-      # and variables -> Actions -> Variables. Example:
-      #   VITE_API_URL=https://sentinelgraph-ai.onrender.com
-      VITE_API_URL: ${{ vars.VITE_API_URL }}
+      # and variables -> Actions -> Variables. Defaults to the Railway backend
+      # when no repo variable is configured.
+      VITE_API_URL: ${{ vars.VITE_API_URL || 'https://thupparivu-sih26189-ahalya-private-production.up.railway.app' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

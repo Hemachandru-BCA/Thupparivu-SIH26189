@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T17:35:59.186284+00:00",
+  "generated_at": "2026-09-16T04:10:24.011186+00:00",
   "model_version": "sentinelgraph-xai-1.0.0",
   "findings": [
     {
@@ -43,7 +43,7 @@
       ],
       "status": "HYPOTHESIS",
       "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-10T17:35:59.175907+00:00",
+      "generated_at": "2026-09-16T04:10:23.984309+00:00",
       "model_version": "sentinelgraph-xai-1.0.0",
       "observed": [
         {
@@ -470,7 +470,7 @@
       ],
       "status": "HYPOTHESIS",
       "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-10T17:35:59.182887+00:00",
+      "generated_at": "2026-09-16T04:10:24.005212+00:00",
       "model_version": "sentinelgraph-xai-1.0.0",
       "observed": [
         {
@@ -873,7 +873,7 @@
       ],
       "status": "HYPOTHESIS",
       "method": "STRUCTURAL_HOLE_ANALYSIS",
-      "generated_at": "2026-09-10T17:35:59.186093+00:00",
+      "generated_at": "2026-09-16T04:10:24.010824+00:00",
       "model_version": "sentinelgraph-xai-1.0.0",
       "observed": [
         {
