@@ -88,7 +88,39 @@ simulation `warnings`, UI disclaimers).
 * No auth/authorization: the demo API is unauthenticated and intended for
   localhost use only.
 
-## 7. Compliance / ethics
+## 7. Temporal anomaly detection
+
+* **Temporal anomaly detection operates on observed evidence timestamps
+  only — gaps in evidence collection create blind spots.** The 24-hour
+  burst detector may miss slow-building anomalies that span beyond the
+  observation window. The synchronized-activity detector requires pairs
+  to differ in community label; same-community coordination is not
+  flagged.
+
+## 8. Financial intelligence
+
+* **Financial pattern detection uses synthetic transaction amounts —
+  thresholds are not calibrated to real Indian financial crime data.**
+  The smurfing threshold defaults to ₹50,000 (configurable via
+  `FINANCIAL_SMURF_THRESHOLD`). Layering detection requires ≥5 inflow
+  and ≥5 outflow edges within a 7-day window — smaller rings are not
+  flagged.
+* The shell-account detector flags accounts with low attribute
+  completeness (< 0.5) and high transaction count; fully-anonymous
+  accounts that are legitimately low-volume escape detection.
+
+## 9. Evidence embeddings (RAG)
+
+* Three embedding tiers: sentence-transformers (best, ~22 MB download),
+  TF-IDF (sklearn, no download), and character n-gram bag-of-words (pure
+  numpy). The system auto-selects the best available model at build time.
+* If no embeddings are built, dossier generation falls back to
+  full-context retrieval (all evidence for the subject) — functionality is
+  preserved but context windows are less focused.
+* Embedding similarity is cosine-based and does not capture semantic
+  equivalence — synonyms/paraphrases may rank below exact keyword matches.
+
+## 10. Compliance / ethics
 
 * The system intentionally **cannot** output enforcement recommendations;
   arrest/enforcement language is absent by construction (grep-able in

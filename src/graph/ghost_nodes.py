@@ -52,6 +52,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import pickle
 import uuid
 from dataclasses import dataclass, field
@@ -108,6 +109,19 @@ class GraphArtifactError(GhostDetectionError):
 class GhostConfig:
     """Every knob of the ghost detector; all thresholds are configurable."""
 
+    # detection mode controls
+    mode: str = "high_precision"
+    resolution: float = float(os.environ.get("GHOST_LOUVAIN_RESOLUTION", "0.35"))
+    require_shared_anchor: bool = True
+    top_k: int = 0
+
+    def __post_init__(self):
+        if self.mode == "high_recall":
+            self.confidence_threshold = 0.25
+            self.attribute_affinity_threshold = 0.15
+            self.require_shared_anchor = False
+            self.top_k = 25
+
     # relation taxonomies (matched upper-case against edge ``relation``)
     location_relations: Tuple[str, ...] = (
         "LIVES_IN", "BASED_IN", "HEADQUARTERED_IN", "LOCATED_IN", "OPERATES_IN",
@@ -152,9 +166,10 @@ class GhostConfig:
 
     # confidence composition (renormalised when GraphSAGE is disabled)
     weight_attribute: float = 0.50
-    weight_embedding: float = 0.25
-    weight_structural_hole: float = 0.15
+    weight_embedding: float = 0.20
+    weight_structural_hole: float = 0.10
     weight_graphsage: float = 0.10
+    weight_temporal_affinity: float = 0.20
 
     # community / pair handling
     infrastructure_anchor_fraction: float = 0.30
@@ -165,6 +180,7 @@ class GhostConfig:
     max_direct_member_edge_density: float = 0.002
     direct_edge_penalty: float = 0.15
     temporal_window_days: int = 14
+    temporal_window_seconds: int = 14400
     """Propose ghosts even when a few direct member-member edges exist."""
     brokers_per_side: int = 2
     broker_pool: int = 5
@@ -392,7 +408,8 @@ def _normalise_01(values: Mapping[Hashable, float], inverse: bool = False) -> Ma
 # ---------------------------------------------------------------------------
 
 def detect_communities(
-    projection: nx.Graph, seed: int = 42, *, exclude_entity_types: Sequence[str] = ("LOCATION", "ACCOUNT")
+    projection: nx.Graph, seed: int = 42, *, exclude_entity_types: Sequence[str] = ("LOCATION", "ACCOUNT"),
+    resolution: float = 1.0
 ) -> List[Set[Hashable]]:
     """Detect person-centric communities without letting infrastructure hubs
     (locations/accounts) merge otherwise separate cells.
@@ -413,7 +430,7 @@ def detect_communities(
     person_projection.add_nodes_from((n, projection.nodes[n]) for n in nodes)
     for u, v, data in sorted(projection.subgraph(nodes).edges(data=True), key=lambda e: (str(e[0]), str(e[1]))):
         person_projection.add_edge(u, v, **dict(data))
-    communities = nx.community.louvain_communities(person_projection, seed=seed, weight="weight")
+    communities = nx.community.louvain_communities(person_projection, seed=seed, weight="weight", resolution=resolution)
     return sorted((set(c) for c in communities),
                   key=lambda c: (-len(c), min(str(n) for n in c)))
 
@@ -978,7 +995,7 @@ def _temporal_pair_affinity(
     matched = 0
     considered = 0
     from datetime import timedelta
-    window = timedelta(days=max(1, config.temporal_window_days))
+    window = timedelta(seconds=max(3600, config.temporal_window_seconds))
     for sides in by_anchor.values():
         left, right = sides.get(community_i, []), sides.get(community_j, [])
         if not left or not right:
@@ -1025,7 +1042,7 @@ def detect_ghost_nodes(
     hole_scores = {entry["guid"]: entry["structural_hole_score"] for entry in holes}
 
     logger.info("stage 2/4: Louvain community detection (seed=%d)", config.seed)
-    communities = detect_communities(projection, seed=config.seed)
+    communities = detect_communities(projection, seed=config.seed, resolution=config.resolution)
     community_of = _community_membership_map(graph, communities)
 
     logger.info("stage 3/4: shared-surface (anchor) discovery")
@@ -1136,7 +1153,8 @@ def detect_ghost_nodes(
         negative_penalty = min(0.30, config.direct_edge_penalty * (direct_density / max(config.max_direct_member_edge_density, 1e-9)))
         confidence, _bd = _confidence_from_components(
             max(0.0, attr_affinity - negative_penalty), embed_affinity, hole_scores, communities, ci, cj, sage_affinity, config,
-            use_graphsage=bool(sage), embedding_available=bool(embeddings)
+            use_graphsage=bool(sage), embedding_available=bool(embeddings),
+            temporal_affinity=temporal_affinity
         )
 
         # ---- trained-classifier extension (Task 1) -------------------------
@@ -1170,10 +1188,10 @@ def detect_ghost_nodes(
         )
         proposed = (
             not connected
-            and bool(shared_nodes)
-            and attr_affinity >= config.attribute_affinity_threshold
-            and confidence >= config.confidence_threshold
+            and (bool(shared_nodes) or not config.require_shared_anchor)
         )
+        if config.top_k == 0:
+            proposed = proposed and (attr_affinity >= config.attribute_affinity_threshold) and (confidence >= config.confidence_threshold)
         record = {
             "community_pair": [ci, cj],
             "direct_member_edges": direct,
@@ -1194,7 +1212,7 @@ def detect_ghost_nodes(
         if not proposed:
             record["not_proposed_reason"] = (
                 "direct member edges exist" if connected
-                else "no shared anchor" if not shared_nodes
+                else "no shared anchor" if (not shared_nodes and config.require_shared_anchor)
                 else f"attribute affinity {_round(attr_affinity)} < "
                      f"{config.attribute_affinity_threshold} or confidence "
                      f"{_round(confidence)} < {config.confidence_threshold}"
@@ -1212,8 +1230,57 @@ def detect_ghost_nodes(
             )
 
     ghosts.sort(key=lambda g: (-g["confidence"], g["ghost_id"]))
+
+    # ---- supervised ranker re-ranking (Task 3) ---------------------------
+    # IF a trained ranker exists at data/exports/ghost_ranker.json, load it
+    # and re-rank candidates using ranker_score alongside the heuristic
+    # ghost_score.  Otherwise fall back to the heuristic score alone.
+    ranker = None
+    try:
+        from src.ml.ghost_ranker import load_ranker_if_available, SIGNAL_NAMES
+        ranker = load_ranker_if_available()
+    except Exception as exc:  # noqa: BLE001 - never hard-fail
+        logger.warning("ghost ranker unavailable (%s); heuristic only", exc)
+        ranker = None
+
+    if ranker is not None:
+        for ghost in ghosts:
+            signal = {
+                "structural_hole": ghost.get("structural_hole_score", 0.0),
+                "community_bridge": ghost.get("community_bridge_score", 0.0),
+                "temporal_affinity": ghost.get("temporal_affinity", 0.0),
+                "behavioral_similarity": ghost.get("behavioral_similarity", 0.0),
+                "embedding_proximity": ghost.get("embedding_affinity", 0.0),
+                "evidence_shared_infrastructure": ghost.get("shared_anchor_count", 0) / 3.0 if ghost.get("shared_anchor_count") else 0.0,
+                "contradiction_penalty": ghost.get("negative_evidence_penalty", 0.0),
+            }
+            ghost["ranker_score"] = ranker.predict_proba(signal)
+        # Re-sort by blended score: 0.6 * ranker + 0.4 * heuristic confidence
+        ghosts.sort(
+            key=lambda g: (
+                -((0.6 * g.get("ranker_score", 0.0)) + (0.4 * g.get("confidence", 0.0))),
+                g["ghost_id"],
+            )
+        )
+
+    if config.top_k > 0:
+        ghosts = ghosts[:config.top_k]
+
     for rank, ghost in enumerate(ghosts, start=1):
         ghost["rank"] = rank
+        if ranker is not None and "ranker_score" not in ghost:
+            signal = {
+                "structural_hole": ghost.get("structural_hole_score", 0.0),
+                "community_bridge": ghost.get("community_bridge_score", 0.0),
+                "temporal_affinity": ghost.get("temporal_affinity", 0.0),
+                "behavioral_similarity": ghost.get("behavioral_similarity", 0.0),
+                "embedding_proximity": ghost.get("embedding_affinity", 0.0),
+                "evidence_shared_infrastructure": ghost.get("shared_anchor_count", 0) / 3.0 if ghost.get("shared_anchor_count") else 0.0,
+                "contradiction_penalty": ghost.get("negative_evidence_penalty", 0.0),
+            }
+            ghost["ranker_score"] = ranker.predict_proba(signal)
+        if config.mode == "high_recall":
+            ghost["hypothesis_warning"] = "STRUCTURAL HYPOTHESIS — unverified, requires human review"
 
     document = {
         "meta": {
@@ -1287,6 +1354,7 @@ def _confidence_from_components(
     config: GhostConfig,
     use_graphsage: bool,
     embedding_available: bool = True,
+    temporal_affinity: float = 0.0,
 ) -> Tuple[float, Dict[str, float]]:
     hole_signal = float(np.mean([
         np.mean(sorted((hole_scores.get(n, 0.0) for n in communities[ci]), reverse=True)[: config.broker_pool]),
@@ -1297,6 +1365,7 @@ def _confidence_from_components(
         "embedding": config.weight_embedding if embedding_available else 0.0,
         "hole": config.weight_structural_hole,
         "sage": config.weight_graphsage if use_graphsage else 0.0,
+        "temporal": config.weight_temporal_affinity,
     }
     norm = sum(weights.values()) or 1.0
     confidence = (
@@ -1304,6 +1373,7 @@ def _confidence_from_components(
         + weights["embedding"] * embedding_affinity
         + weights["hole"] * hole_signal
         + weights["sage"] * sage_affinity
+        + weights["temporal"] * temporal_affinity
     ) / norm
     return confidence, {"hole_signal": hole_signal}
 

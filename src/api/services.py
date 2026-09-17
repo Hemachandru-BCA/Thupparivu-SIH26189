@@ -110,6 +110,24 @@ def ghost_document() -> Dict[str, Any]:
     return _cache_ghost_doc.get(paths.GHOST_PREDICTIONS_PATH, _load_json)
 
 
+def run_ghost_detection(mode: str = "high_recall") -> list[dict]:
+    """Re-run ghost detection in the requested mode and cache the results.
+
+    Returns the list of ghost candidates (document['ghosts']). The full
+    document is also persisted to the shared predictions file so subsequent
+    GETs see the re-run output.
+    """
+    from src.graph.ghost_nodes import GhostConfig, detect_ghost_nodes, write_predictions
+
+    graph = load_graph()
+    config = GhostConfig(mode=mode)
+    document = detect_ghost_nodes(graph, config=config)
+    write_predictions(document, paths.GHOST_PREDICTIONS_PATH)
+    _cache_ghost_doc.get(paths.GHOST_PREDICTIONS_PATH, _load_json)
+    ghosts = document.get("ghosts", document.get("ghost_nodes", []))
+    return [g for g in ghosts if isinstance(g, dict)]
+
+
 def simulation_context() -> Dict[str, Any]:
     """Precomputed baseline context for counterfactual simulations."""
     graph = load_graph()

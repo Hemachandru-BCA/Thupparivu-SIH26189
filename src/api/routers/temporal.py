@@ -19,6 +19,7 @@ their observation status, never presented as legal conclusions.
 
 from __future__ import annotations
 
+import json
 import logging
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
@@ -340,4 +341,86 @@ def node_temporal_features(node_id: str):
         feats = tm.temporal_node_features(node_id)
     except KeyError:
         raise HTTPException(status_code=404, detail=f"Node not found: {node_id}")
+    return {"node_id": node_id, "features": feats}
+
+
+# --------------------------------------------------------------------------- #
+# Anomaly Detection Endpoints (Task 12)
+# --------------------------------------------------------------------------- #
+
+@router.get("/anomalies")
+def list_anomalies(
+    type: Optional[str] = Query(None, description="Filter by anomaly_type"),
+    severity: Optional[str] = Query(None, description="Filter by severity"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+):
+    """Paginated list of detected temporal anomalies."""
+    from src.intelligence.temporal_anomaly import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        return {"items": [], "total": 0, "page": page, "page_size": page_size}
+    data = json.loads(OUTPUT_PATH.read_text())
+    # Apply filters
+    if type:
+        data = [a for a in data if a.get("anomaly_type") == type.upper()]
+    if severity:
+        data = [a for a in data if a.get("severity") == severity.upper()]
+    total = len(data)
+    start = (page - 1) * page_size
+    items = data[start:start + page_size]
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+@router.get("/anomalies/summary")
+def anomalies_summary():
+    """Counts by type and severity, top anomalous entities."""
+    from src.intelligence.temporal_anomaly import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        return {"by_type": {}, "by_severity": {}, "top_entities": [], "last_run": None}
+    data = json.loads(OUTPUT_PATH.read_text())
+    by_type = {}
+    by_severity = {}
+    entity_counts = {}
+    for a in data:
+        t = a.get("anomaly_type", "UNKNOWN")
+        s = a.get("severity", "LOW")
+        by_type[t] = by_type.get(t, 0) + 1
+        by_severity[s] = by_severity.get(s, 0) + 1
+        for eid in a.get("entity_ids", []):
+            entity_counts[eid] = entity_counts.get(eid, 0) + 1
+    top_entities = sorted(entity_counts.items(), key=lambda x: -x[1])[:3]
+    return {
+        "by_type": by_type,
+        "by_severity": by_severity,
+        "top_entities": [{"entity_id": e, "count": c} for e, c in top_entities],
+        "last_run": data[0].get("detected_at") if data else None,
+    }
+
+
+@router.get("/anomalies/{anomaly_id}")
+def get_anomaly(anomaly_id: str):
+    """Single anomaly record with full evidence context."""
+    from src.intelligence.temporal_anomaly import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        raise HTTPException(status_code=404, detail="No anomalies computed")
+    data = json.loads(OUTPUT_PATH.read_text())
+    for a in data:
+        if a.get("anomaly_id") == anomaly_id:
+            return a
+    raise HTTPException(status_code=404, detail=f"Anomaly not found: {anomaly_id}")
+
+
+@router.post("/run")
+def run_anomaly_detection():
+    """Trigger temporal anomaly detection on current artifacts."""
+    import pickle
+    from src.api.jobs import job_manager
+    from src.intelligence.temporal_anomaly import run_temporal_anomaly_detection
+
+    def _job():
+        graph = services.load_graph()
+        return run_temporal_anomaly_detection(graph)
+
+    job = job_manager.submit("anomaly_detection", _job)
+    return job.to_dict()
     return {"node_id": node_id, "features": feats}

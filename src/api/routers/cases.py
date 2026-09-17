@@ -18,32 +18,45 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
 from src.api import audit, paths, schemas
+from src.api.auth import User, get_current_user
 
-router = APIRouter(prefix="/api/cases", tags=["cases"])
+router = APIRouter(prefix="/api/cases", tags=["cases"], dependencies=[Depends(get_current_user)])
 _lock = threading.Lock()
 
+# Storage backend (local or S3 depending on env)
+from src.api.data_access import get_storage_backend, StorageBackend
+_storage: Optional[StorageBackend] = None
 
-def _case_path(case_id: str) -> Path:
+
+def _get_storage() -> StorageBackend:
+    global _storage
+    if _storage is None:
+        _storage = get_storage_backend()
+    return _storage
+
+
+def _case_key(case_id: str) -> str:
     safe = "".join(c for c in case_id if c.isalnum() or c in "-_")
-    return paths.CASES_DIR / f"{safe}.json"
+    return f"cases/{safe}.json"
 
 
 def _load_case(case_id: str) -> Dict:
-    path = _case_path(case_id)
-    if not path.exists():
+    storage = _get_storage()
+    data = storage.read(_case_key(case_id))
+    if data is None:
         raise HTTPException(status_code=404, detail=f"Case not found: {case_id}")
     try:
-        return json.loads(path.read_text())
+        return json.loads(data)
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail=f"Corrupt case file: {case_id}")
 
 
 def _save_case(case: Dict) -> None:
-    path = _case_path(case["id"])
-    path.write_text(json.dumps(case, indent=2, default=str))
+    storage = _get_storage()
+    storage.write(_case_key(case["id"]), json.dumps(case, indent=2, default=str).encode("utf-8"))
 
 
 @router.get("")
@@ -51,9 +64,15 @@ def _save_case(case: Dict) -> None:
 def list_cases():
     """All cases (summaries)."""
     items = []
-    for p in sorted(paths.CASES_DIR.glob("CASE-*.json")):
+    storage = _get_storage()
+    for key in sorted(storage.list("cases/")):
+        if not key.endswith(".json"):
+            continue
+        data = storage.read(key)
+        if data is None:
+            continue
         try:
-            case = json.loads(p.read_text())
+            case = json.loads(data)
             items.append({
                 "id": case.get("id"),
                 "title": case.get("title"),
@@ -131,9 +150,11 @@ def update_case(case_id: str, request: schemas.CaseUpdateRequest):
 @router.delete("/{case_id}")
 def delete_case(case_id: str):
     with _lock:
-        path = _case_path(case_id)
-        if not path.exists():
+        storage = _get_storage()
+        key = _case_key(case_id)
+        data = storage.read(key)
+        if data is None:
             raise HTTPException(status_code=404, detail=f"Case not found: {case_id}")
-        path.unlink()
+        storage.delete(key)
     audit.record_action("cases.delete", object_ids=[case_id])
     return {"deleted": case_id}

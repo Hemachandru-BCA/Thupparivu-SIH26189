@@ -1,4 +1,7 @@
 # --- Core pipeline (generator / preprocessing) ---
+# This file is the output of `pip-compile requirements.in`.
+# To update, edit requirements.in and run:
+#   pip-compile requirements.in -o requirements.txt --strip-extras
 pandas>=2.0.0
 pydantic>=2.0.0
 python-dateutil>=2.9.0

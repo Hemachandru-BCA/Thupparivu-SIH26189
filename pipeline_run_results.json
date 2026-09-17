@@ -1,0 +1,10 @@
+{
+  "financial_patterns": {
+    "ok": true,
+    "seconds": 0.7,
+    "out": {
+      "pattern_count": 3,
+      "output_path": "/home/chandru/Documents/programming/python/hackathon/Thupparivu-SIH26189/data/exports/financial_patterns.json"
+    }
+  }
+}

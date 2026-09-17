@@ -23,6 +23,7 @@ import unicodedata
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 
 from src.resolution.entity_matcher import normalize_name, soundex
+from src.resolution.transliteration import to_latin_fold, name_similarity
 
 # --------------------------------------------------------------------------- #
 # Transliteration tables (Tamil / Hindi common variants)
@@ -170,6 +171,18 @@ def compare_aliases(a: str, b: str, alias_type: str = "NAME") -> float:
     if alias_type.upper() in ("VEHICLE", "LICENSE_PLATE"):
         na, nb = AliasNormalizer().normalize_vehicle(a), AliasNormalizer().normalize_vehicle(b)
         return 1.0 if na == nb and na else 0.0
+    if alias_type.upper() in ("NAME", "PERSON", "ORGANIZATION"):
+        # Primary: transliteration-aware name similarity
+        sim = name_similarity(a, b)
+        # Secondary: if similarity is POSSIBLE (>= 0.65), Soundex match boosts confidence
+        normalizer = AliasNormalizer()
+        keys_a, keys_b = normalizer.all_keys(a), normalizer.all_keys(b)
+        soundex_match = bool(keys_a & keys_b)
+        if sim >= 0.65 and soundex_match:
+            # Slight boost when both transliteration and Soundex agree
+            return min(1.0, sim + 0.05)
+        # Thresholds: >= 0.82 MATCH, >= 0.65 POSSIBLE
+        return sim
     normalizer = AliasNormalizer()
     keys_a, keys_b = normalizer.all_keys(a), normalizer.all_keys(b)
     if keys_a & keys_b:

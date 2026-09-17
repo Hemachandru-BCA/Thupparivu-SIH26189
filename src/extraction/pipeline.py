@@ -81,26 +81,45 @@ class ExtractionPipeline:
         self.nlp = build_nlp(self.config.spacy_model, extra_gazetteer=extra)
         self.entity_extractor = EntityExtractor(nlp=self.nlp)
 
+        # ---- Batched spaCy processing (4-8x faster than per-record) ---- #
+        spacy_batch_size = int(os.environ.get("SPACY_BATCH_SIZE", "64"))
         all_entities, all_triplets, all_events = [], [], []
+
+        t0 = __import__("time").time()
+
+        # Separate structured records from text records
+        structured_records = []
+        text_records = []
         for record in records:
-            text = str(record.get("text") or "")
-            if not text.strip():
-                continue
             record_type = str(record.get("record_type") or "")
-            record_id = str(record.get("record_id") or "")
             if record_type in {"call_observation", "transaction_observation", "meeting_observation"}:
-                entities = []
-                triplets = self._structured_triplets(record)
-                events, links = [], []
+                structured_records.append(record)
             else:
-                doc = self.entity_extractor.process(text)
+                text_records.append(record)
+
+        # Process structured records (no spaCy needed)
+        for record in structured_records:
+            triplets = self._structured_triplets(record)
+            all_triplets.extend(t.to_dict() for t in triplets)
+
+        # Process text records in batches using nlp.pipe()
+        if text_records:
+            texts = [str(r.get("text") or "") for r in text_records]
+            docs = list(self.nlp.pipe(texts, batch_size=spacy_batch_size, n_process=1))
+            for record, doc in zip(text_records, docs):
+                record_id = str(record.get("record_id") or "")
                 entities = self.entity_extractor.entities_from_doc(doc)
                 triplets = self.relation_extractor.extract(doc, record_id=record_id)
                 events, links = self.event_extractor.extract(entities, triplets, record=record)
-            all_entities.extend(e.to_dict() for e in entities)
-            all_triplets.extend(t.to_dict() for t in triplets)
-            all_triplets.extend(t.to_dict() for t in links)
-            all_events.extend(e.to_dict() for e in events)
+                all_entities.extend(e.to_dict() for e in entities)
+                all_triplets.extend(t.to_dict() for t in triplets)
+                all_triplets.extend(t.to_dict() for t in links)
+                all_events.extend(e.to_dict() for e in events)
+
+        elapsed = __import__("time").time() - t0
+        if elapsed > 0:
+            logger.info(f"Extraction: {len(records)} records in {elapsed:.1f}s "
+                        f"({len(records)/elapsed:.0f} rec/s)")
 
         # Collapse repeated event observations into deterministic evidence edges.
         # Keep a count plus one representative timestamp; the raw synthetic CSVs

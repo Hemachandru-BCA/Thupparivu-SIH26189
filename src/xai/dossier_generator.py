@@ -121,6 +121,31 @@ class DossierGenerator:
         self.evidence = evidence_store
         self.llm = llm or MockLLMProvider()
         self.findings_path = findings_path
+        self._rag_retriever = None  # Lazy-init RAG retriever
+
+    def _get_rag_retriever(self):
+        """Lazy-init RAG retriever with fallback to full-context."""
+        if self._rag_retriever is None:
+            try:
+                from src.xai.rag_retriever import RAGRetriever
+                self._rag_retriever = RAGRetriever()
+            except Exception:
+                import logging as _log_mod
+                _log_mod.getLogger(__name__).warning(
+                    "RAG retriever not available — using full-context retrieval"
+                )
+                self._rag_retriever = None
+        return self._rag_retriever
+
+    def _fallback_evidence(self, subject_id, findings, max_evidence):
+        """Full-context evidence retrieval (fallback when RAG unavailable)."""
+        supporting = []
+        for f in (findings or []):
+            supporting.extend(f.supporting_evidence_ids)
+        if not findings:
+            supporting = [r.evidence_id for r in
+                          self.evidence.get_evidence_for_node(subject_id, limit=max_evidence)]
+        return supporting
 
     # ------------------------------------------------------------------ #
     def generate_dossier(self,
@@ -129,17 +154,46 @@ class DossierGenerator:
                          max_evidence: int = 40,
                          max_excerpt_chars: int = 300) -> Dossier:
         """Build a dossier for one subject (node guid / ghost id)."""
+        import logging as _log_mod
+        _log = _log_mod.getLogger(__name__)
+
         findings = self._findings_for_subject(subject_id, finding_ids)
 
-        supporting: List[str] = []
+        # --- RAG-based evidence retrieval with fallback ---
+        rag = self._get_rag_retriever()
+        retrieval_method = "full"
+        evidence_retrieved_count = 0
+        embeddings_model = "none"
+
+        if rag is not None:
+            try:
+                query = f"criminal network role evidence for {subject_id}"
+                if findings:
+                    titles = " ".join(getattr(f, 'title', '') for f in findings[:3])
+                    query = f"criminal network role evidence for {subject_id} {titles}"
+                rag_evidence = rag.retrieve_for_dossier(
+                    subject_id=subject_id,
+                    query=query,
+                    evidence_store=self.evidence,
+                    max_evidence=max_evidence,
+                )
+                supporting = [r.get("evidence_id", "") for r in rag_evidence if r.get("evidence_id")]
+                retrieval_method = rag.retrieval_method
+                evidence_retrieved_count = rag.evidence_retrieved_count
+                embeddings_model = rag.embeddings_model
+                _log.info("Dossier RAG: %d records, method=%s, model=%s",
+                         evidence_retrieved_count, retrieval_method, embeddings_model)
+            except Exception as exc:
+                _log.warning("RAG retrieval failed, falling back: %s", exc)
+                supporting = self._fallback_evidence(subject_id, findings, max_evidence)
+        else:
+            supporting = self._fallback_evidence(subject_id, findings, max_evidence)
+
         counter: List[str] = []
         for f in findings:
-            supporting.extend(f.supporting_evidence_ids)
             counter.extend(f.counter_evidence_ids)
-        if not findings:
-            # subject without findings: index evidence directly on the subject
-            supporting = [r.evidence_id for r in
-                          self.evidence.get_evidence_for_node(subject_id, limit=max_evidence)]
+        if not supporting:
+            supporting = self._fallback_evidence(subject_id, findings, max_evidence)
 
         supporting = sorted(set(supporting))[:max_evidence]
         counter = sorted(set(e for e in counter if not e.startswith("COUNTER:")))[:10]
@@ -176,6 +230,9 @@ class DossierGenerator:
                 "findings_used": [f.id for f in findings],
                 "model_version": findings[0].model_version if findings else None,
                 "context_items": len(context),
+                "retrieval_method": retrieval_method,
+                "evidence_retrieved_count": evidence_retrieved_count,
+                "embeddings_model": embeddings_model,
             },
         )
         return dossier

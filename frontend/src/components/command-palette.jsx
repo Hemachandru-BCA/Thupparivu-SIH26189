@@ -11,10 +11,12 @@ import {
     Search, LayoutDashboard, Network, Users, Clock, FileText, Brain,
     AlertTriangle, BarChart3, Zap, Waypoints, BookOpen, ClipboardList,
     Upload, Settings, Shield, ArrowRight, CornerDownLeft, Filter,
-    Layers, DollarSign, Database, Activity, Sparkles, FolderOpen, AlertCircle, Bookmark
+    Layers, DollarSign, Database, Activity, Sparkles, FolderOpen, AlertCircle, Bookmark,
+    MessageSquare, GitCompare
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { useGlobalSearch } from '@/api/xai';
+import { ALL_NAV_ITEMS } from '@/components/app-shell';
 
 const COMMANDS = [
     { id: 'desk', label: 'Investigation Desk', desc: 'Case overview & operational brief', path: '/', icon: LayoutDashboard, section: 'NAVIGATION' },

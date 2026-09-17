@@ -65,6 +65,8 @@ class GhostDetectRequest(BaseModel):
     confidence_threshold: Optional[float] = None
     attribute_affinity_threshold: Optional[float] = None
     seed: Optional[int] = None
+    mode: Optional[str] = None
+    resolution: Optional[float] = None
 
 
 class RunAllRequest(BaseModel):

@@ -9,9 +9,10 @@ records a human decision without ever marking model output as court-ready.
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from src.api import audit, paths, schemas, services
+from src.api.auth import User, get_current_user
 from src.xai.dossier_generator import (
     DossierGenerator,
     list_dossiers,
@@ -20,7 +21,7 @@ from src.xai.dossier_generator import (
     validate_dossier,
 )
 
-router = APIRouter(prefix="/api/dossiers", tags=["dossiers"])
+router = APIRouter(prefix="/api/dossiers", tags=["dossiers"], dependencies=[Depends(get_current_user)])
 
 
 @router.get("")

@@ -6,11 +6,12 @@ Read-only view over the audit log (Phase AC).
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
 
 from src.api import audit
+from src.api.auth import User, get_current_user
 
-router = APIRouter(prefix="/api/audit", tags=["audit"])
+router = APIRouter(prefix="/api/audit", tags=["audit"], dependencies=[Depends(get_current_user)])
 
 
 @router.get("")

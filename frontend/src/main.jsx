@@ -5,8 +5,9 @@ import { setBaseUrl } from '@/api/client';
 import './index.css';
 document.documentElement.classList.add('dark');
 
-const DEFAULT_API_URL = 'https://enthusiastic-creativity-production-27af.up.railway.app';
-const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || DEFAULT_API_URL;
+// Same-origin by default (Vite dev server proxies /api → local backend).
+// Override with VITE_API_BASE_URL / VITE_API_URL when deployed.
+const apiBase = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || '';
 setBaseUrl(apiBase);
 
 createRoot(document.getElementById('root'), {

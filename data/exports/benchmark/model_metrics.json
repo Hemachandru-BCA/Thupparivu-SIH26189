@@ -8,14 +8,14 @@
     "duplicate_pairs_planted": 1
   },
   "TASK_C_LINK": {
-    "candidates": 43,
+    "candidates": 183,
     "hidden_pairs": 2,
     "models": {
       "pagerank": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.3738,
-        "ece": 0.5633,
+        "brier": 0.3163,
+        "ece": 0.5199,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -23,7 +23,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 24,
+        "fp": 101,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -31,14 +31,14 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       },
       "betweenness": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.2079,
-        "ece": 0.3282,
+        "brier": 0.1064,
+        "ece": 0.2354,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -46,7 +46,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 11,
+        "fp": 28,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -54,14 +54,14 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       },
       "jaccard": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.1032,
-        "ece": 0.1643,
+        "brier": 0.0216,
+        "ece": 0.0481,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -69,7 +69,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 9,
+        "fp": 6,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -77,14 +77,14 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       },
       "adamic_adar": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.091,
-        "ece": 0.1575,
+        "brier": 0.0325,
+        "ece": 0.0631,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -92,7 +92,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 8,
+        "fp": 10,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -100,14 +100,14 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       },
       "node2vec_spectral": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.0614,
-        "ece": 0.1306,
+        "brier": 0.0382,
+        "ece": 0.0706,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -115,7 +115,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 3,
+        "fp": 7,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -123,14 +123,14 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       },
       "thupparivu_ensemble": {
-        "n": 43,
+        "n": 183,
         "positive_fraction": 0.0,
-        "brier": 0.1039,
-        "ece": 0.2167,
+        "brier": 0.0337,
+        "ece": 0.1155,
         "roc_auc": 0.0,
         "pr_auc": 0.0,
         "precision": 0.0,
@@ -138,7 +138,7 @@
         "f1": 0.0,
         "threshold": 0.5,
         "tp": 0,
-        "fp": 9,
+        "fp": 6,
         "fn": 0,
         "precision@1": 0.0,
         "recall@1": 0.0,
@@ -146,58 +146,60 @@
         "recall@5": 0.0,
         "precision@10": 0.0,
         "recall@10": 0.0,
-        "precision@43": 0.0,
-        "recall@43": 0.0
+        "precision@50": 0.0,
+        "recall@50": 0.0
       }
     }
   },
   "TASK_D_GHOST": {
-    "precision": 0.1667,
+    "precision": 0.05,
     "recall": 1.0,
-    "f1": 0.2857,
+    "f1": 0.0952,
     "tp": 1,
-    "fp": 5,
+    "fp": 19,
     "fn": 0,
     "true_community_pairs": 1,
-    "predicted_community_pairs": 6
+    "predicted_community_pairs": 20
   },
   "TASK_E_COMMUNITY": {
-    "nmi": 0.7357,
+    "nmi": 0.6381,
     "ari": 0.0,
-    "n_communities_found": 4,
-    "n_planted": 2
+    "n_communities_found": 7,
+    "n_planted": 3
   },
   "TASK_F_ANOMALY": {
     "isolated": {
-      "precision": 0.5,
+      "precision": 0.25,
       "recall": 1.0,
       "planted": 1,
       "found": [
         "A0-alt",
+        "C1",
+        "C3",
         "ISO-0"
       ]
     },
     "hub": {
       "found": [
-        "A0",
-        "A3",
-        "B0"
+        "A1",
+        "A4",
+        "A5"
       ],
       "bridge_planted_found": []
     }
   },
   "TASK_G_TEMPORAL": {
-    "snapshot_edges": 7,
-    "total_edges": 12,
+    "snapshot_edges": 14,
+    "total_edges": 27,
     "leaked_future_edges": 0,
     "leakage_free": true,
-    "as_of": "2025-07-05T18:00:00+00:00"
+    "as_of": "2025-05-07T23:00:00+00:00"
   },
   "TASK_H_COUNTERFACTUAL": {
-    "target": "A0",
+    "target": "A4",
     "component_delta": 1,
-    "fragmentation_delta": 0.31818181818181823,
-    "bridge_loss": -2.0,
-    "explanation": "Counterfactual 'remove_node' on 'A0': components +1; fragmentation +0.32; communities +1. Status: HYPOTHETICAL \u2014 this is a structural simulation, NOT an enforcement recommendation."
+    "fragmentation_delta": 0.2595238095238095,
+    "bridge_loss": 0.0,
+    "explanation": "Counterfactual 'remove_node' on 'A4': components +1; fragmentation +0.26. Status: HYPOTHETICAL \u2014 this is a structural simulation, NOT an enforcement recommendation."
   }
 }

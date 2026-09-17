@@ -81,17 +81,19 @@ BANKS = (
 DOMAIN_PATTERNS: List[Tuple[str, str, str]] = [
     # (label, name, regex)
     ("EMAIL", "EMAIL", r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"),
-    ("UPI", "UPI_ID", r"[A-Za-z0-9._-]{2,}@(?:upi|ybl|paytm|okaxis|oksbi|okhdfcbank|apl|pockets|ibl|axl|upi)"),
+    ("UPI", "UPI_ID", r"[A-Za-z0-9.\-_]+@[a-zA-Z]+"),
     ("ACCOUNT", "BANK_ACCOUNT", r"(?:account|a/c|acc(?:ount)?)[\s:#-]*([A-Z0-9]{6,18})"),
     ("PHONE", "PHONE", r"(?:\+?91[\s-]?)?[6-9]\d{9}"),
-    ("VEHICLE", "VEHICLE", r"\b[A-Z]{2}[\s-]?[0-9]{2}[\s-]?[A-Z]{1,2}[\s-]?[0-9]{1,4}\b"),
+    ("VEHICLE", "VEHICLE_NO", r"\b[A-Z]{2}[-\s]?[0-9]{1,2}[-\s]?[A-Z]{1,3}[-\s]?[0-9]{4}\b"),
     ("SOCIAL_HANDLE", "SOCIAL_HANDLE", r"@[a-zA-Z0-9_]{3,20}"),
     ("DEVICE", "DEVICE_ID", r"(?:imei|sim|device)[\s:#-]*(\d{10,16})"),
-    ("IDENTIFIER", "AADHAAR", r"\b[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}\b"),
+    ("IDENTIFIER", "AADHAAR", r"\b[2-9]{1}[0-9]{3}\s?[0-9]{4}\s?[0-9]{4}\b"),
     ("CRIME_TYPE", "CRIME_TYPE", r"\b(" + "|".join(CRIME_TYPES) + r")\b"),
     ("BANK", "BANK", r"\b(" + "|".join(BANKS) + r")\b"),
     ("DATE", "DATE", r"\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b|\b\d{4}-\d{2}-\d{2}\b"),
     ("TIME", "TIME", r"\b\d{1,2}:\d{2}\s?(?:am|pm|hrs)?\b"),
+    ("CASE", "BNS_SECTION", r"\b(?:Section|Sec\.|S\.)\s*(\d+[A-Za-z]?)\s+(?:BNS|IPC|CrPC)\b"),
+    ("CASE", "CASE_NUMBER", r"\b(?:FIR|CR|CC|Sessions Case)\s*(?:No\.?)?\s*(\d+/\d{4})\b"),
     ("ADDRESS", "ADDRESS", r"\b\d{1,4}[\s,]+[A-Za-z][A-Za-z\s,]{5,40}(?:road|street|lane|nagar|colony|street|salai)\b",),
 ]
 

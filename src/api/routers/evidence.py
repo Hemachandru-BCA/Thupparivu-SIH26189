@@ -8,12 +8,50 @@ from __future__ import annotations
 
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from src.api import audit, services
+from src.api.auth import User, get_current_user
 from src.api.data_access import paginate
 
 router = APIRouter(prefix="/api/evidence", tags=["evidence"])
+
+
+# --------------------------------------------------------------------------- #
+# Evidence Embeddings (Phase 6 — Hybrid RAG)
+# --------------------------------------------------------------------------- #
+
+@router.post("/embeddings/build")
+def build_embeddings():
+    """Trigger evidence embeddings build as background job."""
+    from src.api.jobs import job_manager
+    from src.xai.embeddings_store import EvidenceEmbeddingsStore
+
+    def _job():
+        store = EvidenceEmbeddingsStore()
+        store.build()
+        return {"record_count": store.record_count, "model_used": store.model_used}
+
+    job = job_manager.submit("embeddings_build", _job)
+    return job.to_dict()
+
+
+@router.get("/embeddings/status")
+def embeddings_status():
+    """Returns whether embeddings are built, model used, count, and timestamp."""
+    import json
+
+    from src.xai.embeddings_store import EMBEDDINGS_PATH, MAPPING_PATH
+
+    if not MAPPING_PATH.exists():
+        return {"built": False, "model_used": "none", "record_count": 0, "built_at": None}
+    meta = json.loads(MAPPING_PATH.read_text())
+    return {
+        "built": True,
+        "model_used": meta.get("model", "unknown"),
+        "record_count": meta.get("record_count", 0),
+        "built_at": meta.get("built_at"),
+    }
 
 
 @router.get("/for-node/{node_id}")

@@ -49,9 +49,14 @@ class CallRecord:
     timestamp: str
     duration_sec: int
     tower_location: str
+    _planted: bool = False
+    """Internal-only flag marking synthetic coordinated calls planted around
+    hidden coordinators. NEVER written to the output CSV (evaluation only)."""
 
     def to_row(self) -> dict:
-        return self.__dict__
+        row = self.__dict__.copy()
+        row.pop("_planted", None)
+        return row
 
 
 @dataclass
@@ -64,9 +69,14 @@ class Transaction:
     timestamp: str
     channel: str  # bank_transfer, cash, crypto, mobile_wallet
     account_id: str = ""
+    _planted: bool = False
+    """Internal-only flag for the synthetic 3-hop money route
+    (broker_A -> coordinator account -> broker_B). NEVER written to CSV."""
 
     def to_row(self) -> dict:
-        return self.__dict__
+        row = self.__dict__.copy()
+        row.pop("_planted", None)
+        return row
 
 
 @dataclass

@@ -83,7 +83,63 @@ class TransactionSimulator:
             txns.append(self._make_txn(idx, sender_id, receiver_id, amount, channel, account_id))
             idx += 1
 
+        # Plant the 3-hop money route: broker_A -> coord account -> broker_B
+        # inside the same 3-hour window as the planted calls.
+        txns = self._plant_coordinated_txns(txns, idx, people, topology)
+
         return txns
+
+    def _plant_coordinated_txns(
+        self,
+        txns: List[Transaction],
+        next_idx: int,
+        people: List[Person],
+        topology: HiddenCoordinatorTopology,
+    ) -> List[Transaction]:
+        """Plant one 3-hop transaction per coordinator:
+        broker_A -> coordinator account -> broker_B within the same 3-hour
+        window used by the planted calls. Marked ``_planted=True`` in memory
+        only (never serialized)."""
+        if not topology.links:
+            return txns
+        coordinators = {p.person_id: p for p in people if p.is_hidden_coordinator}
+        idx = next_idx
+        t0 = self._start_date + timedelta(days=200, seconds=self._rng.randint(0, 86399))
+        for coord_id, gang_map in topology.links.items():
+            coord = coordinators.get(coord_id)
+            if coord is None or len(gang_map) < 2:
+                continue
+            gang_ids = sorted(gang_map.keys())
+            gA, gB = gang_ids[0], gang_ids[1]
+            brokerA = self._highest_degree(gA, people)
+            brokerB = self._highest_degree(gB, people)
+            if brokerA is None or brokerB is None:
+                continue
+            T = t0 + timedelta(minutes=self._rng.randint(-120, 120))
+            at = T + timedelta(minutes=self._rng.randint(-45, 45))
+            """broker_A -> coordinator_account -> broker_B (single txn record
+            from broker_A paying broker_B via the coordinator's routing
+            account)."""
+            txns.append(Transaction(
+                transaction_id=f"T{idx:07d}",
+                sender_id=brokerA.person_id,
+                receiver_id=brokerB.person_id,
+                amount=round(self._rng.uniform(15000, 90000), 2),
+                currency=self._rng.choice(_CURRENCIES),
+                timestamp=at.isoformat(),
+                channel="bank_transfer",
+                account_id=f"ACC-COORD-{coord_id}",
+                _planted=True,
+            ))
+            idx += 1
+        return txns
+
+    @staticmethod
+    def _highest_degree(gang_id: str, people: List[Person]) -> "Person | None":
+        members = [p for p in people if p.gang_id == gang_id]
+        if not members:
+            return None
+        return max(members, key=lambda p: p.person_id)  # stable tie-breaker
 
     def _make_txn(self, idx, sender_id, receiver_id, amount, channel, account_id="") -> Transaction:
         return Transaction(

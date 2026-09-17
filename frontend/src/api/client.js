@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getToken } from '@/api/auth';
 
 let baseUrl = '';
 
@@ -22,14 +23,19 @@ function buildUrl(path, params) {
 export async function requestJson(path, options = {}) {
     const { method = 'GET', params, body } = options;
     const url = buildUrl(path, params);
+    // Attach JWT bearer token if one is stored (harmless in demo mode but
+    // required when the backend enforces auth).
+    const token = getToken();
+    const headers = {
+        Accept: 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+    };
     let res;
     try {
         res = await fetch(url, {
             method,
-            headers: {
-                Accept: 'application/json',
-                ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
-            },
+            headers,
             body: body === undefined ? undefined : JSON.stringify(body),
         });
     } catch (cause) {

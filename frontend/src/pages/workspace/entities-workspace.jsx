@@ -7,7 +7,35 @@ import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
 export default function EntitiesWorkspace() {
     const [, setLocation] = useLocation();
     const { data: entitiesData, isLoading } = useGetEntities();
-    const entities = entitiesData?.results || entitiesData?.items || entitiesData || [];
+    const rawEntities = entitiesData?.results || entitiesData?.items || entitiesData || [];
+
+    /* Normalize: the graph API returns NER annotations (text/label) as well as
+       resolved entities (id/name/type). Merge and re-key to a unified schema. */
+    const entities = useMemo(() => {
+        const seen = new Map();
+        for (const e of rawEntities) {
+            const id = e.id ?? (e.text ? `ner:${e.text}:${e.label}` : `row:${rawEntities.indexOf(e)}`);
+            const name = e.name || e.text || id;
+            const type = e.type || e.label || 'UNKNOWN';
+            const key = id;
+            if (!seen.has(key)) {
+                seen.set(key, {
+                    id,
+                    name,
+                    type,
+                    community: e.community ?? e.community_id ?? null,
+                    degree: e.degree ?? 0,
+                    page_rank: e.page_rank ?? e.pagerank ?? 0,
+                    betweenness: e.betweenness ?? 0,
+                    mention_count: e.mention_count ?? e.mentions ?? 0,
+                });
+            } else {
+                const cur = seen.get(key);
+                if ((e.degree ?? 0) > (cur.degree ?? 0)) seen.set(key, { ...cur, ...e, id, name, type });
+            }
+        }
+        return Array.from(seen.values());
+    }, [rawEntities]);
     const [search, setSearch] = useState('');
     const [typeFilter, setTypeFilter] = useState('ALL');
     const [sortField, setSortField] = useState('name');
@@ -119,14 +147,14 @@ export default function EntitiesWorkspace() {
                                     </span>
                                 </td>
                                 <td className="font-mono text-fg-secondary">
-                                    {entity.community_id != null ? `C${entity.community_id}` : '—'}
+                                    {entity.community != null ? `C${entity.community}` : '—'}
                                 </td>
                                 <td className="font-mono text-fg-secondary">{entity.degree || 0}</td>
                                 <td className="font-mono text-fg-secondary">
-                                    {(entity.metrics?.pagerank || 0).toFixed(4)}
+                                    {(entity.page_rank || 0).toFixed(4)}
                                 </td>
                                 <td className="font-mono text-fg-secondary">
-                                    {(entity.metrics?.betweenness_centrality || 0).toFixed(4)}
+                                    {(entity.betweenness || 0).toFixed(4)}
                                 </td>
                                 <td className="font-mono text-fg-secondary">{entity.mention_count || 0}</td>
                             </tr>

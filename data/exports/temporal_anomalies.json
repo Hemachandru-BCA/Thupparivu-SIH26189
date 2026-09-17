@@ -1,0 +1,1889 @@
+[
+  {
+    "anomaly_id": "AN-8abd7c98",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.331749+00:00",
+    "entity_ids": [
+      "P003232"
+    ],
+    "evidence_ids": [
+      "EV-5e71799c-654d-5d85-82b4-a1e55d4ad30a",
+      "EV-52ba71ad-bf2d-5eaa-a733-fc28357732e1",
+      "EV-29af95e2-a7eb-5b39-bd06-27ea6a9b6631",
+      "EV-5e5f887e-0d89-5097-bd31-04d082593d7b",
+      "EV-a2209d8e-c7cd-5058-ad91-4d086bf5ab0f"
+    ],
+    "description": "Communication burst detected for entity P003232: 5 events in 24h window (baseline mean=1.6, z-score=4.16).",
+    "confidence": 0.4164808212743938,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-ab1bed77",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.331794+00:00",
+    "entity_ids": [
+      "P003232"
+    ],
+    "evidence_ids": [
+      "EV-d17e5862-b703-5705-85b6-fd52442ec88b",
+      "EV-1c9eb23f-5cce-5e6a-aff9-8dcec60a82aa",
+      "EV-72a40834-ef07-5131-894b-210c48876959",
+      "EV-c00921da-0058-597a-a068-687318e91c7f",
+      "EV-674d8da1-87de-5e7e-a262-89b3541a6da3"
+    ],
+    "description": "Communication burst detected for entity P003232: 5 events in 24h window (baseline mean=1.6, z-score=4.16).",
+    "confidence": 0.4164808212743938,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-7f6efa22",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.349846+00:00",
+    "entity_ids": [
+      "P002215"
+    ],
+    "evidence_ids": [
+      "EV-fcf14fe5-358c-5d2d-8f7a-f202fb563b2c",
+      "EV-6abaa588-13d9-564e-b930-ab08610c27e0",
+      "EV-1ef49ba8-bc26-5571-8d3b-c00b557e67c0",
+      "EV-3506632f-6863-5673-97c8-37f51dc2f3ef"
+    ],
+    "description": "Communication burst detected for entity P002215: 4 events in 24h window (baseline mean=1.6, z-score=3.02).",
+    "confidence": 0.30214930376896576,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-623f8649",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.349873+00:00",
+    "entity_ids": [
+      "P002215"
+    ],
+    "evidence_ids": [
+      "EV-d0ba04e9-02a2-54eb-b942-f56367d10aa7",
+      "EV-62f27fdb-7835-5824-890a-606b75b15ed3",
+      "EV-a670a203-d737-5d96-b160-ab89a81e57bc",
+      "EV-b9825c37-aa43-53aa-bec3-4c13c9c97f9c"
+    ],
+    "description": "Communication burst detected for entity P002215: 4 events in 24h window (baseline mean=1.6, z-score=3.02).",
+    "confidence": 0.30214930376896576,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-a338c749",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.349894+00:00",
+    "entity_ids": [
+      "P002215"
+    ],
+    "evidence_ids": [
+      "EV-62f27fdb-7835-5824-890a-606b75b15ed3",
+      "EV-a670a203-d737-5d96-b160-ab89a81e57bc",
+      "EV-b9825c37-aa43-53aa-bec3-4c13c9c97f9c",
+      "EV-13863e41-f4c7-5d06-857c-dd6f20a8dbab"
+    ],
+    "description": "Communication burst detected for entity P002215: 4 events in 24h window (baseline mean=1.6, z-score=3.02).",
+    "confidence": 0.30214930376896576,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-d48bc1f6",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.349917+00:00",
+    "entity_ids": [
+      "P002215"
+    ],
+    "evidence_ids": [
+      "EV-f2740179-9396-531c-8db3-19135505439c",
+      "EV-951bb5cd-9369-5b54-88f1-5700f247c68d",
+      "EV-32bfa9dd-541c-5932-9402-86d60cfd7ade",
+      "EV-d71931e2-3857-5bf8-8ed2-de00b0f2d41c"
+    ],
+    "description": "Communication burst detected for entity P002215: 4 events in 24h window (baseline mean=1.6, z-score=3.02).",
+    "confidence": 0.30214930376896576,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-bf6256c8",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.349934+00:00",
+    "entity_ids": [
+      "P002215"
+    ],
+    "evidence_ids": [
+      "EV-951bb5cd-9369-5b54-88f1-5700f247c68d",
+      "EV-32bfa9dd-541c-5932-9402-86d60cfd7ade",
+      "EV-d71931e2-3857-5bf8-8ed2-de00b0f2d41c",
+      "EV-b72a802f-a9ce-595b-8b34-99db2d133954"
+    ],
+    "description": "Communication burst detected for entity P002215: 4 events in 24h window (baseline mean=1.6, z-score=3.02).",
+    "confidence": 0.30214930376896576,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-b397f315",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380672+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-5c66b01a-d6b4-58a4-a143-ae5d9bfe6dc5",
+      "EV-0e77ee8d-01e1-5dbb-94f7-a93e11c5f402",
+      "EV-62f27fdb-7835-5824-890a-606b75b15ed3",
+      "EV-a75c224f-e051-55a2-8633-bb6bc9f00faa",
+      "EV-9fdacfce-98b1-551e-a11f-c76f4ae95c7f",
+      "EV-a670a203-d737-5d96-b160-ab89a81e57bc",
+      "EV-b9825c37-aa43-53aa-bec3-4c13c9c97f9c",
+      "EV-13863e41-f4c7-5d06-857c-dd6f20a8dbab"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-28adfe84",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380749+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-62f27fdb-7835-5824-890a-606b75b15ed3",
+      "EV-a75c224f-e051-55a2-8633-bb6bc9f00faa",
+      "EV-9fdacfce-98b1-551e-a11f-c76f4ae95c7f",
+      "EV-a670a203-d737-5d96-b160-ab89a81e57bc",
+      "EV-b9825c37-aa43-53aa-bec3-4c13c9c97f9c",
+      "EV-13863e41-f4c7-5d06-857c-dd6f20a8dbab",
+      "EV-77aea801-d931-5364-8d7d-6aec3ae917a2",
+      "EV-57930a30-b86b-5b42-9a66-2841170168ca"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-75f7e784",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380827+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-a98f147a-5b1a-55dd-8e0a-ea6ca2a68930",
+      "EV-586329fc-a5b6-5d10-a521-d6985528df7f",
+      "EV-6df4772b-25c8-56f2-ba13-d80fd7fb0ea3",
+      "EV-05377228-770f-5d3f-b240-40acdbaeba20",
+      "EV-7e1ed5db-c285-5c4a-b309-88b2df3d4388",
+      "EV-86d34797-16a0-5794-b42c-7a53b789ad9c",
+      "EV-fa016e21-7242-5d46-92ad-6583a1017bc6",
+      "EV-8338e079-7745-583f-8590-aa65a82fb67c"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f25bb4b1",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380876+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-586329fc-a5b6-5d10-a521-d6985528df7f",
+      "EV-6df4772b-25c8-56f2-ba13-d80fd7fb0ea3",
+      "EV-05377228-770f-5d3f-b240-40acdbaeba20",
+      "EV-7e1ed5db-c285-5c4a-b309-88b2df3d4388",
+      "EV-86d34797-16a0-5794-b42c-7a53b789ad9c",
+      "EV-fa016e21-7242-5d46-92ad-6583a1017bc6",
+      "EV-8338e079-7745-583f-8590-aa65a82fb67c",
+      "EV-2b67bc0f-a1fc-5fc2-8ec8-543da33fab41",
+      "EV-db7183e7-2a29-516f-a44f-f362daaca6a0"
+    ],
+    "description": "Communication burst detected for entity P004997: 9 events in 24h window (baseline mean=3.1, z-score=4.01).",
+    "confidence": 0.401361263147949,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-63cd5946",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380926+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-6df4772b-25c8-56f2-ba13-d80fd7fb0ea3",
+      "EV-05377228-770f-5d3f-b240-40acdbaeba20",
+      "EV-7e1ed5db-c285-5c4a-b309-88b2df3d4388",
+      "EV-86d34797-16a0-5794-b42c-7a53b789ad9c",
+      "EV-fa016e21-7242-5d46-92ad-6583a1017bc6",
+      "EV-8338e079-7745-583f-8590-aa65a82fb67c",
+      "EV-2b67bc0f-a1fc-5fc2-8ec8-543da33fab41",
+      "EV-db7183e7-2a29-516f-a44f-f362daaca6a0"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-daf7f7a7",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.380979+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-9834ca09-a972-5b93-8435-035d50297866",
+      "EV-c2c450cd-2c83-5739-bec8-7ca84bed7404",
+      "EV-eff44fd2-29b1-5ed6-8f4d-c86902eff46f",
+      "EV-85ef1fd0-b8ea-5004-a7c5-e3fc587d0bbd",
+      "EV-cebd4191-d519-57d8-aa49-e83d51b580f2",
+      "EV-53974866-13f1-56fc-a06e-5f08115d776d",
+      "EV-6fb4ac1e-9e9b-50d8-8395-479b71960994",
+      "EV-28f3c531-2fa0-51ac-bac1-4f7c9e756344"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-313699a7",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.381020+00:00",
+    "entity_ids": [
+      "P004997"
+    ],
+    "evidence_ids": [
+      "EV-c2c450cd-2c83-5739-bec8-7ca84bed7404",
+      "EV-eff44fd2-29b1-5ed6-8f4d-c86902eff46f",
+      "EV-85ef1fd0-b8ea-5004-a7c5-e3fc587d0bbd",
+      "EV-cebd4191-d519-57d8-aa49-e83d51b580f2",
+      "EV-53974866-13f1-56fc-a06e-5f08115d776d",
+      "EV-6fb4ac1e-9e9b-50d8-8395-479b71960994",
+      "EV-28f3c531-2fa0-51ac-bac1-4f7c9e756344",
+      "EV-76923684-99df-5a42-9c9e-e237f95c431b"
+    ],
+    "description": "Communication burst detected for entity P004997: 8 events in 24h window (baseline mean=3.1, z-score=3.33).",
+    "confidence": 0.3329940255006717,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-456177f4",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.406947+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-5faa6c39-fce1-5e9d-b32f-c9f669761f56",
+      "EV-4e3493a6-81e5-5c17-9037-ba2b808181ae",
+      "EV-c96b5afc-366b-5cc9-b306-9eee51012567",
+      "EV-be9bf08a-6397-5e7e-afbb-062798adf54b",
+      "EV-62054cc2-fa97-519b-8b60-91d62a7a29d5",
+      "EV-76ea94d9-372d-5fcd-89eb-b7774802de9f",
+      "EV-205d2050-1a80-5330-a880-a173722f77ab",
+      "EV-dfdc711f-513e-5756-a4bb-83b413dd33be",
+      "EV-0bf67c0a-d3e1-50f0-9f99-bf06a34db608"
+    ],
+    "description": "Communication burst detected for entity P004998: 9 events in 24h window (baseline mean=2.9, z-score=4.30).",
+    "confidence": 0.43049179749312494,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-189f980e",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.407004+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-4e3493a6-81e5-5c17-9037-ba2b808181ae",
+      "EV-c96b5afc-366b-5cc9-b306-9eee51012567",
+      "EV-be9bf08a-6397-5e7e-afbb-062798adf54b",
+      "EV-62054cc2-fa97-519b-8b60-91d62a7a29d5",
+      "EV-76ea94d9-372d-5fcd-89eb-b7774802de9f",
+      "EV-205d2050-1a80-5330-a880-a173722f77ab",
+      "EV-dfdc711f-513e-5756-a4bb-83b413dd33be",
+      "EV-0bf67c0a-d3e1-50f0-9f99-bf06a34db608"
+    ],
+    "description": "Communication burst detected for entity P004998: 8 events in 24h window (baseline mean=2.9, z-score=3.60).",
+    "confidence": 0.35989568397471267,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f45fe052",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.407049+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-c96b5afc-366b-5cc9-b306-9eee51012567",
+      "EV-be9bf08a-6397-5e7e-afbb-062798adf54b",
+      "EV-62054cc2-fa97-519b-8b60-91d62a7a29d5",
+      "EV-76ea94d9-372d-5fcd-89eb-b7774802de9f",
+      "EV-205d2050-1a80-5330-a880-a173722f77ab",
+      "EV-dfdc711f-513e-5756-a4bb-83b413dd33be",
+      "EV-0bf67c0a-d3e1-50f0-9f99-bf06a34db608",
+      "EV-ddfd9a8c-c368-5638-b9e5-2d98a6b3e123"
+    ],
+    "description": "Communication burst detected for entity P004998: 8 events in 24h window (baseline mean=2.9, z-score=3.60).",
+    "confidence": 0.35989568397471267,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-953cc3ca",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.407095+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-62054cc2-fa97-519b-8b60-91d62a7a29d5",
+      "EV-76ea94d9-372d-5fcd-89eb-b7774802de9f",
+      "EV-205d2050-1a80-5330-a880-a173722f77ab",
+      "EV-dfdc711f-513e-5756-a4bb-83b413dd33be",
+      "EV-0bf67c0a-d3e1-50f0-9f99-bf06a34db608",
+      "EV-ddfd9a8c-c368-5638-b9e5-2d98a6b3e123",
+      "EV-00c41a22-73d8-529e-a94f-3e6dc6001dc6",
+      "EV-c111e9d1-3579-52a3-b35b-8d20081b8a90",
+      "EV-2326cb8f-70d1-5098-878c-b3228d87e156"
+    ],
+    "description": "Communication burst detected for entity P004998: 9 events in 24h window (baseline mean=2.9, z-score=4.30).",
+    "confidence": 0.43049179749312494,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-9c8675d9",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.407137+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-76ea94d9-372d-5fcd-89eb-b7774802de9f",
+      "EV-205d2050-1a80-5330-a880-a173722f77ab",
+      "EV-dfdc711f-513e-5756-a4bb-83b413dd33be",
+      "EV-0bf67c0a-d3e1-50f0-9f99-bf06a34db608",
+      "EV-ddfd9a8c-c368-5638-b9e5-2d98a6b3e123",
+      "EV-00c41a22-73d8-529e-a94f-3e6dc6001dc6",
+      "EV-c111e9d1-3579-52a3-b35b-8d20081b8a90",
+      "EV-2326cb8f-70d1-5098-878c-b3228d87e156"
+    ],
+    "description": "Communication burst detected for entity P004998: 8 events in 24h window (baseline mean=2.9, z-score=3.60).",
+    "confidence": 0.35989568397471267,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-99458d33",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.407180+00:00",
+    "entity_ids": [
+      "P004998"
+    ],
+    "evidence_ids": [
+      "EV-c10e5937-c887-5db3-9cc0-8f11fc3cc110",
+      "EV-1c407607-edbb-553d-bd89-e762cf9d77d7",
+      "EV-58d3b36e-91e9-5a63-803c-470a36cf885e",
+      "EV-dc94b4c8-bc2d-51d6-8562-ea2ce86573f0",
+      "EV-34415c3a-65e8-5c13-93ce-f8a80036b269",
+      "EV-e2db7456-63fd-5214-8b70-4f9891f96899",
+      "EV-9fee47bd-f768-5c80-8650-27bf21aa59f6",
+      "EV-e355a911-5426-52e3-b281-70e90be480e5"
+    ],
+    "description": "Communication burst detected for entity P004998: 8 events in 24h window (baseline mean=2.9, z-score=3.60).",
+    "confidence": 0.35989568397471267,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-05bcb160",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.408500+00:00",
+    "entity_ids": [
+      "P000316"
+    ],
+    "evidence_ids": [
+      "EV-d7a4425d-0224-5daa-8a58-ec9420482696",
+      "EV-f5df01b7-e9d8-5db8-83b0-ebb3369db604",
+      "EV-3319f600-c894-5984-8327-bcb5de4d782f",
+      "EV-dfb484ac-aaa9-5cd4-8225-07df963a14b2"
+    ],
+    "description": "Communication burst detected for entity P000316: 4 events in 24h window (baseline mean=1.5, z-score=3.52).",
+    "confidence": 0.3516431053827423,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-a10efd6a",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.408516+00:00",
+    "entity_ids": [
+      "P000316"
+    ],
+    "evidence_ids": [
+      "EV-2eb5813c-eac9-54b3-88dc-dc4c37a268e6",
+      "EV-caa9d586-d850-5f97-8cad-458a87cc21bc",
+      "EV-e4f52d3b-c8ad-5c14-8faa-415f9d808d1a",
+      "EV-d72b8747-8de9-57a2-9d3f-aac7b5d3fdf3"
+    ],
+    "description": "Communication burst detected for entity P000316: 4 events in 24h window (baseline mean=1.5, z-score=3.52).",
+    "confidence": 0.3516431053827423,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-57f89247",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.408529+00:00",
+    "entity_ids": [
+      "P000316"
+    ],
+    "evidence_ids": [
+      "EV-caa9d586-d850-5f97-8cad-458a87cc21bc",
+      "EV-e4f52d3b-c8ad-5c14-8faa-415f9d808d1a",
+      "EV-d72b8747-8de9-57a2-9d3f-aac7b5d3fdf3",
+      "EV-90097006-cf96-5a47-92ca-a8c3a6d04a06"
+    ],
+    "description": "Communication burst detected for entity P000316: 4 events in 24h window (baseline mean=1.5, z-score=3.52).",
+    "confidence": 0.3516431053827423,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-38646a96",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.441114+00:00",
+    "entity_ids": [
+      "P004995"
+    ],
+    "evidence_ids": [
+      "EV-40da0e77-2f18-5c6a-9e5a-43a22119dd6e",
+      "EV-356ff9a8-8fc1-5243-a345-d8c7a25cd886",
+      "EV-bb8dab90-c59e-5647-b82e-2608ef6df0c4",
+      "EV-618757a3-be74-58ab-b562-6463fde92561",
+      "EV-d402e73c-ca6c-5d0e-a390-df52af414376",
+      "EV-ac1ded95-c786-5767-92e8-5862c291c944",
+      "EV-09e4ccfa-48c2-5b5a-9fed-4d155bc3ace0",
+      "EV-b12e0596-16f7-5117-bff2-cc04fad8afe4"
+    ],
+    "description": "Communication burst detected for entity P004995: 8 events in 24h window (baseline mean=3.2, z-score=3.52).",
+    "confidence": 0.3518288477653963,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f652cd25",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.441197+00:00",
+    "entity_ids": [
+      "P004995"
+    ],
+    "evidence_ids": [
+      "EV-356ff9a8-8fc1-5243-a345-d8c7a25cd886",
+      "EV-bb8dab90-c59e-5647-b82e-2608ef6df0c4",
+      "EV-618757a3-be74-58ab-b562-6463fde92561",
+      "EV-d402e73c-ca6c-5d0e-a390-df52af414376",
+      "EV-ac1ded95-c786-5767-92e8-5862c291c944",
+      "EV-09e4ccfa-48c2-5b5a-9fed-4d155bc3ace0",
+      "EV-b12e0596-16f7-5117-bff2-cc04fad8afe4",
+      "EV-40460443-67bb-5d88-8967-0764bcc155c0"
+    ],
+    "description": "Communication burst detected for entity P004995: 8 events in 24h window (baseline mean=3.2, z-score=3.52).",
+    "confidence": 0.3518288477653963,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-7972f2e3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.442651+00:00",
+    "entity_ids": [
+      "P000422"
+    ],
+    "evidence_ids": [
+      "EV-f79d5bc8-c0b9-5438-8d38-c3d36fbf7dfd",
+      "EV-b0309990-f5e0-5302-8ef9-db4de9ab3307",
+      "EV-d54189ea-1089-537d-8fad-a61aaf2a491b",
+      "EV-e33753e0-8d32-572d-9cb2-379a02af8d9b"
+    ],
+    "description": "Communication burst detected for entity P000422: 4 events in 24h window (baseline mean=1.5, z-score=3.75).",
+    "confidence": 0.3747244754753518,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-cbad3cbd",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.444385+00:00",
+    "entity_ids": [
+      "P000600"
+    ],
+    "evidence_ids": [
+      "EV-2eba6568-e1a7-5092-adef-6b586ea401dc",
+      "EV-6ed5807e-12e3-5328-8732-017732ba229f",
+      "EV-61e3ce56-0d88-595d-8074-33871f6a6d37",
+      "EV-92f7a1f8-0079-5422-9247-e763727c94b6"
+    ],
+    "description": "Communication burst detected for entity P000600: 4 events in 24h window (baseline mean=1.5, z-score=3.24).",
+    "confidence": 0.3242165759195339,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-9b49cccd",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.444402+00:00",
+    "entity_ids": [
+      "P000600"
+    ],
+    "evidence_ids": [
+      "EV-6ed5807e-12e3-5328-8732-017732ba229f",
+      "EV-61e3ce56-0d88-595d-8074-33871f6a6d37",
+      "EV-92f7a1f8-0079-5422-9247-e763727c94b6",
+      "EV-2dab166e-354a-59cf-9af0-fd7fcef7b4ac"
+    ],
+    "description": "Communication burst detected for entity P000600: 4 events in 24h window (baseline mean=1.5, z-score=3.24).",
+    "confidence": 0.3242165759195339,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-0a0aae72",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.444418+00:00",
+    "entity_ids": [
+      "P000600"
+    ],
+    "evidence_ids": [
+      "EV-d8f32daa-9295-5186-a22e-5721f35ee858",
+      "EV-22c97dba-eac2-5336-afb3-46b621276eff",
+      "EV-edd95f0e-445a-5ee4-b83d-15a7915a3d1b",
+      "EV-dc94b4c8-bc2d-51d6-8562-ea2ce86573f0"
+    ],
+    "description": "Communication burst detected for entity P000600: 4 events in 24h window (baseline mean=1.5, z-score=3.24).",
+    "confidence": 0.3242165759195339,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-b217a73f",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.444435+00:00",
+    "entity_ids": [
+      "P000600"
+    ],
+    "evidence_ids": [
+      "EV-7f57fe77-d295-5803-97fe-e782641ba982",
+      "EV-35cd6c7b-6a18-573f-a076-a2a5d7101acf",
+      "EV-39722043-65cc-5d8d-880d-6982159b655e",
+      "EV-f44ec1b9-a349-5d6f-ac95-ac84d974c8a2"
+    ],
+    "description": "Communication burst detected for entity P000600: 4 events in 24h window (baseline mean=1.5, z-score=3.24).",
+    "confidence": 0.3242165759195339,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-95da8d1c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.462998+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-7b311a9a-0ed1-59ca-938d-345d4ca96b93",
+      "EV-07942775-223b-55c5-9b83-46753d3941a1",
+      "EV-f21ed7f0-dfe4-5350-8f1e-8fbefbb02df5",
+      "EV-dbdeb0e8-e963-5f49-9ab4-838e1e369cc7",
+      "EV-bba1e44e-1428-5a7c-997b-d920ff65b930",
+      "EV-b65bfd2d-aa1f-5957-9d77-0c32bb4dcdb4",
+      "EV-058cf987-ea55-5fc7-9794-028fdc50a622"
+    ],
+    "description": "Communication burst detected for entity P004999: 7 events in 24h window (baseline mean=2.6, z-score=3.59).",
+    "confidence": 0.35895251989140403,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-cec28211",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463059+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-07942775-223b-55c5-9b83-46753d3941a1",
+      "EV-f21ed7f0-dfe4-5350-8f1e-8fbefbb02df5",
+      "EV-dbdeb0e8-e963-5f49-9ab4-838e1e369cc7",
+      "EV-bba1e44e-1428-5a7c-997b-d920ff65b930",
+      "EV-b65bfd2d-aa1f-5957-9d77-0c32bb4dcdb4",
+      "EV-058cf987-ea55-5fc7-9794-028fdc50a622",
+      "EV-e03df38e-3323-55ac-95ba-c40be662cf1c",
+      "EV-b81673a4-01fe-5af7-80c7-c07f234515d1"
+    ],
+    "description": "Communication burst detected for entity P004999: 8 events in 24h window (baseline mean=2.6, z-score=4.40).",
+    "confidence": 0.4398130994616965,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-0294dfaf",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463113+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-f21ed7f0-dfe4-5350-8f1e-8fbefbb02df5",
+      "EV-dbdeb0e8-e963-5f49-9ab4-838e1e369cc7",
+      "EV-bba1e44e-1428-5a7c-997b-d920ff65b930",
+      "EV-b65bfd2d-aa1f-5957-9d77-0c32bb4dcdb4",
+      "EV-058cf987-ea55-5fc7-9794-028fdc50a622",
+      "EV-e03df38e-3323-55ac-95ba-c40be662cf1c",
+      "EV-b81673a4-01fe-5af7-80c7-c07f234515d1"
+    ],
+    "description": "Communication burst detected for entity P004999: 7 events in 24h window (baseline mean=2.6, z-score=3.59).",
+    "confidence": 0.35895251989140403,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-82d992bf",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463168+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-dbdeb0e8-e963-5f49-9ab4-838e1e369cc7",
+      "EV-bba1e44e-1428-5a7c-997b-d920ff65b930",
+      "EV-b65bfd2d-aa1f-5957-9d77-0c32bb4dcdb4",
+      "EV-058cf987-ea55-5fc7-9794-028fdc50a622",
+      "EV-e03df38e-3323-55ac-95ba-c40be662cf1c",
+      "EV-b81673a4-01fe-5af7-80c7-c07f234515d1",
+      "EV-cbd5706a-30d7-5543-b731-09569953ada9"
+    ],
+    "description": "Communication burst detected for entity P004999: 7 events in 24h window (baseline mean=2.6, z-score=3.59).",
+    "confidence": 0.35895251989140403,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-ec014f0d",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463224+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-78c17e5e-c5be-5de6-9064-8ea6a5de805b",
+      "EV-c340ea0d-bdaa-533f-8eef-c7c8a2a1b3f4",
+      "EV-59798688-207c-5c6d-b57d-ae661a40682e",
+      "EV-e941a959-2d0e-5181-b5d7-00cdb17e6b2f",
+      "EV-eff30d22-3130-5f5c-8903-19b80e9c61e1",
+      "EV-445c9d8f-6ba5-551e-9d81-fc58f0e1a88b",
+      "EV-4f1a466e-c3a4-5df3-a352-0ae2697384cc",
+      "EV-cf97eb17-e1a0-5171-9866-a019778cc3e4"
+    ],
+    "description": "Communication burst detected for entity P004999: 8 events in 24h window (baseline mean=2.6, z-score=4.40).",
+    "confidence": 0.4398130994616965,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-fd9bfb59",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463274+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-c340ea0d-bdaa-533f-8eef-c7c8a2a1b3f4",
+      "EV-59798688-207c-5c6d-b57d-ae661a40682e",
+      "EV-e941a959-2d0e-5181-b5d7-00cdb17e6b2f",
+      "EV-eff30d22-3130-5f5c-8903-19b80e9c61e1",
+      "EV-445c9d8f-6ba5-551e-9d81-fc58f0e1a88b",
+      "EV-4f1a466e-c3a4-5df3-a352-0ae2697384cc",
+      "EV-cf97eb17-e1a0-5171-9866-a019778cc3e4",
+      "EV-4dcf3fe5-3fd8-5174-8f10-655993883c68"
+    ],
+    "description": "Communication burst detected for entity P004999: 8 events in 24h window (baseline mean=2.6, z-score=4.40).",
+    "confidence": 0.4398130994616965,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-5cf38ac1",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.463323+00:00",
+    "entity_ids": [
+      "P004999"
+    ],
+    "evidence_ids": [
+      "EV-59798688-207c-5c6d-b57d-ae661a40682e",
+      "EV-e941a959-2d0e-5181-b5d7-00cdb17e6b2f",
+      "EV-eff30d22-3130-5f5c-8903-19b80e9c61e1",
+      "EV-445c9d8f-6ba5-551e-9d81-fc58f0e1a88b",
+      "EV-4f1a466e-c3a4-5df3-a352-0ae2697384cc",
+      "EV-cf97eb17-e1a0-5171-9866-a019778cc3e4",
+      "EV-4dcf3fe5-3fd8-5174-8f10-655993883c68"
+    ],
+    "description": "Communication burst detected for entity P004999: 7 events in 24h window (baseline mean=2.6, z-score=3.59).",
+    "confidence": 0.35895251989140403,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-3e5d612c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.465065+00:00",
+    "entity_ids": [
+      "P002207"
+    ],
+    "evidence_ids": [
+      "EV-018c24da-7a9a-5cf6-a24d-5a02aa4f004c",
+      "EV-52e1978c-1d97-5553-ac16-8553dbf2dae5",
+      "EV-22276fff-3a59-55e8-abe1-c59dab79702f",
+      "EV-e9b02345-041e-5860-8f44-0ca55dabae94"
+    ],
+    "description": "Communication burst detected for entity P002207: 4 events in 24h window (baseline mean=1.4, z-score=4.05).",
+    "confidence": 0.40491984570744277,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f793f4ef",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.474652+00:00",
+    "entity_ids": [
+      "P004996"
+    ],
+    "evidence_ids": [
+      "EV-d2f6597b-5b21-520f-83cc-c28c9d884389",
+      "EV-98c0cf3c-eaf1-52b0-baa9-bc67358cc4b1",
+      "EV-2f85e4cb-1d0c-5c41-b880-671f374f88c6",
+      "EV-17958dbf-6892-506b-bbf1-7bbb94c94735",
+      "EV-e6576aec-3c4a-5c78-808c-102f85587f3d",
+      "EV-6539d93e-99b2-5d3e-afb2-c39bb7cd2cee",
+      "EV-2afaec41-6020-5b40-83d8-8010b2e8ed7e"
+    ],
+    "description": "Communication burst detected for entity P004996: 7 events in 24h window (baseline mean=2.2, z-score=4.31).",
+    "confidence": 0.43059508062383356,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-404a4235",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.474691+00:00",
+    "entity_ids": [
+      "P004996"
+    ],
+    "evidence_ids": [
+      "EV-98c0cf3c-eaf1-52b0-baa9-bc67358cc4b1",
+      "EV-2f85e4cb-1d0c-5c41-b880-671f374f88c6",
+      "EV-17958dbf-6892-506b-bbf1-7bbb94c94735",
+      "EV-e6576aec-3c4a-5c78-808c-102f85587f3d",
+      "EV-6539d93e-99b2-5d3e-afb2-c39bb7cd2cee",
+      "EV-2afaec41-6020-5b40-83d8-8010b2e8ed7e"
+    ],
+    "description": "Communication burst detected for entity P004996: 6 events in 24h window (baseline mean=2.2, z-score=3.41).",
+    "confidence": 0.341397372933392,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-01a8add3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.474727+00:00",
+    "entity_ids": [
+      "P004996"
+    ],
+    "evidence_ids": [
+      "EV-d38038d9-ff54-5cfc-8b4b-6411e2fb93af",
+      "EV-0cc34a93-5b1f-5bd1-9e78-fef99152de96",
+      "EV-37ff6659-005c-5033-8bbf-d64dc8fd3f4a",
+      "EV-5828b61b-ce06-5f17-937f-95efd64d670c",
+      "EV-733fdd6a-b42f-5761-8272-96878b3e0126",
+      "EV-22e7ecdf-b9e8-52f2-b402-614b69f47108"
+    ],
+    "description": "Communication burst detected for entity P004996: 6 events in 24h window (baseline mean=2.2, z-score=3.41).",
+    "confidence": 0.341397372933392,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4f9dbd4f",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.476191+00:00",
+    "entity_ids": [
+      "P002327"
+    ],
+    "evidence_ids": [
+      "EV-bc2fdc7e-0be9-5766-88a2-7607efd12a4f",
+      "EV-d9f3d983-02e9-5fcf-9255-163b7c3337a5",
+      "EV-51436b7e-b596-551a-8fd7-65a91ba424e9",
+      "EV-b7c00a64-e88d-5c28-997b-8423f3947608"
+    ],
+    "description": "Communication burst detected for entity P002327: 4 events in 24h window (baseline mean=1.4, z-score=4.03).",
+    "confidence": 0.40309513516764506,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-5474a2e0",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477648+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-6ccb7b24-f321-5a7c-a24b-b14e99c11da5",
+      "EV-f9df9551-c32b-598d-bda2-e13c2b1756de",
+      "EV-9aeddacd-5036-5811-b688-531650d4e88e",
+      "EV-d1178e5b-fcf8-52d6-a59d-0c9b1fc7f912"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-87f6ed7c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477668+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-16a18b7d-2375-5481-b472-421b7aeba731",
+      "EV-29bd0a88-ae42-5f3b-8a71-86049c0848ea",
+      "EV-2797a572-e9a9-5367-a415-6a3ff53f4b29",
+      "EV-2adb95fe-a2d0-530c-9594-a4b8e41b7460"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-facbecaf",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477688+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-fe83022e-7a83-5d94-8c5d-6614356beeef",
+      "EV-4505ea3f-4911-5e98-9e57-4b1f109b7fd2",
+      "EV-fa016e21-7242-5d46-92ad-6583a1017bc6",
+      "EV-041804a7-a50c-5712-9f85-c7eec4b9b74c"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4043478c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477702+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-4505ea3f-4911-5e98-9e57-4b1f109b7fd2",
+      "EV-fa016e21-7242-5d46-92ad-6583a1017bc6",
+      "EV-041804a7-a50c-5712-9f85-c7eec4b9b74c",
+      "EV-1233e5bb-df8a-569d-b790-724dc150537e"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-12d41055",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477716+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-49572461-f5bc-58a7-971a-56a80de4ea24",
+      "EV-ea32e767-7368-5d87-aed9-4460cc854c1e",
+      "EV-704ebdb5-0623-5e7c-bbc1-1f3f8b466480",
+      "EV-dd22f77c-4623-5ae6-971b-3c81d96ef511"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-20179bd0",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477730+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-9834ca09-a972-5b93-8435-035d50297866",
+      "EV-cebd4191-d519-57d8-aa49-e83d51b580f2",
+      "EV-28f3c531-2fa0-51ac-bac1-4f7c9e756344",
+      "EV-d126d337-979e-539e-9087-08fb8208b331",
+      "EV-ef05ce5b-53d5-55c0-ae8a-d0315dc95521"
+    ],
+    "description": "Communication burst detected for entity P000965: 5 events in 24h window (baseline mean=1.5, z-score=4.26).",
+    "confidence": 0.4262050728714997,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-1590d00a",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.477742+00:00",
+    "entity_ids": [
+      "P000965"
+    ],
+    "evidence_ids": [
+      "EV-cebd4191-d519-57d8-aa49-e83d51b580f2",
+      "EV-28f3c531-2fa0-51ac-bac1-4f7c9e756344",
+      "EV-d126d337-979e-539e-9087-08fb8208b331",
+      "EV-ef05ce5b-53d5-55c0-ae8a-d0315dc95521"
+    ],
+    "description": "Communication burst detected for entity P000965: 4 events in 24h window (baseline mean=1.5, z-score=3.04).",
+    "confidence": 0.3042115918684255,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-8424b979",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.479055+00:00",
+    "entity_ids": [
+      "P002044"
+    ],
+    "evidence_ids": [
+      "EV-2a985a72-decc-5970-a970-7f85494424d6",
+      "EV-c016676a-d992-55dd-ad8b-d122d90c9401",
+      "EV-b1206a17-79a5-5b1a-9ce1-11e2b4023c53",
+      "EV-219d032e-30bb-562a-a1b4-76437c599041"
+    ],
+    "description": "Communication burst detected for entity P002044: 4 events in 24h window (baseline mean=1.4, z-score=4.15).",
+    "confidence": 0.41516492432723817,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-1a216672",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.486472+00:00",
+    "entity_ids": [
+      "P002164"
+    ],
+    "evidence_ids": [
+      "EV-0bcb1d97-d204-5e07-bc83-c90d2d15ca55",
+      "EV-0afb0b26-a2b2-5afd-83c7-1b7043d884a5",
+      "EV-28a4d94f-9af5-5889-9a7c-0bace49880a2",
+      "EV-011e7686-391f-5442-9364-1b699239f090"
+    ],
+    "description": "Communication burst detected for entity P002164: 4 events in 24h window (baseline mean=1.5, z-score=3.36).",
+    "confidence": 0.3362161902434841,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4f299a36",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.486494+00:00",
+    "entity_ids": [
+      "P002164"
+    ],
+    "evidence_ids": [
+      "EV-811783b2-8e45-5d12-9969-d9dbe43e1f31",
+      "EV-b10d2e46-5f80-519f-8cea-b9500688a693",
+      "EV-30f82ba9-5e60-5ee5-8a97-de7249920fa5",
+      "EV-e6d51f47-bea9-5643-b3cc-3c5582d3a9ee"
+    ],
+    "description": "Communication burst detected for entity P002164: 4 events in 24h window (baseline mean=1.5, z-score=3.36).",
+    "confidence": 0.3362161902434841,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f7e5cce3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.486513+00:00",
+    "entity_ids": [
+      "P002164"
+    ],
+    "evidence_ids": [
+      "EV-4fd53299-fa93-5401-8342-b184658ce364",
+      "EV-604d5e57-981b-5a56-9745-19a301fe1399",
+      "EV-554b50ee-2ca8-513f-9445-8e6912772830",
+      "EV-c5653f8b-2f0d-5b67-81d7-26ef2b1b90f5"
+    ],
+    "description": "Communication burst detected for entity P002164: 4 events in 24h window (baseline mean=1.5, z-score=3.36).",
+    "confidence": 0.3362161902434841,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-1520bddd",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.486529+00:00",
+    "entity_ids": [
+      "P002164"
+    ],
+    "evidence_ids": [
+      "EV-edc4925e-d79d-5808-808f-fb8efad34b1c",
+      "EV-5a89f91d-378c-5962-80b1-ddfb38c1a97e",
+      "EV-65375e0e-ce8e-555d-86e5-55e5a5eed385",
+      "EV-90b2a673-7b8b-5e46-b13b-7a6d107fc75f"
+    ],
+    "description": "Communication burst detected for entity P002164: 4 events in 24h window (baseline mean=1.5, z-score=3.36).",
+    "confidence": 0.3362161902434841,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-d14ebc51",
+    "anomaly_type": "BURST",
+    "severity": "HIGH",
+    "detected_at": "2026-09-16T17:25:57.487635+00:00",
+    "entity_ids": [
+      "P000777"
+    ],
+    "evidence_ids": [
+      "EV-b0416970-1621-54d7-b513-947620f6fc3c",
+      "EV-531874bb-ff02-5976-966c-a5c4ad26f470",
+      "EV-e2543b3d-4a92-5b78-a700-f194a7595989",
+      "EV-e2df865f-3a4c-523b-b22e-e63ba0340e64",
+      "EV-0d180ec6-418d-5526-ab0f-4f5803cfd236"
+    ],
+    "description": "Communication burst detected for entity P000777: 5 events in 24h window (baseline mean=1.5, z-score=5.08).",
+    "confidence": 0.5077411132425567,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4ab9e2de",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.489212+00:00",
+    "entity_ids": [
+      "P001723"
+    ],
+    "evidence_ids": [
+      "EV-7f08567e-47ba-5c6d-994d-4ba99ddcf5fb",
+      "EV-a4b4cd84-ecbc-53a1-9958-031985e6fa17",
+      "EV-199c8c41-21de-5eac-85fb-a693c2dcc78b",
+      "EV-267575de-9a90-50ed-901d-002cbcea265f"
+    ],
+    "description": "Communication burst detected for entity P001723: 4 events in 24h window (baseline mean=1.5, z-score=3.38).",
+    "confidence": 0.3378465703528772,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-5234d870",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.489233+00:00",
+    "entity_ids": [
+      "P001723"
+    ],
+    "evidence_ids": [
+      "EV-ac919fd4-0227-5270-8227-9997185e5f27",
+      "EV-5c66b01a-d6b4-58a4-a143-ae5d9bfe6dc5",
+      "EV-77aea801-d931-5364-8d7d-6aec3ae917a2",
+      "EV-4d1ea690-69d4-57b0-9f95-d3db2ac2c127"
+    ],
+    "description": "Communication burst detected for entity P001723: 4 events in 24h window (baseline mean=1.5, z-score=3.38).",
+    "confidence": 0.3378465703528772,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-889195b3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.489255+00:00",
+    "entity_ids": [
+      "P001723"
+    ],
+    "evidence_ids": [
+      "EV-8c41b0bb-9ec5-5600-893a-2f63e26e6edc",
+      "EV-71e92c4d-605d-5092-aa8d-06989ac119a2",
+      "EV-b7a5a0e7-0964-5709-b565-e3c55c6b2ca6",
+      "EV-5ab02366-f2e7-558e-9525-909d1d2110b3"
+    ],
+    "description": "Communication burst detected for entity P001723: 4 events in 24h window (baseline mean=1.5, z-score=3.38).",
+    "confidence": 0.3378465703528772,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-11b51a4f",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.491422+00:00",
+    "entity_ids": [
+      "P001733"
+    ],
+    "evidence_ids": [
+      "EV-b9584b9c-67a8-550b-9abf-6026c3ea2224",
+      "EV-45219661-e659-5806-b3c1-6d84ed49ba5c",
+      "EV-6df4772b-25c8-56f2-ba13-d80fd7fb0ea3",
+      "EV-05377228-770f-5d3f-b240-40acdbaeba20"
+    ],
+    "description": "Communication burst detected for entity P001733: 4 events in 24h window (baseline mean=1.5, z-score=3.50).",
+    "confidence": 0.3504550284771097,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-8dcd7dba",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.491440+00:00",
+    "entity_ids": [
+      "P001733"
+    ],
+    "evidence_ids": [
+      "EV-b0aafb8d-0afc-5923-9a51-8b22d8df73f0",
+      "EV-59592bb3-c63f-5ef0-9f38-ec11be6a3031",
+      "EV-36ce3dd0-58a6-5794-bf3f-6e1c1effbe4c",
+      "EV-712ded3e-779b-595c-a7bd-0614c5a07af1"
+    ],
+    "description": "Communication burst detected for entity P001733: 4 events in 24h window (baseline mean=1.5, z-score=3.50).",
+    "confidence": 0.3504550284771097,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-1e92da4d",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.493167+00:00",
+    "entity_ids": [
+      "P001087"
+    ],
+    "evidence_ids": [
+      "EV-83db908a-42f7-540b-aec1-cc90cdab2826",
+      "EV-4fdef007-50d4-59fb-a119-56e4838fa60a",
+      "EV-6cecb301-e5d0-55c7-8133-2e71c5c029fe",
+      "EV-2a530f33-7388-5bd4-851e-a20e373fd4d5",
+      "EV-7daf88ec-6fa1-5fbb-b1ea-b8d622e47d3b"
+    ],
+    "description": "Communication burst detected for entity P001087: 5 events in 24h window (baseline mean=1.5, z-score=4.60).",
+    "confidence": 0.460045862902881,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-0677601c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.493184+00:00",
+    "entity_ids": [
+      "P001087"
+    ],
+    "evidence_ids": [
+      "EV-4fdef007-50d4-59fb-a119-56e4838fa60a",
+      "EV-6cecb301-e5d0-55c7-8133-2e71c5c029fe",
+      "EV-2a530f33-7388-5bd4-851e-a20e373fd4d5",
+      "EV-7daf88ec-6fa1-5fbb-b1ea-b8d622e47d3b"
+    ],
+    "description": "Communication burst detected for entity P001087: 4 events in 24h window (baseline mean=1.5, z-score=3.28).",
+    "confidence": 0.32817110154357076,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-a67246ac",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.493200+00:00",
+    "entity_ids": [
+      "P001087"
+    ],
+    "evidence_ids": [
+      "EV-a0d6afe3-4214-58c3-896f-fc038d4e98bb",
+      "EV-a72ad0f9-8f83-5152-958a-a9f62d8d2fc2",
+      "EV-cd00a333-c14c-591e-b36e-6773c1cca090",
+      "EV-8f5b3545-ec05-5933-b5b8-20e11e77d7a9"
+    ],
+    "description": "Communication burst detected for entity P001087: 4 events in 24h window (baseline mean=1.5, z-score=3.28).",
+    "confidence": 0.32817110154357076,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-b5285022",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.493214+00:00",
+    "entity_ids": [
+      "P001087"
+    ],
+    "evidence_ids": [
+      "EV-b171b533-e295-5bb3-88af-1692faf59855",
+      "EV-9cda7641-fbbf-58a2-8a9d-d0a358c246bc",
+      "EV-4f13dba2-998d-52e0-bab7-51aca83ed1f9",
+      "EV-54e778de-b7b0-54c6-8ef6-9818c3d05840"
+    ],
+    "description": "Communication burst detected for entity P001087: 4 events in 24h window (baseline mean=1.5, z-score=3.28).",
+    "confidence": 0.32817110154357076,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-7e46be96",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.495735+00:00",
+    "entity_ids": [
+      "P000738"
+    ],
+    "evidence_ids": [
+      "EV-b427023c-fde5-5278-a978-97a35aff3d5d",
+      "EV-d2d391e7-92af-52db-afe6-d9827f8bd527",
+      "EV-71e23971-40d3-5bb1-a0a6-2af721f816bc",
+      "EV-42999a90-0b11-5779-be76-ca1389a980bd"
+    ],
+    "description": "Communication burst detected for entity P000738: 4 events in 24h window (baseline mean=1.4, z-score=4.59).",
+    "confidence": 0.4590224838216573,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-9aabcbd5",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.497194+00:00",
+    "entity_ids": [
+      "P000799"
+    ],
+    "evidence_ids": [
+      "EV-9e53c925-2c68-5ac6-9f19-a10f62d19895",
+      "EV-5a04b39f-88b9-5b24-94f6-b3b216b0f5cf",
+      "EV-c40e7453-2877-557c-8b34-376e87950a3d",
+      "EV-fe1dc5f5-89aa-5af9-bb2f-a221660a6284"
+    ],
+    "description": "Communication burst detected for entity P000799: 4 events in 24h window (baseline mean=1.5, z-score=3.58).",
+    "confidence": 0.3579062002623318,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-bba5d30d",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.498548+00:00",
+    "entity_ids": [
+      "P002547"
+    ],
+    "evidence_ids": [
+      "EV-47c70314-1c47-5129-81ea-3107bb2afd1e",
+      "EV-801873ca-c535-516e-a843-2cde9f0b2eba",
+      "EV-62d551dc-ed12-5b45-94ec-3422c74ecce3",
+      "EV-a36b1cf9-9f67-541f-a3d2-0ee52a4cc80d"
+    ],
+    "description": "Communication burst detected for entity P002547: 4 events in 24h window (baseline mean=1.4, z-score=3.39).",
+    "confidence": 0.3390073430877005,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-07564a15",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.498568+00:00",
+    "entity_ids": [
+      "P002547"
+    ],
+    "evidence_ids": [
+      "EV-0368d0da-e0f6-5f47-80b4-93af143e0244",
+      "EV-1afb644c-5429-5135-a116-50f307ba52e2",
+      "EV-32bd172c-f80e-5ac2-94fa-15126fdedd45",
+      "EV-1222cf42-1b13-5394-b93a-e4b9809604cc"
+    ],
+    "description": "Communication burst detected for entity P002547: 4 events in 24h window (baseline mean=1.4, z-score=3.39).",
+    "confidence": 0.3390073430877005,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-24ebe774",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.498592+00:00",
+    "entity_ids": [
+      "P002547"
+    ],
+    "evidence_ids": [
+      "EV-3be374ad-de0b-50f3-86a3-a1b8599dbef1",
+      "EV-74b9bc6b-3da5-5da0-bb9f-6e22cf749973",
+      "EV-5828b61b-ce06-5f17-937f-95efd64d670c",
+      "EV-733fdd6a-b42f-5761-8272-96878b3e0126",
+      "EV-22e7ecdf-b9e8-52f2-b402-614b69f47108"
+    ],
+    "description": "Communication burst detected for entity P002547: 5 events in 24h window (baseline mean=1.4, z-score=4.71).",
+    "confidence": 0.471237955967458,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-afd2c9e9",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.498604+00:00",
+    "entity_ids": [
+      "P002547"
+    ],
+    "evidence_ids": [
+      "EV-74b9bc6b-3da5-5da0-bb9f-6e22cf749973",
+      "EV-5828b61b-ce06-5f17-937f-95efd64d670c",
+      "EV-733fdd6a-b42f-5761-8272-96878b3e0126",
+      "EV-22e7ecdf-b9e8-52f2-b402-614b69f47108",
+      "EV-c35a9355-e40b-5145-8164-4c79b3b418a6"
+    ],
+    "description": "Communication burst detected for entity P002547: 5 events in 24h window (baseline mean=1.4, z-score=4.71).",
+    "confidence": 0.471237955967458,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-ee022f59",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.498615+00:00",
+    "entity_ids": [
+      "P002547"
+    ],
+    "evidence_ids": [
+      "EV-5828b61b-ce06-5f17-937f-95efd64d670c",
+      "EV-733fdd6a-b42f-5761-8272-96878b3e0126",
+      "EV-22e7ecdf-b9e8-52f2-b402-614b69f47108",
+      "EV-c35a9355-e40b-5145-8164-4c79b3b418a6"
+    ],
+    "description": "Communication burst detected for entity P002547: 4 events in 24h window (baseline mean=1.4, z-score=3.39).",
+    "confidence": 0.3390073430877005,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-7b51e6f3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.500262+00:00",
+    "entity_ids": [
+      "P002758"
+    ],
+    "evidence_ids": [
+      "EV-352da31e-5025-5621-ac97-54c724b4190c",
+      "EV-a022b32c-a380-53ce-a6d2-c460a27865c5",
+      "EV-ea1d307a-b769-5d8a-b531-477d89896c63",
+      "EV-119de3ff-82b4-548a-b77b-53d74fc4c226"
+    ],
+    "description": "Communication burst detected for entity P002758: 4 events in 24h window (baseline mean=1.5, z-score=3.45).",
+    "confidence": 0.34466968387845737,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-f9fc880d",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.500282+00:00",
+    "entity_ids": [
+      "P002758"
+    ],
+    "evidence_ids": [
+      "EV-6becdb17-961c-53c0-b51e-5fe3772d30c6",
+      "EV-8d0aa971-ce4c-5ed9-a9c3-1db542e36aa1",
+      "EV-7da27c3d-2506-58cc-ba74-44cb1f40fbf7",
+      "EV-067757cc-aa0a-584c-b8ba-6003255af999"
+    ],
+    "description": "Communication burst detected for entity P002758: 4 events in 24h window (baseline mean=1.5, z-score=3.45).",
+    "confidence": 0.34466968387845737,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-b6088516",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.501681+00:00",
+    "entity_ids": [
+      "P002887"
+    ],
+    "evidence_ids": [
+      "EV-4add5346-7ae6-58bf-962d-67eaeb6d1f63",
+      "EV-901a27a9-4243-5818-9d39-0e2e09036f3d",
+      "EV-4dbf9f0b-450f-5923-8464-aa5e3f08a5d6",
+      "EV-3c02b375-c622-569d-ac2e-b442dc9c8214"
+    ],
+    "description": "Communication burst detected for entity P002887: 4 events in 24h window (baseline mean=1.5, z-score=3.62).",
+    "confidence": 0.36224258117725394,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-d518147a",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.501700+00:00",
+    "entity_ids": [
+      "P002887"
+    ],
+    "evidence_ids": [
+      "EV-ca46dc9d-59a5-50eb-bf57-4ed1f6ee9364",
+      "EV-b9d997f2-f925-5e21-8616-7c4dd491d85b",
+      "EV-516c8f55-c128-5e26-8ef8-310707604158",
+      "EV-7fba39a9-9b25-5d04-aa9a-503b9aff221c"
+    ],
+    "description": "Communication burst detected for entity P002887: 4 events in 24h window (baseline mean=1.5, z-score=3.62).",
+    "confidence": 0.36224258117725394,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-fde3eef1",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.503090+00:00",
+    "entity_ids": [
+      "P003265"
+    ],
+    "evidence_ids": [
+      "EV-072ad145-532d-5ac3-8614-66b8ef287453",
+      "EV-aa58485d-e089-5830-bdb2-7c9302cbe2bd",
+      "EV-ebbbfae9-881e-503c-9d7a-7b6e34d211da",
+      "EV-44ce738b-ad06-5b93-b916-a13612cf2fd3",
+      "EV-a2f85d67-5e8d-5f95-b0bf-22fea97c496c",
+      "EV-c5b2f04f-0f54-5856-a29b-ae125069ba08"
+    ],
+    "description": "Communication burst detected for entity P003265: 6 events in 24h window (baseline mean=1.6, z-score=4.97).",
+    "confidence": 0.49744768823123964,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-6119831d",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.503105+00:00",
+    "entity_ids": [
+      "P003265"
+    ],
+    "evidence_ids": [
+      "EV-aa58485d-e089-5830-bdb2-7c9302cbe2bd",
+      "EV-ebbbfae9-881e-503c-9d7a-7b6e34d211da",
+      "EV-44ce738b-ad06-5b93-b916-a13612cf2fd3",
+      "EV-a2f85d67-5e8d-5f95-b0bf-22fea97c496c",
+      "EV-c5b2f04f-0f54-5856-a29b-ae125069ba08"
+    ],
+    "description": "Communication burst detected for entity P003265: 5 events in 24h window (baseline mean=1.6, z-score=3.85).",
+    "confidence": 0.3854492321090014,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-5f256f44",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.519602+00:00",
+    "entity_ids": [
+      "P001273"
+    ],
+    "evidence_ids": [
+      "EV-3cb68365-a3ed-5d19-ac4f-ebdc6882bfae",
+      "EV-5b1fbfb4-a990-5457-bff0-b119763ebcfe"
+    ],
+    "description": "Communication burst detected for entity P001273: 2 events in 24h window (baseline mean=1.1, z-score=3.02).",
+    "confidence": 0.30151134457776363,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-b02672d6",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.537293+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004997"
+    ],
+    "evidence_ids": [
+      "EV-06e96c2d-e5a2-5661-a797-6aa64aaa97f5",
+      "EV-dd22f77c-4623-5ae6-971b-3c81d96ef511",
+      "EV-ff5db2f4-3933-5640-8e08-44b8c13a04e3"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004997: 3 events in 24h window (baseline mean=1.3, z-score=3.12).",
+    "confidence": 0.3121661934215546,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-01ee8f1c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.537316+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004997"
+    ],
+    "evidence_ids": [
+      "EV-ab7db4ff-a353-5519-a9e7-1c19f25e5621",
+      "EV-bd9515d0-3db7-505d-ba1f-2a6faa1e41df",
+      "EV-d75e3646-77f8-5033-b775-04c04a2703a5"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004997: 3 events in 24h window (baseline mean=1.3, z-score=3.12).",
+    "confidence": 0.3121661934215546,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-80f6c17c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.537331+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004997"
+    ],
+    "evidence_ids": [
+      "EV-a89c22b2-86c4-52c6-9c48-e58668503a12",
+      "EV-ca74a207-57c1-5393-8803-5b653b1791f8",
+      "EV-8e5523c9-7023-56c2-a5bd-dadbfb542152"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004997: 3 events in 24h window (baseline mean=1.3, z-score=3.12).",
+    "confidence": 0.3121661934215546,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-3d6dad98",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.537344+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004997"
+    ],
+    "evidence_ids": [
+      "EV-52a087c5-92d1-5800-b2d6-2e68fc60d5b6",
+      "EV-4febbffd-83ec-575b-bd8a-ef9192940839",
+      "EV-db90f5ff-3e4b-537b-a9de-79a07bd29a11"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004997: 3 events in 24h window (baseline mean=1.3, z-score=3.12).",
+    "confidence": 0.3121661934215546,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-1a203a67",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538115+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004995"
+    ],
+    "evidence_ids": [
+      "EV-c4b48806-e34a-54c6-baa9-00d4437d66a6",
+      "EV-906f19ae-3759-5bdb-b04e-d7e269ea8760",
+      "EV-801275d9-a08c-541c-b17c-1814d047d706"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004995: 3 events in 24h window (baseline mean=1.3, z-score=3.06).",
+    "confidence": 0.3055367274628686,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-52c7cb43",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538130+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004995"
+    ],
+    "evidence_ids": [
+      "EV-02da2d5f-bfbf-5f0d-ad27-4c02d4b0208d",
+      "EV-d14dd37c-137e-509b-a6b4-9791fa0e3d56",
+      "EV-3f4a3386-f9d5-5691-a7b1-f6d50782252e"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004995: 3 events in 24h window (baseline mean=1.3, z-score=3.06).",
+    "confidence": 0.3055367274628686,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-959ddc78",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538144+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004995"
+    ],
+    "evidence_ids": [
+      "EV-ee7eee2c-7a25-510b-a03c-465c19be6c06",
+      "EV-dcec1923-3c9c-50f5-a2ea-e9bf0e601a62",
+      "EV-b9d997f2-f925-5e21-8616-7c4dd491d85b"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004995: 3 events in 24h window (baseline mean=1.3, z-score=3.06).",
+    "confidence": 0.3055367274628686,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-74d75e07",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538154+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004995"
+    ],
+    "evidence_ids": [
+      "EV-dcec1923-3c9c-50f5-a2ea-e9bf0e601a62",
+      "EV-b9d997f2-f925-5e21-8616-7c4dd491d85b",
+      "EV-9ec97bf1-e126-5f79-820e-bfe2dbcec625"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004995: 3 events in 24h window (baseline mean=1.3, z-score=3.06).",
+    "confidence": 0.3055367274628686,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-eb75fab3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538224+00:00",
+    "entity_ids": [
+      "ACC-P002327"
+    ],
+    "evidence_ids": [
+      "EV-9597a8e9-3c51-5898-becd-057ee15aa6e3",
+      "EV-c5a4c6f4-8d89-57f1-ab4c-40a25d9798c7"
+    ],
+    "description": "Communication burst detected for entity ACC-P002327: 2 events in 24h window (baseline mean=1.0, z-score=4.36).",
+    "confidence": 0.4364357804719847,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-cf0ba167",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538501+00:00",
+    "entity_ids": [
+      "ACC-COORD-P005000"
+    ],
+    "evidence_ids": [
+      "EV-472f4e4b-113f-5e72-9705-94b10ff13eb1",
+      "EV-3bbe2d9c-ffdc-5fea-ab7b-d2813b849f57",
+      "EV-5f5d646c-0a66-5d6e-b1dd-8924a468723c"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P005000: 3 events in 24h window (baseline mean=1.1, z-score=4.71).",
+    "confidence": 0.4713270180873891,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-5df035e2",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538748+00:00",
+    "entity_ids": [
+      "ACC-P002215"
+    ],
+    "evidence_ids": [
+      "EV-26f27218-bc8f-5546-8dbc-7d083d90320d",
+      "EV-0f65b920-3a19-5f6c-b772-4a90b93a5eb1"
+    ],
+    "description": "Communication burst detected for entity ACC-P002215: 2 events in 24h window (baseline mean=1.1, z-score=3.17).",
+    "confidence": 0.3169144720720335,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4c21ec60",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.538756+00:00",
+    "entity_ids": [
+      "ACC-P002215"
+    ],
+    "evidence_ids": [
+      "EV-008f8a5f-87db-5074-ab97-a04fe4b319e5",
+      "EV-85ef1fd0-b8ea-5004-a7c5-e3fc587d0bbd"
+    ],
+    "description": "Communication burst detected for entity ACC-P002215: 2 events in 24h window (baseline mean=1.1, z-score=3.17).",
+    "confidence": 0.3169144720720335,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-379ac25c",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.539459+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004998"
+    ],
+    "evidence_ids": [
+      "EV-e2df865f-3a4c-523b-b22e-e63ba0340e64",
+      "EV-dbfb3037-719f-51d7-8d7a-1aab903faee4",
+      "EV-ed115185-7dbb-5201-937a-0774711ae8d7"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004998: 3 events in 24h window (baseline mean=1.2, z-score=4.01).",
+    "confidence": 0.40052870054441225,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-d0822a0b",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.539540+00:00",
+    "entity_ids": [
+      "ACC-P000600"
+    ],
+    "evidence_ids": [
+      "EV-532e2458-1e90-5671-8f2a-572840850665",
+      "EV-e0a301e5-fc54-5c6f-9ae4-74393671c659"
+    ],
+    "description": "Communication burst detected for entity ACC-P000600: 2 events in 24h window (baseline mean=1.0, z-score=4.48).",
+    "confidence": 0.4477215043467819,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-68fe4f29",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.539796+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004996"
+    ],
+    "evidence_ids": [
+      "EV-944f3954-2d5d-57d7-8ea0-fe4022cee4b0",
+      "EV-2b034f05-7918-5f9e-aac9-214b01b3b718",
+      "EV-f4c60786-7b1e-58db-b5f3-0068514b87f5"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004996: 3 events in 24h window (baseline mean=1.1, z-score=4.71).",
+    "confidence": 0.4713270180873891,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-8de64f62",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.539864+00:00",
+    "entity_ids": [
+      "ACC-P000316"
+    ],
+    "evidence_ids": [
+      "EV-49702df0-f11f-5c07-b01b-28a2a8be736b",
+      "EV-cc07c273-08c5-5c40-9af2-9974e7da5103",
+      "EV-6dcb0503-5d23-553b-8d54-841fc90d962b"
+    ],
+    "description": "Communication burst detected for entity ACC-P000316: 3 events in 24h window (baseline mean=1.2, z-score=3.44).",
+    "confidence": 0.3440706546403157,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-4066de0e",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540219+00:00",
+    "entity_ids": [
+      "ACC-COORD-P004999"
+    ],
+    "evidence_ids": [
+      "EV-678a44f7-434b-5652-b69d-a11c4d23e921",
+      "EV-5943c313-6725-5d30-95a7-5cc36912e32f",
+      "EV-7aeab164-45ed-54ef-bcc4-769dcd85e579"
+    ],
+    "description": "Communication burst detected for entity ACC-COORD-P004999: 3 events in 24h window (baseline mean=1.2, z-score=4.34).",
+    "confidence": 0.43406119906104434,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-fa6486b1",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540291+00:00",
+    "entity_ids": [
+      "ACC-P001053"
+    ],
+    "evidence_ids": [
+      "EV-dbfc6bf7-83c4-5461-bc4a-d745bbbe9f69",
+      "EV-5b9c7508-8bc0-533c-9725-bf1f5e35f41e"
+    ],
+    "description": "Communication burst detected for entity ACC-P001053: 2 events in 24h window (baseline mean=1.1, z-score=3.09).",
+    "confidence": 0.30895719032666236,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-7011196e",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540299+00:00",
+    "entity_ids": [
+      "ACC-P001053"
+    ],
+    "evidence_ids": [
+      "EV-65e6df0b-f75a-5c54-b186-087106a9bdda",
+      "EV-7ecddd4b-e15f-567b-8d53-8324cf0f520a"
+    ],
+    "description": "Communication burst detected for entity ACC-P001053: 2 events in 24h window (baseline mean=1.1, z-score=3.09).",
+    "confidence": 0.30895719032666236,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-54bd1dd2",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540360+00:00",
+    "entity_ids": [
+      "ACC-P000799"
+    ],
+    "evidence_ids": [
+      "EV-8c9ffa11-efdb-5c2e-9272-66cdab4131d8",
+      "EV-1a42a6a4-6b6d-57df-b77c-6baf0a2dfd14"
+    ],
+    "description": "Communication burst detected for entity ACC-P000799: 2 events in 24h window (baseline mean=1.1, z-score=4.25).",
+    "confidence": 0.42485291572496003,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-369f1ff3",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540664+00:00",
+    "entity_ids": [
+      "ACC-P003232"
+    ],
+    "evidence_ids": [
+      "EV-365ffdfa-2466-55e1-8d71-6ea082098433",
+      "EV-56710277-deb4-5601-ab7d-472a8a8b78a0"
+    ],
+    "description": "Communication burst detected for entity ACC-P003232: 2 events in 24h window (baseline mean=1.1, z-score=4.01).",
+    "confidence": 0.4006938426723769,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-a5fa3bb6",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540806+00:00",
+    "entity_ids": [
+      "ACC-P001396"
+    ],
+    "evidence_ids": [
+      "EV-c1350728-2a8a-5f71-ab36-96a182de3e19",
+      "EV-a6e93bd2-0401-5f37-b9ab-eb3606e5867d"
+    ],
+    "description": "Communication burst detected for entity ACC-P001396: 2 events in 24h window (baseline mean=1.1, z-score=3.75).",
+    "confidence": 0.375,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "anomaly_id": "AN-de594cc2",
+    "anomaly_type": "BURST",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:25:57.540887+00:00",
+    "entity_ids": [
+      "ACC-P002044"
+    ],
+    "evidence_ids": [
+      "EV-806244e4-cae6-5310-91b9-a80d0e37601c",
+      "EV-a61a459a-1e14-5547-95cf-937b54fb0d08"
+    ],
+    "description": "Communication burst detected for entity ACC-P002044: 2 events in 24h window (baseline mean=1.1, z-score=3.47).",
+    "confidence": 0.3474396144861517,
+    "status": "HYPOTHESIS \u2014 requires human review"
+  }
+]

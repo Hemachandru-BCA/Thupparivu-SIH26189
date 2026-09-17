@@ -13,11 +13,12 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Body, HTTPException, Query
+from fastapi import APIRouter, Body, Depends, HTTPException, Query
 
 from src.api import audit, services
+from src.api.auth import User, get_current_user
 
-router = APIRouter(prefix="/api/copilot", tags=["copilot"])
+router = APIRouter(prefix="/api/copilot", tags=["copilot"], dependencies=[Depends(get_current_user)])
 logger = logging.getLogger(__name__)
 
 
@@ -61,8 +62,24 @@ def ask_question(body: Dict[str, Any] = Body(...)) -> Dict[str, Any]:
         "tools_used": len(response.tools_called),
         "evidence_count": len(response.evidence_ids),
     })
-    
-    return response.model_dump()
+
+    result = response.model_dump()
+    # Map backend field names to spec-expected names
+    result["tools_used"] = [
+        {"name": t.tool_name, "input": t.to_context(), "output": t.data}
+        for t in response.tools_called
+    ]
+    result["tool_results"] = [
+        {"tool": t.tool_name, "success": t.success, "data": t.data}
+        for t in response.tools_called
+    ]
+    result.setdefault("warnings", [])
+    if response.requires_human_review:
+        result["warnings"].append(
+            "DRAFT FOR HUMAN REVIEW — AI-generated analytical output, not a conclusion."
+        )
+    result["session_id"] = body.get("session_id")
+    return result
 
 
 @router.get("/tools")

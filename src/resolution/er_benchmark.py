@@ -62,12 +62,40 @@ _TYPO_OPS = [
     lambda s: re.sub(r"h", "", s),                                # drop h
 ]
 
+#: Comprehensive transliteration variant pairs for benchmarking
 _TRANSLITERATION_PAIRS = [
     ("Kumar", "Kumaar"),
     ("Priya", "Priyaa"),
     ("Sharma", "Sarma"),
     ("Karthik", "Karthick"),
     ("Ravi", "Ravie"),
+    # Additional variants targeting Indian phonotactics
+    ("Subramaniam", "Subramanian"),
+    ("Subramaniam", "Subramanyam"),
+    ("Murugesan", "Murugesh"),
+    ("Mohammed", "Mohammad"),
+    ("Krishnan", "Krisnan"),
+    ("Venkatesh", "Venkatesh"),
+    ("Balasubramaniam", "Balasubramanian"),
+    ("Ganesh", "Ganesh"),
+    ("Rajendran", "Rajendran"),
+    ("Suresh", "Suresh"),
+]
+
+# Extended transliteration variants that append "u" to consonant-final names
+# and substitute th↔t, sh↔s, aa↔a
+_EXTENDED_TRANSLITERATION_OPS = [
+    lambda s: s + "u" if s and s[-1].lower() in "bcdfghjklmnpqrstvwxyz" else s,  # append 'u'
+    lambda s: re.sub(r"th", "t", s),
+    lambda s: re.sub(r"t", "th", s),
+    lambda s: re.sub(r"sh", "s", s),
+    lambda s: re.sub(r"s", "sh", s),
+    lambda s: re.sub(r"aa", "a", s),
+    lambda s: re.sub(r"a", "aa", s),
+    lambda s: re.sub(r"ii", "i", s),
+    lambda s: re.sub(r"i", "ii", s),
+    lambda s: re.sub(r"uu", "u", s),
+    lambda s: re.sub(r"u", "uu", s),
 ]
 
 
@@ -176,6 +204,12 @@ class ErBenchmarkGenerator:
                 if a.lower() in r.name.lower():
                     r.name = re.sub(a, b, r.name, flags=re.IGNORECASE)
                     break
+        elif variant == "transliteration_extended":
+            # Apply multiple transliteration operators for more aggressive variants
+            r.name = self.rng.choice(_EXTENDED_TRANSLITERATION_OPS)(r.name)
+            # Also apply a second operator with 50% probability
+            if self.rng.random() < 0.5:
+                r.name = self.rng.choice(_EXTENDED_TRANSLITERATION_OPS)(r.name)
         elif variant == "abbreviation":
             parts = r.name.split()
             if len(parts) >= 2:
@@ -192,7 +226,8 @@ class ErBenchmarkGenerator:
                  variants: Optional[List[str]] = None) -> ErBenchmark:
         """Generate a benchmark with ``n_clusters`` true entities."""
         variants = variants or ["typo", "missing_phone", "transliteration",
-                                "abbreviation", "partial", "conflicting_phone"]
+                                "transliteration_extended", "abbreviation",
+                                "partial", "conflicting_phone"]
         cases: List[ErBenchmarkCase] = []
         for c in range(n_clusters):
             cluster_id = f"CL-{c:03d}"

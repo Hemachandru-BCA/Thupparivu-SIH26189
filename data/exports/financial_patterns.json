@@ -1,0 +1,47 @@
+[
+  {
+    "pattern_id": "FP-ab99e55c",
+    "pattern_type": "SHELL_ACCOUNT",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:34:48.018140+00:00",
+    "implicated_accounts": [
+      "4f9b439b-b4c7-5627-bad7-4367b53c0c5c"
+    ],
+    "evidence_ids": [],
+    "description": "Shell account 4f9b439b-b4c7-5627-bad7-4367b53c0c5c: 10 transactions (volume=0), attribute completeness=0.33.",
+    "confidence": 0.6666666666666667,
+    "total_amount": 0.0,
+    "flow_graph": {},
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "pattern_id": "FP-a642b59b",
+    "pattern_type": "SHELL_ACCOUNT",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:34:48.018186+00:00",
+    "implicated_accounts": [
+      "d6579db1-9f01-5440-8d18-1fbb0da139be"
+    ],
+    "evidence_ids": [],
+    "description": "Shell account d6579db1-9f01-5440-8d18-1fbb0da139be: 12 transactions (volume=0), attribute completeness=0.33.",
+    "confidence": 0.6666666666666667,
+    "total_amount": 0.0,
+    "flow_graph": {},
+    "status": "HYPOTHESIS \u2014 requires human review"
+  },
+  {
+    "pattern_id": "FP-bd1a3c7e",
+    "pattern_type": "SHELL_ACCOUNT",
+    "severity": "MEDIUM",
+    "detected_at": "2026-09-16T17:34:48.018200+00:00",
+    "implicated_accounts": [
+      "c2727fd9-c4d7-5310-b0b7-356fd2403078"
+    ],
+    "evidence_ids": [],
+    "description": "Shell account c2727fd9-c4d7-5310-b0b7-356fd2403078: 10 transactions (volume=0), attribute completeness=0.33.",
+    "confidence": 0.6666666666666667,
+    "total_amount": 0.0,
+    "flow_graph": {},
+    "status": "HYPOTHESIS \u2014 requires human review"
+  }
+]

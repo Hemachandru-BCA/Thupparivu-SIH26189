@@ -15,6 +15,7 @@ accusations.
 
 from __future__ import annotations
 
+import json
 from collections import defaultdict
 from typing import Any, Dict, List, Optional
 
@@ -158,3 +159,117 @@ def trace_funds(body: Dict[str, Any] = Body(...)):
         "flow_indicators": indicators,
         "note": "FUND FLOW TRACE — indicators only, not legal conclusions",
     }
+
+
+# --------------------------------------------------------------------------- #
+# Financial Intelligence Pattern Endpoints (Task 13)
+# --------------------------------------------------------------------------- #
+
+@router.get("/patterns")
+def list_patterns(
+    pattern_type: Optional[str] = Query(None, description="Filter by pattern type"),
+    severity: Optional[str] = Query(None, description="Filter by severity"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+):
+    """Paginated list of detected financial patterns."""
+    from src.intelligence.financial import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        return {"items": [], "total": 0, "page": page, "page_size": page_size}
+    data = json.loads(OUTPUT_PATH.read_text())
+    if pattern_type:
+        data = [p for p in data if p.get("pattern_type") == pattern_type.upper()]
+    if severity:
+        data = [p for p in data if p.get("severity") == severity.upper()]
+    total = len(data)
+    start = (page - 1) * page_size
+    items = data[start:start + page_size]
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+@router.get("/patterns/{pattern_id}")
+def get_pattern(pattern_id: str):
+    """Single financial pattern record."""
+    from src.intelligence.financial import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        raise HTTPException(status_code=404, detail="No patterns computed")
+    data = json.loads(OUTPUT_PATH.read_text())
+    for p in data:
+        if p.get("pattern_id") == pattern_id:
+            return p
+    raise HTTPException(status_code=404, detail=f"Pattern not found: {pattern_id}")
+
+
+@router.get("/accounts/{account_id}/risk")
+def account_risk(account_id: str):
+    """Risk score for an account based on implicated patterns."""
+    from src.intelligence.financial import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        return {
+            "account_id": account_id,
+            "risk_score": 0.0,
+            "pattern_count": 0,
+            "highest_severity": "NONE",
+            "implicated_patterns": [],
+            "disclaimer": "RISK INDICATOR — NOT AN ASSESSMENT OF GUILT",
+        }
+    data = json.loads(OUTPUT_PATH.read_text())
+    implicated = [p for p in data if account_id in p.get("implicated_accounts", [])]
+    if not implicated:
+        return {
+            "account_id": account_id,
+            "risk_score": 0.0,
+            "pattern_count": 0,
+            "highest_severity": "NONE",
+            "implicated_patterns": [],
+            "disclaimer": "RISK INDICATOR — NOT AN ASSESSMENT OF GUILT",
+        }
+    severity_weights = {"HIGH": 1.0, "MEDIUM": 0.5, "LOW": 0.2}
+    total = sum(severity_weights.get(p.get("severity", "LOW"), 0.2) * p.get("confidence", 0.5) for p in implicated)
+    risk_score = min(1.0, total / max(len(implicated), 1))
+    highest = max((severity_weights.get(p.get("severity", "LOW"), 0) for p in implicated), default=0)
+    highest_sev = "HIGH" if highest >= 1.0 else ("MEDIUM" if highest >= 0.5 else "LOW")
+    return {
+        "account_id": account_id,
+        "risk_score": risk_score,
+        "pattern_count": len(implicated),
+        "highest_severity": highest_sev,
+        "implicated_patterns": [p.get("pattern_id", "") for p in implicated],
+        "disclaimer": "RISK INDICATOR — NOT AN ASSESSMENT OF GUILT",
+    }
+
+
+@router.get("/summary")
+def financial_summary():
+    """Counts by pattern type, top 5 highest-risk accounts."""
+    from src.intelligence.financial import OUTPUT_PATH
+    if not OUTPUT_PATH.exists():
+        return {"by_type": {}, "top_risk_accounts": []}
+    data = json.loads(OUTPUT_PATH.read_text())
+    by_type = {}
+    account_risks: Dict[str, float] = defaultdict(float)
+    for p in data:
+        t = p.get("pattern_type", "UNKNOWN")
+        by_type[t] = by_type.get(t, 0) + 1
+        for acc in p.get("implicated_accounts", []):
+            account_risks[acc] += p.get("confidence", 0.5)
+    top5 = sorted(account_risks.items(), key=lambda x: -x[1])[:5]
+    return {
+        "by_type": by_type,
+        "top_risk_accounts": [{"account_id": a, "risk_score": min(1.0, r)} for a, r in top5],
+    }
+
+
+@router.post("/run")
+def run_financial_analysis():
+    """Trigger financial intelligence analysis on current artifacts."""
+    import pickle
+    from src.api.jobs import job_manager
+    from src.intelligence.financial import run_financial_intelligence
+
+    def _job():
+        graph = services.load_graph()
+        return run_financial_intelligence(graph)
+
+    job = job_manager.submit("financial_intelligence", _job)
+    return job.to_dict()

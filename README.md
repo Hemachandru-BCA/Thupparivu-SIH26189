@@ -37,6 +37,10 @@ investigator UI**.
 | API hardening — Pydantic validation, pagination, query limits, structured errors, audit log, request-size guard | ✅ |
 | Production adapters — PostgreSQL / S3 / Kafka / Neo4j / Airflow (optional, disabled by default) | ✅ interfaces + local implementations |
 | Tests — 145 passing (unit + integration + API contracts) | ✅ |
+| **Temporal Anomaly Detection** — burst, synchronized cross-community, new hub emergence, round-trip financial flow (4 anomaly families) | ✅ |
+| **Enhanced Financial Intelligence** — layering, smurfing, shell account, velocity anomaly detection + risk scoring | ✅ |
+| **Hybrid RAG Retrieval** — sentence-transformers / TF-IDF / n-gram embeddings, cosine similarity, recency bias, evidence retrieval for dossiers | ✅ |
+| **Investigation Copilot UI** — tool-call trace, entity chips, confidence badges, demo queries, NodeChip → graph highlight navigation | ✅ |
 
 See `FINAL_IMPLEMENTATION_REPORT.md` for the full phase-by-phase mapping and
 `LIMITATIONS.md` for what is explicitly *not* implemented.
@@ -79,7 +83,7 @@ sentinelgraph-ai/
 ├── requirements.txt
 ├── docker-compose.yml
 ├── pytest.ini
-├── run_stage.py              # stage runner (generate|preprocess|extract|graph|ghosts|evidence|findings)
+├── run_stage.py              # stage runner (generate|preprocess|extract|graph|ghosts|evidence|findings|anomalies|embeddings|financial_patterns)
 ├── run_demo.py               # one-click demo + guided scenario
 ├── conftest.py
 ├── .env.example
@@ -105,6 +109,7 @@ Optional extras (never required for the demo):
 
 ```bash
 pip install pypdf                # PDF ingestion
+pip install sentence-transformers>=2.2.0  # higher-quality evidence embeddings (RAG)
 pip install neo4j psycopg[binary] boto3 confluent-kafka   # production adapters
 ```
 
@@ -146,6 +151,9 @@ python run_stage.py graph        # resolution + graph + analytics
 python run_stage.py ghosts       # hidden-intermediary inference
 python run_stage.py evidence     # evidence provenance index (~25 s)
 python run_stage.py findings     # XAI findings from ghosts
+python run_stage.py anomalies    # temporal anomaly detection
+python run_stage.py embeddings   # evidence embeddings index (RAG)
+python run_stage.py financial_patterns  # financial intelligence patterns
 ```
 
 Run the test suite:
@@ -231,6 +239,10 @@ Full list in `docs/LIMITATIONS.md`. Highlights:
 * The mock LLM is deterministic and template-based; a real provider is
   optional and its output is strictly schema-validated with a deterministic
   fallback.
+* **Temporal anomaly detection operates on observed evidence timestamps
+  only — gaps in evidence collection create blind spots.**
+* **Financial pattern detection uses synthetic transaction amounts —
+  thresholds are not calibrated to real Indian financial crime data.**
 * All data is synthetic; nothing here is trained-model grade or court-ready.
 
 ---
@@ -390,6 +402,7 @@ initial startup is fast — just `uvicorn` + Python imports (~5–10 s).
 | Graph embeddings | Node2Vec-style (gensim Word2Vec) | ~50 MB | CPU only | Optional, lazy |
 | GraphSAGE-style embeddings | numpy projection weights | ~0 KB | CPU only | Optional, lazy |
 | Dossier LLM | `MockLLMProvider` (offline, deterministic) | ~0 KB | CPU only | Lazy (first dossier call) |
+| Evidence embeddings | sentence-transformers `paraphrase-MiniLM-L6-v2` (optional) | ~22 MB | CPU only | Lazy (first embeddings build). Falls back to TF-IDF → n-gram bag-of-words if unavailable. |
 
 **No large model files are stored in the repository.** The spaCy model is
 downloaded during the Render build step. Everything else is either optional

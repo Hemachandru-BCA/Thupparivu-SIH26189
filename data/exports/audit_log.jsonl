@@ -942,3 +942,43 @@
 {"timestamp": "2026-09-15T17:37:06.334712+00:00", "actor": "anonymous", "action": "communities.list", "object_ids": [], "detail": {}}
 {"timestamp": "2026-09-15T17:37:06.383869+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
 {"timestamp": "2026-09-15T17:37:06.400842+00:00", "actor": "anonymous", "action": "intel.cross_case", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-16T15:51:43.835618+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-16T15:51:43.875406+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-16T15:51:43.883054+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-16T15:51:44.340111+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-16T15:51:44.445954+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-16T15:51:44.616271+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-16T15:51:44.719631+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-16T15:52:08.726428+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 1}}
+{"timestamp": "2026-09-16T15:52:08.752118+00:00", "actor": "anonymous", "action": "briefs.entity", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080"], "detail": {}}
+{"timestamp": "2026-09-16T15:52:33.884339+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 5}}
+{"timestamp": "2026-09-16T15:52:35.340521+00:00", "actor": "anonymous", "action": "briefs.relationship", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080", "0a377008-2b23-5b51-999f-cbd4ac0bc9ce"], "detail": {}}
+{"timestamp": "2026-09-16T15:53:00.960218+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 1}}
+{"timestamp": "2026-09-16T15:53:00.970206+00:00", "actor": "anonymous", "action": "briefs.why_flagged", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080"], "detail": {}}
+{"timestamp": "2026-09-16T15:59:38.759937+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-16T15:59:38.794443+00:00", "actor": "anonymous", "action": "findings.generate", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3", "F-3e28a1d1-9b04-5948-aa58-7750182c3f70", "F-80c8bfcc-7f15-544b-a709-e84d6a7f167a"], "detail": {"count": 3}}
+{"timestamp": "2026-09-16T15:59:38.801952+00:00", "actor": "anonymous", "action": "findings.view", "object_ids": ["F-2e9ce49f-a36b-5abf-8bdd-3c5c823cbfa3"], "detail": {}}
+{"timestamp": "2026-09-16T15:59:39.244304+00:00", "actor": "anonymous", "action": "graph.subgraph", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1"], "detail": {"depth": 2, "max_nodes": 25, "returned_nodes": 25}}
+{"timestamp": "2026-09-16T15:59:39.633892+00:00", "actor": "anonymous", "action": "graph.paths", "object_ids": ["5ef4789c-89b7-5500-9f02-378b29835fc1", "4db01be9-7fdd-5bd6-8120-5f9767ecec4b"], "detail": {"k": 2, "found": 2}}
+{"timestamp": "2026-09-16T15:59:39.810673+00:00", "actor": "anonymous", "action": "search", "object_ids": [], "detail": {"q": "Aaron ", "results": 21}}
+{"timestamp": "2026-09-16T15:59:39.921897+00:00", "actor": "anonymous", "action": "evidence.search", "object_ids": [], "detail": {"q": "called", "results": 25}}
+{"timestamp": "2026-09-16T16:00:03.843222+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 1}}
+{"timestamp": "2026-09-16T16:00:03.869164+00:00", "actor": "anonymous", "action": "briefs.entity", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080"], "detail": {}}
+{"timestamp": "2026-09-16T16:00:28.075357+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 5}}
+{"timestamp": "2026-09-16T16:00:29.407716+00:00", "actor": "anonymous", "action": "briefs.relationship", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080", "0a377008-2b23-5b51-999f-cbd4ac0bc9ce"], "detail": {}}
+{"timestamp": "2026-09-16T16:00:53.286263+00:00", "actor": "anonymous", "action": "priority.ranked", "object_ids": [], "detail": {"entity_type": null, "count": 1}}
+{"timestamp": "2026-09-16T16:00:53.298170+00:00", "actor": "anonymous", "action": "briefs.why_flagged", "object_ids": ["92ad9891-6710-5687-a505-d260ad764080"], "detail": {}}
+{"timestamp": "2026-09-16T17:42:36.486944+00:00", "actor": "anonymous", "action": "copilot.ask", "object_ids": [], "detail": {"query": "Find paths between Person-001 and Person-042", "tools_used": 0, "evidence_count": 0}}
+{"timestamp": "2026-09-16T17:45:38.749912+00:00", "actor": "anonymous", "action": "copilot.ask", "object_ids": [], "detail": {"query": "Find paths between Person-001 and Person-042", "tools_used": 0, "evidence_count": 0}}
+{"timestamp": "2026-09-16T17:46:07.429891+00:00", "actor": "anonymous", "action": "copilot.ask", "object_ids": [], "detail": {"query": "What is the path between Ravi and the warehouse incident?", "tools_used": 0, "evidence_count": 0}}
+{"timestamp": "2026-09-16T17:48:25.216566+00:00", "actor": "anonymous", "action": "copilot.ask", "object_ids": [], "detail": {"query": "Find hidden connectors in this network", "tools_used": 1, "evidence_count": 0}}
+{"timestamp": "2026-09-16T17:49:18.341695+00:00", "actor": "anonymous", "action": "copilot.ask", "object_ids": [], "detail": {"query": "Find hidden connectors in this network", "tools_used": 1, "evidence_count": 0}}
+{"timestamp": "2026-09-16T18:54:19.586981+00:00", "actor": "anonymous", "action": "intel.gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-16T18:54:20.685372+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-16T18:54:32.576883+00:00", "actor": "anonymous", "action": "investigation.relationship_gaps", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-16T19:11:41.950981+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-16T19:13:34.759874+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-16T19:13:46.595842+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-16T19:23:21.584131+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
+{"timestamp": "2026-09-16T19:25:51.749617+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-16T21:48:01.043963+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}

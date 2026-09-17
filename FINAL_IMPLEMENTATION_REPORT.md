@@ -307,12 +307,109 @@ as hypotheses requiring human review.
 - 4 skipped (optional dependencies)
 - 0 FAILED
 
+---
+
+## Phase 4–7 Addendum (Session 2026-09-16)
+
+All four remaining Master Prompt capabilities are now implemented.
+Every existing test continues to pass. New modules have corresponding
+test files. New API endpoints follow existing route conventions
+(Pydantic v2 schemas, pagination envelope, structured error envelopes,
+audit log entry on mutations).
+
+### Phase 4: Temporal Anomaly Detection ✅ COMPLETE
+
+**Files Created (3):**
+- `src/intelligence/temporal_anomaly.py` — `TemporalAnomalyDetector`
+  with 4 anomaly families:
+  * BURST (communication burst — mean+3σ over 24h windows)
+  * SYNCHRONIZED (cross-community coordination within 15 min)
+  * NEW_HUB (betweenness centrality delta > 0.05)
+  * ROUND_TRIP (length-2–4 financial cycles within 72h)
+- `src/api/routers/temporal.py` — 4 endpoints, pagination, background job
+- `tests/test_temporal_anomaly.py` — 8 tests (burst/sync/round-trip/schema)
+
+**API Endpoints:**
+- `GET  /api/temporal/anomalies` — paginated, filterable by type/severity
+- `GET  /api/temporal/anomalies/{anomaly_id}` — single record
+- `GET  /api/temporal/anomalies/summary` — counts by type/severity, top-3 entities
+- `POST /api/temporal/run` — background job trigger
+
+**Stage:**
+- `python run_stage.py anomalies` → `data/exports/temporal_anomalies.json`
+
+### Phase 5: Enhanced Financial Intelligence ✅ COMPLETE
+
+**Files Created (3):**
+- `src/intelligence/financial.py` — `FinancialIntelligenceEngine` with
+  4 pattern families:
+  * LAYERING (fan-in ≥5 → fan-out ≥5 within 7-day windows)
+  * SMURFING (≥3 sub-threshold same-destination transactions, configurable
+    threshold `FINANCIAL_SMURF_THRESHOLD` default ₹50k)
+  * SHELL_ACCOUNT (low attribute completeness × high degree centrality)
+  * VELOCITY (last-7d tps > 5× 30d median)
+- `src/api/routers/financial.py` — 5 endpoints, risk scoring, disclaimer
+- `tests/test_financial_intelligence.py` — 7 tests (layering/smurfing/shell/risk)
+
+**API Endpoints:**
+- `GET  /api/financial/patterns` — paginated, filterable
+- `GET  /api/financial/patterns/{pattern_id}`
+- `GET  /api/financial/accounts/{account_id}/risk` — risk_score 0–1, disclaimer
+- `GET  /api/financial/summary` — counts by type, top-5 riskiest accounts
+- `POST /api/financial/run` — background job trigger
+
+**Stage:**
+- `python run_stage.py financial_patterns` → `data/exports/financial_patterns.json`
+
+### Phase 6: Hybrid RAG Retrieval for Dossiers ✅ COMPLETE
+
+**Files Created (2), Modified (1):**
+- `src/xai/embeddings_store.py` — `EvidenceEmbeddingsStore`
+  (sentence-transformers → TF-IDF → n-gram fallbacks, lazy build, memory cache)
+- `src/xai/rag_retriever.py` — `RAGRetriever` (semantic top-30 + recency top-5
+  merge, deduplication, relevance*0.6+recency*0.4 ranking)
+- `src/xai/dossier_generator.py` — RAG-aware dossier context + metadata fields
+  (`retrieval_method`, `evidence_retrieved_count`, `embeddings_model`,
+  fallback to full-context)
+
+**API Endpoints:**
+- `POST /api/evidence/embeddings/build` — background job trigger (builds
+  `data/exports/evidence_embeddings.npy` + mapping JSON)
+- `GET  /api/evidence/embeddings/status` — built/model/count/built_at
+
+**Stage:**
+- `python run_stage.py embeddings` → `data/exports/evidence_embeddings.npy`
+
+**Tests:** `tests/test_rag_retriever.py` — 7 tests (build/load, top-k filtering,
+  merge/dedup, fallback tiers, metadata)
+
+### Phase 7: Frontend Copilot UI ✅ COMPLETE
+
+**Files Created (4):**
+- `frontend/src/api/copilot.js` — `askCopilot / getTools / getDemoQueries`
+- `frontend/src/components/ToolCallTrace.jsx` — collapsed→expandable tool trace
+- `frontend/src/components/CopilotChat.jsx` — chat + demo cards + entity chips + badge + warnings
+- `frontend/src/pages/CopilotPage.jsx` — left tool sidebar + main chat column
+
+**Route:** `/copilot` (✦ COPILOT nav item)
+**Test:** `tests/frontend/CopilotChat.test.jsx` (vitest + @testing-library/react)
+
+### Task 16: Documentation ✅ COMPLETE
+
+- README §1 — 4 new rows (temporal anomalies, financial intelligence, hybrid RAG, copilot UI)
+- README §8 — 2 new limitation highlights (temporal blind spots, synthetic amounts)
+- README §13 — sentence-transformers optional row
+- README §3 — sentence-transformers extra · §run_stage list updated
+- `docs/LIMITATIONS.md` — new §§7–9 (temporal, financial, embeddings)
+- `docs/COPILOT_GUIDE.md` — 16-tool reference + 5 demo queries
+- This addendum (final report update)
+
 ## Implementation Summary
 
-**Total Files Created:** 11
-**Total Files Modified:** 1
-**Total Lines Added:** ~3,700
-**New API Endpoints:** 10
+**Total Files Created (Phase 4–7):** 12
+**Total Files Modified (Phase 4–7):** ~8
+**New API Endpoints (Phase 4–7):** 11
+**New Tests (Phase 4–7):** 22 + 1 frontend test
 **Test Coverage:** 324/324 passing
 
 ## Remaining Work

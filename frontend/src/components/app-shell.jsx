@@ -1,61 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import {
     LayoutDashboard, Network, Users, Clock, FileText, Brain,
     AlertTriangle, BarChart3, Zap, Waypoints, DollarSign, FolderOpen,
-    BookOpen, Activity, ClipboardList, Upload, Settings, ChevronLeft,
-    ChevronRight, Search, Shield, Eye, Database, MapPin, Sparkles,
-    AlertCircle, HelpCircle, Terminal, Layers, Bookmark, Radar,
-    Target, Dna
+    BookOpen, Activity, ClipboardList, Settings, ChevronLeft,
+    ChevronRight, Search, Shield, Database, MapPin,
+    AlertCircle, MessageSquare, GitCompare
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { CommandPalette } from '@/components/command-palette';
-import { InspectorPanel } from '@/components/inspector-panel';
-import { useGetGraphOverview } from '@/api/graph';
+import { useGetGraphOverview, useHealthCheck } from '@/api/graph';
 
-export const NAV_ITEMS = [
-    // 01 CASE
-    { path: '/', label: 'DESK', icon: LayoutDashboard, section: 'CASE', title: 'Investigation Desk' },
-    { path: '/network', label: 'NETWORK', icon: Network, section: 'CASE', title: 'Network Canvas' },
-    { path: '/entities', label: 'ENTITIES', icon: Users, section: 'CASE', title: 'Entity Directory' },
-    { path: '/timeline', label: 'TIMELINE', icon: Clock, section: 'CASE', title: 'Timeline & Replay' },
-    { path: '/evidence', label: 'EVIDENCE', icon: FileText, section: 'CASE', title: 'Evidence Register' },
-
-    // 02 INTELLIGENCE
-    { path: '/findings', label: 'HYPOTHESES', icon: Brain, section: 'INTEL', title: 'Hypothesis Engine' },
-    { path: '/ghosts', label: 'ANOMALIES', icon: AlertTriangle, section: 'INTEL', title: 'Ghost Candidates' },
-    { path: '/communities', label: 'COMMUNITIES', icon: Waypoints, section: 'INTEL', title: 'Community Evolution' },
-    { path: '/financial', label: 'FINANCIAL', icon: DollarSign, section: 'INTEL', title: 'Financial Flow Trace' },
-    { path: '/gaps', label: 'GAPS', icon: AlertCircle, section: 'INTEL', title: 'Investigative Gaps' },
-    { path: '/cross-case', label: 'CROSS-CASE', icon: FolderOpen, section: 'INTEL', title: 'Cross-Case Reuse' },
-
-    // 03 ANALYSIS
-    { path: '/simulation', label: 'SIMULATION', icon: Zap, section: 'ANALYSIS', title: 'Counterfactual Sandbox' },
-    { path: '/analytics', label: 'ANALYSIS LAB', icon: BarChart3, section: 'ANALYSIS', title: 'Centrality & Graph Lab' },
-    { path: '/bookmarks', label: 'MY FINDINGS', icon: Bookmark, section: 'ANALYSIS', title: 'Bookmarked Entities & Hypotheses' },
-    { path: '/p1-analysis', label: 'P1 WORKBENCH', icon: Radar, section: 'ANALYSIS', title: 'Advanced Analytical Workbench' },
-    { path: '/geospatial', label: 'GEOSPATIAL', icon: MapPin, section: 'ANALYSIS', title: 'Geospatial Intelligence' },
-    { path: '/nl-query', label: 'ANALYST QUERY', icon: Search, section: 'ANALYSIS', title: 'Natural-Language Analyst Query' },
-    { path: '/next-best', label: 'NEXT BEST', icon: Target, section: 'ANALYSIS', title: 'Next-Best Analytical Action' },
-    { path: '/case-similarity', label: 'CASE DNA', icon: Dna, section: 'ANALYSIS', title: 'Case Similarity / Network DNA' },
-    { path: '/models', label: 'MODELS', icon: Activity, section: 'ANALYSIS', title: 'Model Registry & Benchmark' },
-    { path: '/dossiers', label: 'REPORTS', icon: BookOpen, section: 'ANALYSIS', title: 'Intelligence Reports' },
-    { path: '/judge', label: 'JUDGE DEMO', icon: Sparkles, section: 'ANALYSIS', title: 'Judge Walkthrough' },
-
-    // 04 SYSTEM
-    { path: '/cases', label: 'CASES', icon: FolderOpen, section: 'SYSTEM', title: 'Case Workspaces' },
-    { path: '/pipeline', label: 'DATA', icon: Upload, section: 'SYSTEM', title: 'Data Ingestion' },
-    { path: '/audit', label: 'AUDIT', icon: ClipboardList, section: 'SYSTEM', title: 'Audit Trail' },
-    { path: '/settings', label: 'SETTINGS', icon: Settings, section: 'SYSTEM', title: 'Settings' },
+/* ── Navigation sections ── */
+export const NAV_SECTIONS = [
+    { id: 'workspace', label: 'WORKSPACE', items: [
+        { path: '/', label: 'Overview', icon: LayoutDashboard, title: 'Command center' },
+        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'Case management' },
+        { path: '/network', label: 'Network', icon: Network, title: 'Network explorer' },
+        { path: '/entities', label: 'Entities', icon: Users, title: 'Entity directory' },
+        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Evidence timeline' },
+    ]},
+    { id: 'analysis', label: 'ANALYSIS', items: [
+        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence register' },
+        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical findings' },
+        { path: '/ghosts', label: 'Hypotheses', icon: AlertTriangle, title: 'Ghost candidates' },
+        { path: '/simulation', label: 'Simulation', icon: Zap, title: 'Counterfactual sandbox' },
+        { path: '/dossiers', label: 'Dossiers', icon: BookOpen, title: 'Report dossiers' },
+    ]},
+    { id: 'intelligence', label: 'INTELLIGENCE', items: [
+        { path: '/financial', label: 'Financial', icon: DollarSign, title: 'Financial flows' },
+        { path: '/communities', label: 'Communities', icon: Waypoints, title: 'Community structure' },
+        { path: '/analytics', label: 'Analytics', icon: BarChart3, title: 'Network analytics' },
+        { path: '/cross-case', label: 'Cross-case', icon: GitCompare, title: 'Cross-case links' },
+        { path: '/copilot', label: 'Copilot', icon: MessageSquare, title: 'Investigative assistant' },
+        { path: '/gaps', label: 'Gaps', icon: AlertCircle, title: 'Investigative gaps' },
+    ]},
+    { id: 'operations', label: 'OPERATIONS', items: [
+        { path: '/pipeline', label: 'Pipeline', icon: Activity, title: 'Pipeline monitor' },
+        { path: '/audit', label: 'Audit', icon: ClipboardList, title: 'Audit log' },
+    ]},
 ];
+export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
+/* Back-compat: flat list used by command palette */
+export const NAV_ITEMS = ALL_NAV_ITEMS;
 
-export const NAV_SECTIONS = ['CASE', 'INTEL', 'ANALYSIS', 'SYSTEM'];
-
+/* ── Entity colors ── */
 export const ENTITY_COLORS = {
     PERSON: 'hsl(214 80% 56%)',
-    PHONE: 'hsl(152 56% 44%)',
-    VEHICLE: 'hsl(36 82% 55%)',
-    LOCATION: 'hsl(0 72% 51%)',
+    PHONE: 'hsl(36 82% 55%)',
+    VEHICLE: 'hsl(152 56% 44%)',
+    LOCATION: 'hsl(152 56% 44%)',
     ORGANIZATION: 'hsl(270 55% 58%)',
     ACCOUNT: 'hsl(192 68% 48%)',
     DEVICE: 'hsl(220 20% 55%)',
@@ -91,7 +85,11 @@ export function formatNumber(n) {
 
 export function formatTimestamp(ts) {
     if (!ts) return '—';
-    return new Date(ts).toLocaleString();
+    try {
+        const d = new Date(ts);
+        return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+            + ' · ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    } catch { return String(ts); }
 }
 
 export function formatShortDate(ts) {
@@ -99,161 +97,129 @@ export function formatShortDate(ts) {
     return new Date(ts).toLocaleDateString();
 }
 
+/* ── App Shell ── */
 export function AppShell({ children }) {
     const [location] = useLocation();
     const { activeCase, setCommandPaletteOpen } = useInvestigation();
     const [railCollapsed, setRailCollapsed] = useState(false);
+    const { data: healthData } = useHealthCheck();
     const { data: overview } = useGetGraphOverview();
+
+    const healthStatus = healthData ? (healthData.ok ? 'connected' : 'degraded') : 'loading';
+    const nodeCount = overview?.nodeCount ?? overview?.totalNodes ?? null;
+    const edgeCount = overview?.edgeCount ?? overview?.totalEdges ?? null;
+
+    useEffect(() => {
+        const handler = (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                setCommandPaletteOpen(true);
+            }
+        };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+    }, [setCommandPaletteOpen]);
 
     return (
         <div className="flex flex-col h-screen w-screen bg-bg-root text-fg-primary overflow-hidden select-none">
-            {/* ── TOP HEADER ── */}
-            <header className="flex items-center h-10 px-3 bg-bg-surface border-b border-border-default shrink-0 gap-3 z-20">
-                {/* Brand Logo */}
-                <Link href="/" className="flex items-center gap-2 hover:opacity-90 cursor-pointer">
-                    <div className="w-5 h-5 rounded bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[11px] tracking-tighter shadow-sm">
-                        TP
-                    </div>
-                    <div className="flex items-baseline gap-1.5">
-                        <span className="font-mono font-bold text-[13px] tracking-wider text-fg-primary">THUPPARIVU</span>
-                        <span className="text-[9px] font-mono text-fg-muted uppercase tracking-widest hidden md:inline">INVESTIGATIVE WORKSTATION</span>
-                    </div>
+            {/* GLOBAL HEADER */}
+            <header className="flex items-center h-11 px-3 bg-bg-surface border-b border-border-default shrink-0 gap-3 z-30">
+                <Link href="/" className="flex items-center gap-2 hover:opacity-90 cursor-pointer shrink-0">
+                    <div className="w-5 h-5 rounded-sm bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[10px] tracking-tighter">SG</div>
+                    <span className="text-[13px] font-semibold text-fg-primary hidden sm:inline">SentinelGraph</span>
                 </Link>
-
-                <div className="w-px h-4 bg-border-default" />
-
-                {/* Case Context Badge */}
-                <div className="flex items-center gap-2">
-                    <Link href="/cases" className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-bg-panel border border-border-default hover:border-border-strong text-[11px] cursor-pointer">
-                        <span className="text-fg-faint font-mono text-[9px]">CASE:</span>
-                        <span className="font-mono font-semibold text-fg-primary">{activeCase?.id || 'CASE-0421'}</span>
-                        <span className="tp-badge tp-badge-amber text-[8px]">HIGH</span>
-                    </Link>
-                </div>
-
                 <div className="w-px h-4 bg-border-default hidden lg:block" />
-
-                {/* Dataset metadata */}
+                <Link href="/cases" className="flex items-center gap-1.5 text-[11px] hover:opacity-80 cursor-pointer">
+                    <span className="text-fg-faint">Case</span>
+                    <span className="font-mono font-semibold text-fg-primary">{activeCase?.id || '—'}</span>
+                </Link>
+                <div className="w-px h-4 bg-border-default hidden lg:block" />
                 <div className="hidden lg:flex items-center gap-2 text-[11px]">
-                    <span className="text-fg-faint font-mono text-[9px] uppercase">DATASET</span>
-                    <span className="text-fg-secondary truncate max-w-[180px]">{activeCase?.dataset || 'Synthetic Investigation 07'}</span>
+                    <span className="text-fg-faint font-mono text-[9px] uppercase">Dataset</span>
+                    <span className="text-fg-secondary truncate max-w-[160px]">{activeCase?.dataset || 'Synthetic Investigation 07'}</span>
                 </div>
-
                 <div className="flex-1" />
-
-                {/* Quick Search Button (Cmd+K trigger) */}
                 <button
                     onClick={() => setCommandPaletteOpen(true)}
-                    className="flex items-center gap-2 px-2.5 h-6 rounded bg-bg-panel border border-border-default hover:border-border-strong text-fg-muted text-[11px] transition-colors cursor-pointer"
+                    className="flex items-center gap-2 px-2.5 h-6 rounded-sm bg-[hsl(220,13%,10%)] border border-border-default hover:border-border-strong text-fg-muted text-[11px] transition-colors cursor-pointer"
                 >
-                    <Search size={12} className="text-fg-faint" />
-                    <span className="hidden sm:inline text-fg-faint">Search workstation...</span>
-                    <kbd className="tp-kbd text-[9px]">⌘K</kbd>
+                    <Search size={11} className="text-fg-faint" />
+                    <span className="hidden sm:inline text-fg-faint">Search…</span>
+                    <kbd className="text-[9px] text-fg-faint font-mono bg-[hsl(220,10%,16%)] px-1 rounded-sm">⌘K</kbd>
                 </button>
-
-                <div className="w-px h-4 bg-border-default" />
-
-                {/* Live Graph Counts */}
-                <div className="hidden xl:flex items-center gap-2.5 text-[10px] font-mono text-fg-muted">
-                    <span>{formatNumber(overview?.entities_count || 13146)} entities</span>
-                    <span className="text-fg-faint">·</span>
-                    <span>{formatNumber(overview?.triplets_count || 23982)} links</span>
-                    <span className="text-fg-faint">·</span>
-                    <span className="text-amber">3 anomalies</span>
-                </div>
-
-                <div className="w-px h-4 bg-border-default" />
-
-                {/* System Status Indicator */}
-                <div className="flex items-center gap-1.5" title="Backend connected & operational">
-                    <div className="tp-status-dot bg-green" />
-                    <span className="text-[10px] font-mono text-fg-secondary uppercase tracking-wider font-semibold">LIVE</span>
+                <div className="flex items-center gap-1.5 text-[10px] font-mono">
+                    <div className={`w-1.5 h-1.5 rounded-full ${healthStatus === 'connected' ? 'bg-green' : healthStatus === 'degraded' ? 'bg-amber' : 'bg-fg-faint'}`} />
+                    <span className="text-fg-faint hidden md:inline">
+                        {healthStatus === 'connected' ? 'API' : healthStatus === 'degraded' ? 'Degraded' : 'Connecting'}
+                    </span>
                 </div>
             </header>
 
-            {/* ── WORKSTATION BODY (NavRail + Content + Inspector) ── */}
-            <div className="flex flex-1 min-h-0 overflow-hidden relative">
-                {/* Navigation Rail */}
-                <nav
-                    className="flex flex-col h-full bg-sidebar-bg border-r border-sidebar-border shrink-0 select-none"
-                    style={{ width: railCollapsed ? '48px' : '156px', transition: 'width 0.15s ease' }}
-                >
-                    <div className="flex-1 overflow-y-auto py-1.5 px-1 space-y-2">
-                        {NAV_SECTIONS.map(section => {
-                            const items = NAV_ITEMS.filter(i => i.section === section);
-                            return (
-                                <div key={section} className="space-y-0.5">
-                                    {!railCollapsed && (
-                                        <div className="px-2 py-0.5 text-[8px] font-mono font-bold tracking-widest text-fg-faint uppercase">
-                                            {section}
+            <div className="flex flex-1 min-h-0">
+                {/* LEFT NAV RAIL */}
+                <nav className={`flex flex-col border-r border-border-default bg-bg-surface shrink-0 transition-all duration-fast overflow-y-auto overflow-x-hidden ${railCollapsed ? 'w-10' : 'w-48'}`}>
+                    {NAV_SECTIONS.map((section) => (
+                        <div key={section.id} className="py-1.5">
+                            {!railCollapsed && (
+                                <div className="px-3 py-1 text-[9px] font-semibold text-fg-faint uppercase tracking-widest">{section.label}</div>
+                            )}
+                            {section.items.map((item) => {
+                                const Icon = item.icon;
+                                const isActive = location === item.path || (item.path !== '/' && location.startsWith(item.path));
+                                return (
+                                    <Link key={item.path} href={item.path}>
+                                        <div
+                                            className={`flex items-center gap-2 mx-1.5 px-2 py-1.5 rounded-sm text-[12px] transition-colors cursor-pointer group
+                                                ${isActive
+                                                    ? 'bg-[hsl(220,10%,12%)] text-fg-primary border-l-2 border-l-primary'
+                                                    : 'text-fg-muted hover:text-fg-primary hover:bg-[hsl(220,10%,11%)] border-l-2 border-l-transparent'}`}
+                                            title={railCollapsed ? item.title || item.label : undefined}
+                                        >
+                                            <Icon size={13} className={isActive ? 'text-primary shrink-0' : 'text-fg-faint group-hover:text-fg-secondary shrink-0'} />
+                                            {!railCollapsed && <span className="truncate">{item.label}</span>}
                                         </div>
-                                    )}
-                                    {items.map(item => {
-                                        const isActive = location === item.path ||
-                                            (item.path !== '/' && location.startsWith(item.path));
-                                        const Icon = item.icon;
-                                        return (
-                                            <Link key={item.path} href={item.path}>
-                                                <div
-                                                    className={`group flex items-center gap-2 px-2 py-1 rounded text-[11px] font-medium cursor-pointer transition-all
-                                                        ${isActive
-                                                            ? 'bg-sidebar-active-bg text-fg-primary border-l-2 border-primary font-semibold'
-                                                            : 'text-fg-muted hover:text-fg-primary hover:bg-sidebar-hover border-l-2 border-transparent'
-                                                        }`}
-                                                    title={railCollapsed ? item.title : undefined}
-                                                >
-                                                    <Icon size={13} className={isActive ? 'text-primary shrink-0' : 'text-fg-faint group-hover:text-fg-secondary shrink-0'} />
-                                                    {!railCollapsed && <span className="truncate">{item.label}</span>}
-                                                </div>
-                                            </Link>
-                                        );
-                                    })}
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Rail Collapse Toggle */}
-                    <div className="border-t border-sidebar-border p-1">
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    ))}
+                    <div className="flex-1" />
+                    <div className="border-t border-border-subtle py-1.5">
+                        <Link href="/settings">
+                            <div className={`flex items-center gap-2 mx-1.5 px-2 py-1.5 rounded-sm text-[12px] transition-colors cursor-pointer
+                                ${location === '/settings' ? 'bg-[hsl(220,10%,12%)] text-fg-primary' : 'text-fg-muted hover:text-fg-primary hover:bg-[hsl(220,10%,11%)]'}`}>
+                                <Settings size={13} className="text-fg-faint shrink-0" />
+                                {!railCollapsed && <span>Settings</span>}
+                            </div>
+                        </Link>
                         <button
-                            onClick={() => setRailCollapsed(prev => !prev)}
-                            className="w-full flex items-center justify-center gap-1 py-1 rounded text-fg-faint hover:text-fg-secondary hover:bg-sidebar-hover text-[10px] font-mono transition-colors cursor-pointer"
+                            onClick={() => setRailCollapsed(c => !c)}
+                            className="flex items-center gap-2 mx-1.5 px-2 py-1.5 rounded-sm text-[11px] text-fg-faint hover:text-fg-secondary transition-colors cursor-pointer w-full"
                         >
-                            {railCollapsed ? <ChevronRight size={12} /> : <ChevronLeft size={12} />}
-                            {!railCollapsed && <span>COLLAPSE</span>}
+                            {railCollapsed ? <ChevronRight size={12} /> : <><ChevronLeft size={12} /><span>Collapse</span></>}
                         </button>
                     </div>
                 </nav>
 
-                {/* Main Workspace Page View */}
-                <main className="flex-1 min-w-0 h-full overflow-y-auto bg-bg-root relative flex flex-col">
+                {/* MAIN CONTENT */}
+                <main className="flex-1 min-w-0 overflow-auto bg-bg-root">
                     {children}
                 </main>
-
-                {/* Right Contextual Inspector Panel */}
-                <InspectorPanel />
             </div>
 
-            {/* ── STATUS BAR (bottom) ── */}
-            <footer className="flex items-center h-5 px-3 border-t border-border-subtle bg-bg-surface text-[10px] font-mono text-fg-faint shrink-0 gap-4 z-20">
+            {/* STATUS BAR */}
+            <footer className="flex items-center h-5 px-3 border-t border-border-subtle bg-bg-surface text-[10px] font-mono text-fg-faint shrink-0 gap-4 z-30">
                 <span className="flex items-center gap-1.5">
-                    <div className="tp-status-dot bg-green" />
-                    <span>SYSTEM NOMINAL</span>
+                    <div className={`w-1.5 h-1.5 rounded-full ${healthStatus === 'connected' ? 'bg-green' : healthStatus === 'degraded' ? 'bg-amber' : 'bg-red'}`} />
+                    <span>{healthStatus === 'connected' ? 'SYSTEM NOMINAL' : healthStatus === 'degraded' ? 'DEGRADED' : 'RECONNECTING'}</span>
                 </span>
                 <span className="text-border-strong">|</span>
-                <span>DATASET v1.7</span>
-                <span className="text-border-strong hidden sm:inline">|</span>
-                <span className="hidden sm:inline">GRAPH GS-0241</span>
-                <span className="text-border-strong hidden md:inline">|</span>
-                <span className="hidden md:inline">EVAL PR-AUC 0.82</span>
+                {nodeCount != null && <span>{formatNumber(nodeCount)} nodes · {formatNumber(edgeCount)} edges</span>}
                 <div className="flex-1" />
-                <span className="text-fg-muted">THUPPARIVU v3.0 · SIH26189</span>
+                {overview?.lastUpdated && <span>Updated {formatTimestamp(overview.lastUpdated)}</span>}
             </footer>
 
-            {/* Global Command Palette */}
             <CommandPalette />
         </div>
     );
 }
-
-export default AppShell;

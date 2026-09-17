@@ -84,21 +84,16 @@ class CommunicationSimulator:
             calls.append(self._make_call(call_idx, caller_id, receiver_id))
             call_idx += 1
 
-        return calls
-
-    def _make_call(self, idx: int, caller_id: str, receiver_id: str) -> CallRecord:
-        return CallRecord(
-            call_id=f"C{idx:07d}",
-            caller_id=caller_id,
-            receiver_id=receiver_id,
-            timestamp=self._random_timestamp().isoformat(),
-            duration_sec=self._rng.randint(5, 1800),
-            tower_location=self._rng.choice(self._towers),
+    # 3) Coordinated temporal planting around each hidden coordinator:
+    #    broker_A -> coordinator within T ± 30 min and coordinator -> broker_B
+    #    within T ± 90 min, all within a 3-hour window so the ghost detector's
+    #    temporal-affinity component lights up.
+        calls = self._plant_coordinated_calls(
+            calls, call_idx, people, topology, by_gang
         )
 
-    # ------------------------------------------------------------------ #
-    # Meetings
-    # ------------------------------------------------------------------ #
+        return calls
+
     def generate_meetings(
         self,
         people: List[Person],
@@ -164,6 +159,102 @@ class CommunicationSimulator:
             timestamp=self._random_timestamp().isoformat(),
             attendee_ids=attendees,
         )
+
+    def _make_call(self, idx: int, caller_id: str, receiver_id: str) -> CallRecord:
+        """Ordinary (non-planted) call with a uniformly random timestamp."""
+        return CallRecord(
+            call_id=f"C{idx:07d}",
+            caller_id=caller_id,
+            receiver_id=receiver_id,
+            timestamp=self._random_timestamp().isoformat(),
+            duration_sec=self._rng.randint(5, 1800),
+            tower_location=self._rng.choice(self._towers),
+        )
+
+    def _make_call_at(self, idx: int, caller_id: str, receiver_id: str, at: datetime) -> CallRecord:
+        """Create a call pinned to a specific timestamp (planted signal)."""
+        return CallRecord(
+            call_id=f"C{idx:07d}",
+            caller_id=caller_id,
+            receiver_id=receiver_id,
+            timestamp=at.isoformat(),
+            duration_sec=self._rng.randint(45, 900),
+            tower_location=self._rng.choice(self._towers),
+            _planted=True,
+        )
+
+    def _plant_coordinated_calls(
+        self,
+        calls: List[CallRecord],
+        next_idx: int,
+        people: List[Person],
+        topology: HiddenCoordinatorTopology,
+        by_gang: Dict[str, List[Person]],
+    ) -> List[CallRecord]:
+        """Plant the 3-call temporal signature around each hidden coordinator:
+        the coordinator's two community brokers each talk to/from the
+        coordinator's phone inside a shared 3-hour window. Records are marked
+        ``_planted=True`` (never serialized to CSV) so the evaluation harness
+        can recover ground truth in memory.
+        """
+        if not topology.links:
+            return calls
+
+        coordinators = {p.person_id: p for p in people if p.is_hidden_coordinator}
+        idx = next_idx
+        t0 = self._start_date + timedelta(days=200, seconds=self._rng.randint(0, 86399))
+
+        for coord_id, gang_map in topology.links.items():
+            coord = coordinators.get(coord_id)
+            if coord is None or len(gang_map) < 2:
+                continue
+
+            # Pick the two community brokers this coordinator connects:
+            # the two controlled gangs' highest-degree members.
+            gang_ids = sorted(gang_map.keys())
+            if len(gang_ids) < 2:
+                continue
+            gA, gB = gang_ids[0], gang_ids[1]
+
+            def _highest_degree(gang_id: str):
+                members = [p for p in people if p.gang_id == gang_id]
+                if not members:
+                    return None
+                ranked = sorted(
+                    members,
+                    key=lambda p: sum(
+                        1 for c in calls
+                        if c.caller_id == p.person_id or c.receiver_id == p.person_id
+                    ),
+                    reverse=True,
+                )
+                return ranked[0]
+
+            brokerA = _highest_degree(gA)
+            brokerB = _highest_degree(gB)
+            if brokerA is None or brokerB is None:
+                continue
+
+            # T is a random base time; window spans [T-1h30m, T+1h30m].
+            T = t0 + timedelta(minutes=self._rng.randint(-120, 120))
+
+            # 3 calls: broker_A -> coordinator within ±30 min of T
+            for k in range(3):
+                at = T + timedelta(minutes=self._rng.randint(-30, 30))
+                calls.append(self._make_call_at(
+                    idx, brokerA.person_id, coord_id, at
+                ))
+                idx += 1
+
+            # 3 calls: coordinator -> broker_B within T ± 90 min
+            for k in range(3):
+                at = T + timedelta(minutes=self._rng.randint(-90, 90))
+                calls.append(self._make_call_at(
+                    idx, coord_id, brokerB.person_id, at
+                ))
+                idx += 1
+
+        return calls
 
     def _random_timestamp(self) -> datetime:
         offset_days = self._rng.randint(0, 364)

@@ -171,6 +171,13 @@
     --color-chart-4: hsl(var(--chart-4));
     --color-chart-5: hsl(var(--chart-5));
     --color-chart-6: hsl(var(--chart-6));
+
+    /* Motion — matching the --transition-* custom properties */
+    --duration-fast: 100ms;
+    --duration-base: 160ms;
+    --duration-slow: 240ms;
+
+    --animate-in: slide-up 0.16s ease both;
 }
 
 /* ── Base ── */

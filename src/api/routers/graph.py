@@ -18,12 +18,15 @@ Conventions mirror routers/data.py and routers/pipeline.py:
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any, Optional
 
 import networkx as nx
 from fastapi import APIRouter, HTTPException, Query
 
 from src.api import audit, data_access, paths, services
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/graph", tags=["graph"])
 
@@ -121,6 +124,31 @@ def graph_info():
         "ghost_predictions_count": len(ghosts),
         "metadata": metadata,
     }
+
+
+@router.get("/warmup")
+def graph_warmup():
+    """Proactively load the knowledge graph into memory so the first real
+    user request does not incur a cold-start penalty.  Returns graph stats
+    if the graph is built, otherwise a safe no-op.
+
+    Called by the keep-alive GitHub Actions workflow every 14 minutes.
+    """
+    try:
+        g = services.load_graph()
+        nodes = g.number_of_nodes()
+        edges = g.number_of_edges()
+    except (FileNotFoundError, Exception) as exc:  # noqa: BLE001
+        logger.debug("warmup: graph not available (%s)", exc)
+        return {"status": "warm", "nodes": 0, "edges": 0, "detail": str(exc)}
+
+    # Also eagerly load ghost predictions if available.
+    try:
+        _ = services._load_json(paths.GHOST_PREDICTIONS_PATH)
+    except Exception:  # noqa: BLE001
+        pass
+
+    return {"status": "warm", "nodes": nodes, "edges": edges}
 
 
 @router.get("/metadata")
@@ -221,15 +249,24 @@ def list_edges(
 # --------------------------------------------------------------------------- #
 # Ghosts / metrics
 # --------------------------------------------------------------------------- #
+# Ghosts / metrics
+# --------------------------------------------------------------------------- #
 @router.get("/ghosts")
 def list_ghosts(
     page: int = Query(1, ge=1),
     page_size: int = Query(DEFAULT_PAGE_SIZE, ge=1),
+    mode: Optional[str] = Query(None, description="high_precision or high_recall"),
 ):
     """Paginated list of ghost-node predictions produced by the ghost
-    detection stage of the pipeline."""
+    detection stage of the pipeline. Optionally re-runs detection in a
+    different mode via the `mode` query parameter."""
     page, page_size = _page_params(page, page_size)
     rows = _load_ghost_predictions()
+    if mode in ("high_precision", "high_recall"):
+        try:
+            rows = services.run_ghost_detection(mode=mode)
+        except Exception:
+            logger.exception("ghost detection re-run failed; using cached rows")
     items, total = data_access.paginate(rows, page, page_size)
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
