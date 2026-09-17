@@ -11,7 +11,7 @@ This project is now deployed on Railway with:
 ### Step 1: Update Environment Variable
 In Railway, set the environment variable:
 ```
-VITE_API_BASE_URL=https://enthusiastic-creativity-production-27af.up.railway.app
+VITE_API_BASE_URL=https://thupparivu-sih26189-production.up.railway.app
 ```
 
 ### Step 2: Deploy to Railway
@@ -55,7 +55,7 @@ CORS_ORIGINS=https://hemachandru-bca.github.io
 ### Frontend (Railway)
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `VITE_API_BASE_URL` | `https://enthusiastic-creativity-production-27af.up.railway.app` | Your backend URL |
+| `VITE_API_BASE_URL` | `https://thupparivu-sih26189-production.up.railway.app` | Your backend URL |
 
 ### Backend (Railway)
 | Variable | Value | Description |
