@@ -1,11 +1,13 @@
-// src/api/xai.js — hooks for the evidence / findings / simulation / dossier /
-// case / global-search route groups. All list endpoints return the backend
-// envelope untouched: { items, total, page, page_size }.
+// src/api/xai.js — barrel re-export (backwards compat, deprecate later)
+// Domain logic has been split into dedicated files.
+export * from './findings';
+export * from './cases';
+export * from './search';
+
+// --- Evidence, Simulation, Dossiers, Subgraph (remaining domain logic) ---
 import { useQuery } from '@tanstack/react-query';
 import { request, requestJson } from './client';
 
-// NOTE: request() throws on !res.ok with the backend's detail — good.
-// For POST/PATCH we need a small JSON poster; client.js only does GETs.
 async function send(method, path, body) {
     return requestJson(path, { method, body });
 }
@@ -50,15 +52,6 @@ export function useEvidenceDetail(evidenceId, options) {
     });
 }
 
-export function useEvidenceChainForFinding(findingId, options) {
-    return useQuery({
-        queryKey: ['/api/evidence/chain/finding', findingId],
-        queryFn: () => request(`/api/evidence/chain/finding/${encodeURIComponent(findingId)}`),
-        enabled: Boolean(findingId),
-        ...(options?.query ?? {}),
-    });
-}
-
 export function useEvidenceChainForEntity(entityId, options) {
     return useQuery({
         queryKey: ['/api/evidence/chain/entity', entityId],
@@ -66,29 +59,6 @@ export function useEvidenceChainForEntity(entityId, options) {
         enabled: Boolean(entityId),
         ...(options?.query ?? {}),
     });
-}
-
-// ---------------------------------------------------------------- findings --
-export const getFindingsQueryKey = (params) => ['/api/findings', params ?? null];
-export function useFindings(params, options) {
-    return useQuery({
-        queryKey: getFindingsQueryKey(params),
-        queryFn: () => request('/api/findings', params),
-        ...(options?.query ?? {}),
-    });
-}
-
-export function useFindingDetail(findingId, options) {
-    return useQuery({
-        queryKey: ['/api/findings/item', findingId],
-        queryFn: () => request(`/api/findings/${encodeURIComponent(findingId)}`),
-        enabled: Boolean(findingId),
-        ...(options?.query ?? {}),
-    });
-}
-
-export async function generateFindings() {
-    return send('POST', '/api/findings/generate');
 }
 
 // -------------------------------------------------------------- simulation --
@@ -125,44 +95,6 @@ export async function generateDossier(payload) {
 
 export async function reviewDossier(dossierId, payload) {
     return send('POST', `/api/dossiers/${encodeURIComponent(dossierId)}/review`, payload);
-}
-
-// ------------------------------------------------------------------- cases --
-export const getCasesQueryKey = () => ['/api/cases'];
-export function useCases(options) {
-    return useQuery({
-        queryKey: getCasesQueryKey(),
-        queryFn: () => request('/api/cases'),
-        ...(options?.query ?? {}),
-    });
-}
-
-export function useCaseDetail(caseId, options) {
-    return useQuery({
-        queryKey: ['/api/cases/item', caseId],
-        queryFn: () => request(`/api/cases/${encodeURIComponent(caseId)}`),
-        enabled: Boolean(caseId),
-        ...(options?.query ?? {}),
-    });
-}
-
-export async function createCase(payload) {
-    return send('POST', '/api/cases', payload);
-}
-
-export async function updateCase(caseId, payload) {
-    return send('PATCH', `/api/cases/${encodeURIComponent(caseId)}`, payload);
-}
-
-// ----------------------------------------------------------- global search --
-export const getGlobalSearchQueryKey = (params) => ['/api/search', params ?? null];
-export function useGlobalSearch(params, options) {
-    return useQuery({
-        queryKey: getGlobalSearchQueryKey(params),
-        queryFn: () => request('/api/search', params),
-        enabled: Boolean(params?.q && params.q.length >= 2),
-        ...(options?.query ?? {}),
-    });
 }
 
 // ------------------------------------------------------------ server graph --

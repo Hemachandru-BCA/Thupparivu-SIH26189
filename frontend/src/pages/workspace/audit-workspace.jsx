@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { request } from '@/api/client';
 import { ClipboardList, Filter, RefreshCw } from 'lucide-react';
-import { formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
 
 export default function AuditWorkspace() {
     const { data: auditData, isLoading, refetch } = useQuery({

@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { useFinancialAccounts, traceFunds } from '@/api/intel';
 import { useInvestigation } from '@/state/investigation-context';
-import { formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
 
 export default function FinancialWorkspace() {
     const { setSelectedEntity } = useInvestigation();

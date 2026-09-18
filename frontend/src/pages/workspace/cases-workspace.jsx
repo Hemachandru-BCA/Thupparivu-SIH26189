@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useRoute } from 'wouter';
 import { useCases, useCaseDetail } from '@/api/xai';
 import { FolderOpen, Plus, ChevronRight, Clock, Users, FileText } from 'lucide-react';
-import { formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
+import { useInvestigation } from '@/state/investigation-context';
 
 export default function CasesWorkspace() {
+    const { activeCase, setActiveCase } = useInvestigation();
     const [, params] = useRoute('/cases/:id');
     const { data: casesData, isLoading } = useCases();
     const cases = casesData?.results || casesData?.items || casesData || [];
@@ -79,7 +81,8 @@ export default function CasesWorkspace() {
                         </div>
                         {detail.description && (
                             <div>
-                                <div className="tp-section-label mb-2">DESCRIPTION</div>
+                                <button onClick={() => setActiveCase(detail)} className="tp-btn tp-btn-primary mb-4 w-fit">Set as Active WorkspaceContext</button>
+<div className="tp-section-label mb-2">DESCRIPTION</div>
                                 <div className="text-[12px] text-fg-secondary leading-relaxed">{detail.description}</div>
                             </div>
                         )}

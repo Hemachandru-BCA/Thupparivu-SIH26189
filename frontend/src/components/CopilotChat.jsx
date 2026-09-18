@@ -37,12 +37,13 @@ function NodeChip({ id }) {
 function AnswerText({ text }) {
   if (!text) return null;
   // Match E-[a-f0-9]{16} patterns in the text
-  const ENTITY_RE = /(E-[0-9a-f]{16})/g;
-  const parts = text.split(ENTITY_RE);
+  const ENTITY_SPLIT = /(E-[0-9a-f]{16})/;
+  const ENTITY_TEST  = /^E-[0-9a-f]{16}$/;
+  const parts = text.split(ENTITY_SPLIT);
   return (
     <div className="text-sm text-fg-primary leading-relaxed whitespace-pre-wrap">
       {parts.map((part, i) => {
-        if (ENTITY_RE.test(part)) {
+        if (ENTITY_TEST.test(part)) {
           return <NodeChip key={i} id={part} />;
         }
         return <span key={i}>{part}</span>;
@@ -56,9 +57,9 @@ function AnswerText({ text }) {
 // ---------------------------------------------------------------------------
 function ConfidenceBadge({ confidence }) {
   if (confidence === undefined || confidence === null) return null;
-  let cls = 'bg-blue-500/20 text-blue-400';
-  if (confidence < 0.4) cls = 'bg-amber-500/20 text-amber-400';
-  else if (confidence >= 0.7) cls = 'bg-emerald-500/20 text-emerald-400';
+  let cls = 'bg-blue-bg text-blue';
+  if (confidence < 0.4) cls = 'bg-amber-bg text-amber';
+  else if (confidence >= 0.7) cls = 'bg-green-bg text-green';
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono ${cls}`}>
       confidence: {(confidence * 100).toFixed(0)}%
@@ -77,7 +78,7 @@ function MessageBubble({ msg }) {
         className={`max-w-[85%] rounded-xl px-4 py-3 ${
           isUser
             ? 'bg-primary/20 text-fg-primary'
-            : 'bg-bg-secondary border border-border-subtle'
+            : 'bg-bg-panel border border-border-subtle'
         }`}
       >
         {isUser ? (
@@ -103,7 +104,7 @@ function MessageBubble({ msg }) {
             {msg.warnings && msg.warnings.length > 0 && (
               <div className="mt-2 flex flex-col gap-1">
                 {msg.warnings.map((w, i) => (
-                  <div key={i} className="flex items-start gap-1.5 text-[11px] text-amber-400">
+                  <div key={i} className="flex items-start gap-1.5 text-[11px] text-amber">
                     <AlertTriangle className="w-3 h-3 mt-0.5 shrink-0" />
                     <span>{w}</span>
                   </div>
@@ -129,7 +130,7 @@ function DemoCard({ query, description, onClick }) {
   return (
     <button
       onClick={() => onClick(query)}
-      className="text-left p-3 rounded-lg border border-border-subtle bg-bg-secondary hover:bg-sidebar-hover hover:border-primary/30 transition-all group"
+      className="text-left p-3 rounded-lg border border-border-subtle bg-bg-panel hover:bg-sidebar-hover hover:border-primary/30 transition-all group"
     >
       <p className="text-sm text-fg-primary group-hover:text-primary transition-colors">
         "{query}"
@@ -249,7 +250,7 @@ export default function CopilotChat() {
         {/* Loading indicator */}
         {loading && (
           <div className="flex justify-start mb-4">
-            <div className="px-4 py-3 rounded-xl bg-bg-secondary border border-border-subtle">
+            <div className="px-4 py-3 rounded-xl bg-bg-panel border border-border-subtle">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 <span className="text-sm text-fg-muted">Thinking…</span>
@@ -268,7 +269,7 @@ export default function CopilotChat() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about the network… (Ctrl+Enter to send)"
-            className="flex-1 bg-bg-primary border border-border-subtle rounded-lg px-3 py-2 text-sm text-fg-primary placeholder:text-fg-faint focus:outline-none focus:border-primary/50 transition-colors"
+            className={`flex-1 bg-bg-root border border-border-subtle rounded-lg px-3 py-2 text-sm text-fg-primary placeholder:text-fg-faint focus:outline-none focus:border-primary/50 transition-colors`}
             disabled={loading}
           />
           <button

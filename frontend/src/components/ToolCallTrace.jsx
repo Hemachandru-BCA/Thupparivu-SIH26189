@@ -52,7 +52,7 @@ export default function ToolCallTrace({ toolCalls = [] }) {
   if (!toolCalls || toolCalls.length === 0) return null;
 
   return (
-    <div className="mb-2 rounded-lg border border-border-subtle bg-bg-secondary/60 overflow-hidden">
+    <div className="mb-2 rounded-lg border border-border-subtle bg-bg-panel/60 overflow-hidden">
       <div className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-fg-faint border-b border-border-subtle flex items-center gap-1.5">
         <Terminal className="w-3 h-3" />
         Tool calls ({toolCalls.length})
@@ -85,7 +85,7 @@ export default function ToolCallTrace({ toolCalls = [] }) {
               </span>
             </button>
             {open && (
-              <pre className="mx-3 mb-2 px-3 py-2 rounded bg-bg-primary text-[10px] font-mono text-fg-muted overflow-x-auto max-h-64 overflow-y-auto">
+              <pre className="mx-3 mb-2 px-3 py-2 rounded bg-bg-root text-[10px] font-mono text-fg-muted overflow-x-auto max-h-64 overflow-y-auto">
                 {JSON.stringify(tc.output ?? tc.result ?? tc, null, 2)}
               </pre>
             )}

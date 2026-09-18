@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { getSearchGraphQueryKey, useSearchGraph } from '@/api/graph';
+import { getSearchGraphQueryKey, useSearchGraph, useGetGraphOverview } from '@/api/graph';
+import { formatNumber } from '@/utils/format';
 import {
   Activity,
   AlertTriangle,
@@ -150,6 +151,10 @@ export function Shell({ children }) {
   const [globalQuery, setGlobalQuery] = useState('');
   const [debouncedGlobalQuery, setDebouncedGlobalQuery] = useState('');
   const [location] = useLocation();
+
+  const { data: overviewData } = useGetGraphOverview();
+  const nodeCount = overviewData?.nodeCount ?? overviewData?.entities_count ?? overviewData?.totalNodes ?? null;
+  const edgeCount = overviewData?.edgeCount ?? overviewData?.triplets_count ?? overviewData?.totalEdges ?? null;
 
   const searchContainerRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -303,7 +308,7 @@ export function Shell({ children }) {
                 </span>
               </div>
               <span className="font-mono-ui text-[8px] font-semibold text-cyan-400/90 bg-cyan-950/60 border border-cyan-500/20 rounded px-1.5 py-0.5">
-                13.1k NODES
+                {nodeCount != null ? formatNumber(nodeCount) + ' NODES' : '…'}
               </span>
             </div>
           ) : (
@@ -482,14 +487,16 @@ export function Shell({ children }) {
             {/* System Status Pill */}
             <div
               className="hidden sm:flex items-center gap-2 rounded-md border border-emerald-500/25 bg-emerald-500/5 px-2.5 py-1 text-[10px] font-mono-ui text-emerald-400"
-              title="API connection active · 13,146 nodes in graph"
+              title={`API connection active · ${nodeCount != null ? formatNumber(nodeCount) : '…'} nodes in graph`}
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
               </span>
               <span className="tracking-wide font-semibold">SYS: NOMINAL</span>
-              <span className="hidden xl:inline text-emerald-500/70 border-l border-emerald-500/20 pl-2">13.1k NODES</span>
+              <span className="hidden xl:inline text-emerald-500/70 border-l border-emerald-500/20 pl-2">
+                {nodeCount != null ? formatNumber(nodeCount) + ' NODES' : '…'}
+              </span>
             </div>
 
             {/* Notifications Menu */}

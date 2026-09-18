@@ -1,15 +1,26 @@
-import { useFindingDetail, useEvidenceChainForFinding } from '@/api/xai';
-import { useRoute, Link } from 'wouter';
-import { Brain, ChevronLeft, AlertTriangle, FileText, CheckCircle, HelpCircle, XCircle } from 'lucide-react';
-import { getConfidenceColor } from '@/components/app-shell';
-import { EvidenceChainWidget } from '@/components/evidence-chain';
+import { useState, useMemo } from "react";
+import { useLocation } from "wouter";
+import { useFindings } from "@/api/xai";
+import { Brain, Search } from "lucide-react";
+import { getConfidenceColor } from "@/components/app-shell";
 
-export default function FindingDetailPage() {
-    const [, params] = useRoute('/findings/:id');
-    const findingId = params?.id;
-    const { data: findingData, isLoading } = useFindingDetail(findingId);
-    const { data: chainData, isLoading: isChainLoading } = useEvidenceChainForFinding(findingId);
-    const finding = findingData?.result || findingData;
+export default function FindingDetailWorkspace() {
+    // Actually this is the Findings List Workspace (formerly finding-detail-workspace.jsx which did both list & detail)
+    const [, setLocation] = useLocation();
+    const { data: findingsData, isLoading } = useFindings();
+    const findings = findingsData?.results || findingsData?.items || findingsData || [];
+    const [search, setSearch] = useState("");
+
+    const filtered = useMemo(() => {
+        if (!search) return findings;
+        const q = search.toLowerCase();
+        return findings.filter(f =>
+            (f.finding_id || "").toLowerCase().includes(q) ||
+            (f.subject_id || "").toLowerCase().includes(q) ||
+            (f.finding_type || "").toLowerCase().includes(q) ||
+            (f.method || "").toLowerCase().includes(q)
+        );
+    }, [findings, search]);
 
     if (isLoading) return (
         <div className="flex items-center justify-center h-full">
@@ -17,183 +28,65 @@ export default function FindingDetailPage() {
         </div>
     );
 
-    if (!finding) return (
-        <div className="flex flex-col items-center justify-center h-full text-center">
-            <Brain size={24} className="text-fg-faint mb-3" />
-            <span className="text-[11px] font-mono text-fg-faint uppercase">FINDING NOT FOUND</span>
-            <Link href="/findings">
-                <button className="tp-btn tp-btn-primary text-[10px] mt-3">Back to Hypotheses</button>
-            </Link>
-        </div>
-    );
-
-    const conf = finding.confidence || 0;
-    const confColor = getConfidenceColor(conf);
-
     return (
-        <div className="h-full flex flex-col overflow-hidden animate-fade-in">
-            {/* Header */}
-            <div className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
-                <Link href="/findings">
-                    <button className="tp-btn tp-btn-ghost text-[10px] h-6 px-1.5 gap-1">
-                        <ChevronLeft size={12} /> Hypotheses
-                    </button>
-                </Link>
-                <div className="w-px h-4 bg-border-default" />
-                <span className="font-mono text-[10px] text-fg-faint">{finding.finding_id || finding.id}</span>
-                <span className="tp-badge tp-badge-purple">{finding.finding_type || 'FINDING'}</span>
-                <div className="flex-1" />
-                <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-fg-faint">CONFIDENCE:</span>
-                    <span className="font-mono text-[13px] font-bold" style={{color: confColor}}>
-                        {(conf * 100).toFixed(0)}%
-                    </span>
-                </div>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6 max-w-4xl mx-auto space-y-6">
-                {/* Subject & summary */}
-                <div>
-                    <h1 className="text-[18px] font-semibold text-fg-primary mb-1">
-                        {finding.subject_label || finding.subject_id || 'Investigative Finding'}
-                    </h1>
-                    <div className="text-[12px] text-fg-secondary leading-relaxed">
-                        {finding.finding_text || finding.method || 'Investigative model inference'}
+        <div className="h-full flex overflow-hidden animate-fade-in">
+            <div className="flex-1 flex flex-col min-w-0">
+                <div className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
+                    <Brain size={13} className="text-purple" />
+                    <span className="text-[11px] font-semibold text-fg-primary">FINDINGS</span>
+                    <span className="tp-badge tp-badge-purple">{findings.length} total</span>
+                    <div className="w-px h-4 bg-border-default" />
+                    <div className="relative flex-1 max-w-sm">
+                        <Search size={11} className="absolute left-2 top-1/2 -translate-y-1/2 text-fg-faint" />
+                        <input value={search} onChange={e => setSearch(e.target.value)}
+                            placeholder="Filter findings..."
+                            className="tp-input pl-7 h-7 text-[11px]" />
                     </div>
                 </div>
 
-                {/* Epistemic claims */}
-                <div className="grid grid-cols-3 gap-4">
-                    {/* Observed */}
-                    <div className="tp-panel p-3">
-                        <div className="flex items-center gap-1.5 mb-2">
-                            <CheckCircle size={11} className="text-green" />
-                            <span className="tp-section-label text-green">OBSERVED FACTS ({finding.observed?.length || 0})</span>
-                        </div>
-                        <div className="space-y-1.5">
-                            {finding.observed?.length > 0 ? finding.observed.map((obs, i) => (
-                                <div key={i} className="text-[11px] text-fg-secondary">
-                                    {typeof obs === 'string' ? obs : obs.text}
-                                    {obs.evidence_ids?.length > 0 && (
-                                        <div className="flex gap-1 mt-0.5">
-                                            {obs.evidence_ids.map(eid => (
-                                                <span key={eid} className="tp-badge tp-badge-neutral" style={{fontSize: '7px'}}>{eid}</span>
-                                            ))}
+                <div className="flex-1 overflow-auto">
+                    <table className="tp-table">
+                        <thead>
+                            <tr>
+                                <th>FINDING ID</th>
+                                <th>TYPE & METHOD</th>
+                                <th>SUBJECT</th>
+                                <th>CONFIDENCE</th>
+                                <th>EVIDENCE COUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filtered.map((finding, i) => (
+                                <tr key={finding.finding_id || i} className="cursor-pointer group hover:bg-bg-hover transition-colors"
+                                    onClick={() => setLocation(`/findings/${finding.finding_id || finding.id}`)}>
+                                    <td className="font-mono text-fg-faint" style={{maxWidth: 160}}>{finding.finding_id || finding.id}</td>
+                                    <td>
+                                        <div className="flex flex-col gap-0.5">
+                                            <span className="tp-badge tp-badge-purple">{finding.finding_type || "FINDING"}</span>
+                                            <span className="text-[10px] text-fg-muted truncate max-w-xs">{finding.method || "Analysis"}</span>
                                         </div>
-                                    )}
-                                </div>
-                            )) : (
-                                <span className="text-[10px] text-fg-faint">None recorded</span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Inferred */}
-                    <div className="tp-panel p-3">
-                        <div className="flex items-center gap-1.5 mb-2">
-                            <Brain size={11} className="text-purple" />
-                            <span className="tp-section-label text-purple">MODEL INFERENCES ({finding.inferred?.length || 0})</span>
-                        </div>
-                        <div className="space-y-1.5">
-                            {finding.inferred?.length > 0 ? finding.inferred.map((inf, i) => (
-                                <div key={i} className="text-[11px] text-purple italic">
-                                    {typeof inf === 'string' ? inf : inf.text}
-                                </div>
-                            )) : (
-                                <span className="text-[10px] text-fg-faint">None recorded</span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Unknowns / Unresolved */}
-                    <div className="tp-panel p-3">
-                        <div className="flex items-center gap-1.5 mb-2">
-                            <HelpCircle size={11} className="text-fg-faint" />
-                            <span className="tp-section-label text-fg-faint">UNRESOLVED ({finding.unknown?.length || 0})</span>
-                        </div>
-                        <div className="space-y-1.5">
-                            {finding.unknown?.length > 0 ? finding.unknown.map((unk, i) => (
-                                <div key={i} className="text-[11px] text-fg-faint">
-                                    {typeof unk === 'string' ? unk : unk.text}
-                                </div>
-                            )) : (
-                                <span className="text-[10px] text-fg-faint">None recorded</span>
-                            )}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Confidence breakdown components */}
-                {finding.confidence_components?.length > 0 && (
-                    <div className="tp-panel p-4">
-                        <div className="tp-section-label mb-3">ANALYSIS CONTRIBUTION</div>
-                        <div className="space-y-2">
-                            {finding.confidence_components.map((comp, i) => (
-                                <div key={i}>
-                                    <div className="flex justify-between text-[11px] mb-0.5">
-                                        <span className="text-fg-secondary">{comp.name}</span>
-                                        <span className="font-mono text-fg-primary">
-                                            {(comp.value > 0 ? '+' : '') + (comp.value?.toFixed(2) || '0.00')}
+                                    </td>
+                                    <td className="font-medium text-fg-primary group-hover:text-primary transition-colors">{finding.subject_label || finding.subject_id}</td>
+                                    <td>
+                                        <span className="font-mono text-[10px]" style={{color: getConfidenceColor(finding.confidence || 0)}}>
+                                            {((finding.confidence || 0) * 100).toFixed(1)}%
                                         </span>
-                                    </div>
-                                    <div className="tp-confidence-bar">
-                                        <div className="tp-confidence-fill" style={{
-                                            width: `${Math.min(Math.abs(comp.value || 0) * 100, 100)}%`,
-                                            background: (comp.value || 0) >= 0 ? 'hsl(var(--primary))' : 'hsl(var(--red))'
-                                        }} />
-                                    </div>
-                                </div>
+                                    </td>
+                                    <td className="font-mono text-fg-secondary">
+                                        {(finding.supporting_evidence || []).length || 0}
+                                    </td>
+                                </tr>
                             ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Supporting evidence */}
-                {finding.supporting_evidence_ids?.length > 0 && (
-                    <div>
-                        <div className="tp-section-label mb-2">SUPPORTING EVIDENCE</div>
-                        <div className="flex flex-wrap gap-1.5">
-                            {finding.supporting_evidence_ids.map(eid => (
-                                <span key={eid} className="tp-badge tp-badge-green font-mono">{eid}</span>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Counter evidence */}
-                {finding.counter_evidence_ids?.length > 0 && (
-                    <div>
-                        <div className="tp-section-label mb-2">COUNTER-EVIDENCE</div>
-                        <div className="flex flex-wrap gap-1.5">
-                            {finding.counter_evidence_ids.map(eid => (
-                                <span key={eid} className="tp-badge tp-badge-red font-mono">{eid}</span>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Traceable Evidence Chain Widget (5-stage) */}
-                <EvidenceChainWidget
-                    chainData={chainData}
-                    isLoading={isChainLoading}
-                    title="End-to-End Provenance & Evidence Chain"
-                />
-
-                {/* Limitations */}
-                {finding.limitations?.length > 0 && (
-                    <div className="tp-panel p-3 border-amber/20 bg-amber-bg">
-                        <div className="tp-section-label mb-2 text-amber">LIMITATIONS & CAVEATS</div>
-                        <div className="space-y-1">
-                            {finding.limitations.map((lim, i) => (
-                                <div key={i} className="flex items-start gap-2 text-[11px] text-amber">
-                                    <AlertTriangle size={10} className="shrink-0 mt-0.5" />
-                                    <span>{lim}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                            {filtered.length === 0 && (
+                                <tr>
+                                    <td colSpan={5} className="text-center py-8 text-fg-faint text-[11px]">
+                                        No findings match the current filters
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

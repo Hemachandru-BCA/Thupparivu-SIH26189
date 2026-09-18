@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { toast, Toaster } from 'sonner';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { AppShell } from '@/components/app-shell';
 import { InvestigationProvider } from '@/state/investigation-context';
@@ -46,6 +47,11 @@ const queryClient = new QueryClient({
             refetchOnWindowFocus: false,
             retry: 1,
         },
+        mutations: {
+            onError: (error) => {
+                toast.error(error?.message ?? 'Request failed', { duration: 4000 });
+            },
+        },
     },
 });
 
@@ -58,48 +64,52 @@ function PageLoading() {
 }
 
 function Router() {
-    return <RoutedErrorBoundary><AppShell>
-        <Suspense fallback={<PageLoading />}>
-            <Switch>
-                <Route path="/" component={InvestigationDesk} />
-                <Route path="/network" component={NetworkWorkspace} />
-                <Route path="/entities" component={EntitiesWorkspace} />
-                <Route path="/cases" component={CasesWorkspace} />
-                <Route path="/cases/:id" component={CasesWorkspace} />
-                <Route path="/ghosts" component={AnomaliesWorkspace} />
-                <Route path="/findings" component={HypothesesWorkspace} />
-                <Route path="/findings/:id" component={FindingDetailPage} />
-                <Route path="/dossiers" component={ReportsWorkspace} />
-                <Route path="/dossiers/:id" component={ReportsWorkspace} />
-                <Route path="/evidence" component={EvidenceWorkspace} />
-                <Route path="/simulation" component={SimulationWorkspace} />
-                <Route path="/analytics" component={AnalyticsWorkspace} />
-                <Route path="/communities" component={CommunitiesWorkspace} />
-                <Route path="/timeline" component={TimelineWorkspace} />
-                <Route path="/pipeline" component={PipelineWorkspace} />
-                <Route path="/audit" component={AuditWorkspace} />
-                <Route path="/settings" component={SettingsWorkspace} />
-                {/* New intelligence workspaces */}
-                <Route path="/financial" component={FinancialWorkspace} />
-                <Route path="/copilot" component={CopilotPage} />
-                <Route path="/gaps" component={GapsWorkspace} />
-                <Route path="/cross-case" component={CrossCaseWorkspace} />
-                <Route path="/entity/:id" component={EntityAnalysisWorkspace} />
-                <Route path="/bookmarks" component={BookmarksWorkspace} />
-                <Route path="/p1-analysis" component={P1AnalysisWorkspace} />
-                <Route path="/geospatial" component={GeospatialWorkspace} />
-                <Route path="/nl-query" component={NLQueryWorkspace} />
-                <Route path="/next-best" component={NextBestActionWorkspace} />
-                <Route path="/case-similarity" component={CaseSimilarityWorkspace} />
-                <Route path="/models" component={ModelsWorkspace} />
-                <Route path="/judge" component={JudgeDemoWalkthrough} />
-                {/* Legacy */}
-                <Route path="/explorer" component={NetworkWorkspace} />
-                <Route path="/search" component={EvidenceWorkspace} />
-                <Route component={NotFound} />
-            </Switch>
-        </Suspense>
-    </AppShell></RoutedErrorBoundary>;
+    return (
+        <AppShell>
+            <RoutedErrorBoundary>
+                <Suspense fallback={<PageLoading />}>
+                    <Switch>
+                        <Route path="/" component={InvestigationDesk} />
+                        <Route path="/network" component={NetworkWorkspace} />
+                        <Route path="/entities" component={EntitiesWorkspace} />
+                        <Route path="/cases" component={CasesWorkspace} />
+                        <Route path="/cases/:id" component={CasesWorkspace} />
+                        <Route path="/ghosts" component={AnomaliesWorkspace} />
+                        <Route path="/findings" component={HypothesesWorkspace} />
+                        <Route path="/findings/:id" component={FindingDetailPage} />
+                        <Route path="/dossiers" component={ReportsWorkspace} />
+                        <Route path="/dossiers/:id" component={ReportsWorkspace} />
+                        <Route path="/evidence" component={EvidenceWorkspace} />
+                        <Route path="/simulation" component={SimulationWorkspace} />
+                        <Route path="/analytics" component={AnalyticsWorkspace} />
+                        <Route path="/communities" component={CommunitiesWorkspace} />
+                        <Route path="/timeline" component={TimelineWorkspace} />
+                        <Route path="/pipeline" component={PipelineWorkspace} />
+                        <Route path="/audit" component={AuditWorkspace} />
+                        <Route path="/settings" component={SettingsWorkspace} />
+                        {/* New intelligence workspaces */}
+                        <Route path="/financial" component={FinancialWorkspace} />
+                        <Route path="/copilot" component={CopilotPage} />
+                        <Route path="/gaps" component={GapsWorkspace} />
+                        <Route path="/cross-case" component={CrossCaseWorkspace} />
+                        <Route path="/entity/:id" component={EntityAnalysisWorkspace} />
+                        <Route path="/bookmarks" component={BookmarksWorkspace} />
+                        <Route path="/p1-analysis" component={P1AnalysisWorkspace} />
+                        <Route path="/geospatial" component={GeospatialWorkspace} />
+                        <Route path="/nl-query" component={NLQueryWorkspace} />
+                        <Route path="/next-best" component={NextBestActionWorkspace} />
+                        <Route path="/case-similarity" component={CaseSimilarityWorkspace} />
+                        <Route path="/models" component={ModelsWorkspace} />
+                        <Route path="/judge" component={JudgeDemoWalkthrough} />
+                        {/* Legacy */}
+                        <Route path="/explorer" component={NetworkWorkspace} />
+                        <Route path="/search" component={EvidenceWorkspace} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Suspense>
+            </RoutedErrorBoundary>
+        </AppShell>
+    );
 }
 
 function RoutedErrorBoundary({ children }) {
@@ -110,11 +120,24 @@ function RoutedErrorBoundary({ children }) {
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <WouterRouter>
+            <WouterRouter base={import.meta.env.BASE_URL ?? '/'}>
                 <InvestigationProvider>
                     <Router />
                 </InvestigationProvider>
             </WouterRouter>
+            <Toaster
+                position="bottom-right"
+                theme="dark"
+                toastOptions={{
+                    style: {
+                        background: 'hsl(var(--bg-elevated))',
+                        border: '1px solid hsl(var(--border-default))',
+                        color: 'hsl(var(--fg-primary))',
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '12px',
+                    },
+                }}
+            />
         </QueryClientProvider>
     );
 }
@@ -124,10 +147,10 @@ function AuthGate() {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">
+            <div className="min-h-screen flex items-center justify-center bg-bg-root text-fg-primary">
                 <div className="text-center">
-                    <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                    <p className="text-sm text-zinc-400">Loading…</p>
+                    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                    <p className="text-sm text-fg-muted">Loading…</p>
                 </div>
             </div>
         );

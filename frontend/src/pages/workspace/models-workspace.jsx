@@ -16,7 +16,7 @@ import {
     RotateCcw, Sparkles, BarChart3, Database, Layers, ArrowRight
 } from 'lucide-react';
 import { useModels, useModelRuns, useBenchmarkMetrics, runBenchmark } from '@/api/intel';
-import { formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
 
 const MEASURED_BENCHMARK = [
     { model: 'PageRank (Baseline)', precision10: 0.61, recall10: 0.54, f1: 0.57, prAuc: 0.62, brier: 0.18, features: 'Topology only' },

@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
 import { useEvidenceSearch, useEvidenceDetail, useEvidenceForNode } from '@/api/xai';
 import { FileText, Search, Filter, ChevronRight, ExternalLink, Hash } from 'lucide-react';
-import { formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
+import { useInvestigation } from '@/state/investigation-context';
 
 export default function EvidenceWorkspace() {
     const [searchQuery, setSearchQuery] = useState('');
+    const { setSelectedEvidence, setInspectorOpen } = useInvestigation();
     const [selectedId, setSelectedId] = useState(null);
     const [searchMode, setSearchMode] = useState('search'); // 'search' | 'node' | 'detail'
     const [nodeId, setNodeId] = useState('');
@@ -82,13 +84,13 @@ export default function EvidenceWorkspace() {
                                 </thead>
                                 <tbody>
                                     {results.map((ev, i) => (
-                                        <tr key={ev.evidence_id || i} className="cursor-pointer"
-                                            onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSearchMode('detail'); }}>
-                                            <td className="font-mono text-fg-faint">{ev.evidence_id || ev.id}</td>
+                                        <tr key={ev.evidence_id || i} className="cursor-pointer group"
+                                            onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSelectedEvidence(ev); setInspectorOpen(true); setSearchMode('detail'); }}>
+                                            <td className="font-mono text-fg-faint" style={{maxWidth: 160}}>{ev.evidence_id || ev.id}</td>
                                             <td>
                                                 <span className="tp-badge tp-badge-blue">{ev.source_type || 'RECORD'}</span>
                                             </td>
-                                            <td className="font-mono text-fg-secondary text-[10px]">{ev.source_record_id || '—'}</td>
+                                            <td className="font-mono text-fg-secondary group-hover:text-primary transition-colors text-[10px]">{ev.source_record_id || '—'}</td>
                                             <td className="text-fg-secondary max-w-xs truncate">{ev.text_excerpt || '—'}</td>
                                             <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(ev.timestamp)}</td>
                                         </tr>
@@ -109,13 +111,13 @@ export default function EvidenceWorkspace() {
                         ) : (
                             <div className="p-3 space-y-2">
                                 {nodeEv.map((ev, i) => (
-                                    <div key={ev.evidence_id || i} className="tp-panel p-3 cursor-pointer hover:border-border-default"
-                                        onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSearchMode('detail'); }}>
+                                    <div key={ev.evidence_id || i} className="tp-panel p-3 cursor-pointer hover:border-primary/50 transition-colors group"
+                                        onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSelectedEvidence(ev); setInspectorOpen(true); setSearchMode('detail'); }}>
                                         <div className="flex items-center gap-2 mb-1">
                                             <span className="tp-badge tp-badge-blue" style={{fontSize: '8px'}}>{ev.source_type}</span>
                                             <span className="font-mono text-[9px] text-fg-faint">{ev.evidence_id}</span>
                                         </div>
-                                        <div className="text-[11px] text-fg-secondary">{ev.text_excerpt}</div>
+                                        <div className="text-[11px] text-fg-secondary group-hover:text-fg-primary">{ev.text_excerpt}</div>
                                         <div className="text-[9px] font-mono text-fg-faint mt-1">{formatTimestamp(ev.timestamp)}</div>
                                     </div>
                                 ))}

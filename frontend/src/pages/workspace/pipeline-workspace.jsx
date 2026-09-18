@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHealthCheck, useListJobs, useTriggerPipeline } from '@/api/graph';
 import { Upload, Play, RotateCcw, CheckCircle, AlertTriangle, Clock, Database } from 'lucide-react';
-import { formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
 
 const PIPELINE_STAGES = [
     { id: 'generate', label: 'GENERATE', description: 'Generate synthetic data' },

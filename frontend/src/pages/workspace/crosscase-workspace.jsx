@@ -19,7 +19,8 @@ import {
 import { useCrossCase } from '@/api/intel';
 import { useCases } from '@/api/xai';
 import { useInvestigation } from '@/state/investigation-context';
-import { formatNumber, getEntityTypeColor } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
+import { getEntityTypeColor } from '@/components/app-shell';
 
 /* ── Cross-Case Link Strength Scorer ── */
 function computeLinkStrength(sharedEntities, totalCasesA, totalCasesB) {

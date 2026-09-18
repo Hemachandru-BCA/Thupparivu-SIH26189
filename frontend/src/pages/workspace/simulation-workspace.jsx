@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { runNodeRemovalSimulation, runScenarioComparison } from '@/api/xai';
 import { Zap, AlertTriangle, Play, RotateCcw } from 'lucide-react';
-import { formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
 
 export default function SimulationWorkspace() {
     const [targetNode, setTargetNode] = useState('');

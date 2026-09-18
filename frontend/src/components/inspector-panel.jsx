@@ -217,16 +217,23 @@ export function InspectorPanel() {
                                 onClick={() => setLocation(`/network?focus=${encodeURIComponent(selectedEntity.id)}`)}
                                 className="tp-btn tp-btn-primary w-full justify-between"
                             >
-                                <span>Center On Network Canvas</span>
+                                <span>Open on graph</span>
                                 <ArrowRight size={12} />
                             </button>
                             <button
-                                onClick={() => setLocation(`/entity/${encodeURIComponent(selectedEntity.id)}`)}
+                                onClick={() => setLocation(`/timeline?entity=${encodeURIComponent(selectedEntity.id)}`)}
                                 className="tp-btn w-full justify-between"
                             >
-                                <span>Why Is This Important?</span>
-                                <HelpCircle size={12} className="text-blue" />
+                                <span>View timeline</span>
+                                <Clock size={12} className="text-fg-muted" />
                             </button>
+                            <button
+                                onClick={() => setLocation(`/evidence?entity=${encodeURIComponent(selectedEntity.id)}`)}
+                                className="tp-btn w-full justify-between"
+                            >
+                                <span>View evidence</span>
+                                <FileText size={12} className="text-fg-muted" />
+                            </button> </button>
                             <button
                                 onClick={() => setLocation(`/simulation?target=${encodeURIComponent(selectedEntity.id)}`)}
                                 className="tp-btn w-full justify-between"

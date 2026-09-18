@@ -26,7 +26,8 @@ import { useGraphMetrics, useGetGraphNeighborhood } from '@/api/graph';
 import { useEvidenceForNode, useEvidenceTimeline, useEvidenceChainForEntity, runNodeRemovalSimulation } from '@/api/xai';
 import { useCrossCase } from '@/api/intel';
 import { useCaseDetail, updateCase } from '@/api/xai';
-import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
+import { getEntityTypeColor } from '@/components/app-shell';
 import { EvidenceChainWidget } from '@/components/evidence-chain';
 
 /* ── Helpers ── */

@@ -17,7 +17,7 @@ import {
     Shield, Clock, Database, Users, FileText, AlertTriangle, ChevronRight
 } from 'lucide-react';
 import { useInvestigativeGaps } from '@/api/intel';
-import { formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
 
 export default function GapsWorkspace() {
     const { data: gapsData, isLoading } = useInvestigativeGaps();

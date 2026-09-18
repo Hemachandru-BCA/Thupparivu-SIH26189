@@ -982,3 +982,16 @@
 {"timestamp": "2026-09-16T19:23:21.584131+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
 {"timestamp": "2026-09-16T19:25:51.749617+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
 {"timestamp": "2026-09-16T21:48:01.043963+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T05:58:00.380388+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T05:58:40.367104+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T05:59:28.202640+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T06:00:42.442561+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}
+{"timestamp": "2026-09-18T08:52:15.032414+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T08:53:12.295259+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T08:54:47.296706+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
+{"timestamp": "2026-09-18T08:55:46.617439+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
+{"timestamp": "2026-09-18T08:56:21.513480+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T08:56:24.158008+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
+{"timestamp": "2026-09-18T08:56:32.770418+00:00", "actor": "anonymous", "action": "intel.case_brief", "object_ids": ["CASE-0421"], "detail": {}}
+{"timestamp": "2026-09-18T08:56:36.137021+00:00", "actor": "anonymous", "action": "temporal.snapshot", "object_ids": [], "detail": {"as_of": "2025-01-01T00:05:26"}}
+{"timestamp": "2026-09-18T08:56:58.699670+00:00", "actor": "anonymous", "action": "financial.accounts", "object_ids": [], "detail": {}}

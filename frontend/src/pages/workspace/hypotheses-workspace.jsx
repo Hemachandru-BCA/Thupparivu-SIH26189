@@ -2,7 +2,8 @@ import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
 import { useFindings, useFindingDetail } from '@/api/xai';
 import { Brain, ChevronRight, AlertTriangle, Clock, Target, FileText } from 'lucide-react';
-import { getConfidenceColor, formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
+import { getConfidenceColor } from '@/components/app-shell';
 
 function ConfidenceBar({ value, height = 3 }) {
     const color = getConfidenceColor(value);

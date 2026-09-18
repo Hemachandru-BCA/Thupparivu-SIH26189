@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter graph-intelligence dev",
-    "build": "pnpm --filter graph-intelligence build",
-    "typecheck": "pnpm --filter graph-intelligence typecheck"
+    "dev": "pnpm --filter thupparivu dev",
+    "build": "pnpm --filter thupparivu build",
+    "typecheck": "pnpm --filter thupparivu typecheck"
   },
   "devDependencies": {
     "orval": "^8.28.1"

@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useRoute } from 'wouter';
 import { useDossiers, useDossierDetail, generateDossier } from '@/api/xai';
 import { BookOpen, ChevronRight, Plus, FileText, AlertTriangle, Download, FileArchive, CheckCircle2 } from 'lucide-react';
-import { formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
 import { requestJson } from '@/api/client';
 
 export default function ReportsWorkspace() {

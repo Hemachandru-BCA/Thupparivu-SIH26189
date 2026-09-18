@@ -8,7 +8,8 @@ import {
     BarChart3, Clock, FileText, X, Pin, PinOff, Expand, Focus, Crosshair,
     ShieldCheck, Sparkles, AlertTriangle, CheckCircle2, ArrowRight
 } from 'lucide-react';
-import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
+import { formatNumber } from '@/utils/format';
+import { getEntityTypeColor } from '@/components/app-shell';
 import { MassiveGraphCanvas } from '@/components/massive-graph-canvas';
 
 /* ---------------------------------------------------------------------------

@@ -1,11 +1,14 @@
 import { useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useGetEntities } from '@/api/graph';
-import { Users, Search, Filter, Download, ChevronDown } from 'lucide-react';
-import { getEntityTypeColor, formatNumber } from '@/components/app-shell';
+import { useInvestigation } from '@/state/investigation-context';
+import { Users, Search, FolderPlus, ArrowRight } from 'lucide-react';
+import { formatNumber } from '@/utils/format';
+import { getEntityTypeColor } from '@/components/app-shell';
 
 export default function EntitiesWorkspace() {
     const [, setLocation] = useLocation();
+    const { setSelectedEntity, setInspectorOpen, activeCase } = useInvestigation();
     const { data: entitiesData, isLoading } = useGetEntities();
     const rawEntities = entitiesData?.results || entitiesData?.items || entitiesData || [];
 
@@ -114,17 +117,17 @@ export default function EntitiesWorkspace() {
                 <table className="tp-table">
                     <thead>
                         <tr>
-                            <th className="cursor-pointer" onClick={() => handleSort('id')}>
+                            <th className="cursor-pointer group" onClick={() => handleSort('id')}>
                                 ID {sortField === 'id' && (sortDir === 'asc' ? '↑' : '↓')}
                             </th>
-                            <th className="cursor-pointer" onClick={() => handleSort('name')}>
+                            <th className="cursor-pointer group" onClick={() => handleSort('name')}>
                                 NAME {sortField === 'name' && (sortDir === 'asc' ? '↑' : '↓')}
                             </th>
-                            <th className="cursor-pointer" onClick={() => handleSort('type')}>
+                            <th className="cursor-pointer group" onClick={() => handleSort('type')}>
                                 TYPE {sortField === 'type' && (sortDir === 'asc' ? '↑' : '↓')}
                             </th>
                             <th>COMMUNITY</th>
-                            <th className="cursor-pointer" onClick={() => handleSort('degree')}>
+                            <th className="cursor-pointer group" onClick={() => handleSort('degree')}>
                                 DEGREE {sortField === 'degree' && (sortDir === 'asc' ? '↑' : '↓')}
                             </th>
                             <th>PAGERANK</th>
@@ -134,8 +137,8 @@ export default function EntitiesWorkspace() {
                     </thead>
                     <tbody>
                         {filtered.map((entity, idx) => (
-                            <tr key={entity.id || `entity-${idx}`} className="cursor-pointer"
-                                onClick={() => setLocation(`/entity/${encodeURIComponent(entity.id)}`)}>
+                            <tr key={entity.id || `entity-${idx}`} className="cursor-pointer group"
+                                onClick={() => { setSelectedEntity(entity); setInspectorOpen(true); }}>
                                 <td className="font-mono text-fg-faint">{entity.id}</td>
                                 <td className="text-fg-primary font-medium">{entity.name || entity.id}</td>
                                 <td>

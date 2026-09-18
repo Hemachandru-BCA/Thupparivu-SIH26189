@@ -86,17 +86,18 @@ export async function loginRequest(username, password) {
  */
 export async function detectDemoMode() {
   try {
+    const controller = new AbortController();
+    const tid = setTimeout(() => controller.abort(), 3000);
     const resp = await fetch(`${API_BASE}/api/auth/token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: "__probe__", password: "__probe__" }),
+      method: 'POST',
+      signal: controller.signal,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: '__probe__', password: '__probe__' }),
     });
-    // In DEMO_MODE the backend accepts any credentials → 200
-    if (resp.ok) return true;
-    return false;
+    clearTimeout(tid);
+    return resp.ok;
   } catch {
-    // Backend unreachable → assume NOT demo (user must log in)
-    return false;
+    return false; // unreachable or timed out → not demo
   }
 }
 

@@ -8,9 +8,12 @@ import {
     useTemporalInfo, useTemporalTimeline, useTemporalSnapshot,
     useTemporalDiff, useTemporalEvolution, useTemporalLayers
 } from '@/api/intel';
-import { getEntityTypeColor, formatTimestamp } from '@/components/app-shell';
+import { formatTimestamp } from '@/utils/format';
+import { getEntityTypeColor } from '@/components/app-shell';
+import { useInvestigation } from '@/state/investigation-context';
 
 export default function TimelineWorkspace() {
+    const { setTimeRange } = useInvestigation();
     const [viewMode, setViewMode] = useState('REPLAY'); // 'REPLAY' | 'DIFF' | 'EVOLUTION'
     
     // ── Replay state ──
@@ -33,6 +36,13 @@ export default function TimelineWorkspace() {
 
     // Current bucket snapshot
     const activeTimestamp = timestamps[currentBucket] || tempInfo?.earliest;
+    
+    // Sync time range when hovering/playing
+    useEffect(() => {
+        if (activeTimestamp) {
+            setTimeRange(prev => ({ ...prev, asOf: activeTimestamp }));
+        }
+    }, [activeTimestamp, setTimeRange]);
     const { data: snapshotData, isLoading: isSnapshotLoading } = useTemporalSnapshot(activeTimestamp, {
         enabled: Boolean(activeTimestamp && viewMode === 'REPLAY'),
     });

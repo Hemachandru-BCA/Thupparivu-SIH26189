@@ -323,7 +323,7 @@ code is pushed to `main`.
 1. Push this repository to GitHub
 2. Go to **Settings → Pages** and set **Source** to **GitHub Actions**
 3. Set **Settings → Secrets and variables → Actions → Variables**:
-   - `VITE_API_URL` = `https://enthusiastic-creativity-production-27af.up.railway.app`
+   - `VITE_API_URL` = `https://thupparivu-sih26189-production.up.railway.app`
 
 ### What happens on push
 
@@ -338,7 +338,7 @@ The workflow at `.github/workflows/deploy.yml`:
 
 | Variable | Value |
 |---|---|
-| `VITE_API_URL` | `https://enthusiastic-creativity-production-27af.up.railway.app` (your Render URL) |
+| `VITE_API_URL` | `https://thupparivu-sih26189-production.up.railway.app` (your Railway backend URL) |
 
 **Expected URL:** `https://Hemachandru-BCA.github.io/Thupparivu-SIH26189/`
 
