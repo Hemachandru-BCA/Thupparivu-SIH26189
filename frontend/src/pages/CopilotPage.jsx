@@ -65,7 +65,7 @@ export default function CopilotPage() {
       <div className="flex flex-1 min-h-0">
         {/* Tool sidebar */}
         <aside className="w-60 border-r border-border-subtle shrink-0 overflow-y-auto bg-bg-secondary/40 hidden md:block">
-          <div className="px-4 py-3 text-[10px] font-mono uppercase tracking-wider text-fg-faint border-b border-border-subtle">
+          <div className="px-4 py-3 text-[11px] font-mono uppercase tracking-wider text-fg-faint border-b border-border-subtle">
             Available tools ({tools.length})
           </div>
           {loading ? (
@@ -78,7 +78,7 @@ export default function CopilotPage() {
               if (!items.length) return null;
               return (
                 <div key={cat} className="px-3 py-3">
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-fg-faint mb-1.5">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-fg-faint mb-1.5">
                     {label}
                   </div>
                   <div className="flex flex-col gap-1">

@@ -564,7 +564,7 @@ export function SimulationPage() {
                                 {(result.new_brokers ?? []).slice(0, 4).map((b) => (
                                     <div key={b.guid} className="flex items-center justify-between gap-2">
                                         <span className="truncate">{b.name}</span>
-                                        <span className="font-mono-ui text-[10px] text-chart-3">+{num(b.betweenness_gain)}</span>
+                                        <span className="font-mono-ui text-[11px] text-chart-3">+{num(b.betweenness_gain)}</span>
                                     </div>
                                 ))}
                             </div>
@@ -596,7 +596,7 @@ export function SimulationPage() {
                                 ) : (
                                     <>
                                         <Pill tone="teal">rank {s.network_effect_rank}</Pill>
-                                        <span className="font-mono-ui text-[10px]">{s.node_id.slice(0, 14)}…</span>
+                                        <span className="font-mono-ui text-[11px]">{s.node_id.slice(0, 14)}…</span>
                                         <span>fragmentation {num(s.fragmentation_score)}</span>
                                         <span>connectivity loss {num(s.connectivity_change)}</span>
                                         <span>{s.affected_node_count} affected</span>

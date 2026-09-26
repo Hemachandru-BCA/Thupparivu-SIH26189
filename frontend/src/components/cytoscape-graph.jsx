@@ -312,7 +312,7 @@ export function CytoscapeGraph({
         <div className="relative overflow-hidden rounded-md border border-card-border bg-[#0a101b] shadow-[inset_0_0_80px_rgba(20,184,166,.04)]" style={{ height }}>
             <div ref={containerRef} style={{ height: '100%', width: '100%' }} data-testid="cytoscape-container" />
             <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-1.5">
-                <span className="rounded bg-background/80 px-2 py-1 font-mono-ui text-[11px] uppercase tracking-wide text-foreground/80 backdrop-blur">
+                <span className="rounded bg-bg-panel/90 px-2 py-1 font-mono-ui text-[11px] uppercase tracking-wide text-fg-primary backdrop-blur">
                     {nodes.length} nodes · {edges.length} edges
                 </span>
                 {ghostCount > 0 && (
@@ -327,20 +327,20 @@ export function CytoscapeGraph({
                 )}
             </div>
             <div className="absolute right-3 top-3 flex gap-1.5">
-                <button aria-label="Fit graph" onClick={fit} className="rounded border border-border bg-background/85 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-foreground/80 backdrop-blur hover:text-foreground" title="Fit to screen">
+                <button aria-label="Fit graph" onClick={fit} className="rounded border border-border-default bg-bg-panel/90 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-fg-primary backdrop-blur hover:text-fg-primary hover:border-primary/50" title="Fit to screen">
                     Fit
                 </button>
-                <button aria-label="Zoom out" onClick={() => zoom(0.8)} className="rounded border border-border bg-background/85 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-foreground/80 backdrop-blur hover:text-foreground" title="Zoom out">
+                <button aria-label="Zoom out" onClick={() => zoom(0.8)} className="rounded border border-border-default bg-bg-panel/90 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-fg-primary backdrop-blur hover:text-fg-primary hover:border-primary/50" title="Zoom out">
                     −
                 </button>
-                <button aria-label="Zoom in" onClick={() => zoom(1.25)} className="rounded border border-border bg-background/85 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-foreground/80 backdrop-blur hover:text-foreground" title="Zoom in">
+                <button aria-label="Zoom in" onClick={() => zoom(1.25)} className="rounded border border-border-default bg-bg-panel/90 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-fg-primary backdrop-blur hover:text-fg-primary hover:border-primary/50" title="Zoom in">
                     +
                 </button>
-                <button aria-label="Re-run graph layout" onClick={relayout} className="rounded border border-border bg-background/85 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-foreground/80 backdrop-blur hover:text-foreground" title="Re-run layout">
+                <button aria-label="Re-run graph layout" onClick={relayout} className="rounded border border-border-default bg-bg-panel/90 px-2.5 py-1.5 font-mono-ui text-[11px] uppercase text-fg-primary backdrop-blur hover:text-fg-primary hover:border-primary/50" title="Re-run layout">
                     Layout
                 </button>
             </div>
-            <div className="pointer-events-none absolute bottom-3 left-3 flex flex-wrap gap-2 rounded-md bg-background/85 px-3 py-2 backdrop-blur">
+            <div className="pointer-events-none absolute bottom-3 left-3 flex flex-wrap gap-2 rounded-md bg-bg-panel/90 px-3 py-2 backdrop-blur">
                 <LegendSwatch color="#14b8a6" label="observed edge" />
                 <LegendSwatch color="#f59e0b" label="inferred / ghost" dashed />
                 <LegendSwatch color="#ef4444" label="removed (sim)" />
@@ -348,8 +348,8 @@ export function CytoscapeGraph({
                 <LegendSwatch color="#22d3ee" label="new broker" />
             </div>
             {!ready && (
-                <div className="absolute inset-0 grid place-items-center bg-background/70">
-                    <div className="font-mono-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">loading graph engine…</div>
+                <div className="absolute inset-0 grid place-items-center bg-bg-root/70">
+                    <div className="font-mono-ui text-[11px] uppercase tracking-[0.2em] text-fg-muted">loading graph engine…</div>
                 </div>
             )}
         </div>
@@ -358,7 +358,7 @@ export function CytoscapeGraph({
 
 function LegendSwatch({ color, label, dashed = false }) {
     return (
-        <span className="flex items-center gap-1.5 font-mono-ui text-[11px] uppercase text-foreground/70">
+        <span className="flex items-center gap-1.5 font-mono-ui text-[11px] uppercase text-fg-secondary">
             <span
                 className="inline-block h-2.5 w-4 rounded-sm border"
                 style={{ borderColor: color, background: dashed ? 'transparent' : color, borderStyle: dashed ? 'dashed' : 'solid' }}

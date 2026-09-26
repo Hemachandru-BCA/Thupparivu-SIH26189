@@ -279,7 +279,7 @@ export function ExplorerPage() {
                         <button
                             type="button"
                             onClick={handleExpand}
-                            className="flex items-center justify-center gap-1.5 rounded border border-[#1f293d] bg-[#0e1626] px-2 py-1.5 font-mono-ui text-[10px] text-foreground hover:border-cyan-500/50 hover:bg-[#142035]"
+                            className="flex items-center justify-center gap-1.5 rounded border border-[#1f293d] bg-[#0e1626] px-2 py-1.5 font-mono-ui text-[11px] text-foreground hover:border-cyan-500/50 hover:bg-[#142035]"
                         >
                             <Expand size={12} className="text-cyan-400" /> Expand
                         </button>
@@ -292,7 +292,7 @@ export function ExplorerPage() {
                                     setSimulation(null);
                                 }
                             }}
-                            className="flex items-center justify-center gap-1.5 rounded border border-[#1f293d] bg-[#0e1626] px-2 py-1.5 font-mono-ui text-[10px] text-foreground hover:border-cyan-500/50 hover:bg-[#142035]"
+                            className="flex items-center justify-center gap-1.5 rounded border border-[#1f293d] bg-[#0e1626] px-2 py-1.5 font-mono-ui text-[11px] text-foreground hover:border-cyan-500/50 hover:bg-[#142035]"
                         >
                             <Crosshair size={12} className="text-cyan-400" /> Focus Center
                         </button>
@@ -307,7 +307,7 @@ export function ExplorerPage() {
                             type="button"
                             onClick={handleSimulate}
                             disabled={simLoading || !(selectedNode?.id ?? focusId)}
-                            className="w-full rounded bg-amber-500/15 py-1.5 font-mono-ui text-[10px] font-bold uppercase text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 disabled:opacity-40 transition-colors"
+                            className="w-full rounded bg-amber-500/15 py-1.5 font-mono-ui text-[11px] font-bold uppercase text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 disabled:opacity-40 transition-colors"
                         >
                             {simLoading ? 'Simulating…' : 'Simulate Node Removal'}
                         </button>
@@ -411,7 +411,7 @@ export function ExplorerPage() {
                             <h3 className="mt-2 text-sm font-bold text-white break-words">
                                 {selectedNode.label || selectedNode.id}
                             </h3>
-                            <div className="mt-0.5 font-mono-ui text-[10px] text-muted-foreground/60 break-all">
+                            <div className="mt-0.5 font-mono-ui text-[11px] text-muted-foreground/60 break-all">
                                 ID: {selectedNode.id}
                             </div>
                         </div>
@@ -487,7 +487,7 @@ export function ExplorerPage() {
                         <button
                             type="button"
                             onClick={() => setBottomDrawerOpen(!bottomDrawerOpen)}
-                            className="flex items-center gap-1.5 font-mono-ui text-[10px] font-bold uppercase tracking-wider text-cyan-400 hover:text-white"
+                            className="flex items-center gap-1.5 font-mono-ui text-[11px] font-bold uppercase tracking-wider text-cyan-400 hover:text-white"
                         >
                             {bottomDrawerOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
                             Evidence & Timeline Intelligence
@@ -532,7 +532,7 @@ export function ExplorerPage() {
                                     {(timeline.data?.items ?? []).map((t) => (
                                         <div key={t.evidence_id} className="flex items-center justify-between rounded border border-[#141e2e] bg-[#0b101a] px-3 py-1.5 text-xs">
                                             <div className="flex items-center gap-3">
-                                                <span className="font-mono-ui text-[10px] text-cyan-400">{t.timestamp || 'NO TS'}</span>
+                                                <span className="font-mono-ui text-[11px] text-cyan-400">{t.timestamp || 'NO TS'}</span>
                                                 <Pill tone="neutral">{t.source_type}</Pill>
                                                 <span className="text-foreground/90 truncate max-w-lg">{t.text_excerpt}</span>
                                             </div>
@@ -569,7 +569,7 @@ export function ExplorerPage() {
 
 function MetricLine({ label, value }) {
     return (
-        <div className="flex items-center justify-between border-b border-[#141f30] pb-1 last:border-0 font-mono-ui text-[10px]">
+        <div className="flex items-center justify-between border-b border-[#141f30] pb-1 last:border-0 font-mono-ui text-[11px]">
             <span className="text-muted-foreground">{label}</span>
             <span className="font-semibold text-white">{value}</span>
         </div>

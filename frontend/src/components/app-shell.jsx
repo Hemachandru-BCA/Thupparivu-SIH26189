@@ -5,7 +5,8 @@ import {
     AlertTriangle, Zap, DollarSign, FolderOpen,
     BookOpen, Settings, ChevronLeft,
     ChevronRight, Search, MessageSquare,
-    LayoutGrid, Layers, Target, Scale
+    LayoutGrid, Layers, Target, Scale,
+    BarChart3, Focus, Waypoints, Activity, Database
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { CommandPalette } from '@/components/command-palette';
@@ -14,32 +15,33 @@ export { formatNumber, formatTimestamp, formatShortDate } from '@/utils/format';
 
 /* ── Navigation sections — task-oriented ── */
 export const NAV_SECTIONS = [
-    { id: 'cases', label: 'CASES', items: [
-        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'All cases' },
+    { id: 'workspace', label: 'WORKSPACE', items: [
+        { path: '/', label: 'Overview', icon: LayoutGrid, title: 'Command Center & Overview' },
+        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'Case Management' },
+        { path: '/network', label: 'Network', icon: Network, title: 'Network Link Analysis' },
+        { path: '/entities', label: 'Entities', icon: Users, title: 'Entity 360 Directory' },
+        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Temporal Event Replay' },
     ]},
-    { id: 'investigate', label: 'INVESTIGATE', items: [
-        { path: '/', label: 'Workspace', icon: LayoutGrid, title: 'Investigation workspace' },
-        { path: '/entities', label: 'Entities', icon: Users, title: 'Entity directory' },
-        { path: '/network', label: 'Network', icon: Network, title: 'Network explorer' },
-        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Evidence timeline' },
+    { id: 'analysis', label: 'ANALYSIS', items: [
+        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence Register & Provenance' },
+        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical Findings & Hypotheses' },
+        { path: '/ghosts', label: 'Anomalies', icon: AlertTriangle, title: 'Ghost & Anomaly Queue' },
+        { path: '/simulation', label: 'Simulation', icon: Zap, title: 'Counterfactual Simulations' },
+        { path: '/dossiers', label: 'Dossiers', icon: BookOpen, title: 'Intelligence Dossiers & Reports' },
     ]},
     { id: 'intelligence', label: 'INTELLIGENCE', items: [
-        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical findings' },
-        { path: '/ghosts', label: 'Anomalies', icon: AlertTriangle, title: 'Anomaly review queue' },
-        { path: '/financial', label: 'Financial', icon: DollarSign, title: 'Financial flows' },
-        { path: '/communities', label: 'Communities', icon: Layers, title: 'Community structure' },
+        { path: '/financial', label: 'Financial', icon: DollarSign, title: 'Financial Flow Tracing' },
+        { path: '/communities', label: 'Communities', icon: Layers, title: 'Community Clustering' },
+        { path: '/analytics', label: 'Analytics', icon: BarChart3, title: 'Graph Metrics & Analytics' },
+        { path: '/crosscase', label: 'Cross-Case', icon: Focus, title: 'Cross-Case Correlation' },
+        { path: '/gaps', label: 'Gaps', icon: Waypoints, title: 'Intelligence Gaps' },
+        { path: '/copilot', label: 'Copilot', icon: MessageSquare, title: 'AI Assistant & Reasoning' },
     ]},
-    { id: 'evidence', label: 'EVIDENCE', items: [
-        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence register' },
-    ]},
-    { id: 'reporting', label: 'REPORTING', items: [
-        { path: '/dossiers', label: 'Dossiers', icon: BookOpen, title: 'Report dossiers' },
-    ]},
-    { id: 'tools', label: 'TOOLS', items: [
-        { path: '/simulation', label: 'Simulation', icon: Zap, title: 'Counterfactual sandbox' },
-        { path: '/copilot', label: 'Assistant', icon: MessageSquare, title: 'Investigative assistant' },
-        { path: '/settings', label: 'Settings', icon: Settings, title: 'Settings' },
-    ]},
+    { id: 'operations', label: 'OPERATIONS', items: [
+        { path: '/pipeline', label: 'Pipeline', icon: Database, title: 'Ingestion & ML Pipeline' },
+        { path: '/audit', label: 'Audit', icon: Activity, title: 'System Audit Trail' },
+        { path: '/settings', label: 'Settings', icon: Settings, title: 'Workstation Settings' },
+    ]}
 ];
 export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
 /* Back-compat: flat list used by command palette */

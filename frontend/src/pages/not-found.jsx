@@ -17,7 +17,7 @@ export default function NotFound() {
                     </p>
                 </div>
                 <Link href="/">
-                    <button className="tp-btn tp-btn-primary text-[10px] gap-1.5 mx-auto">
+                    <button className="tp-btn tp-btn-primary text-[11px] gap-1.5 mx-auto">
                         <ArrowLeft size={11} /> Return to Investigation Desk
                     </button>
                 </Link>

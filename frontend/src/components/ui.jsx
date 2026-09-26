@@ -15,17 +15,17 @@ import { ChevronDown, ChevronRight, X, Search, AlertTriangle, Info, CheckCircle2
 
 /* ---------------------------------------------------------------------------
    STATUS LABEL
-   Semantic status indicator. Always conveys meaning through text + color.
+   Semantic status indicator for epistemic states (OBSERVED, INFERRED, etc.).
 --------------------------------------------------------------------------- */
 const STATUS_STYLES = {
-  observed:   { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'OBSERVED' },
-  inferred:   { bg: 'bg-blue-bg',    text: 'text-blue',    border: 'border-blue/30',   label: 'INFERRED' },
-  unknown:    { bg: 'bg-[hsl(220,10%,16%)]', text: 'text-fg-secondary', border: 'border-border-strong', label: 'UNKNOWN' },
-  contradicted: { bg: 'bg-red-bg',   text: 'text-red',     border: 'border-red/30',    label: 'CONTRADICTED' },
-  simulated:  { bg: 'bg-purple-bg',  text: 'text-purple',  border: 'border-purple/30', label: 'SIMULATED' },
-  hypothesis: { bg: 'bg-amber-bg',   text: 'text-amber',   border: 'border-amber/30',  label: 'HYPOTHESIS' },
-  draft:      { bg: 'bg-amber-bg',   text: 'text-amber',   border: 'border-amber/30',  label: 'DRAFT' },
-  active:     { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'ACTIVE' },
+  observed:     { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'OBSERVED' },
+  inferred:     { bg: 'bg-blue-bg',    text: 'text-blue',    border: 'border-blue/30',   label: 'INFERRED' },
+  unknown:      { bg: 'bg-[hsl(220,10%,16%)]', text: 'text-fg-secondary', border: 'border-border-strong', label: 'UNKNOWN' },
+  contradicted: { bg: 'bg-red-bg',     text: 'text-red',     border: 'border-red/30',    label: 'CONTRADICTED' },
+  simulated:    { bg: 'bg-purple-bg',  text: 'text-purple',  border: 'border-purple/30', label: 'SIMULATED' },
+  hypothesis:   { bg: 'bg-amber-bg',   text: 'text-amber',   border: 'border-amber/30',  label: 'HYPOTHESIS' },
+  draft:        { bg: 'bg-amber-bg',   text: 'text-amber',   border: 'border-amber/30',  label: 'DRAFT' },
+  active:       { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'ACTIVE' },
   complete:   { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'COMPLETE' },
   running:    { bg: 'bg-blue-bg',    text: 'text-blue',    border: 'border-blue/30',   label: 'RUNNING' },
   queued:     { bg: 'bg-[hsl(220,6%,18%)]', text: 'text-fg-muted', border: 'border-border-default', label: 'QUEUED' },
@@ -625,4 +625,75 @@ export function useToast() {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast must be used inside <ToastProvider>');
   return ctx;
+}
+
+/* ---------------------------------------------------------------------------
+   CONFIDENCE BADGE
+--------------------------------------------------------------------------- */
+export function ConfidenceBadge({ value = 0, showBar = true, className = '' }) {
+  const pct = Math.round((value > 1 ? value / 100 : value) * 100);
+  let textCls = 'text-green';
+  let bgCls = 'bg-green';
+  if (pct < 40) { textCls = 'text-red'; bgCls = 'bg-red'; }
+  else if (pct < 65) { textCls = 'text-amber'; bgCls = 'bg-amber'; }
+  else if (pct < 80) { textCls = 'text-blue'; bgCls = 'bg-blue'; }
+
+  return (
+    <div className={`inline-flex items-center gap-1.5 ${className}`}>
+      <span className={`font-mono text-[11px] font-semibold ${textCls}`}>{pct}%</span>
+      {showBar && (
+        <div className="w-12 h-1 bg-[hsl(220,10%,16%)] rounded-full overflow-hidden border border-border-subtle">
+          <div className={`h-full ${bgCls} transition-all duration-300`} style={{ width: `${pct}%` }} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   ENTITY CHIP
+--------------------------------------------------------------------------- */
+export function EntityChip({ id, label, type = 'PERSON', onClick, className = '' }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded border border-border-default bg-bg-elevated text-fg-primary text-[11px] font-mono hover:border-primary/50 hover:bg-bg-hover transition-colors cursor-pointer ${className}`}
+      title={`Entity: ${label || id} (${type})`}
+    >
+      <span className="text-[11px] text-fg-faint uppercase font-sans tracking-tight">{type}</span>
+      <span className="truncate max-w-[140px] font-semibold">{label || id}</span>
+    </button>
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   PANEL & PANEL HEADER
+--------------------------------------------------------------------------- */
+export function Panel({ children, className = '' }) {
+  return (
+    <div className={`bg-bg-panel border border-border-default rounded-sm shadow-sm flex flex-col overflow-hidden ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+export function PanelHeader({ title, icon: Icon, badge, actions, className = '' }) {
+  return (
+    <div className={`flex items-center justify-between h-9 px-3 border-b border-border-default bg-bg-surface shrink-0 ${className}`}>
+      <div className="flex items-center gap-2 min-w-0">
+        {Icon && <Icon size={14} className="text-primary shrink-0" />}
+        <h3 className="text-[12px] font-semibold text-fg-primary truncate uppercase tracking-wider font-mono">{title}</h3>
+        {badge && <span className="shrink-0">{badge}</span>}
+      </div>
+      {actions && <div className="flex items-center gap-1 shrink-0">{actions}</div>}
+    </div>
+  );
+}
+
+export function SectionLabel({ children, className = '' }) {
+  return (
+    <span className={`text-[11px] font-mono text-fg-faint uppercase tracking-wider font-semibold ${className}`}>
+      {children}
+    </span>
+  );
 }

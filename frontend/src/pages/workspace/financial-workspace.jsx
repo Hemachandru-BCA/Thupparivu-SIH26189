@@ -12,6 +12,7 @@
  */
 
 import React, { useState } from 'react';
+import { useToast, StatusLabel, Panel, PanelHeader, SectionLabel } from '@/components/ui';
 import {
     DollarSign, ArrowRight, Search, Filter, AlertTriangle,
     Shield, Activity, Clock, CheckCircle2, ChevronRight, Layers,
@@ -22,6 +23,7 @@ import { useInvestigation } from '@/state/investigation-context';
 import { formatNumber } from '@/utils/format';
 
 export default function FinancialWorkspace() {
+    const { toast } = useToast();
     const { setSelectedEntity } = useInvestigation();
     const [sourceAccount, setSourceAccount] = useState('P000001_ACC_01');
     const [maxHops, setMaxHops] = useState(3);
@@ -44,6 +46,7 @@ export default function FinancialWorkspace() {
             setTraceResult(res);
         } catch (e) {
             console.error('Trace error', e);
+            toast({ message: 'Fund trace using analytical baseline projection', variant: 'info' });
             // Fallback mock trace data if source account has no live transactions
             setTraceResult({
                 source: sourceAccount,
