@@ -6,69 +6,71 @@ import {
     BookOpen, Settings, ChevronLeft,
     ChevronRight, Search, MessageSquare,
     LayoutGrid, Layers, Target, Scale,
-    BarChart3, Focus, Waypoints, Activity, Database
+    BarChart3, Focus, Waypoints, Activity, Database, Shield, UserCheck
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { CommandPalette } from '@/components/command-palette';
 import { useGetGraphOverview, useHealthCheck } from '@/api/graph';
 export { formatNumber, formatTimestamp, formatShortDate } from '@/utils/format';
 
-/* ── Navigation sections — task-oriented ── */
+/* ── Navigation sections — exact reference ── */
 export const NAV_SECTIONS = [
     { id: 'workspace', label: 'WORKSPACE', items: [
-        { path: '/', label: 'Overview', icon: LayoutGrid, title: 'Command Center & Overview' },
-        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'Case Management' },
-        { path: '/network', label: 'Network', icon: Network, title: 'Network Link Analysis' },
-        { path: '/entities', label: 'Entities', icon: Users, title: 'Entity 360 Directory' },
-        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Temporal Event Replay' },
-    ]},
-    { id: 'analysis', label: 'ANALYSIS', items: [
-        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence Register & Provenance' },
-        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical Findings & Hypotheses' },
-        { path: '/ghosts', label: 'Anomalies', icon: AlertTriangle, title: 'Ghost & Anomaly Queue' },
-        { path: '/simulation', label: 'Simulation', icon: Zap, title: 'Counterfactual Simulations' },
-        { path: '/dossiers', label: 'Dossiers', icon: BookOpen, title: 'Intelligence Dossiers & Reports' },
+        { path: '/', label: 'Overview', icon: LayoutGrid, title: 'Investigation Overview' },
+        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'All Cases' },
+        { path: '/network', label: 'Network Explorer', icon: Network, title: 'Link Analysis & Graph' },
+        { path: '/entities', label: 'Search', icon: Users, title: 'Entity Directory & Search' },
     ]},
     { id: 'intelligence', label: 'INTELLIGENCE', items: [
-        { path: '/financial', label: 'Financial', icon: DollarSign, title: 'Financial Flow Tracing' },
-        { path: '/communities', label: 'Communities', icon: Layers, title: 'Community Clustering' },
-        { path: '/analytics', label: 'Analytics', icon: BarChart3, title: 'Graph Metrics & Analytics' },
-        { path: '/crosscase', label: 'Cross-Case', icon: Focus, title: 'Cross-Case Correlation' },
-        { path: '/gaps', label: 'Gaps', icon: Waypoints, title: 'Intelligence Gaps' },
-        { path: '/copilot', label: 'Copilot', icon: MessageSquare, title: 'AI Assistant & Reasoning' },
+        { path: '/ghosts', label: 'Ghost Hypotheses', icon: AlertTriangle, title: 'Ghost Candidate Review' },
+        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical Findings' },
+        { path: '/financial', label: 'Financial Intelligence', icon: DollarSign, title: 'Fund Flow Tracing' },
     ]},
-    { id: 'operations', label: 'OPERATIONS', items: [
-        { path: '/pipeline', label: 'Pipeline', icon: Database, title: 'Ingestion & ML Pipeline' },
-        { path: '/audit', label: 'Audit', icon: Activity, title: 'System Audit Trail' },
+    { id: 'evidence', label: 'EVIDENCE & ANALYSIS', items: [
+        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence Register' },
+        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Temporal Event Replay' },
+        { path: '/simulation', label: 'Counterfactuals', icon: Zap, title: 'Node Removal Scenarios' },
+        { path: '/analytics', label: 'Graph Analytics', icon: BarChart3, title: 'Centrality & Topology' },
+    ]},
+    { id: 'copilot', label: 'COPILOT & OUTPUT', items: [
+        { path: '/copilot', label: 'Copilot', icon: MessageSquare, title: 'AI Assistant' },
+        { path: '/dossiers', label: 'Dossiers / Reports', icon: BookOpen, title: 'Report Packs' },
+    ]},
+    { id: 'system', label: 'SYSTEM', items: [
+        { path: '/audit', label: 'Activity / Audit', icon: Activity, title: 'System Audit Trail' },
+        { path: '/pipeline', label: 'Pipeline', icon: Database, title: 'Ingestion Console' },
         { path: '/settings', label: 'Settings', icon: Settings, title: 'Workstation Settings' },
     ]}
 ];
-export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
-/* Back-compat: flat list used by command palette */
-export const NAV_ITEMS = ALL_NAV_ITEMS;
 
-// Entity colors and icons — canonical source is now @/utils/tokens
-// Re-exported here for backwards compatibility
-export { getEntityColor as getEntityTypeColor, ENTITY_ICONS } from '@/utils/tokens';
-/** @deprecated Use getEntityColor from @/utils/tokens */
-export { getEntityColor as ENTITY_COLORS_COMPAT } from '@/utils/tokens';
+export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
+
+const CASE_STATUS_COLORS = {
+    ACTIVE: 'text-green border-green/30 bg-green-bg',
+    PENDING: 'text-amber border-amber/30 bg-amber-bg',
+    CLOSED: 'text-fg-muted border-border-default bg-bg-panel',
+};
+
+export function getEntityTypeColor(type) {
+    const map = {
+        PERSON: 'var(--entity-person)',
+        PHONE: 'var(--entity-phone)',
+        VEHICLE: 'var(--entity-vehicle)',
+        LOCATION: 'var(--entity-location)',
+        ORGANIZATION: 'var(--entity-org)',
+        ACCOUNT: 'var(--entity-account)',
+        DEVICE: 'var(--entity-device)',
+        EVENT: 'var(--entity-event)',
+    };
+    return map[type?.toUpperCase()] || 'var(--primary)';
+}
 
 export function getConfidenceColor(conf) {
     if (conf >= 0.85) return 'hsl(var(--green))';
-    if (conf >= 0.7) return 'hsl(var(--blue))';
-    if (conf >= 0.5) return 'hsl(var(--amber))';
+    if (conf >= 0.65) return 'hsl(var(--blue))';
+    if (conf >= 0.45) return 'hsl(var(--amber))';
     return 'hsl(var(--red))';
 }
-
-import { formatNumber, formatTimestamp, formatShortDate } from '@/utils/format';
-
-/* ── Case status label ── */
-const CASE_STATUS_COLORS = {
-    ACTIVE: 'text-green border-green/40 bg-green-bg',
-    CLOSED: 'text-fg-muted border-border-subtle bg-bg-panel',
-    REVIEW: 'text-amber border-amber/40 bg-amber-bg',
-    PENDING: 'text-blue border-blue/40 bg-blue-bg',
-};
 
 /* ── App Shell ── */
 export function AppShell({ children }) {
@@ -80,6 +82,7 @@ export function AppShell({ children }) {
     useEffect(() => {
         try { localStorage.setItem('sg-rail-collapsed', String(railCollapsed)); } catch {}
     }, [railCollapsed]);
+
     const { data: healthData } = useHealthCheck();
     const { data: overview } = useGetGraphOverview();
 
@@ -101,117 +104,137 @@ export function AppShell({ children }) {
         return () => window.removeEventListener('keydown', handler);
     }, [setCommandPaletteOpen]);
 
-    const caseStatusCls = CASE_STATUS_COLORS[activeCase?.status] || CASE_STATUS_COLORS.ACTIVE;
+    const currentItem = ALL_NAV_ITEMS.find(item => item.path === location) || ALL_NAV_ITEMS[0];
+    const pageTitle = currentItem?.label || 'Investigation Overview';
 
     return (
         <div className="flex flex-col h-screen w-screen bg-bg-root text-fg-primary overflow-hidden select-none">
-            {/* ── GLOBAL HEADER — always visible ── */}
-            <header className="flex items-center h-9 px-3 bg-bg-surface border-b border-border-default shrink-0 gap-2 z-30">
-                {/* App identity */}
-                <Link href="/" className="flex items-center gap-1.5 hover:opacity-90 cursor-pointer shrink-0">
-                    <div className="w-5 h-5 rounded-sm bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[11px] tracking-tighter">SG</div>
-                    <span className="text-[12px] font-semibold text-fg-primary hidden sm:inline">SentinelGraph</span>
-                </Link>
+            {/* ── TOP BAR ── */}
+            <header className="flex items-center h-10 px-4 bg-bg-surface border-b border-border-default shrink-0 justify-between z-30">
+                {/* Left: Breadcrumb + Screen Title */}
+                <div className="flex items-center gap-3 min-w-0">
+                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-fg-muted">
+                        <span>Workspace</span>
+                        <span>/</span>
+                        <span className="text-primary font-semibold">{activeCase?.id || 'CASE-0421'}</span>
+                    </div>
+                    <div className="w-px h-3.5 bg-border-default" />
+                    <h1 className="text-[13px] font-semibold text-fg-primary uppercase font-mono tracking-wide truncate">
+                        {pageTitle}
+                    </h1>
+                </div>
 
-                <div className="w-px h-4 bg-border-default mx-1" />
-
-                {/* Active case — always visible, links to case detail */}
-                {activeCase && (
-                    <Link href="/cases" className="flex items-center gap-2 min-w-0 hover:opacity-80 cursor-pointer group">
-                        <span className="text-[11px] text-fg-faint shrink-0 hidden md:inline">CASE</span>
-                        <span className="font-mono text-[11px] text-primary shrink-0">{activeCase.id}</span>
-                        <span className="text-[11px] text-fg-secondary truncate max-w-[240px] hidden lg:inline">
-                            {activeCase.title}
-                        </span>
-                        <span className={`text-[11px] font-mono px-1.5 py-0.5 rounded border shrink-0 ${caseStatusCls}`}>
-                            {activeCase.status}
-                        </span>
-                    </Link>
-                )}
-
-                {/* Focused entity breadcrumb — shown when something is selected */}
-                {selectedEntity && (
-                    <>
-                        <div className="w-px h-4 bg-border-subtle mx-1 hidden lg:block" />
-                        <span className="text-[11px] text-fg-faint hidden lg:inline shrink-0">ENTITY</span>
-                        <span className="text-[11px] text-fg-secondary truncate max-w-[180px] hidden lg:inline font-mono">
-                            {selectedEntity.name || selectedEntity.id}
-                        </span>
-                    </>
-                )}
-
-                <div className="flex-1" />
-
-                {/* Search */}
+                {/* Center: Global Search Input */}
                 <button
                     onClick={() => setCommandPaletteOpen(true)}
-                    className="flex items-center gap-1.5 px-2 py-1 rounded border border-border-subtle text-fg-faint text-[11px] hover:border-border-default hover:text-fg-secondary transition-colors"
+                    className="flex items-center gap-2 px-3 py-1 rounded bg-bg-panel border border-border-default text-fg-faint text-[11px] font-mono hover:border-primary/50 hover:text-fg-secondary transition-colors w-72 justify-between cursor-pointer"
                 >
-                    <Search size={11} />
-                    <span className="hidden md:inline">Search</span>
-                    <kbd className="hidden lg:inline text-[11px] font-mono text-fg-faint bg-bg-elevated px-1 rounded">⌘K</kbd>
+                    <div className="flex items-center gap-1.5">
+                        <Search size={12} className="text-fg-faint" />
+                        <span>Search entities, findings, evidence...</span>
+                    </div>
+                    <kbd className="px-1 py-0.5 rounded bg-bg-elevated border border-border-subtle text-[9px] font-mono text-fg-muted">⌘K</kbd>
                 </button>
 
-                <div className="w-px h-4 bg-border-subtle mx-1" />
-
-                {/* Health indicator */}
-                <div className="flex items-center gap-1.5 text-[11px] shrink-0" title={`API ${healthStatus} · ${nodeCount != null ? `${nodeCount} nodes` : '...'}`}>
-                    <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                        healthStatus === 'ok' ? 'bg-green' :
-                        healthStatus === 'degraded' ? 'bg-amber' : 'bg-fg-faint animate-pulse'
-                    }`} />
-                    <span className="hidden md:inline text-fg-faint font-mono">
-                        {healthStatus === 'ok' ? (nodeCount != null ? `${nodeCount}n` : 'ok') : healthStatus}
-                    </span>
+                {/* Right: Primary Action + Case Status */}
+                <div className="flex items-center gap-3">
+                    <Link href="/network">
+                        <button className="tp-btn tp-btn-primary flex items-center gap-1.5 text-[11px] py-1 px-2.5 font-mono">
+                            <Network size={12} /><span>Open network</span>
+                        </button>
+                    </Link>
+                    <div className="flex items-center gap-1.5 text-[11px] font-mono bg-bg-panel px-2 py-0.5 rounded border border-border-default" title={`API ${healthStatus}`}>
+                        <div className={`w-1.5 h-1.5 rounded-full ${healthStatus === 'ok' ? 'bg-green' : 'bg-amber'}`} />
+                        <span className="text-fg-muted">{activeCase?.status || 'ACTIVE'}</span>
+                    </div>
                 </div>
             </header>
 
             {/* ── MAIN LAYOUT ── */}
             <div className="flex flex-1 overflow-hidden">
-                {/* LEFT NAV RAIL */}
-                <nav className={`flex flex-col border-r border-border-default bg-bg-surface shrink-0 transition-all duration-150 overflow-y-auto overflow-x-hidden ${railCollapsed ? 'w-9' : 'w-44'}`}>
-                    {NAV_SECTIONS.map((section) => (
-                        <div key={section.id} className="py-1">
+                {/* LEFT SIDEBAR */}
+                <nav className={`flex flex-col border-r border-border-default bg-bg-surface shrink-0 transition-all duration-150 overflow-y-auto overflow-x-hidden ${railCollapsed ? 'w-12' : 'w-56'}`}>
+                    {/* Top Branding */}
+                    <div className="p-3 border-b border-border-default shrink-0 bg-bg-panel">
+                        <Link href="/" className="flex items-center gap-2 hover:opacity-90 cursor-pointer">
+                            <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[11px] tracking-tighter shrink-0">SG</div>
                             {!railCollapsed && (
-                                <div className="px-3 pt-2 pb-0.5 text-[11px] font-semibold text-fg-faint uppercase tracking-widest">{section.label}</div>
+                                <div className="min-w-0">
+                                    <div className="text-[12px] font-bold text-fg-primary tracking-tight leading-tight">SentinelGraph AI</div>
+                                    <div className="text-[9px] font-mono text-fg-faint uppercase tracking-widest">INVESTIGATIVE WORKBENCH</div>
+                                </div>
                             )}
-                            {section.items.map((item) => {
-                                const Icon = item.icon;
-                                const isActive = location === item.path || (item.path !== '/' && location.startsWith(item.path));
-                                return (
-                                    <Link key={item.path} href={item.path}>
-                                        <div
-                                            className={`flex items-center gap-2 mx-1 px-2 py-1.5 rounded-sm text-[12px] transition-colors cursor-pointer group
-                                                ${isActive
-                                                    ? 'bg-bg-elevated text-fg-primary border-l-2 border-l-primary'
-                                                    : 'text-fg-muted hover:text-fg-primary hover:bg-bg-hover border-l-2 border-l-transparent'}`}
-                                            title={railCollapsed ? item.title || item.label : undefined}
-                                        >
-                                            <Icon size={13} className={isActive ? 'text-primary shrink-0' : 'text-fg-faint group-hover:text-fg-secondary shrink-0'} />
-                                            {!railCollapsed && <span className="truncate">{item.label}</span>}
-                                        </div>
-                                    </Link>
-                                );
-                            })}
+                        </Link>
+                    </div>
+
+                    {/* Active Case Header Box */}
+                    {!railCollapsed && activeCase && (
+                        <div className="p-3 border-b border-border-default bg-bg-root shrink-0 space-y-1">
+                            <div className="text-[9px] font-mono text-fg-faint uppercase tracking-wider font-semibold">CURRENT CASE</div>
+                            <div className="text-[11px] font-mono font-bold text-primary">{activeCase.id}</div>
+                            <div className="text-[11px] font-medium text-fg-primary leading-tight truncate">{activeCase.title}</div>
                         </div>
-                    ))}
+                    )}
 
-                    <div className="flex-1" />
+                    {/* Navigation Items */}
+                    <div className="flex-1 py-2 space-y-3 overflow-y-auto">
+                        {NAV_SECTIONS.map((section) => (
+                            <div key={section.id} className="px-2">
+                                {!railCollapsed && (
+                                    <div className="px-2 mb-1 text-[9px] font-mono text-fg-faint uppercase tracking-widest font-semibold">
+                                        {section.label}
+                                    </div>
+                                )}
+                                <div className="space-y-0.5">
+                                    {section.items.map((item) => {
+                                        const Icon = item.icon;
+                                        const isActive = location === item.path;
+                                        return (
+                                            <Link key={item.path} href={item.path}>
+                                                <div
+                                                    className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-sm text-[12px] transition-colors cursor-pointer group ${
+                                                        isActive
+                                                            ? 'bg-primary/15 text-primary font-semibold border-l-2 border-primary'
+                                                            : 'text-fg-secondary hover:bg-bg-hover hover:text-fg-primary'
+                                                    }`}
+                                                    title={railCollapsed ? item.title || item.label : undefined}
+                                                >
+                                                    <Icon size={14} className={`shrink-0 ${isActive ? 'text-primary' : 'text-fg-faint group-hover:text-fg-secondary'}`} />
+                                                    {!railCollapsed && <span className="truncate">{item.label}</span>}
+                                                </div>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-                    {/* Collapse toggle */}
-                    <div className="border-t border-border-subtle pb-2">
+                    {/* Bottom Analyst Profile */}
+                    <div className="p-3 border-t border-border-default shrink-0 bg-bg-panel flex items-center justify-between">
+                        {!railCollapsed ? (
+                            <div className="flex items-center gap-2 min-w-0">
+                                <div className="w-6 h-6 rounded-full bg-primary-bg border border-primary/30 flex items-center justify-center text-[10px] font-mono text-primary font-bold shrink-0">AR</div>
+                                <div className="min-w-0">
+                                    <div className="text-[11px] font-semibold text-fg-primary truncate">A. Rao</div>
+                                    <div className="text-[9px] font-mono text-fg-faint truncate">Lead Analyst</div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="w-6 h-6 rounded-full bg-primary-bg border border-primary/30 flex items-center justify-center text-[10px] font-mono text-primary font-bold mx-auto">AR</div>
+                        )}
                         <button
-                            onClick={() => setRailCollapsed(c => !c)}
-                            className="flex items-center gap-2 mx-1 px-2 py-1.5 rounded-sm text-[11px] text-fg-faint hover:text-fg-secondary transition-colors cursor-pointer w-[calc(100%-8px)] mt-1"
+                            onClick={() => setRailCollapsed(!railCollapsed)}
+                            className="text-fg-faint hover:text-fg-primary p-1 cursor-pointer"
                             title={railCollapsed ? 'Expand navigation' : 'Collapse navigation'}
                         >
-                            {railCollapsed ? <ChevronRight size={12} /> : <><ChevronLeft size={12} /><span>Collapse</span></>}
+                            {railCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
                         </button>
                     </div>
                 </nav>
 
                 {/* CONTENT AREA */}
-                <main className="flex-1 overflow-hidden relative">
+                <main className="flex-1 overflow-hidden relative bg-bg-root">
                     {children}
                 </main>
             </div>
