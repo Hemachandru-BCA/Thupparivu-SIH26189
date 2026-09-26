@@ -32,9 +32,9 @@ function Panel({ title, icon: Icon, children, className = '' }) {
 function Metric({ label, value, detail }) {
     return (
         <div className="border border-border-subtle bg-bg-root px-2 py-2">
-            <div className="text-[9px] uppercase tracking-wide text-fg-faint">{label}</div>
+            <div className="text-[11px] uppercase tracking-wide text-fg-faint">{label}</div>
             <div className="mt-1 text-[17px] font-mono text-fg-primary">{value}</div>
-            {detail && <div className="mt-1 text-[9px] text-fg-faint">{detail}</div>}
+            {detail && <div className="mt-1 text-[11px] text-fg-faint">{detail}</div>}
         </div>
     );
 }
@@ -87,9 +87,9 @@ export default function P1AnalysisWorkspace() {
                         <Activity size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">P1 ANALYTICAL WORKBENCH</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Observed change, structural patterns, flow, reliability, and counter-evidence.</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Observed change, structural patterns, flow, reliability, and counter-evidence.</p>
                 </div>
-                <div className="text-right text-[9px] text-fg-faint">
+                <div className="text-right text-[11px] text-fg-faint">
                     <div>FOCUS ENTITY</div>
                     <div className="mt-1 font-mono text-fg-secondary">{selectedEntity?.label || selectedEntity?.id || 'CASE NETWORK'}</div>
                 </div>
@@ -99,7 +99,7 @@ export default function P1AnalysisWorkspace() {
                 <div className="space-y-3">
                     <Panel title="NETWORK REPLAY" icon={Clock3}>
                         <div className="flex flex-wrap items-center gap-2">
-                            <select value={mode} onChange={(event) => setMode(event.target.value)} className="tp-input h-7 text-[10px]">
+                            <select value={mode} onChange={(event) => setMode(event.target.value)} className="tp-input h-7 text-[11px]">
                                 <option value="cumulative">Cumulative</option>
                                 <option value="snapshot">Snapshot</option>
                                 <option value="sliding_window">Sliding window · 30 days</option>
@@ -112,7 +112,7 @@ export default function P1AnalysisWorkspace() {
                                 onChange={(event) => setBucketIndex(Number(event.target.value))}
                                 className="min-w-[180px] flex-1 accent-[hsl(var(--primary))]"
                             />
-                            <span className="font-mono text-[10px] text-fg-secondary">{timestamp || 'No timestamp'}</span>
+                            <span className="font-mono text-[11px] text-fg-secondary">{timestamp || 'No timestamp'}</span>
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
                             <Metric label="Entities" value={snapshotLoading ? <LoadingLine /> : snapshot?.node_count ?? '—'} />
@@ -120,7 +120,7 @@ export default function P1AnalysisWorkspace() {
                             <Metric label="Communities" value={snapshot?.communities ?? '—'} />
                             <Metric label="Change" value={diff?.edges_added != null ? `+${diff.edges_added}` : '—'} detail={diff?.summary} />
                         </div>
-                        <div className="mt-3 flex items-start gap-2 border-l-2 border-primary pl-2 text-[10px] text-fg-secondary">
+                        <div className="mt-3 flex items-start gap-2 border-l-2 border-primary pl-2 text-[11px] text-fg-secondary">
                             <GitCompare size={12} className="mt-0.5 shrink-0 text-primary" />
                             <span>{diff?.summary || 'Move the timeline to inspect structural change.'}</span>
                         </div>
@@ -129,9 +129,9 @@ export default function P1AnalysisWorkspace() {
                                 <div key={event.event_id} className="border border-border-subtle bg-bg-root px-2 py-2">
                                     <div className="flex items-center justify-between gap-2">
                                         <span className="tp-badge tp-badge-blue">{event.event_type}</span>
-                                        <span className="font-mono text-[9px] text-fg-faint">{event.timestamp?.slice(0, 10)}</span>
+                                        <span className="font-mono text-[11px] text-fg-faint">{event.timestamp?.slice(0, 10)}</span>
                                     </div>
-                                    <div className="mt-1 text-[10px] text-fg-secondary">{event.description}</div>
+                                    <div className="mt-1 text-[11px] text-fg-secondary">{event.description}</div>
                                 </div>
                             ))}
                         </div>
@@ -147,11 +147,11 @@ export default function P1AnalysisWorkspace() {
                             <div className="space-y-1.5">
                                 {motifs.slice(0, 6).map((motif) => (
                                     <div key={motif.motif_id} className="flex items-start gap-2 border-b border-border-subtle pb-1.5">
-                                        <span className="mt-0.5 text-[9px] font-mono text-primary">{motif.motif_type}</span>
-                                        <span className="text-[10px] text-fg-secondary">{motif.description}</span>
+                                        <span className="mt-0.5 text-[11px] font-mono text-primary">{motif.motif_type}</span>
+                                        <span className="text-[11px] text-fg-secondary">{motif.description}</span>
                                     </div>
                                 ))}
-                                {!motifs.length && <div className="text-[10px] text-fg-faint">No motifs returned for this graph.</div>}
+                                {!motifs.length && <div className="text-[11px] text-fg-faint">No motifs returned for this graph.</div>}
                             </div>
                         </Panel>
 
@@ -164,11 +164,11 @@ export default function P1AnalysisWorkspace() {
                             <div className="space-y-1.5">
                                 {signals.slice(0, 5).map((signal, index) => (
                                     <div key={`${signal.signal_type}-${index}`} className="flex items-start gap-2 border-b border-border-subtle pb-1.5">
-                                        <span className="mt-0.5 text-[9px] font-mono text-amber-400">{signal.signal_type}</span>
-                                        <span className="text-[10px] text-fg-secondary">{signal.description}</span>
+                                        <span className="mt-0.5 text-[11px] font-mono text-amber-400">{signal.signal_type}</span>
+                                        <span className="text-[11px] text-fg-secondary">{signal.description}</span>
                                     </div>
                                 ))}
-                                {!signals.length && <div className="text-[10px] text-fg-faint">No financial signals returned.</div>}
+                                {!signals.length && <div className="text-[11px] text-fg-faint">No financial signals returned.</div>}
                             </div>
                         </Panel>
                     </div>
@@ -177,37 +177,37 @@ export default function P1AnalysisWorkspace() {
                 <div className="space-y-3">
                     <Panel title="DATA QUALITY INDICATORS" icon={ShieldCheck}>
                         <div className="mb-3 flex items-end justify-between border-b border-border-subtle pb-2">
-                            <span className="text-[10px] text-fg-faint">Analytical readiness</span>
+                            <span className="text-[11px] text-fg-faint">Analytical readiness</span>
                             <span className="font-mono text-lg text-fg-primary">{qualityData?.overall_readiness != null ? `${Math.round(qualityData.overall_readiness * 100)}%` : '—'}</span>
                         </div>
                         <div className="space-y-2">
                             {dimensions.map((dimension) => (
                                 <div key={dimension.name}>
-                                    <div className="flex justify-between text-[9px] text-fg-secondary"><span>{dimension.name}</span><span className="font-mono">{Math.round(dimension.score * 100)}%</span></div>
+                                    <div className="flex justify-between text-[11px] text-fg-secondary"><span>{dimension.name}</span><span className="font-mono">{Math.round(dimension.score * 100)}%</span></div>
                                     <div className="mt-1 h-1 bg-bg-root"><div className="h-full bg-primary" style={{ width: `${dimension.score * 100}%` }} /></div>
                                 </div>
                             ))}
                         </div>
-                        {qualityData?.limitations?.[0] && <div className="mt-3 text-[9px] text-fg-faint">{qualityData.limitations[0]}</div>}
+                        {qualityData?.limitations?.[0] && <div className="mt-3 text-[11px] text-fg-faint">{qualityData.limitations[0]}</div>}
                     </Panel>
 
                     <Panel title="METHOD AGREEMENT" icon={Layers3}>
                         {agreement ? (
                             <>
                                 <div className="flex items-center justify-between border-b border-border-subtle pb-2">
-                                    <div><div className="text-[10px] text-fg-secondary">{agreement.entity_label}</div><div className="mt-1 text-[9px] text-fg-faint">{agreement.agreement_level}</div></div>
+                                    <div><div className="text-[11px] text-fg-secondary">{agreement.entity_label}</div><div className="mt-1 text-[11px] text-fg-faint">{agreement.agreement_level}</div></div>
                                     <div className="font-mono text-lg text-fg-primary">{Math.round(agreement.agreement_score * 100)}%</div>
                                 </div>
                                 <div className="mt-2 space-y-1">
-                                    {agreement.rankings.map((ranking) => <div key={ranking.method} className="flex justify-between text-[10px] text-fg-secondary"><span>{ranking.method}</span><span className="font-mono">#{ranking.rank}</span></div>)}
+                                    {agreement.rankings.map((ranking) => <div key={ranking.method} className="flex justify-between text-[11px] text-fg-secondary"><span>{ranking.method}</span><span className="font-mono">#{ranking.rank}</span></div>)}
                                 </div>
-                                <div className="mt-2 text-[10px] text-fg-faint">{agreement.interpretation}</div>
+                                <div className="mt-2 text-[11px] text-fg-faint">{agreement.interpretation}</div>
                             </>
-                        ) : <div className="text-[10px] text-fg-faint">Select an entity to compare methods.</div>}
+                        ) : <div className="text-[11px] text-fg-faint">Select an entity to compare methods.</div>}
                     </Panel>
 
                     <Panel title="COUNTER-EVIDENCE" icon={AlertTriangle}>
-                        <select value={findingId} onChange={(event) => selectFinding(event.target.value)} className="tp-input h-7 w-full text-[10px]">
+                        <select value={findingId} onChange={(event) => selectFinding(event.target.value)} className="tp-input h-7 w-full text-[11px]">
                             <option value="">Select a finding</option>
                             {findings.slice(0, 30).map((finding) => <option key={finding.id} value={finding.id}>{finding.subject_label || finding.id}</option>)}
                         </select>
@@ -218,10 +218,10 @@ export default function P1AnalysisWorkspace() {
                                     <Metric label="Contradictory" value={counterEvidence.contradiction_count} />
                                     <Metric label="Unknown" value={counterEvidence.unknown_count} />
                                 </div>
-                                <div className="text-[10px] text-fg-secondary">{counterEvidence.summary}</div>
-                                {counterEvidence.contradictory?.slice(0, 3).map((item) => <div key={item.evidence_id} className="border-l-2 border-red-400 bg-bg-root px-2 py-1.5 text-[9px] text-fg-secondary"><span className="font-mono text-red-300">{item.evidence_id}</span> · {item.impact}</div>)}
+                                <div className="text-[11px] text-fg-secondary">{counterEvidence.summary}</div>
+                                {counterEvidence.contradictory?.slice(0, 3).map((item) => <div key={item.evidence_id} className="border-l-2 border-red-400 bg-bg-root px-2 py-1.5 text-[11px] text-fg-secondary"><span className="font-mono text-red-300">{item.evidence_id}</span> · {item.impact}</div>)}
                             </div>
-                        ) : <div className="mt-3 text-[10px] text-fg-faint">Choose a finding to inspect what may weaken it.</div>}
+                        ) : <div className="mt-3 text-[11px] text-fg-faint">Choose a finding to inspect what may weaken it.</div>}
                     </Panel>
                 </div>
             </div>

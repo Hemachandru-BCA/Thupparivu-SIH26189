@@ -66,12 +66,12 @@ export default function AnomaliesWorkspace() {
                                     </td>
                                     <td>
                                         <div className="flex items-center gap-2">
-                                            <span className="font-mono text-[10px]" style={{color: getConfidenceColor(ghost.confidence || 0)}}>
+                                            <span className="font-mono text-[11px]" style={{color: getConfidenceColor(ghost.confidence || 0)}}>
                                                 {((ghost.confidence || 0) * 100).toFixed(1)}%
                                             </span>
                                         </div>
                                     </td>
-                                    <td className="font-mono text-fg-secondary text-[10px]">
+                                    <td className="font-mono text-fg-secondary text-[11px]">
                                         Deg: {ghost.metrics?.proxy_degree || 0}
                                     </td>
                                 </tr>

@@ -27,7 +27,7 @@ export default function SettingsWorkspace() {
                             </span>
                         </div>
                         {health && (
-                            <div className="text-[10px] font-mono text-fg-faint space-y-1">
+                            <div className="text-[11px] font-mono text-fg-faint space-y-1">
                                 <div>Status: {health.status}</div>
                                 {health.version && <div>Version: {health.version}</div>}
                                 {health.dataset && <div>Dataset: {health.dataset}</div>}
@@ -72,7 +72,7 @@ export default function SettingsWorkspace() {
                     </div>
                     <div className="p-3 space-y-3">
                         <div>
-                            <label className="text-[10px] text-fg-faint font-mono uppercase block mb-1">DEFAULT EXPANSION DEPTH</label>
+                            <label className="text-[11px] text-fg-faint font-mono uppercase block mb-1">DEFAULT EXPANSION DEPTH</label>
                             <select className="tp-select w-32" defaultValue="2">
                                 <option value="1">1 hop</option>
                                 <option value="2">2 hops</option>

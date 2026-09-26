@@ -61,7 +61,7 @@ function ConfidenceBadge({ confidence }) {
   if (confidence < 0.4) cls = 'bg-amber-bg text-amber';
   else if (confidence >= 0.7) cls = 'bg-green-bg text-green';
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono ${cls}`}>
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono ${cls}`}>
       confidence: {(confidence * 100).toFixed(0)}%
     </span>
   );
@@ -113,7 +113,7 @@ function MessageBubble({ msg }) {
             )}
 
             {/* Timestamp */}
-            <div className="mt-1 text-[10px] text-fg-faint font-mono">
+            <div className="mt-1 text-[11px] text-fg-faint font-mono">
               {msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : ''}
             </div>
           </>
@@ -235,7 +235,7 @@ export default function CopilotChat() {
                 />
               ))}
             </div>
-            <div className="flex items-center gap-1 text-[10px] text-fg-faint">
+            <div className="flex items-center gap-1 text-[11px] text-fg-faint">
               <Info className="w-3 h-3" />
               Responses include tool-call traces for full transparency.
             </div>

@@ -18,7 +18,7 @@ function Panel({ title, icon: Icon, children, className = '' }) {
 function Stat({ label, value, accent }) {
     return (
         <div className="border border-border-subtle bg-bg-root px-2 py-2">
-            <div className="text-[9px] uppercase tracking-wide text-fg-faint">{label}</div>
+            <div className="text-[11px] uppercase tracking-wide text-fg-faint">{label}</div>
             <div className={`mt-1 text-[15px] font-mono ${accent || 'text-fg-primary'}`}>{value}</div>
         </div>
     );
@@ -27,7 +27,7 @@ function Stat({ label, value, accent }) {
 function SimilarityBar({ label, value }) {
     return (
         <div className="space-y-0.5">
-            <div className="flex items-center justify-between text-[9px] text-fg-secondary">
+            <div className="flex items-center justify-between text-[11px] text-fg-secondary">
                 <span>{label}</span>
                 <span className="font-mono">{Math.round(value * 100)}%</span>
             </div>
@@ -44,7 +44,7 @@ function SimilarCaseRow({ sim, onSelect, isSelected }) {
             <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                     <Network size={12} className="text-primary" />
-                    <span className="text-[10px] font-mono text-fg-primary">{sim.case_id}</span>
+                    <span className="text-[11px] font-mono text-fg-primary">{sim.case_id}</span>
                 </div>
                 <span className={`tp-badge ${sim.similarity >= 0.75 ? 'tp-badge-green' : sim.similarity >= 0.5 ? 'tp-badge-yellow' : 'tp-badge-neutral'}`}>
                     {Math.round(sim.similarity * 100)}%
@@ -70,7 +70,7 @@ function ComparisonView({ comparison }) {
         <Panel title={`${comparison.case_a} vs ${comparison.case_b}`} icon={GitCompareArrows}>
             <div className="mb-3 text-center">
                 <span className="text-[22px] font-mono text-primary">{Math.round(comparison.similarity * 100)}%</span>
-                <div className="text-[9px] text-fg-faint mt-1">Overall Similarity</div>
+                <div className="text-[11px] text-fg-faint mt-1">Overall Similarity</div>
             </div>
             <div className="space-y-1.5 mb-3">
                 {Object.entries(comparison.dimensions || {}).map(([dim, val]) => (
@@ -80,29 +80,29 @@ function ComparisonView({ comparison }) {
             {/* Why similar */}
             {comparison.why_similar?.length > 0 && (
                 <div className="mb-2">
-                    <div className="text-[9px] font-semibold text-emerald-400 mb-1">WHY SIMILAR</div>
+                    <div className="text-[11px] font-semibold text-emerald-400 mb-1">WHY SIMILAR</div>
                     {comparison.why_similar.map((reason, i) => (
-                        <div key={i} className="text-[10px] text-fg-secondary">+ {reason}</div>
+                        <div key={i} className="text-[11px] text-fg-secondary">+ {reason}</div>
                     ))}
                 </div>
             )}
             {/* Differences */}
             {comparison.differences?.length > 0 && (
                 <div className="mb-2">
-                    <div className="text-[9px] font-semibold text-rose-400 mb-1">DIFFERENCES</div>
+                    <div className="text-[11px] font-semibold text-rose-400 mb-1">DIFFERENCES</div>
                     {comparison.differences.map((diff, i) => (
-                        <div key={i} className="text-[10px] text-fg-secondary">- {diff}</div>
+                        <div key={i} className="text-[11px] text-fg-secondary">- {diff}</div>
                     ))}
                 </div>
             )}
             {/* Side-by-side stats */}
             <div className="grid grid-cols-2 gap-1 mt-2">
-                <div className="text-[9px] text-fg-faint font-semibold border-b border-border-subtle pb-1">{comparison.case_a}</div>
-                <div className="text-[9px] text-fg-faint font-semibold border-b border-border-subtle pb-1">{comparison.case_b}</div>
+                <div className="text-[11px] text-fg-faint font-semibold border-b border-border-subtle pb-1">{comparison.case_a}</div>
+                <div className="text-[11px] text-fg-faint font-semibold border-b border-border-subtle pb-1">{comparison.case_b}</div>
                 {Object.entries(comparison.a_only || {}).map(([key, val]) => (
                     <React.Fragment key={key}>
-                        <div className="text-[10px] text-fg-secondary">{key}: <span className="font-mono">{typeof val === 'number' ? val.toFixed?.(3) ?? val : val}</span></div>
-                        <div className="text-[10px] text-fg-secondary">{key}: <span className="font-mono">{typeof comparison.b_only?.[key] === 'number' ? comparison.b_only[key].toFixed?.(3) ?? comparison.b_only[key] : comparison.b_only?.[key] ?? '—'}</span></div>
+                        <div className="text-[11px] text-fg-secondary">{key}: <span className="font-mono">{typeof val === 'number' ? val.toFixed?.(3) ?? val : val}</span></div>
+                        <div className="text-[11px] text-fg-secondary">{key}: <span className="font-mono">{typeof comparison.b_only?.[key] === 'number' ? comparison.b_only[key].toFixed?.(3) ?? comparison.b_only[key] : comparison.b_only?.[key] ?? '—'}</span></div>
                     </React.Fragment>
                 ))}
             </div>
@@ -141,9 +141,9 @@ export default function SimilarCasesWorkspace() {
                         <GitCompareArrows size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">CASE SIMILARITY / NETWORK DNA</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Structural fingerprints, cross-case similarity, and comparison.</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Structural fingerprints, cross-case similarity, and comparison.</p>
                 </div>
-                <span className="text-[9px] text-fg-faint font-mono">{caseId}</span>
+                <span className="text-[11px] text-fg-faint font-mono">{caseId}</span>
             </div>
 
             <div className="grid gap-3 p-3 xl:grid-cols-[minmax(0,1.3fr)_minmax(280px,0.7fr)]">
@@ -165,7 +165,7 @@ export default function SimilarCasesWorkspace() {
                                 <Stat label="Confidence" value={fp.avg_edge_confidence?.toFixed(2)} />
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint py-4 text-center">Loading fingerprint...</div>
+                            <div className="text-[11px] text-fg-faint py-4 text-center">Loading fingerprint...</div>
                         )}
                     </Panel>
 
@@ -176,7 +176,7 @@ export default function SimilarCasesWorkspace() {
                                 <SimilarCaseRow key={sim.case_id} sim={sim} onSelect={setSelectedCase} isSelected={selectedCase === sim.case_id} />
                             ))}
                             {!similarCases.length && !simLoading && (
-                                <div className="text-[10px] text-fg-faint py-4 text-center">No other cases found for comparison.</div>
+                                <div className="text-[11px] text-fg-faint py-4 text-center">No other cases found for comparison.</div>
                             )}
                         </div>
                     </Panel>
@@ -197,14 +197,14 @@ export default function SimilarCasesWorkspace() {
                                 { label: 'Motifs', value: motifW, set: setMotifW },
                             ].map(({ label, value, set }) => (
                                 <div key={label}>
-                                    <div className="flex items-center justify-between text-[9px] text-fg-secondary">
+                                    <div className="flex items-center justify-between text-[11px] text-fg-secondary">
                                         <span>{label}</span>
                                         <span className="font-mono">{value}%</span>
                                     </div>
                                     <input type="range" min="0" max="100" value={value} onChange={(e) => set(Number(e.target.value))} className="w-full accent-[hsl(var(--primary))]" />
                                 </div>
                             ))}
-                            <div className="text-[9px] text-fg-faint">Total weight: {structuralW + financialW + temporalW + entityW + motifW}%</div>
+                            <div className="text-[11px] text-fg-faint">Total weight: {structuralW + financialW + temporalW + entityW + motifW}%</div>
                         </div>
                     </Panel>
 
@@ -212,14 +212,14 @@ export default function SimilarCasesWorkspace() {
                         {fp?.motif_distribution ? (
                             <div className="space-y-1">
                                 {Object.entries(fp.motif_distribution).map(([type, count]) => (
-                                    <div key={type} className="flex items-center justify-between text-[10px] text-fg-secondary">
+                                    <div key={type} className="flex items-center justify-between text-[11px] text-fg-secondary">
                                         <span>{type}</span>
                                         <span className="font-mono">{count}</span>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint">No motif data.</div>
+                            <div className="text-[11px] text-fg-faint">No motif data.</div>
                         )}
                     </Panel>
 
@@ -228,7 +228,7 @@ export default function SimilarCasesWorkspace() {
                             <div className="space-y-1">
                                 {Object.entries(fp.entity_type_composition).sort(([, a], [, b]) => b - a).map(([type, ratio]) => (
                                     <div key={type}>
-                                        <div className="flex items-center justify-between text-[10px] text-fg-secondary">
+                                        <div className="flex items-center justify-between text-[11px] text-fg-secondary">
                                             <span>{type}</span>
                                             <span className="font-mono">{(ratio * 100).toFixed(0)}%</span>
                                         </div>
@@ -237,7 +237,7 @@ export default function SimilarCasesWorkspace() {
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint">No composition data.</div>
+                            <div className="text-[11px] text-fg-faint">No composition data.</div>
                         )}
                     </Panel>
                 </div>

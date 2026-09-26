@@ -46,8 +46,8 @@ function SignalBar({ label, value, hint }) {
     return (
         <div className="py-1.5">
             <div className="flex justify-between items-center mb-1">
-                <span className="text-[10px] font-mono text-fg-secondary">{label}</span>
-                <span className={`text-[10px] font-mono ${rl.cls}`}>{pct(value)} · {rl.label}</span>
+                <span className="text-[11px] font-mono text-fg-secondary">{label}</span>
+                <span className={`text-[11px] font-mono ${rl.cls}`}>{pct(value)} · {rl.label}</span>
             </div>
             <div className="h-1.5 rounded-full bg-bg-root overflow-hidden">
                 <div
@@ -58,7 +58,7 @@ function SignalBar({ label, value, hint }) {
                     }}
                 />
             </div>
-            {hint && <div className="text-[9px] text-fg-faint mt-0.5">{hint}</div>}
+            {hint && <div className="text-[11px] text-fg-faint mt-0.5">{hint}</div>}
         </div>
     );
 }
@@ -67,7 +67,7 @@ function EvidenceGroup({ title, items, icon: Icon, colorClass }) {
     if (!items || items.length === 0) return null;
     return (
         <div>
-            <div className={`flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-wide ${colorClass}`}>
+            <div className={`flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wide ${colorClass}`}>
                 <Icon size={10} />
                 {title} ({items.length})
             </div>
@@ -78,10 +78,10 @@ function EvidenceGroup({ title, items, icon: Icon, colorClass }) {
                         onClick={() => setSelectedEvidence?.({ id: ev.evidence_id, ...ev })}
                         className="w-full text-left px-2 py-1 rounded bg-bg-root border border-border-subtle hover:bg-bg-hover"
                     >
-                        <div className="text-[9px] font-mono text-fg-secondary truncate">
+                        <div className="text-[11px] font-mono text-fg-secondary truncate">
                             {ev.evidence_id || ev.id} · {ev.source_type || 'SOURCE'}
                         </div>
-                        {ev.excerpt && <div className="text-[9px] text-fg-faint truncate">{ev.excerpt.slice(0, 80)}</div>}
+                        {ev.excerpt && <div className="text-[11px] text-fg-faint truncate">{ev.excerpt.slice(0, 80)}</div>}
                     </button>
                 ))}
             </div>
@@ -207,8 +207,8 @@ export default function EntityAnalysisWorkspace() {
                 <div className="tp-panel p-6 text-center space-y-2 max-w-sm">
                     <AlertTriangle size={16} className="mx-auto text-fg-faint" />
                     <div className="text-[12px] font-semibold text-fg-primary">NO ENTITY SELECTED</div>
-                    <p className="text-[10px] text-fg-faint">Select an entity in the network, entity directory, or search to see its analytical importance.</p>
-                    <button onClick={() => setLocation('/network')} className="tp-btn tp-btn-primary text-[10px] h-6 px-3 mt-2">
+                    <p className="text-[11px] text-fg-faint">Select an entity in the network, entity directory, or search to see its analytical importance.</p>
+                    <button onClick={() => setLocation('/network')} className="tp-btn tp-btn-primary text-[11px] h-6 px-3 mt-2">
                         OPEN NETWORK
                     </button>
                 </div>
@@ -228,7 +228,7 @@ export default function EntityAnalysisWorkspace() {
                     </button>
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[9px] font-mono text-primary uppercase tracking-widest">
+                            <span className="text-[11px] font-mono text-primary uppercase tracking-widest">
                                 WHY IS THIS IMPORTANT?
                             </span>
                             <span className="tp-badge tp-badge-blue text-[8px]">{entity?.type || 'PERSON'}</span>
@@ -239,12 +239,12 @@ export default function EntityAnalysisWorkspace() {
                         <div className="text-[16px] font-bold text-fg-primary truncate mt-0.5">
                             {entity?.label || entity?.name || entity?.canonical_name || entityId}
                         </div>
-                        <div className="text-[10px] font-mono text-fg-faint truncate">{entityId}</div>
+                        <div className="text-[11px] font-mono text-fg-faint truncate">{entityId}</div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                         <button
                             onClick={() => toggleBookmark({ type: 'ENTITY', refId: entityId, title: entity?.label || entityId })}
-                            className="tp-btn h-6 text-[10px]"
+                            className="tp-btn h-6 text-[11px]"
                             title="Bookmark entity"
                         >
                             {isBookmarked(entityId) ? <BookmarkCheck size={12} className="text-amber" /> : <Bookmark size={12} />}
@@ -252,7 +252,7 @@ export default function EntityAnalysisWorkspace() {
                         </button>
                         <button
                             onClick={() => setLocation(`/network?focus=${encodeURIComponent(entityId)}`)}
-                            className="tp-btn h-6 text-[10px]"
+                            className="tp-btn h-6 text-[11px]"
                         >
                             <NetworkIcon size={12} /> OPEN NETWORK
                         </button>
@@ -334,7 +334,7 @@ export default function EntityAnalysisWorkspace() {
                         <EvidenceGroup title="Contradictory Evidence" items={evidenceSplit.contradictory} icon={XCircle} colorClass="text-red" />
                         <EvidenceGroup title="Unclassified Evidence" items={evidenceSplit.unknown} icon={HelpCircle} colorClass="text-fg-faint" />
                         {evidenceSplit.total === 0 && (
-                            <div className="text-[10px] text-fg-faint text-center py-3">
+                            <div className="text-[11px] text-fg-faint text-center py-3">
                                 No evidence records indexed for this entity yet.
                             </div>
                         )}
@@ -360,7 +360,7 @@ export default function EntityAnalysisWorkspace() {
                         </div>
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">1. NETWORK POSITION</div>
-                            <div className="text-[10px] text-fg-secondary mt-0.5">
+                            <div className="text-[11px] text-fg-secondary mt-0.5">
                                 {importance.structural >= 0.6
                                     ? `Connects communities through high betweenness (${nodeMetrics?.betweenness_centrality?.toFixed(4) || '—'}) and degree ${nodeMetrics?.degree || 0}.`
                                     : importance.structural >= 0.3
@@ -380,7 +380,7 @@ export default function EntityAnalysisWorkspace() {
                         </div>
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">2. TEMPORAL ROLE</div>
-                            <div className="text-[10px] text-fg-secondary mt-0.5">
+                            <div className="text-[11px] text-fg-secondary mt-0.5">
                                 {timeline?.length > 0
                                     ? `${timeline.length} dated evidence events indexed for this entity across the investigation window.`
                                     : 'No dated evidence events indexed yet.'}
@@ -398,7 +398,7 @@ export default function EntityAnalysisWorkspace() {
                         </div>
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">3. CROSS-CASE PRESENCE</div>
-                            <div className="text-[10px] text-fg-secondary mt-0.5">
+                            <div className="text-[11px] text-fg-secondary mt-0.5">
                                 {crossCaseInfo
                                     ? `Appears in ${crossCaseInfo.case_count} investigations: ${(crossCaseInfo.cases || []).join(', ')}.`
                                     : 'Not currently flagged across other case workspaces.'}
@@ -423,7 +423,7 @@ export default function EntityAnalysisWorkspace() {
                         </div>
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">4. FINANCIAL ROLE</div>
-                            <div className="text-[10px] text-fg-muted mt-0.5">
+                            <div className="text-[11px] text-fg-muted mt-0.5">
                                 {importance.financial >= 0.5
                                     ? `Degree-based financial exposure is elevated (${pct(importance.financial)}). Review transaction flows.`
                                     : `Financial exposure via degree proxy: ${pct(importance.financial)} (heuristic).`}
@@ -440,33 +440,33 @@ export default function EntityAnalysisWorkspace() {
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">5. COUNTERFACTUAL IMPACT</div>
                             {counterfactual?.error ? (
-                                <div className="text-[10px] text-red mt-0.5">{counterfactual.error}</div>
+                                <div className="text-[11px] text-red mt-0.5">{counterfactual.error}</div>
                             ) : counterfactual ? (
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-1.5">
                                     <div className="bg-bg-panel p-1.5 rounded border border-border-subtle">
                                         <div className="text-[8px] font-mono text-fg-faint">FRAGMENTATION</div>
-                                        <div className="text-[10px] font-mono text-fg-primary">{(counterfactual.fragmentation_score || 0).toFixed(3)}</div>
+                                        <div className="text-[11px] font-mono text-fg-primary">{(counterfactual.fragmentation_score || 0).toFixed(3)}</div>
                                     </div>
                                     <div className="bg-bg-panel p-1.5 rounded border border-border-subtle">
                                         <div className="text-[8px] font-mono text-fg-faint">CONNECTIVITY Δ</div>
-                                        <div className="text-[10px] font-mono text-amber">{((counterfactual.connectivity_change || 0) * 100).toFixed(1)}%</div>
+                                        <div className="text-[11px] font-mono text-amber">{((counterfactual.connectivity_change || 0) * 100).toFixed(1)}%</div>
                                     </div>
                                     <div className="bg-bg-panel p-1.5 rounded border border-border-subtle">
                                         <div className="text-[8px] font-mono text-fg-faint">AFFECTED</div>
-                                        <div className="text-[10px] font-mono text-fg-primary">{counterfactual.affected_node_count || 0}</div>
+                                        <div className="text-[11px] font-mono text-fg-primary">{counterfactual.affected_node_count || 0}</div>
                                     </div>
                                     <div className="bg-bg-panel p-1.5 rounded border border-border-subtle">
                                         <div className="text-[8px] font-mono text-fg-faint">REROUTING</div>
-                                        <div className="text-[10px] font-mono text-fg-primary">{(counterfactual.rerouting_score || 0).toFixed(3)}</div>
+                                        <div className="text-[11px] font-mono text-fg-primary">{(counterfactual.rerouting_score || 0).toFixed(3)}</div>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="text-[10px] text-fg-faint mt-1">
+                                <div className="text-[11px] text-fg-faint mt-1">
                                     Run a counterfactual removal simulation to see the modelled impact.
                                 </div>
                             )}
                             <button onClick={handleCounterfactual} disabled={simLoading}
-                                className="tp-btn tp-btn-primary h-6 text-[10px] mt-2">
+                                className="tp-btn tp-btn-primary h-6 text-[11px] mt-2">
                                 <Zap size={11} /> {simLoading ? 'SIMULATING…' : counterfactual ? 'RE-RUN COUNTERFACTUAL' : 'RUN COUNTERFACTUAL'}
                             </button>
                         </div>
@@ -479,17 +479,17 @@ export default function EntityAnalysisWorkspace() {
                         </div>
                         <div className="flex-1">
                             <div className="text-[11px] font-semibold text-fg-primary">6. EVIDENCE BASIS</div>
-                            <div className="text-[10px] text-fg-secondary mt-0.5">
+                            <div className="text-[11px] text-fg-secondary mt-0.5">
                                 {evidenceSplit.supporting.length} supporting · {evidenceSplit.contradictory.length} contradicting · {evidenceSplit.unknown.length} unknown
                             </div>
                             <div className="flex gap-2 mt-2">
-                                <button onClick={() => setLocation(`/evidence?node=${encodeURIComponent(entityId)}`)} className="tp-btn h-6 text-[10px]">
+                                <button onClick={() => setLocation(`/evidence?node=${encodeURIComponent(entityId)}`)} className="tp-btn h-6 text-[11px]">
                                     <FileText size={11} /> VIEW EVIDENCE
                                 </button>
-                                <button onClick={() => setLocation(`/network?focus=${encodeURIComponent(entityId)}`)} className="tp-btn h-6 text-[10px]">
+                                <button onClick={() => setLocation(`/network?focus=${encodeURIComponent(entityId)}`)} className="tp-btn h-6 text-[11px]">
                                     <NetworkIcon size={11} /> VIEW NETWORK
                                 </button>
-                                <Link href="/cross-case" className="tp-btn h-6 text-[10px] inline-flex items-center gap-1">
+                                <Link href="/cross-case" className="tp-btn h-6 text-[11px] inline-flex items-center gap-1">
                                     <FolderOpen size={11} /> COMPARE CASES
                                 </Link>
                             </div>
@@ -502,7 +502,7 @@ export default function EntityAnalysisWorkspace() {
             <div className="tp-panel p-3.5">
                 <div className="flex items-center justify-between mb-2">
                     <span className="tp-section-label">INVESTIGATION NOTES</span>
-                    <span className="text-[9px] font-mono text-fg-faint">{caseNotes.length} NOTES</span>
+                    <span className="text-[11px] font-mono text-fg-faint">{caseNotes.length} NOTES</span>
                 </div>
                 {/* Add note form */}
                 <div className="flex gap-2 mb-3">
@@ -511,13 +511,13 @@ export default function EntityAnalysisWorkspace() {
                         value={noteText}
                         onChange={e => setNoteText(e.target.value)}
                         placeholder={`Note for ${entityId}…`}
-                        className="tp-input flex-1 h-6 text-[10px]"
+                        className="tp-input flex-1 h-6 text-[11px]"
                         onKeyDown={e => e.key === 'Enter' && handleAddNote()}
                     />
                     <button
                         onClick={handleAddNote}
                         disabled={noteSaving || !noteText.trim()}
-                        className="tp-btn tp-btn-primary h-6 text-[10px] px-3"
+                        className="tp-btn tp-btn-primary h-6 text-[11px] px-3"
                     >
                         {noteSaving ? 'SAVING…' : 'ADD NOTE'}
                     </button>
@@ -527,13 +527,13 @@ export default function EntityAnalysisWorkspace() {
                     <div className="space-y-1.5 max-h-[300px] overflow-y-auto">
                         {caseNotes.map((n, i) => (
                             <div key={i} className="p-2 rounded bg-bg-root border border-border-subtle">
-                                <div className="text-[10px] text-fg-primary">{n.text}</div>
+                                <div className="text-[11px] text-fg-primary">{n.text}</div>
                                 <div className="text-[8px] font-mono text-fg-faint mt-1">{n.at || n.timestamp || ''}</div>
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <div className="text-[10px] text-fg-faint py-2 text-center">No notes for this entity yet.</div>
+                    <div className="text-[11px] text-fg-faint py-2 text-center">No notes for this entity yet.</div>
                 )}
             </div>
         </div>

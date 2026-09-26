@@ -86,7 +86,7 @@ export default function ModelsWorkspace() {
                         <BarChart3 size={13} className="text-primary" />
                         <span className="text-[11px] font-semibold text-fg-primary">MEASURED MODEL PERFORMANCE COMPARISON</span>
                     </div>
-                    <span className="text-[10px] font-mono text-fg-faint">EVALUATED ON SYNTHETIC INVESTIGATION 07 (GROUND TRUTH ISOLATED)</span>
+                    <span className="text-[11px] font-mono text-fg-faint">EVALUATED ON SYNTHETIC INVESTIGATION 07 (GROUND TRUTH ISOLATED)</span>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="tp-table">
@@ -131,14 +131,14 @@ export default function ModelsWorkspace() {
                         <div>
                             <div className="flex items-center justify-between">
                                 <span className="font-mono text-[11px] font-bold text-fg-primary">{m.name}</span>
-                                <span className="tp-badge tp-badge-neutral text-[9px]">v{m.latest_version}</span>
+                                <span className="tp-badge tp-badge-neutral text-[11px]">v{m.latest_version}</span>
                             </div>
                             <p className="text-[11px] text-fg-secondary mt-1.5 leading-relaxed">
                                 {m.description}
                             </p>
                         </div>
                         <div className="pt-2 border-t border-border-subtle space-y-1.5">
-                            <div className="text-[10px] font-mono text-fg-faint">CAPABILITIES:</div>
+                            <div className="text-[11px] font-mono text-fg-faint">CAPABILITIES:</div>
                             <div className="flex flex-wrap gap-1">
                                 {m.capabilities?.map((c, cIdx) => (
                                     <span key={cIdx} className="tp-badge tp-badge-blue text-[8px]">{c}</span>

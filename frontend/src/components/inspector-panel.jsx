@@ -6,7 +6,7 @@
  * depending on what is selected.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import {
     Eye, PanelRightClose, Users, FileText, Brain, Shield,
@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
 import { recordHypothesisDisposition } from '@/api/intel';
+import { useToast } from '@/components/ui';
 
 export function InspectorPanel() {
     const [, setLocation] = useLocation();
@@ -33,6 +34,14 @@ export function InspectorPanel() {
     const [dispositionReason, setDispositionReason] = useState('');
     const [dispositionStatus, setDispositionStatus] = useState(null);
     const [copied, setCopied] = useState(false);
+    const { toast } = useToast();
+
+    // Escape-to-close inspector
+    useEffect(() => {
+        const handler = (e) => { if (e.key === 'Escape' && inspectorOpen) { clearInspection(); setInspectorOpen(false); } };
+        window.addEventListener('keydown', handler);
+        return () => window.removeEventListener('keydown', handler);
+    }, [inspectorOpen, clearInspection, setInspectorOpen]);
 
     if (!inspectorOpen) return null;
 
@@ -54,6 +63,7 @@ export function InspectorPanel() {
             setTimeout(() => setDispositionStatus(null), 3000);
         } catch (e) {
             console.error('Disposition failed', e);
+            toast({ message: `Disposition failed: ${e.message || 'server error'}. Try again.`, variant: 'error', duration: 6000 });
         }
     };
 
@@ -75,18 +85,18 @@ export function InspectorPanel() {
     }
 
     return (
-        <aside className="w-80 bg-inspector-bg border-l border-border-subtle flex flex-col shrink-0 h-full overflow-hidden animate-fade-in">
+        <aside role="complementary" aria-label="Inspector panel" className="w-80 bg-inspector-bg border-l border-border-subtle flex flex-col shrink-0 h-full overflow-hidden animate-fade-in">
             {/* Inspector Header */}
             <div className="flex items-center justify-between px-3 h-9 border-b border-border-subtle bg-bg-surface shrink-0">
                 <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-fg-muted uppercase tracking-wider font-semibold">
+                    <span className="text-[11px] font-mono text-fg-secondary uppercase tracking-wider font-semibold">
                         {selectedEntity ? 'ENTITY 360' : selectedEvidence ? 'EVIDENCE INSPECTOR' : 'HYPOTHESIS INSPECTOR'}
                     </span>
                 </div>
                 <div className="flex items-center gap-1">
                     <button
                         onClick={clearInspection}
-                        className="tp-btn-ghost text-[10px] px-1.5 py-0.5"
+                        className="tp-btn-ghost text-[11px] px-1.5 py-0.5"
                         title="Clear selection"
                     >
                         Clear
@@ -109,7 +119,7 @@ export function InspectorPanel() {
                         {/* Title & Type */}
                         <div>
                             <div className="flex items-center justify-between">
-                                <span className="tp-badge tp-badge-blue text-[9px]">{selectedEntity.type || selectedEntity.entity_type || 'PERSON'}</span>
+                                <span className="tp-badge tp-badge-blue text-[11px]">{selectedEntity.type || selectedEntity.entity_type || 'PERSON'}</span>
                                 <button
                                     onClick={() => toggleBookmark({
                                         type: 'ENTITY',
@@ -130,7 +140,7 @@ export function InspectorPanel() {
                                 {selectedEntity.label || selectedEntity.name || selectedEntity.canonical_name || selectedEntity.id}
                             </div>
                             <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] font-mono text-fg-faint truncate max-w-[200px]">
+                                <span className="text-[11px] font-mono text-fg-faint truncate max-w-[200px]">
                                     {selectedEntity.id}
                                 </span>
                                 <button
@@ -162,7 +172,7 @@ export function InspectorPanel() {
                                         <span className="text-fg-faint">Resolved Aliases:</span>
                                         <div className="flex flex-wrap gap-1 mt-1">
                                             {selectedEntity.aliases.map((a, i) => (
-                                                <span key={i} className="tp-badge tp-badge-neutral text-[9px]">{a}</span>
+                                                <span key={i} className="tp-badge tp-badge-neutral text-[11px]">{a}</span>
                                             ))}
                                         </div>
                                     </div>
@@ -179,32 +189,32 @@ export function InspectorPanel() {
                             <div className="tp-section-label">NETWORK METRICS</div>
                             <div className="grid grid-cols-2 gap-2 text-[11px]">
                                 <div className="bg-bg-root p-1.5 rounded border border-border-subtle">
-                                    <div className="text-fg-faint text-[9px] font-mono">DEGREE</div>
+                                    <div className="text-fg-faint text-[11px] font-mono">DEGREE</div>
                                     <div className="font-mono text-[13px] font-semibold text-fg-primary mt-0.5">
                                         {selectedEntity.degree ?? selectedEntity.metrics?.degree ?? 4}
                                     </div>
                                 </div>
                                 <div className="bg-bg-root p-1.5 rounded border border-border-subtle">
-                                    <div className="text-fg-faint text-[9px] font-mono">PAGERANK</div>
+                                    <div className="text-fg-faint text-[11px] font-mono">PAGERANK</div>
                                     <div className="font-mono text-[13px] font-semibold text-fg-primary mt-0.5">
                                         {(selectedEntity.metrics?.pagerank || selectedEntity.pagerank || 0.00012).toFixed(5)}
                                     </div>
                                 </div>
                                 <div className="bg-bg-root p-1.5 rounded border border-border-subtle">
-                                    <div className="text-fg-faint text-[9px] font-mono">BETWEENNESS</div>
+                                    <div className="text-fg-faint text-[11px] font-mono">BETWEENNESS</div>
                                     <div className="font-mono text-[13px] font-semibold text-fg-primary mt-0.5">
                                         {(selectedEntity.metrics?.betweenness_centrality || selectedEntity.betweenness || 0.0).toFixed(4)}
                                     </div>
                                 </div>
                                 <div className="bg-bg-root p-1.5 rounded border border-border-subtle">
-                                    <div className="text-fg-faint text-[9px] font-mono">COMMUNITY</div>
+                                    <div className="text-fg-faint text-[11px] font-mono">COMMUNITY</div>
                                     <div className="font-mono text-[13px] font-semibold text-primary mt-0.5">
                                         {selectedEntity.community_id != null ? `C${selectedEntity.community_id}` : (selectedEntity.metrics?.community != null ? `C${selectedEntity.metrics.community}` : 'C03')}
                                     </div>
                                 </div>
                             </div>
                             {selectedEntity.is_ghost && (
-                                <div className="p-2 rounded bg-amber-bg border border-amber-dim/30 text-amber text-[10px] font-mono flex items-center gap-1.5">
+                                <div className="p-2 rounded bg-amber-bg border border-amber-dim/30 text-amber text-[11px] font-mono flex items-center gap-1.5">
                                     <AlertTriangle size={12} />
                                     <span>POTENTIAL HIDDEN INTERMEDIARY CANDIDATE</span>
                                 </div>
@@ -256,11 +266,11 @@ export function InspectorPanel() {
                 {selectedEvidence && (
                     <>
                         <div>
-                            <span className="tp-badge tp-badge-green text-[9px]">{selectedEvidence.source_type || 'DOCUMENT'}</span>
+                            <span className="tp-badge tp-badge-green text-[11px]">{selectedEvidence.source_type || 'DOCUMENT'}</span>
                             <div className="text-[14px] font-semibold text-fg-primary mt-1">
                                 {selectedEvidence.evidence_id || selectedEvidence.id}
                             </div>
-                            <div className="text-[10px] font-mono text-fg-faint mt-0.5">
+                            <div className="text-[11px] font-mono text-fg-faint mt-0.5">
                                 Ingested: {selectedEvidence.ingested_at || selectedEvidence.timestamp || '2026-09-06'}
                             </div>
                         </div>
@@ -271,7 +281,7 @@ export function InspectorPanel() {
                             <div className="p-2 rounded bg-bg-root border border-border-subtle text-[11px] text-fg-primary leading-relaxed font-mono">
                                 "{selectedEvidence.text_excerpt || selectedEvidence.excerpt || selectedEvidence.text || 'No raw text available'}"
                             </div>
-                            <div className="flex justify-between text-[10px] font-mono text-fg-faint">
+                            <div className="flex justify-between text-[11px] font-mono text-fg-faint">
                                 <span>Confidence: {(selectedEvidence.confidence || 1.0) * 100}%</span>
                                 <span>Source: {selectedEvidence.source_record_id || 'Synthetic Record'}</span>
                             </div>
@@ -281,8 +291,8 @@ export function InspectorPanel() {
                         <div className="tp-panel p-2.5 space-y-2 text-[11px]">
                             <div className="tp-section-label">PROVENANCE & INTEGRITY</div>
                             <div className="space-y-1">
-                                <div className="text-fg-faint text-[9px] font-mono">SHA-256 HASH</div>
-                                <div className="font-mono text-[10px] text-fg-muted truncate bg-bg-root p-1 rounded">
+                                <div className="text-fg-faint text-[11px] font-mono">SHA-256 HASH</div>
+                                <div className="font-mono text-[11px] text-fg-muted truncate bg-bg-root p-1 rounded">
                                     {selectedEvidence.hash || selectedEvidence.content_hash || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}
                                 </div>
                             </div>
@@ -298,7 +308,7 @@ export function InspectorPanel() {
                 {selectedHypothesis && (
                     <>
                         <div>
-                            <span className="tp-badge tp-badge-purple text-[9px]">
+                            <span className="tp-badge tp-badge-purple text-[11px]">
                                 {selectedHypothesis.hypothesis_type || 'POTENTIAL_HIDDEN_INTERMEDIARY'}
                             </span>
                             <div className="text-[14px] font-semibold text-fg-primary mt-1">
@@ -350,10 +360,10 @@ export function InspectorPanel() {
                                     ? 'bg-amber-bg border-amber-dim/30 text-amber'
                                     : 'bg-green-bg border-green-dim/30 text-green'
                             }`}>
-                                <div className="font-mono text-[9px] uppercase tracking-wider font-semibold">
+                                <div className="font-mono text-[11px] uppercase tracking-wider font-semibold">
                                     CONTRADICTION DETECTOR: {selectedHypothesis.contradiction.verdict}
                                 </div>
-                                <div className="text-[10px] text-fg-secondary">
+                                <div className="text-[11px] text-fg-secondary">
                                     Net Support Score: {selectedHypothesis.contradiction.net_support}
                                 </div>
                             </div>
@@ -371,31 +381,31 @@ export function InspectorPanel() {
                             <div className="grid grid-cols-2 gap-1.5 pt-1">
                                 <button
                                     onClick={() => handleDisposition('CONFIRM')}
-                                    className="tp-btn bg-green-bg border-green-dim/40 text-green hover:bg-green-dim/20 text-[10px]"
+                                    className="tp-btn bg-green-bg border-green-dim/40 text-green hover:bg-green-dim/20 text-[11px]"
                                 >
                                     CONFIRM
                                 </button>
                                 <button
                                     onClick={() => handleDisposition('REJECT')}
-                                    className="tp-btn bg-red-bg border-red-dim/40 text-red hover:bg-red-dim/20 text-[10px]"
+                                    className="tp-btn bg-red-bg border-red-dim/40 text-red hover:bg-red-dim/20 text-[11px]"
                                 >
                                     REJECT
                                 </button>
                                 <button
                                     onClick={() => handleDisposition('DEFER')}
-                                    className="tp-btn text-[10px]"
+                                    className="tp-btn text-[11px]"
                                 >
                                     DEFER
                                 </button>
                                 <button
                                     onClick={() => handleDisposition('REQUEST_EVIDENCE')}
-                                    className="tp-btn text-[10px]"
+                                    className="tp-btn text-[11px]"
                                 >
                                     REQ EVIDENCE
                                 </button>
                             </div>
                             {dispositionStatus && (
-                                <div className="text-[10px] font-mono text-green text-center pt-1 animate-fade-in">
+                                <div className="text-[11px] font-mono text-green text-center pt-1 animate-fade-in">
                                     ✓ RECORDED AS {dispositionStatus}
                                 </div>
                             )}

@@ -5,7 +5,7 @@ import { BarChart3, Users, TrendingUp, Waypoints, Activity } from 'lucide-react'
 function MetricBar({ label, value, maxValue, color }) {
     const pct = maxValue > 0 ? (value / maxValue) * 100 : 0;
     return (
-        <div className="flex items-center gap-3 text-[10px]">
+        <div className="flex items-center gap-3 text-[11px]">
             <span className="w-24 text-fg-faint font-mono truncate shrink-0">{label}</span>
             <div className="flex-1 tp-confidence-bar">
                 <div className="tp-confidence-fill" style={{ width: `${pct}%`, background: color || 'hsl(var(--primary))' }} />
@@ -57,7 +57,7 @@ export default function AnalyticsWorkspace() {
                         const Icon = tab.icon;
                         return (
                             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                                className={`tp-btn text-[9px] h-6 px-2.5 gap-1 ${activeTab === tab.id ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
+                                className={`tp-btn text-[11px] h-6 px-2.5 gap-1 ${activeTab === tab.id ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
                                 <Icon size={10} />
                                 {tab.label}
                             </button>
@@ -73,7 +73,7 @@ export default function AnalyticsWorkspace() {
                         <div className="tp-panel">
                             <div className="tp-panel-header">
                                 <span className="text-[11px] font-semibold text-fg-primary">CENTRALITY METRICS</span>
-                                <span className="text-[10px] font-mono text-fg-faint">{sortedCentrality.length} nodes</span>
+                                <span className="text-[11px] font-mono text-fg-faint">{sortedCentrality.length} nodes</span>
                             </div>
                             <div className="p-3">
                                 <table className="tp-table">
@@ -138,7 +138,7 @@ export default function AnalyticsWorkspace() {
                                     return (
                                         <div key={c.id} className="tp-panel p-2.5">
                                             <div className="flex items-center justify-between mb-1">
-                                                <span className="font-mono text-[10px] text-fg-muted">C{c.id}</span>
+                                                <span className="font-mono text-[11px] text-fg-muted">C{c.id}</span>
                                                 <span className="font-mono text-[12px] text-fg-primary font-semibold">{c.size}</span>
                                             </div>
                                             <div className="tp-confidence-bar">

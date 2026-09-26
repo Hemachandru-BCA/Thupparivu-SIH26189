@@ -34,9 +34,9 @@ function BookmarkRow({ item, onNavigate, onRemove }) {
             </div>
             <div className="flex-1 min-w-0">
                 <div className="text-[11px] font-semibold text-fg-primary truncate">{item.title || item.refId}</div>
-                <div className="text-[9px] font-mono text-fg-faint mt-0.5">{item.refId}</div>
+                <div className="text-[11px] font-mono text-fg-faint mt-0.5">{item.refId}</div>
                 {item.note && (
-                    <div className="text-[10px] text-fg-secondary mt-1 italic">"{item.note}"</div>
+                    <div className="text-[11px] text-fg-secondary mt-1 italic">"{item.note}"</div>
                 )}
                 <div className="text-[8px] font-mono text-fg-faint mt-1">
                     Added {item.added_at ? new Date(item.added_at).toLocaleString() : '—'}
@@ -45,7 +45,7 @@ function BookmarkRow({ item, onNavigate, onRemove }) {
             <div className="flex items-center gap-1 shrink-0 pt-0.5">
                 <button
                     onClick={() => onNavigate(item)}
-                    className="tp-btn h-5 text-[9px] px-2"
+                    className="tp-btn h-5 text-[11px] px-2"
                     title="Open in context"
                 >
                     <ExternalLink size={10} />
@@ -112,7 +112,7 @@ export default function BookmarksWorkspace() {
                         <span className="text-[14px] font-bold text-fg-primary">MY FINDINGS</span>
                         <span className="tp-badge tp-badge-amber">{bookmarks.length}</span>
                     </div>
-                    <p className="text-[10px] text-fg-faint mt-0.5">Bookmarked entities, hypotheses, and notes — the investigator's working set.</p>
+                    <p className="text-[11px] text-fg-faint mt-0.5">Bookmarked entities, hypotheses, and notes — the investigator's working set.</p>
                 </div>
             </div>
 
@@ -124,7 +124,7 @@ export default function BookmarksWorkspace() {
                         value={filter}
                         onChange={e => setFilter(e.target.value)}
                         placeholder="Filter bookmarks…"
-                        className="tp-input pl-7 h-6 text-[10px]"
+                        className="tp-input pl-7 h-6 text-[11px]"
                     />
                 </div>
                 <div className="flex gap-1">
@@ -132,7 +132,7 @@ export default function BookmarksWorkspace() {
                         <button
                             key={type}
                             onClick={() => setTypeFilter(type)}
-                            className={`tp-badge text-[9px] cursor-pointer transition-colors ${
+                            className={`tp-badge text-[11px] cursor-pointer transition-colors ${
                                 typeFilter === type ? 'tp-badge-amber' : 'tp-badge-neutral'
                             }`}
                         >
@@ -159,7 +159,7 @@ export default function BookmarksWorkspace() {
                     <div className="p-8 text-center space-y-2">
                         <Bookmark size={24} className="mx-auto text-fg-faint" />
                         <div className="text-[12px] font-semibold text-fg-secondary">No bookmarks yet</div>
-                        <p className="text-[10px] text-fg-faint">
+                        <p className="text-[11px] text-fg-faint">
                             Bookmark entities, hypotheses, or findings from the inspector panel or entity analysis page.
                         </p>
                     </div>

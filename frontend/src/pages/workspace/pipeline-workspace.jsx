@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useHealthCheck, useListJobs, useTriggerPipeline } from '@/api/graph';
 import { Upload, Play, RotateCcw, CheckCircle, AlertTriangle, Clock, Database } from 'lucide-react';
 import { formatTimestamp } from '@/utils/format';
+import { useToast } from '@/components/ui';
 
 const PIPELINE_STAGES = [
     { id: 'generate', label: 'GENERATE', description: 'Generate synthetic data' },
@@ -16,6 +17,7 @@ export default function PipelineWorkspace() {
     const { data: jobsData, refetch: refetchJobs } = useListJobs();
     const { trigger: triggerPipeline } = useTriggerPipeline();
     const [triggering, setTriggering] = useState(null);
+    const { toast } = useToast();
 
     const jobs = jobsData?.results || jobsData?.items || jobsData || [];
 
@@ -23,9 +25,11 @@ export default function PipelineWorkspace() {
         setTriggering(stage);
         try {
             await triggerPipeline(stage);
+            toast({ message: `Pipeline stage ${stage} triggered successfully`, variant: 'success' });
             setTimeout(() => refetchJobs(), 1000);
         } catch (e) {
             console.error('Pipeline trigger failed:', e);
+            toast({ message: `Pipeline trigger failed: ${e.message || 'server error'}`, variant: 'error', duration: 6000 });
         } finally {
             setTriggering(null);
         }
@@ -39,7 +43,7 @@ export default function PipelineWorkspace() {
                 <div className="w-px h-4 bg-border-default" />
                 <div className="flex items-center gap-1.5">
                     <div className={`tp-status-dot ${health?.status === 'ok' ? 'bg-green' : 'bg-red'}`} />
-                    <span className="text-[10px] font-mono text-fg-faint">
+                    <span className="text-[11px] font-mono text-fg-faint">
                         API {health?.status === 'ok' ? 'HEALTHY' : 'UNREACHABLE'}
                     </span>
                 </div>
@@ -54,11 +58,11 @@ export default function PipelineWorkspace() {
                     <div className="p-3 grid grid-cols-5 gap-2">
                         {PIPELINE_STAGES.map(stage => (
                             <div key={stage.id} className="tp-panel p-3 text-center">
-                                <div className="font-mono text-[10px] text-fg-muted mb-1">{stage.label}</div>
-                                <div className="text-[9px] text-fg-faint mb-2">{stage.description}</div>
+                                <div className="font-mono text-[11px] text-fg-muted mb-1">{stage.label}</div>
+                                <div className="text-[11px] text-fg-faint mb-2">{stage.description}</div>
                                 <button onClick={() => handleTrigger(stage.id)}
                                     disabled={triggering !== null}
-                                    className="tp-btn tp-btn-primary text-[9px] h-6 w-full justify-center">
+                                    className="tp-btn tp-btn-primary text-[11px] h-6 w-full justify-center">
                                     {triggering === stage.id
                                         ? <RotateCcw size={10} className="animate-spin" />
                                         : <Play size={10} />}
@@ -73,7 +77,7 @@ export default function PipelineWorkspace() {
                 <div className="tp-panel">
                     <div className="tp-panel-header">
                         <span className="text-[11px] font-semibold text-fg-primary">JOB HISTORY</span>
-                        <span className="text-[10px] font-mono text-fg-faint">{jobs.length} jobs</span>
+                        <span className="text-[11px] font-mono text-fg-faint">{jobs.length} jobs</span>
                     </div>
                     <div className="overflow-y-auto" style={{maxHeight: 400}}>
                         <table className="tp-table">
@@ -102,7 +106,7 @@ export default function PipelineWorkspace() {
                                                     : job.status === 'failed'
                                                         ? <AlertTriangle size={10} className="text-red" />
                                                         : <Clock size={10} className="text-amber" />}
-                                                <span className={`text-[10px] font-mono ${
+                                                <span className={`text-[11px] font-mono ${
                                                     job.status === 'completed' || job.status === 'success' ? 'text-green' :
                                                     job.status === 'failed' ? 'text-red' : 'text-amber'
                                                 }`}>
@@ -110,14 +114,14 @@ export default function PipelineWorkspace() {
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(job.created_at)}</td>
-                                        <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(job.started_at)}</td>
-                                        <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(job.finished_at)}</td>
-                                        <td className="text-[10px] text-red max-w-xs truncate">{job.error || ''}</td>
+                                        <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(job.created_at)}</td>
+                                        <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(job.started_at)}</td>
+                                        <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(job.finished_at)}</td>
+                                        <td className="text-[11px] text-red max-w-xs truncate">{job.error || ''}</td>
                                     </tr>
                                 ))}
                                 {jobs.length === 0 && (
-                                    <tr><td colSpan={7} className="text-center py-4 text-fg-faint text-[10px]">No jobs recorded</td></tr>
+                                    <tr><td colSpan={7} className="text-center py-4 text-fg-faint text-[11px]">No jobs recorded</td></tr>
                                 )}
                             </tbody>
                         </table>

@@ -61,13 +61,13 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => setActiveTab('supporting')}
-                        className={`tp-btn text-[10px] h-6 px-2 ${activeTab === 'supporting' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                        className={`tp-btn text-[11px] h-6 px-2 ${activeTab === 'supporting' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
                     >
                         Supporting ({evidence_records.length})
                     </button>
                     <button
                         onClick={() => setActiveTab('counter')}
-                        className={`tp-btn text-[10px] h-6 px-2 ${activeTab === 'counter' ? 'tp-btn-amber' : 'tp-btn-ghost'}`}
+                        className={`tp-btn text-[11px] h-6 px-2 ${activeTab === 'counter' ? 'tp-btn-amber' : 'tp-btn-ghost'}`}
                     >
                         Contradictory ({counter_evidence_records.length})
                     </button>
@@ -75,7 +75,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
             </div>
 
             {/* Visual 5-Stage Stepper Bar */}
-            <div className="grid grid-cols-5 gap-2 text-center text-[10px] font-mono">
+            <div className="grid grid-cols-5 gap-2 text-center text-[11px] font-mono">
                 <div className="p-2 rounded bg-bg-surface border border-primary/30 flex flex-col items-center">
                     <span className="text-fg-faint">01 STAGE</span>
                     <span className="font-bold text-primary">FINDING / LEAD</span>
@@ -104,7 +104,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                     <div className="flex items-center justify-between mb-1.5">
                         <div className="flex items-center gap-2">
                             <Brain size={13} className="text-primary" />
-                            <span className="text-[10px] font-mono text-fg-faint">LEVEL 1 · FINDING / HYPOTHESIS</span>
+                            <span className="text-[11px] font-mono text-fg-faint">LEVEL 1 · FINDING / HYPOTHESIS</span>
                             <span className="tp-badge tp-badge-purple">{finding.type}</span>
                             <span className="tp-badge tp-badge-neutral">{finding.status}</span>
                         </div>
@@ -123,7 +123,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
             {/* Level 2: Analytical Signals */}
             {signals.length > 0 && (
                 <div className="p-3 rounded bg-bg-surface border border-border-subtle space-y-2">
-                    <div className="flex items-center gap-2 text-[10px] font-mono text-purple">
+                    <div className="flex items-center gap-2 text-[11px] font-mono text-purple">
                         <Sparkles size={12} />
                         <span>LEVEL 2 · ANALYTICAL SIGNALS & DECOMPOSED WEIGHTS</span>
                     </div>
@@ -140,7 +140,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                                     <div className="tp-confidence-fill" style={{ width: `${Math.min(sig.value * 100, 100)}%` }} />
                                 </div>
                                 {sig.description && (
-                                    <div className="text-[9px] text-fg-faint mt-1 line-clamp-1">{sig.description}</div>
+                                    <div className="text-[11px] text-fg-faint mt-1 line-clamp-1">{sig.description}</div>
                                 )}
                             </div>
                         ))}
@@ -151,7 +151,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
             {/* Level 3: Relationships Linked */}
             {relationships.length > 0 && (
                 <div className="p-3 rounded bg-bg-surface border border-border-subtle space-y-2">
-                    <div className="flex items-center gap-2 text-[10px] font-mono text-blue">
+                    <div className="flex items-center gap-2 text-[11px] font-mono text-blue">
                         <Network size={12} />
                         <span>LEVEL 3 · SUPPORTING NETWORK RELATIONSHIPS ({relationships.length})</span>
                     </div>
@@ -162,11 +162,11 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                                     <span className="tp-badge tp-badge-blue text-[8px]">{rel.relationship_type}</span>
                                     <span className="tp-badge tp-badge-neutral text-[8px]">{rel.status}</span>
                                 </div>
-                                <div className="font-mono text-[10px] text-fg-primary truncate">
+                                <div className="font-mono text-[11px] text-fg-primary truncate">
                                     {rel.source} → {rel.target}
                                 </div>
                                 {rel.timestamp && (
-                                    <div className="text-[9px] font-mono text-fg-faint mt-1 flex items-center gap-1">
+                                    <div className="text-[11px] font-mono text-fg-faint mt-1 flex items-center gap-1">
                                         <Clock size={9} />
                                         <span>{new Date(rel.timestamp).toLocaleDateString()}</span>
                                     </div>
@@ -180,11 +180,11 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
             {/* Level 4 & 5: Evidence Records & Source Document Excerpt */}
             <div className="p-3 rounded bg-bg-surface border border-border-subtle space-y-2">
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-[10px] font-mono text-green">
+                    <div className="flex items-center gap-2 text-[11px] font-mono text-green">
                         <FileText size={12} />
                         <span>LEVEL 4 & 5 · EVIDENCE RECORDS & CRYPTOGRAPHIC PROVENANCE ({activeEvidence.length})</span>
                     </div>
-                    <span className="text-[9px] font-mono text-fg-faint">SHA-256 HASH VERIFIED</span>
+                    <span className="text-[11px] font-mono text-fg-faint">SHA-256 HASH VERIFIED</span>
                 </div>
 
                 {activeEvidence.length > 0 ? (
@@ -193,19 +193,19 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                             <div key={i} className="p-2.5 rounded bg-bg-root border border-border-subtle space-y-1.5">
                                 <div className="flex items-center justify-between flex-wrap gap-2">
                                     <div className="flex items-center gap-2">
-                                        <span className="tp-badge tp-badge-green text-[9px]">{ev.source_type}</span>
-                                        <span className="font-mono text-[10px] text-fg-primary font-bold">{ev.source_record_id}</span>
-                                        <span className="font-mono text-[9px] text-fg-faint">({ev.evidence_id})</span>
+                                        <span className="tp-badge tp-badge-green text-[11px]">{ev.source_type}</span>
+                                        <span className="font-mono text-[11px] text-fg-primary font-bold">{ev.source_record_id}</span>
+                                        <span className="font-mono text-[11px] text-fg-faint">({ev.evidence_id})</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {ev.timestamp && (
-                                            <span className="text-[9px] font-mono text-fg-faint">
+                                            <span className="text-[11px] font-mono text-fg-faint">
                                                 {new Date(ev.timestamp).toLocaleString()}
                                             </span>
                                         )}
                                         <button
                                             onClick={() => copyToClipboard(ev.hash || ev.evidence_id, ev.evidence_id)}
-                                            className="tp-btn tp-btn-ghost text-[9px] h-5 px-1 gap-1"
+                                            className="tp-btn tp-btn-ghost text-[11px] h-5 px-1 gap-1"
                                             title="Copy SHA-256 Hash"
                                         >
                                             {copiedId === ev.evidence_id ? <Check size={10} className="text-green" /> : <Copy size={10} />}
@@ -233,7 +233,7 @@ export function EvidenceChainWidget({ chainData, isLoading, title = "Traceable E
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-4 text-[10px] font-mono text-fg-faint">
+                    <div className="text-center py-4 text-[11px] font-mono text-fg-faint">
                         NO {activeTab.toUpperCase()} EVIDENCE FOUND
                     </div>
                 )}

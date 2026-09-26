@@ -38,7 +38,7 @@ const ACTION_ICONS = {
 function ScoreBar({ label, value, maxLabel }) {
     return (
         <div className="space-y-0.5">
-            <div className="flex items-center justify-between text-[9px] text-fg-secondary">
+            <div className="flex items-center justify-between text-[11px] text-fg-secondary">
                 <span>{label}</span>
                 <span className="font-mono">{value}</span>
             </div>
@@ -69,14 +69,14 @@ function RecommendationCard({ rec, onAction }) {
             <div className="flex items-start gap-2">
                 <ActionIcon size={14} className="mt-0.5 shrink-0 text-primary" />
                 <div className="flex-1 min-w-0">
-                    <div className="text-[10px] font-semibold text-fg-primary">{rec.title}</div>
-                    <div className="text-[9px] text-fg-faint mt-0.5">{rec.reason}</div>
+                    <div className="text-[11px] font-semibold text-fg-primary">{rec.title}</div>
+                    <div className="text-[11px] text-fg-faint mt-0.5">{rec.reason}</div>
                     <div className="flex items-center gap-2 mt-1">
                         <span className={`tp-badge ${rec.priority === 'high' ? 'tp-badge-yellow' : rec.priority === 'medium' ? 'tp-badge-blue' : 'tp-badge-neutral'}`}>
                             {rec.priority}
                         </span>
                         <span className="tp-badge tp-badge-green">{rec.action_type}</span>
-                        {rec.confidence && <span className="text-[9px] text-fg-faint font-mono">conf: {(rec.confidence * 100).toFixed(0)}%</span>}
+                        {rec.confidence && <span className="text-[11px] text-fg-faint font-mono">conf: {(rec.confidence * 100).toFixed(0)}%</span>}
                     </div>
                 </div>
                 <button onClick={() => setExpanded(!expanded)} className="text-fg-faint hover:text-fg-secondary">
@@ -89,7 +89,7 @@ function RecommendationCard({ rec, onAction }) {
                     {/* Score components */}
                     {rec.score_components && (
                         <div className="space-y-1">
-                            <div className="text-[9px] font-semibold text-fg-faint">WHY THIS IS SUGGESTED</div>
+                            <div className="text-[11px] font-semibold text-fg-faint">WHY THIS IS SUGGESTED</div>
                             <ScoreBar label="Evidence value" value={rec.score_components.evidence_value || 0} />
                             <ScoreBar label="Information gain" value={rec.score_components.information_gain || 0} />
                             <ScoreBar label="Cross-case relevance" value={rec.score_components.cross_case_relevance || 0} />
@@ -100,7 +100,7 @@ function RecommendationCard({ rec, onAction }) {
 
                     {/* Context */}
                     {rec.context && (
-                        <div className="text-[9px] text-fg-faint">
+                        <div className="text-[11px] text-fg-faint">
                             {rec.context.case_id && <div>Case: {rec.context.case_id}</div>}
                             {rec.context.entity_id && <div>Entity: {rec.context.entity_id}</div>}
                         </div>
@@ -109,20 +109,20 @@ function RecommendationCard({ rec, onAction }) {
                     {/* Feedback buttons */}
                     {!feedback ? (
                         <div className="flex items-center gap-1.5 pt-1">
-                            <span className="text-[9px] text-fg-faint mr-1">Action:</span>
+                            <span className="text-[11px] text-fg-faint mr-1">Action:</span>
                             {[
                                 { key: 'open', label: 'Open', icon: ExternalLink },
                                 { key: 'dismiss', label: 'Dismiss', icon: XCircle },
                                 { key: 'defer', label: 'Defer', icon: Clock3 },
                                 { key: 'completed', label: 'Done', icon: CheckCircle2 },
                             ].map(({ key, label, icon: Icon }) => (
-                                <button key={key} onClick={() => handleFeedback(key)} className="tp-button h-5 text-[9px] flex items-center gap-0.5">
+                                <button key={key} onClick={() => handleFeedback(key)} className="tp-button h-5 text-[11px] flex items-center gap-0.5">
                                     <Icon size={10} />{label}
                                 </button>
                             ))}
                         </div>
                     ) : (
-                        <div className="flex items-center gap-1 text-[9px] text-emerald-400 pt-1">
+                        <div className="flex items-center gap-1 text-[11px] text-emerald-400 pt-1">
                             <CheckCircle2 size={10} />
                             <span>Recorded: {feedback}</span>
                         </div>
@@ -162,10 +162,10 @@ export default function NextBestActionWorkspace() {
                         <Compass size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">NEXT-BEST ANALYTICAL ACTION</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Contextual recommendations for what to explore next.</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Contextual recommendations for what to explore next.</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <span className="text-[9px] text-fg-faint font-mono">{caseId}</span>
+                    <span className="text-[11px] text-fg-faint font-mono">{caseId}</span>
                     {entityId && <span className="tp-badge tp-badge-blue">FOCUSED: {selectedEntity?.label || entityId}</span>}
                 </div>
             </div>
@@ -173,7 +173,7 @@ export default function NextBestActionWorkspace() {
             <div className="grid gap-3 p-3 xl:grid-cols-[minmax(0,1.3fr)_minmax(280px,0.7fr)]">
                 <div className="space-y-3">
                     {isLoading && (
-                        <div className="text-[10px] text-fg-faint py-8 text-center">Generating recommendations...</div>
+                        <div className="text-[11px] text-fg-faint py-8 text-center">Generating recommendations...</div>
                     )}
 
                     {/* High priority */}
@@ -204,7 +204,7 @@ export default function NextBestActionWorkspace() {
                     )}
 
                     {!isLoading && recommendations.length === 0 && (
-                        <div className="text-[10px] text-fg-faint py-8 text-center">
+                        <div className="text-[11px] text-fg-faint py-8 text-center">
                             No recommendations at this time.
                             <div className="mt-2">Try selecting an entity or expanding the network.</div>
                         </div>
@@ -216,19 +216,19 @@ export default function NextBestActionWorkspace() {
                     <Panel title="RECOMMENDATION SUMMARY" icon={Compass}>
                         <div className="grid grid-cols-2 gap-1.5">
                             <div className="border border-border-subtle bg-bg-root px-2 py-2">
-                                <div className="text-[9px] text-fg-faint">Total</div>
+                                <div className="text-[11px] text-fg-faint">Total</div>
                                 <div className="text-[16px] font-mono text-fg-primary">{recommendations.length}</div>
                             </div>
                             <div className="border border-border-subtle bg-bg-root px-2 py-2">
-                                <div className="text-[9px] text-fg-faint">High</div>
+                                <div className="text-[11px] text-fg-faint">High</div>
                                 <div className="text-[16px] font-mono text-amber-400">{high.length}</div>
                             </div>
                             <div className="border border-border-subtle bg-bg-root px-2 py-2">
-                                <div className="text-[9px] text-fg-faint">Medium</div>
+                                <div className="text-[11px] text-fg-faint">Medium</div>
                                 <div className="text-[16px] font-mono text-blue-400">{medium.length}</div>
                             </div>
                             <div className="border border-border-subtle bg-bg-root px-2 py-2">
-                                <div className="text-[9px] text-fg-faint">Low</div>
+                                <div className="text-[11px] text-fg-faint">Low</div>
                                 <div className="text-[16px] font-mono text-fg-secondary">{low.length}</div>
                             </div>
                         </div>
@@ -237,8 +237,8 @@ export default function NextBestActionWorkspace() {
                     <Panel title="FILTERS" icon={Target}>
                         <div className="space-y-2">
                             <div>
-                                <div className="text-[9px] text-fg-faint mb-1">Action type</div>
-                                <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="tp-input h-6 w-full text-[10px]">
+                                <div className="text-[11px] text-fg-faint mb-1">Action type</div>
+                                <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="tp-input h-6 w-full text-[11px]">
                                     <option value="">All types</option>
                                     <option value="inspect_entity">Inspect entity</option>
                                     <option value="expand_network">Expand network</option>
@@ -256,7 +256,7 @@ export default function NextBestActionWorkspace() {
                     </Panel>
 
                     <Panel title="HOW THIS WORKS" icon={Compass}>
-                        <div className="space-y-1.5 text-[9px] text-fg-faint">
+                        <div className="space-y-1.5 text-[11px] text-fg-faint">
                             <div>• Recommendations use current investigation context</div>
                             <div>• Score components are transparent and explainable</div>
                             <div>• Feedback is recorded but does not automatically retrain</div>

@@ -72,7 +72,12 @@ const CASE_STATUS_COLORS = {
 export function AppShell({ children }) {
     const [location] = useLocation();
     const { activeCase, setCommandPaletteOpen, selectedEntity } = useInvestigation();
-    const [railCollapsed, setRailCollapsed] = useState(false);
+    const [railCollapsed, setRailCollapsed] = useState(() => {
+        try { return localStorage.getItem('sg-rail-collapsed') === 'true'; } catch { return false; }
+    });
+    useEffect(() => {
+        try { localStorage.setItem('sg-rail-collapsed', String(railCollapsed)); } catch {}
+    }, [railCollapsed]);
     const { data: healthData } = useHealthCheck();
     const { data: overview } = useGetGraphOverview();
 
@@ -102,7 +107,7 @@ export function AppShell({ children }) {
             <header className="flex items-center h-9 px-3 bg-bg-surface border-b border-border-default shrink-0 gap-2 z-30">
                 {/* App identity */}
                 <Link href="/" className="flex items-center gap-1.5 hover:opacity-90 cursor-pointer shrink-0">
-                    <div className="w-5 h-5 rounded-sm bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[10px] tracking-tighter">SG</div>
+                    <div className="w-5 h-5 rounded-sm bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[11px] tracking-tighter">SG</div>
                     <span className="text-[12px] font-semibold text-fg-primary hidden sm:inline">SentinelGraph</span>
                 </Link>
 
@@ -111,12 +116,12 @@ export function AppShell({ children }) {
                 {/* Active case — always visible, links to case detail */}
                 {activeCase && (
                     <Link href="/cases" className="flex items-center gap-2 min-w-0 hover:opacity-80 cursor-pointer group">
-                        <span className="text-[10px] text-fg-faint shrink-0 hidden md:inline">CASE</span>
+                        <span className="text-[11px] text-fg-faint shrink-0 hidden md:inline">CASE</span>
                         <span className="font-mono text-[11px] text-primary shrink-0">{activeCase.id}</span>
                         <span className="text-[11px] text-fg-secondary truncate max-w-[240px] hidden lg:inline">
                             {activeCase.title}
                         </span>
-                        <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border shrink-0 ${caseStatusCls}`}>
+                        <span className={`text-[11px] font-mono px-1.5 py-0.5 rounded border shrink-0 ${caseStatusCls}`}>
                             {activeCase.status}
                         </span>
                     </Link>
@@ -126,7 +131,7 @@ export function AppShell({ children }) {
                 {selectedEntity && (
                     <>
                         <div className="w-px h-4 bg-border-subtle mx-1 hidden lg:block" />
-                        <span className="text-[10px] text-fg-faint hidden lg:inline shrink-0">ENTITY</span>
+                        <span className="text-[11px] text-fg-faint hidden lg:inline shrink-0">ENTITY</span>
                         <span className="text-[11px] text-fg-secondary truncate max-w-[180px] hidden lg:inline font-mono">
                             {selectedEntity.name || selectedEntity.id}
                         </span>
@@ -142,13 +147,13 @@ export function AppShell({ children }) {
                 >
                     <Search size={11} />
                     <span className="hidden md:inline">Search</span>
-                    <kbd className="hidden lg:inline text-[9px] font-mono text-fg-faint bg-bg-elevated px-1 rounded">⌘K</kbd>
+                    <kbd className="hidden lg:inline text-[11px] font-mono text-fg-faint bg-bg-elevated px-1 rounded">⌘K</kbd>
                 </button>
 
                 <div className="w-px h-4 bg-border-subtle mx-1" />
 
                 {/* Health indicator */}
-                <div className="flex items-center gap-1.5 text-[10px] shrink-0" title={`API ${healthStatus} · ${nodeCount != null ? `${nodeCount} nodes` : '...'}`}>
+                <div className="flex items-center gap-1.5 text-[11px] shrink-0" title={`API ${healthStatus} · ${nodeCount != null ? `${nodeCount} nodes` : '...'}`}>
                     <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${
                         healthStatus === 'ok' ? 'bg-green' :
                         healthStatus === 'degraded' ? 'bg-amber' : 'bg-fg-faint animate-pulse'
@@ -166,7 +171,7 @@ export function AppShell({ children }) {
                     {NAV_SECTIONS.map((section) => (
                         <div key={section.id} className="py-1">
                             {!railCollapsed && (
-                                <div className="px-3 pt-2 pb-0.5 text-[9px] font-semibold text-fg-faint uppercase tracking-widest">{section.label}</div>
+                                <div className="px-3 pt-2 pb-0.5 text-[11px] font-semibold text-fg-faint uppercase tracking-widest">{section.label}</div>
                             )}
                             {section.items.map((item) => {
                                 const Icon = item.icon;

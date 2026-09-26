@@ -101,7 +101,7 @@ export default function JudgeDemoWalkthrough() {
             </div>
 
             <div className="mt-8 space-y-4">
-                <div className="text-[10px] font-mono text-fg-faint mb-2">TOUR ITINERARY (6 STEPS)</div>
+                <div className="text-[11px] font-mono text-fg-faint mb-2">TOUR ITINERARY (6 STEPS)</div>
                 {STEPS.map((step) => (
                     <div key={step.id} className="tp-panel p-4 flex flex-col md:flex-row gap-4 items-start md:items-center hover:bg-bg-hover transition-colors">
                         <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${step.bg} ${step.color} border border-border-subtle`}>
@@ -121,7 +121,7 @@ export default function JudgeDemoWalkthrough() {
             </div>
 
             <div className="mt-8 pt-8 border-t border-border-subtle text-center space-y-2">
-                <div className="text-[10px] font-mono text-fg-faint uppercase tracking-widest">
+                <div className="text-[11px] font-mono text-fg-faint uppercase tracking-widest">
                     CORE SYSTEM PRINCIPLES
                 </div>
                 <div className="flex justify-center gap-4 text-[11px] font-mono text-fg-secondary">

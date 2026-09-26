@@ -1,17 +1,16 @@
 /**
  * components/login-page.jsx
  *
- * Simple login form for SentinelGraph.  In DEMO_MODE the user is
- * automatically logged in and this page is not shown.  When the backend
- * requires real authentication the user sees a username + password form.
+ * Login form for SentinelGraph.  In DEMO_MODE the user is automatically
+ * logged in and this page is not shown.
  *
- * The form matches the POST /api/auth/token JSON contract:
- *   { "username": "...", "password": "..." }
+ * Styling: uses design-token classes from index.css only — no raw Tailwind
+ * palette values.  Labels are linked to inputs via htmlFor/id for a11y.
  */
 
 import React, { useState } from 'react';
 import { useAuth } from '@/state/auth-context';
-import { Shield, AlertCircle, Loader2 } from 'lucide-react';
+import { Shield, XCircle, Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const { login, demoMode } = useAuth();
@@ -27,65 +26,78 @@ export default function LoginPage() {
     try {
       await login(username, password);
     } catch (err) {
-      setError(err.message || 'Login failed');
+      setError(err.message || 'Login failed. Check credentials and try again.');
     } finally {
       setBusy(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">
-      <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-2xl">
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mb-3">
-            <Shield className="w-7 h-7 text-emerald-400" />
+    <div className="min-h-screen flex items-center justify-center bg-bg-root text-fg-primary">
+      <div className="w-full max-w-sm bg-bg-panel border border-border-default rounded p-8 shadow-2xl">
+
+        {/* Brand */}
+        <div className="flex flex-col items-center mb-7">
+          <div className="w-12 h-12 rounded border border-primary/30 bg-primary-bg flex items-center justify-center mb-3">
+            <Shield className="w-6 h-6 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">SentinelGraph</h1>
-          <p className="text-zinc-400 text-sm mt-1">Investigative Intelligence</p>
+          <h1 className="text-xl font-bold tracking-tight text-fg-primary">SentinelGraph</h1>
+          <p className="text-fg-muted text-[12px] mt-1 font-mono uppercase tracking-widest">Investigative Intelligence</p>
         </div>
 
+        {/* Error banner */}
         {error && (
-          <div className="flex items-center gap-2 bg-red-500/10 text-red-400 text-sm rounded-lg p-3 mb-4">
-            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <div role="alert" className="flex items-start gap-2 bg-red-bg border border-red/30 text-fg-primary text-[13px] rounded p-3 mb-4">
+            <XCircle className="w-4 h-4 text-red shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <div>
-            <label className="block text-xs font-medium text-zinc-400 mb-1">Username</label>
+            <label htmlFor="sg-username" className="block text-[12px] font-medium text-fg-secondary mb-1.5">
+              Username
+            </label>
             <input
+              id="sg-username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              placeholder="Enter username"
+              className="w-full bg-bg-elevated border border-border-default rounded px-3 py-2 text-[13px] text-fg-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+              placeholder="analyst@domain"
+              autoComplete="username"
               autoFocus
+              required
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-zinc-400 mb-1">Password</label>
+            <label htmlFor="sg-password" className="block text-[12px] font-medium text-fg-secondary mb-1.5">
+              Password
+            </label>
             <input
+              id="sg-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              placeholder="Enter password"
+              className="w-full bg-bg-elevated border border-border-default rounded px-3 py-2 text-[13px] text-fg-primary focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              required
             />
           </div>
           <button
             type="submit"
             disabled={busy}
-            className="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-semibold rounded-lg px-4 py-2.5 text-sm flex items-center justify-center gap-2 transition-colors"
+            className="w-full bg-primary hover:bg-primary-hover disabled:opacity-50 text-primary-fg font-semibold rounded px-4 py-2.5 text-[13px] flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             {busy && <Loader2 className="w-4 h-4 animate-spin" />}
-            {busy ? 'Logging in…' : 'Log In'}
+            {busy ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 
         {demoMode && (
-          <p className="text-zinc-500 text-xs text-center mt-4">
-            Demo mode — auto-login active
+          <p className="text-fg-faint text-[11px] text-center mt-5 font-mono">
+            DEMO MODE — authentication bypassed
           </p>
         )}
       </div>

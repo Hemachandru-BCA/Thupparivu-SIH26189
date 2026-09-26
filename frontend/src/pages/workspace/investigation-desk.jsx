@@ -16,6 +16,7 @@ import {
     DollarSign, Layers, BookOpen, Zap, MessageSquare, CornerDownRight
 } from "lucide-react";
 import { formatNumber } from "@/utils/format";
+import { StatusLabel } from "@/components/ui";
 
 function WorkflowCard({ label, description, href, icon: Icon, count = null, status = null }) {
     const leftCls = { active: "border-l-primary", warning: "border-l-amber", empty: "border-l-border-strong" }[status] || "border-l-border-strong";
@@ -25,7 +26,7 @@ function WorkflowCard({ label, description, href, icon: Icon, count = null, stat
                 <Icon size={13} className="shrink-0 text-fg-faint group-hover:text-primary transition-colors" />
                 <div className="flex-1 min-w-0">
                     <div className="text-[12px] font-medium text-fg-primary leading-tight">{label}</div>
-                    <div className="text-[10px] text-fg-muted truncate">{description}</div>
+                    <div className="text-[11px] text-fg-muted truncate">{description}</div>
                 </div>
                 {count != null && <span className="text-[11px] font-mono text-fg-faint shrink-0">{count}</span>}
                 <ArrowRight size={11} className="text-fg-faint group-hover:text-fg-secondary shrink-0 transition-colors" />
@@ -37,7 +38,7 @@ function WorkflowCard({ label, description, href, icon: Icon, count = null, stat
 function StatusRow({ label, value, color = "text-fg-primary" }) {
     return (
         <div className="flex items-center justify-between px-3 py-1.5 border-b border-border-subtle last:border-b-0">
-            <span className="text-[10px] text-fg-faint uppercase tracking-wide">{label}</span>
+            <span className="text-[11px] text-fg-faint uppercase tracking-wide">{label}</span>
             <span className={`text-[12px] font-mono font-semibold ${color}`}>{value ?? "—"}</span>
         </div>
     );
@@ -48,10 +49,10 @@ function FindingRow({ finding, onClick }) {
     const confColor = conf >= 0.8 ? "text-green" : conf >= 0.6 ? "text-blue" : conf >= 0.4 ? "text-amber" : "text-red";
     return (
         <button onClick={onClick} className="w-full text-left flex items-start gap-3 px-3 py-1.5 border-b border-border-subtle hover:bg-bg-hover transition-colors cursor-pointer group">
-            <span className={`text-[10px] font-mono shrink-0 pt-0.5 ${confColor}`}>{(conf * 100).toFixed(0)}%</span>
+            <span className={`text-[11px] font-mono shrink-0 pt-0.5 ${confColor}`}>{(conf * 100).toFixed(0)}%</span>
             <div className="flex-1 min-w-0">
                 <div className="text-[11px] text-fg-primary truncate">{finding.subject_label || finding.subject_id}</div>
-                <div className="text-[10px] text-fg-muted truncate">{finding.finding_type || "Finding"}</div>
+                <div className="text-[11px] text-fg-muted truncate">{finding.finding_type || "Finding"}</div>
             </div>
             <ChevronRight size={11} className="text-fg-faint group-hover:text-fg-secondary shrink-0 mt-0.5 transition-colors" />
         </button>
@@ -61,13 +62,18 @@ function FindingRow({ finding, onClick }) {
 function GhostRow({ ghost, onClick }) {
     const conf = ghost.confidence || 0;
     return (
-        <button onClick={onClick} className="w-full text-left flex items-start gap-3 px-3 py-1.5 border-b border-border-subtle hover:bg-bg-hover transition-colors cursor-pointer group">
-            <AlertTriangle size={12} className="text-amber shrink-0 mt-0.5" />
-            <div className="flex-1 min-w-0">
-                <div className="text-[11px] text-fg-primary truncate">{ghost.label || ghost.ghost_id}</div>
-                <div className="text-[10px] text-fg-muted truncate">{ghost.subtype || "Anomalous entity"}</div>
+        <button onClick={onClick} className="w-full text-left flex flex-col gap-1.5 px-3 py-2 border-b border-border-subtle hover:bg-bg-hover transition-colors cursor-pointer group">
+            <div className="flex items-start gap-2 w-full">
+                <AlertTriangle size={12} className="text-amber shrink-0 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                    <div className="text-[11px] font-medium text-fg-primary truncate">{ghost.label || ghost.ghost_id}</div>
+                    <div className="text-[11px] text-fg-muted truncate">{ghost.subtype || "Anomalous entity"}</div>
+                </div>
             </div>
-            <span className="text-[10px] font-mono text-amber shrink-0">{(conf * 100).toFixed(0)}%</span>
+            <div className="flex items-center gap-2 pl-5 mt-0.5">
+                <StatusLabel status="hypothesis" className="!text-[11px] !py-0 !px-1" />
+                <span className="text-[11px] font-mono font-semibold text-amber shrink-0">{(conf * 100).toFixed(0)}% CONFIDENCE</span>
+            </div>
         </button>
     );
 }
@@ -75,10 +81,10 @@ function GhostRow({ ghost, onClick }) {
 function SectionHead({ label, href, count }) {
     return (
         <div className="flex items-center justify-between px-3 py-1.5 border-b border-border-default bg-bg-surface shrink-0">
-            <span className="text-[10px] font-semibold text-fg-faint uppercase tracking-widest">{label}</span>
+            <span className="text-[11px] font-semibold text-fg-faint uppercase tracking-widest">{label}</span>
             <div className="flex items-center gap-2">
-                {count != null && <span className="text-[10px] font-mono text-fg-faint">{count}</span>}
-                {href && <Link href={href}><span className="text-[10px] text-primary hover:underline cursor-pointer">All</span></Link>}
+                {count != null && <span className="text-[11px] font-mono text-fg-faint">{count}</span>}
+                {href && <Link href={href}><span className="text-[11px] text-primary hover:underline cursor-pointer">All</span></Link>}
             </div>
         </div>
     );
@@ -125,13 +131,13 @@ export default function InvestigationDesk() {
                         <>
                             <div className="flex items-center gap-2 mb-1">
                                 <FolderOpen size={11} className="text-primary shrink-0" />
-                                <span className="text-[10px] font-mono text-primary font-semibold">{activeCase.id}</span>
-                                <span className="text-[9px] px-1.5 py-0.5 rounded border border-green/40 text-green bg-green-bg font-mono ml-auto">{activeCase.status}</span>
+                                <span className="text-[11px] font-mono text-primary font-semibold">{activeCase.id}</span>
+                                <span className="text-[11px] px-1.5 py-0.5 rounded border border-green/40 text-green bg-green-bg font-mono ml-auto">{activeCase.status}</span>
                             </div>
                             <div className="text-[12px] text-fg-primary font-medium leading-snug">{activeCase.title}</div>
-                            <div className="mt-0.5 text-[10px] text-fg-muted">{activeCase.jurisdiction}</div>
+                            <div className="mt-0.5 text-[11px] text-fg-muted">{activeCase.jurisdiction}</div>
                             {activeCase.classification && (
-                                <div className="mt-1.5 text-[9px] font-mono text-amber bg-amber-bg border border-amber/30 px-1.5 py-0.5 rounded inline-block">
+                                <div className="mt-1.5 text-[11px] font-mono text-amber bg-amber-bg border border-amber/30 px-1.5 py-0.5 rounded inline-block">
                                     {activeCase.classification}
                                 </div>
                             )}
@@ -140,17 +146,19 @@ export default function InvestigationDesk() {
                         <Link href="/cases"><div className="flex items-center gap-2 text-[11px] text-primary hover:underline cursor-pointer"><FolderOpen size={12} /><span>Open a case to begin</span></div></Link>
                     )}
                 </div>
-                <SectionHead label="Investigate" />
-                <WorkflowCard label="Search entities" description="Persons, orgs, accounts, locations" href="/entities" icon={Users} count={formatNumber(overview?.nodeCount ?? overview?.totalNodes)} status={overview ? "active" : "empty"} />
+                <SectionHead label="Primary Workflows" />
                 <WorkflowCard label="Network graph" description="Relationships and connections" href="/network" icon={NetworkIcon} status="active" />
+                <WorkflowCard label="Intelligence Findings" description="Detected patterns & assessments" href="/findings" icon={Brain} count={findings.length || null} status={findings.length > 0 ? "active" : "empty"} />
+                <WorkflowCard label="Ghost Anomalies" description="Suspicious hidden entities" href="/ghosts" icon={AlertTriangle} count={highGhosts.length > 0 ? highGhosts.length : null} status={highGhosts.length > 0 ? "warning" : "empty"} />
+
+                <SectionHead label="Secondary Analysis" />
+                <WorkflowCard label="Search entities" description="Persons, orgs, accounts, locations" href="/entities" icon={Users} count={formatNumber(overview?.nodeCount ?? overview?.totalNodes)} status={overview ? "active" : "empty"} />
+                <WorkflowCard label="Evidence Register" description="Source records and documents" href="/evidence" icon={FileText} status="active" />
                 <WorkflowCard label="Timeline" description="Chronological event analysis" href="/timeline" icon={Clock} status="active" />
-                <WorkflowCard label="Evidence" description="Source records and documents" href="/evidence" icon={FileText} status="active" />
-                <SectionHead label="Intelligence" />
-                <WorkflowCard label="Findings" description="Detected patterns and assessments" href="/findings" icon={Brain} count={findings.length || null} status={findings.length > 0 ? "active" : "empty"} />
-                <WorkflowCard label="Anomalies" description="Suspicious entities for review" href="/ghosts" icon={AlertTriangle} count={highGhosts.length > 0 ? highGhosts.length : null} status={highGhosts.length > 0 ? "warning" : "empty"} />
                 <WorkflowCard label="Financial flows" description="Account transfers and fund tracing" href="/financial" icon={DollarSign} status="active" />
                 <WorkflowCard label="Communities" description="Clusters and group analysis" href="/communities" icon={Layers} status="active" />
-                <SectionHead label="Output" />
+                
+                <SectionHead label="Output & Utilities" />
                 <WorkflowCard label="Dossiers" description="Case reports and packages" href="/dossiers" icon={BookOpen} status="active" />
                 <WorkflowCard label="Simulation" description="Counterfactual analysis" href="/simulation" icon={Zap} status="active" />
                 <WorkflowCard label="Assistant" description="Context-aware queries" href="/copilot" icon={MessageSquare} status="active" />
@@ -158,7 +166,7 @@ export default function InvestigationDesk() {
 
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <div className="px-4 py-3 border-b border-border-default bg-bg-surface shrink-0">
-                    <div className="text-[10px] font-semibold text-fg-faint uppercase tracking-widest mb-1.5">Case Brief</div>
+                    <div className="text-[11px] font-semibold text-fg-faint uppercase tracking-widest mb-1.5">Case Brief</div>
                     {brief?.summary ? (
                         <p className="text-[12px] text-fg-secondary leading-relaxed max-w-2xl">{brief.summary}</p>
                     ) : overviewLoading ? (
@@ -206,7 +214,7 @@ export default function InvestigationDesk() {
                                         <div className="flex items-center gap-2 px-3 py-1.5 hover:bg-bg-hover cursor-pointer border-b border-border-subtle last:border-b-0">
                                             <FolderOpen size={11} className="text-fg-faint shrink-0" />
                                             <span className="text-[11px] text-fg-primary truncate flex-1">{c.title || c.case_id || c.id}</span>
-                                            <span className={`text-[9px] font-mono px-1 rounded border shrink-0 ${(c.status||"ACTIVE")==="ACTIVE" ? "text-green border-green/40 bg-green-bg" : "text-fg-muted border-border-subtle"}`}>{c.status || "ACTIVE"}</span>
+                                            <span className={`text-[11px] font-mono px-1 rounded border shrink-0 ${(c.status||"ACTIVE")==="ACTIVE" ? "text-green border-green/40 bg-green-bg" : "text-fg-muted border-border-subtle"}`}>{c.status || "ACTIVE"}</span>
                                         </div>
                                     </Link>
                                 ))}
@@ -233,7 +241,7 @@ export default function InvestigationDesk() {
 
             <div className="w-52 border-l border-border-default flex flex-col bg-bg-surface shrink-0 overflow-y-auto">
                 <div className="px-3 py-2 border-b border-border-default shrink-0">
-                    <span className="text-[10px] font-semibold text-fg-faint uppercase tracking-widest">Start here</span>
+                    <span className="text-[11px] font-semibold text-fg-faint uppercase tracking-widest">Start here</span>
                 </div>
                 <div className="p-2 space-y-0.5">
                     <ActionLink href="/entities" icon={Users} label="Search for an entity" />
@@ -248,7 +256,7 @@ export default function InvestigationDesk() {
                     <ActionLink href="/copilot" icon={MessageSquare} label="Ask the assistant" />
                 </div>
                 <div className="px-3 py-2 border-t border-border-default mt-auto">
-                    <p className="text-[9px] text-fg-faint leading-relaxed">
+                    <p className="text-[11px] text-fg-faint leading-relaxed">
                         Press <kbd className="font-mono bg-bg-elevated px-1 rounded">⌘K</kbd> or <kbd className="font-mono bg-bg-elevated px-1 rounded">/</kbd> to search
                     </p>
                 </div>

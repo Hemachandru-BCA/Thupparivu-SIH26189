@@ -47,7 +47,7 @@ export default function CommunitiesWorkspace() {
                 <span className="text-[11px] font-semibold text-fg-primary">COMMUNITIES</span>
                 <span className="tp-badge tp-badge-cyan">{stats.total} clusters</span>
                 <div className="w-px h-4 bg-border-default" />
-                <span className="text-[10px] font-mono text-fg-faint">LARGEST: {stats.largest} · AVG: {stats.avgSize}</span>
+                <span className="text-[11px] font-mono text-fg-faint">LARGEST: {stats.largest} · AVG: {stats.avgSize}</span>
                 <div className="flex-1" />
                 <div className="relative max-w-xs">
                     <Search size={11} className="absolute left-2 top-1/2 -translate-y-1/2 text-fg-faint" />
@@ -76,7 +76,7 @@ export default function CommunitiesWorkspace() {
                                 </div>
                                 <div className="space-y-0.5">
                                     {types.slice(0, 4).map(([type, count]) => (
-                                        <div key={type} className="flex items-center justify-between text-[9px]">
+                                        <div key={type} className="flex items-center justify-between text-[11px]">
                                             <span className="text-fg-faint">{type}</span>
                                             <span className="font-mono text-fg-secondary">{count}</span>
                                         </div>

@@ -94,7 +94,7 @@ export default function FinancialWorkspace() {
                         Trace transaction velocity, fan-in/fan-out patterns, circular layering, and rapid pass-through nodes across accounts.
                     </p>
                 </div>
-                <div className="text-[10px] font-mono text-fg-faint text-right">
+                <div className="text-[11px] font-mono text-fg-faint text-right">
                     <span>4,033 ACCOUNTS</span> · <span>12,136 TRANSFERS</span>
                 </div>
             </div>
@@ -160,7 +160,7 @@ export default function FinancialWorkspace() {
                                 <div className="text-[12px] font-semibold text-fg-primary">
                                     Identified {traceResult.paths?.length || 0} multi-hop financial transfer paths originating from {traceResult.source}
                                 </div>
-                                <div className="text-[10px] text-fg-muted font-mono mt-0.5">
+                                <div className="text-[11px] text-fg-muted font-mono mt-0.5">
                                     {traceResult.note}
                                 </div>
                             </div>
@@ -173,7 +173,7 @@ export default function FinancialWorkspace() {
                         <div className="lg:col-span-8 tp-panel">
                             <div className="tp-panel-header">
                                 <span className="text-[11px] font-semibold text-fg-primary">TRANSACTION CHAINS & VELOCITY</span>
-                                <span className="text-[10px] font-mono text-fg-faint">HOPS: {maxHops}</span>
+                                <span className="text-[11px] font-mono text-fg-faint">HOPS: {maxHops}</span>
                             </div>
                             <div className="p-3.5 space-y-4 overflow-y-auto" style={{ maxHeight: 450 }}>
                                 {traceResult.paths?.map((p, pIdx) => (
@@ -191,11 +191,11 @@ export default function FinancialWorkspace() {
                                                         onClick={() => setSelectedEntity({ id: hop.from, label: hop.from_label, type: 'ACCOUNT' })}
                                                         className="p-2 rounded bg-bg-panel border border-border-default hover:border-primary cursor-pointer text-center min-w-[140px] shrink-0"
                                                     >
-                                                        <div className="text-[10px] font-mono text-fg-muted truncate">{hop.from}</div>
+                                                        <div className="text-[11px] font-mono text-fg-muted truncate">{hop.from}</div>
                                                         <div className="text-[11px] font-medium text-fg-primary truncate">{hop.from_label}</div>
                                                     </div>
                                                     <div className="flex flex-col items-center px-1 text-center shrink-0">
-                                                        <span className="text-[10px] font-mono text-green font-semibold">₹{formatNumber(hop.amount)}</span>
+                                                        <span className="text-[11px] font-mono text-green font-semibold">₹{formatNumber(hop.amount)}</span>
                                                         <ArrowRight size={14} className="text-fg-faint mt-0.5" />
                                                     </div>
                                                     {hIdx === p.path.length - 1 && (
@@ -203,7 +203,7 @@ export default function FinancialWorkspace() {
                                                             onClick={() => setSelectedEntity({ id: hop.to, label: hop.to_label, type: 'ACCOUNT' })}
                                                             className="p-2 rounded bg-bg-panel border border-border-default hover:border-primary cursor-pointer text-center min-w-[140px] shrink-0"
                                                         >
-                                                            <div className="text-[10px] font-mono text-fg-muted truncate">{hop.to}</div>
+                                                            <div className="text-[11px] font-mono text-fg-muted truncate">{hop.to}</div>
                                                             <div className="text-[11px] font-medium text-fg-primary truncate">{hop.to_label}</div>
                                                         </div>
                                                     )}
@@ -232,7 +232,7 @@ export default function FinancialWorkspace() {
                                                 {ind.flag}
                                             </span>
                                         </div>
-                                        <div className="text-[10px] text-fg-muted">
+                                        <div className="text-[11px] text-fg-muted">
                                             {ind.label} · In: {ind.fan_in} | Out: {ind.fan_out}
                                         </div>
                                     </div>

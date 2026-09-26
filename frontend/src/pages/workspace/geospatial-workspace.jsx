@@ -18,7 +18,7 @@ function Panel({ title, icon: Icon, children, className = '' }) {
 function Stat({ label, value, accent }) {
     return (
         <div className="border border-border-subtle bg-bg-root px-2 py-2">
-            <div className="text-[9px] uppercase tracking-wide text-fg-faint">{label}</div>
+            <div className="text-[11px] uppercase tracking-wide text-fg-faint">{label}</div>
             <div className={`mt-1 text-[16px] font-mono ${accent || 'text-fg-primary'}`}>{value}</div>
         </div>
     );
@@ -29,14 +29,14 @@ function LocationRow({ obs, onHighlight }) {
         <div className="flex items-start gap-2 border-b border-border-subtle pb-1.5 hover:bg-bg-hover px-1" onMouseEnter={() => onHighlight(obs)}>
             <MapPin size={12} className="mt-0.5 shrink-0 text-amber-400" />
             <div className="flex-1 min-w-0">
-                <div className="text-[10px] text-fg-secondary truncate">{obs.address_text || obs.location_id}</div>
+                <div className="text-[11px] text-fg-secondary truncate">{obs.address_text || obs.location_id}</div>
                 <div className="flex gap-2 mt-0.5">
                     <span className="tp-badge tp-badge-blue">{obs.entity_type || 'location'}</span>
                     {obs.entity_label && <span className="tp-badge tp-badge-neutral">{obs.entity_label}</span>}
-                    <span className="text-[9px] text-fg-faint font-mono">{obs.timestamp?.slice(0, 10)}</span>
+                    <span className="text-[11px] text-fg-faint font-mono">{obs.timestamp?.slice(0, 10)}</span>
                 </div>
             </div>
-            <div className="text-right text-[9px] text-fg-faint font-mono shrink-0">
+            <div className="text-right text-[11px] text-fg-faint font-mono shrink-0">
                 <div>{obs.latitude?.toFixed(3)}</div>
                 <div>{obs.longitude?.toFixed(3)}</div>
             </div>
@@ -51,11 +51,11 @@ function ClusterRow({ cluster }) {
             <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                     <div className={`w-2 h-2 rounded-full ${COLORS[cluster.cluster_id % COLORS.length]}`} />
-                    <span className="text-[10px] font-mono text-fg-secondary">Cluster {cluster.cluster_id + 1}</span>
+                    <span className="text-[11px] font-mono text-fg-secondary">Cluster {cluster.cluster_id + 1}</span>
                 </div>
-                <span className="text-[9px] font-mono text-fg-faint">{cluster.entity_count} entities · {cluster.observation_count} obs</span>
+                <span className="text-[11px] font-mono text-fg-faint">{cluster.entity_count} entities · {cluster.observation_count} obs</span>
             </div>
-            <div className="mt-1 text-[9px] text-fg-faint">
+            <div className="mt-1 text-[11px] text-fg-faint">
                 {cluster.avg_latitude?.toFixed(4)}°N, {cluster.avg_longitude?.toFixed(4)}°E · radius {cluster.radius_km?.toFixed(2)} km
             </div>
             <div className="mt-1 flex flex-wrap gap-1">
@@ -95,10 +95,10 @@ export default function GeospatialWorkspace() {
                         <MapPin size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">GEOSPATIAL INTELLIGENCE</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Where the network operates — locations, co-occurrence, and spatial patterns.</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Where the network operates — locations, co-occurrence, and spatial patterns.</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <select value={viewMode} onChange={(e) => setViewMode(e.target.value)} className="tp-input h-7 text-[10px]">
+                    <select value={viewMode} onChange={(e) => setViewMode(e.target.value)} className="tp-input h-7 text-[11px]">
                         <option value="observations">Entity Map</option>
                         <option value="clusters">Activity Clusters</option>
                         <option value="proximity">Spatial Proximity</option>
@@ -109,7 +109,7 @@ export default function GeospatialWorkspace() {
             {/* Filters */}
             <div className="flex flex-wrap items-center gap-2 border-b border-border-subtle bg-bg-root px-4 py-2">
                 <Filter size={11} className="text-fg-faint" />
-                <select value={entityFilter} onChange={(e) => setEntityFilter(e.target.value)} className="tp-input h-6 text-[10px]">
+                <select value={entityFilter} onChange={(e) => setEntityFilter(e.target.value)} className="tp-input h-6 text-[11px]">
                     <option value="">All entity types</option>
                     <option value="PERSON">Person</option>
                     <option value="LOCATION">Location</option>
@@ -117,8 +117,8 @@ export default function GeospatialWorkspace() {
                     <option value="VEHICLE">Vehicle</option>
                     <option value="ACCOUNT">Account</option>
                 </select>
-                <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="tp-input h-6 text-[10px]" />
-                <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="tp-input h-6 text-[10px]" />
+                <input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="tp-input h-6 text-[11px]" />
+                <input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="tp-input h-6 text-[11px]" />
                 {selectedEntity?.id && (
                     <span className="tp-badge tp-badge-blue">FOCUSED: {selectedEntity.label || selectedEntity.id}</span>
                 )}
@@ -133,7 +133,7 @@ export default function GeospatialWorkspace() {
                                 <LocationRow key={obs.observation_id || i} obs={obs} onHighlight={setHighlighted} />
                             ))}
                             {!observations.length && !obsLoading && (
-                                <div className="text-[10px] text-fg-faint py-6 text-center">
+                                <div className="text-[11px] text-fg-faint py-6 text-center">
                                     No geographic observations found.
                                     <div className="mt-2">The current dataset may not contain lat/lon data.</div>
                                 </div>
@@ -147,7 +147,7 @@ export default function GeospatialWorkspace() {
                                 <ClusterRow key={cluster.cluster_id} cluster={cluster} />
                             ))}
                             {!clusters.length && (
-                                <div className="text-[10px] text-fg-faint py-6 text-center">No geographic clusters identified.</div>
+                                <div className="text-[11px] text-fg-faint py-6 text-center">No geographic clusters identified.</div>
                             )}
                         </div>
                     )}
@@ -158,18 +158,18 @@ export default function GeospatialWorkspace() {
                                 <div key={i} className="flex items-start gap-2 border-b border-border-subtle pb-1.5 px-1">
                                     <Crosshair size={12} className="mt-0.5 shrink-0 text-emerald-400" />
                                     <div className="flex-1 min-w-0">
-                                        <div className="text-[10px] text-fg-secondary">
+                                        <div className="text-[11px] text-fg-secondary">
                                             {pair.entity_a_label} ↔ {pair.entity_b_label}
                                         </div>
                                         <div className="flex gap-2 mt-0.5">
                                             <span className="tp-badge tp-badge-blue">{pair.distance_km?.toFixed(2)} km</span>
-                                            <span className="text-[9px] text-fg-faint">{pair.co_occurrence_count} co-occurrences</span>
+                                            <span className="text-[11px] text-fg-faint">{pair.co_occurrence_count} co-occurrences</span>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                             {!proxPairs.length && (
-                                <div className="text-[10px] text-fg-faint py-6 text-center">No spatial proximity pairs identified.</div>
+                                <div className="text-[11px] text-fg-faint py-6 text-center">No spatial proximity pairs identified.</div>
                             )}
                         </div>
                     )}
@@ -185,14 +185,14 @@ export default function GeospatialWorkspace() {
                             <Stat label="Proximity Pairs" value={proxPairs.length} />
                         </div>
                         {obsData?.limitations?.[0] && (
-                            <div className="mt-2 text-[9px] text-fg-faint">{obsData.limitations[0]}</div>
+                            <div className="mt-2 text-[11px] text-fg-faint">{obsData.limitations[0]}</div>
                         )}
                     </Panel>
 
                     <Panel title="ENTITY TYPE BREAKDOWN" icon={Users}>
                         <div className="space-y-1">
                             {obsData?.by_entity_type && Object.entries(obsData.by_entity_type).map(([type, count]) => (
-                                <div key={type} className="flex items-center justify-between text-[10px] text-fg-secondary">
+                                <div key={type} className="flex items-center justify-between text-[11px] text-fg-secondary">
                                     <span>{type}</span>
                                     <span className="font-mono">{count}</span>
                                 </div>
@@ -203,10 +203,10 @@ export default function GeospatialWorkspace() {
                     <Panel title="HIGHLIGHTED" icon={Zap}>
                         {highlighted ? (
                             <div className="space-y-1">
-                                <div className="text-[10px] text-fg-secondary">{highlighted.address_text || highlighted.location_id}</div>
-                                <div className="text-[9px] text-fg-faint">{highlighted.entity_type} · {highlighted.entity_label}</div>
-                                <div className="text-[9px] text-fg-faint font-mono">{highlighted.latitude?.toFixed(6)}, {highlighted.longitude?.toFixed(6)}</div>
-                                <div className="text-[9px] text-fg-faint font-mono">{highlighted.timestamp}</div>
+                                <div className="text-[11px] text-fg-secondary">{highlighted.address_text || highlighted.location_id}</div>
+                                <div className="text-[11px] text-fg-faint">{highlighted.entity_type} · {highlighted.entity_label}</div>
+                                <div className="text-[11px] text-fg-faint font-mono">{highlighted.latitude?.toFixed(6)}, {highlighted.longitude?.toFixed(6)}</div>
+                                <div className="text-[11px] text-fg-faint font-mono">{highlighted.timestamp}</div>
                                 {highlighted.evidence_ids?.length > 0 && (
                                     <div className="mt-1 flex flex-wrap gap-1">
                                         {highlighted.evidence_ids.map((eid) => <span key={eid} className="tp-badge tp-badge-green">{eid}</span>)}
@@ -214,7 +214,7 @@ export default function GeospatialWorkspace() {
                                 )}
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint">Hover over a location to inspect details.</div>
+                            <div className="text-[11px] text-fg-faint">Hover over a location to inspect details.</div>
                         )}
                     </Panel>
                 </div>

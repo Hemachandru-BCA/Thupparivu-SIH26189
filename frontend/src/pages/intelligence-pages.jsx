@@ -62,11 +62,11 @@ export function FindingsPage() {
                                 <div className="flex-1 space-y-1">
                                     {(f.confidence_components ?? []).slice(0, 4).map((c) => (
                                         <div key={c.name} className="flex items-center gap-2">
-                                            <div className="w-36 truncate font-mono-ui text-[9px] uppercase text-muted-foreground">{c.name.replace(/_/g, ' ')}</div>
+                                            <div className="w-36 truncate font-mono-ui text-[11px] uppercase text-muted-foreground">{c.name.replace(/_/g, ' ')}</div>
                                             <div className="h-1.5 flex-1 overflow-hidden rounded bg-muted">
                                                 <div className="h-full rounded bg-primary/70" style={{ width: `${Math.min(100, c.value * 100)}%` }} />
                                             </div>
-                                            <div className="w-9 text-right font-mono-ui text-[9px]">{c.value?.toFixed?.(2)}</div>
+                                            <div className="w-9 text-right font-mono-ui text-[11px]">{c.value?.toFixed?.(2)}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -77,7 +77,7 @@ export function FindingsPage() {
                                 <CountChip label="unknown" value={f.unknown?.length ?? 0} tone="neutral" />
                             </div>
                             <div className="flex items-center justify-between">
-                                <span className="font-mono-ui text-[9px] uppercase text-muted-foreground">
+                                <span className="font-mono-ui text-[11px] uppercase text-muted-foreground">
                                     {f.supporting_evidence_ids?.length ?? 0} evidence · {f.counter_evidence_ids?.length ?? 0} counter
                                 </span>
                                 <button
@@ -152,20 +152,20 @@ export function FindingDetailPage() {
                             <div key={i} className="flex items-start gap-2 text-xs">
                                 <Sigma size={13} className="mt-0.5 shrink-0 text-primary" />
                                 <div>
-                                    <div className="font-mono-ui text-[9px] uppercase text-muted-foreground">{s.signal_type.replace(/_/g, ' ')}</div>
+                                    <div className="font-mono-ui text-[11px] uppercase text-muted-foreground">{s.signal_type.replace(/_/g, ' ')}</div>
                                     <div>{s.description}</div>
                                 </div>
                             </div>
                         ))}
                         <div className="mt-3 space-y-1">
-                            <div className="font-mono-ui text-[9px] uppercase text-muted-foreground">confidence components</div>
+                            <div className="font-mono-ui text-[11px] uppercase text-muted-foreground">confidence components</div>
                             {(f.confidence_components ?? []).map((c) => (
                                 <div key={c.name} className="flex items-center gap-2 text-xs">
                                     <span className="w-44 truncate">{c.name.replace(/_/g, ' ')}</span>
                                     <div className="h-1.5 flex-1 overflow-hidden rounded bg-muted">
                                         <div className="h-full rounded bg-chart-3/80" style={{ width: `${Math.min(100, (c.value ?? 0) * 100)}%` }} />
                                     </div>
-                                    <span className="w-20 text-right font-mono-ui text-[9px] text-muted-foreground">w {c.weight}</span>
+                                    <span className="w-20 text-right font-mono-ui text-[11px] text-muted-foreground">w {c.weight}</span>
                                 </div>
                             ))}
                         </div>
@@ -202,7 +202,7 @@ function EvidenceChip({ id }) {
     return (
         <button
             onClick={() => navigate(`/evidence?focus=${encodeURIComponent(id)}`)}
-            className="rounded border border-border bg-muted/60 px-1.5 py-0.5 font-mono-ui text-[9px] text-primary hover:border-primary/60"
+            className="rounded border border-border bg-muted/60 px-1.5 py-0.5 font-mono-ui text-[11px] text-primary hover:border-primary/60"
         >
             {id.slice(0, 16)}…
         </button>
@@ -313,7 +313,7 @@ function DossierCard({ dossier, onChanged }) {
                     <div className="space-y-3 border-t border-border pt-3">
                         {detail.data.sections?.map((section, si) => (
                             <div key={si}>
-                                <div className="mb-1 font-mono-ui text-[9px] uppercase tracking-wide text-primary">{section.title}</div>
+                                <div className="mb-1 font-mono-ui text-[11px] uppercase tracking-wide text-primary">{section.title}</div>
                                 <div className="space-y-1.5">
                                     {section.items?.slice(0, 6).map((item, ii) => (
                                         <div key={ii} className="rounded-md border border-border/60 p-2">
@@ -332,7 +332,7 @@ function DossierCard({ dossier, onChanged }) {
                             </div>
                         ))}
                         <div>
-                            <div className="mb-1 font-mono-ui text-[9px] uppercase tracking-wide text-primary">Limitations</div>
+                            <div className="mb-1 font-mono-ui text-[11px] uppercase tracking-wide text-primary">Limitations</div>
                             <ul className="list-disc space-y-0.5 pl-5 text-[11px] text-muted-foreground">
                                 {(detail.data.limitations ?? []).slice(0, 6).map((l, i) => <li key={i}>{l}</li>)}
                             </ul>
@@ -397,7 +397,7 @@ export function EvidencePage() {
                             <Pill tone="neutral">{detail.data.provenance}</Pill>
                         </div>
                         <p className="rounded-md bg-muted/60 p-3 leading-5">{detail.data.text_excerpt}</p>
-                        <div className="font-mono-ui text-[9px] text-muted-foreground">hash {detail.data.hash?.slice(0, 32)}…</div>
+                        <div className="font-mono-ui text-[11px] text-muted-foreground">hash {detail.data.hash?.slice(0, 32)}…</div>
                     </div>
                 </Panel>
             )}
@@ -450,7 +450,7 @@ function EvidenceTable({ items }) {
                     <Pill tone="teal">{rec.source_type}</Pill>
                     <div className="min-w-0 flex-1">
                         <div className="text-xs leading-5">{rec.text_excerpt}</div>
-                        <div className="mt-0.5 font-mono-ui text-[9px] text-muted-foreground">
+                        <div className="mt-0.5 font-mono-ui text-[11px] text-muted-foreground">
                             {rec.evidence_id} · {rec.source_record_id} · {rec.timestamp ?? '—'} · {rec.provenance}
                         </div>
                     </div>
@@ -555,12 +555,12 @@ export function SimulationPage() {
                         </div>
                         <div className="grid gap-3 text-xs sm:grid-cols-3">
                             <div className="rounded-md border border-border p-3">
-                                <div className="mb-1 font-mono-ui text-[9px] uppercase text-muted-foreground">community changes</div>
+                                <div className="mb-1 font-mono-ui text-[11px] uppercase text-muted-foreground">community changes</div>
                                 <div>{result.community_changes?.num_communities_before} → {result.community_changes?.num_communities_after} communities</div>
                                 <div className="text-muted-foreground">NMI {num(result.community_changes?.nmi_vs_baseline)} · {result.community_changes?.split_baseline_communities?.length ?? 0} split</div>
                             </div>
                             <div className="rounded-md border border-border p-3">
-                                <div className="mb-1 font-mono-ui text-[9px] uppercase text-muted-foreground">new brokers</div>
+                                <div className="mb-1 font-mono-ui text-[11px] uppercase text-muted-foreground">new brokers</div>
                                 {(result.new_brokers ?? []).slice(0, 4).map((b) => (
                                     <div key={b.guid} className="flex items-center justify-between gap-2">
                                         <span className="truncate">{b.name}</span>
@@ -569,7 +569,7 @@ export function SimulationPage() {
                                 ))}
                             </div>
                             <div className="rounded-md border border-border p-3">
-                                <div className="mb-1 font-mono-ui text-[9px] uppercase text-muted-foreground">alternate paths</div>
+                                <div className="mb-1 font-mono-ui text-[11px] uppercase text-muted-foreground">alternate paths</div>
                                 {(result.alternate_paths ?? []).slice(0, 3).map((p, i) => (
                                     <div key={i} className="truncate text-muted-foreground">
                                         {p.source.slice(0, 8)}… → {p.target.slice(0, 8)}… ({p.length} hops)
@@ -654,11 +654,11 @@ export function SearchPage() {
                             <Pill tone={item.result_type === 'ghost' ? 'amber' : item.result_type === 'evidence' ? 'teal' : 'neutral'}>{item.result_type}</Pill>
                             <div className="min-w-0 flex-1">
                                 <div className="truncate text-xs font-semibold">{item.display_name || item.id}</div>
-                                <div className="truncate font-mono-ui text-[9px] text-muted-foreground">
+                                <div className="truncate font-mono-ui text-[11px] text-muted-foreground">
                                     {item.entity_type}{item.confidence !== undefined ? ` · confidence ${item.confidence}` : ''}{item.excerpt ? ` · ${item.excerpt}` : ''}
                                 </div>
                             </div>
-                            <span className="font-mono-ui text-[9px] uppercase text-primary">{item.quick_action}</span>
+                            <span className="font-mono-ui text-[11px] uppercase text-primary">{item.quick_action}</span>
                         </button>
                     ))}
                 </div>
@@ -670,7 +670,7 @@ export function SearchPage() {
 function Metric({ label, value }) {
     return (
         <div className="rounded-md border border-card-border bg-muted/40 p-3">
-            <div className="font-mono-ui text-[9px] uppercase tracking-wide text-muted-foreground">{label}</div>
+            <div className="font-mono-ui text-[11px] uppercase tracking-wide text-muted-foreground">{label}</div>
             <div className="mt-1 font-mono-ui text-lg font-semibold">{value}</div>
         </div>
     );

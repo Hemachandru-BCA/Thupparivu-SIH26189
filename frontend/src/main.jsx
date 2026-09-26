@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { ToastProvider } from '@/components/ui';
 import { setBaseUrl } from '@/api/client';
 import './index.css';
 document.documentElement.classList.add('dark');
@@ -16,5 +17,7 @@ createRoot(document.getElementById('root'), {
         console.error(error, errorInfo.componentStack);
     },
 }).render(<ErrorBoundary>
-    <App />
+    <ToastProvider>
+        <App />
+    </ToastProvider>
 </ErrorBoundary>);

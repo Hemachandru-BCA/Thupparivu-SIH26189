@@ -137,7 +137,7 @@ export function CommandPalette() {
                         placeholder="Type a command or search entities, cases, hypotheses, evidence..."
                         className="flex-1 bg-transparent text-[13px] text-fg-primary placeholder:text-fg-faint outline-none font-sans"
                     />
-                    <kbd className="tp-kbd text-[10px]">ESC</kbd>
+                    <kbd className="tp-kbd text-[11px]">ESC</kbd>
                 </div>
 
                 {/* Command & Result List */}
@@ -162,11 +162,11 @@ export function CommandPalette() {
                                         <Icon size={14} className={isSelected ? 'text-primary' : 'text-fg-muted'} />
                                         <div className="min-w-0">
                                             <div className="font-medium text-fg-primary truncate">{item.label}</div>
-                                            <div className="text-[10px] text-fg-muted truncate">{item.desc}</div>
+                                            <div className="text-[11px] text-fg-muted truncate">{item.desc}</div>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2 shrink-0 ml-3">
-                                        <span className="tp-badge tp-badge-neutral text-[9px]">{item.section}</span>
+                                        <span className="tp-badge tp-badge-neutral text-[11px]">{item.section}</span>
                                         {isSelected && <CornerDownLeft size={12} className="text-fg-muted" />}
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@ export function CommandPalette() {
                 </div>
 
                 {/* Footer hints */}
-                <div className="flex items-center justify-between px-3 py-1.5 border-t border-border-subtle bg-bg-surface text-[10px] font-mono text-fg-faint">
+                <div className="flex items-center justify-between px-3 py-1.5 border-t border-border-subtle bg-bg-surface text-[11px] font-mono text-fg-faint">
                     <div className="flex items-center gap-3">
                         <span>↑↓ navigate</span>
                         <span>↵ select</span>

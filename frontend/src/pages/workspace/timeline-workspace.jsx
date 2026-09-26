@@ -101,19 +101,19 @@ export default function TimelineWorkspace() {
                 <div className="flex items-center gap-1.5">
                     <button
                         onClick={() => setViewMode('REPLAY')}
-                        className={`tp-btn text-[10px] h-6 px-2.5 gap-1.5 ${viewMode === 'REPLAY' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                        className={`tp-btn text-[11px] h-6 px-2.5 gap-1.5 ${viewMode === 'REPLAY' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
                     >
                         <Play size={10} /> Network Replay
                     </button>
                     <button
                         onClick={() => setViewMode('DIFF')}
-                        className={`tp-btn text-[10px] h-6 px-2.5 gap-1.5 ${viewMode === 'DIFF' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                        className={`tp-btn text-[11px] h-6 px-2.5 gap-1.5 ${viewMode === 'DIFF' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
                     >
                         <GitCompare size={10} /> Structural Diff
                     </button>
                     <button
                         onClick={() => setViewMode('EVOLUTION')}
-                        className={`tp-btn text-[10px] h-6 px-2.5 gap-1.5 ${viewMode === 'EVOLUTION' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                        className={`tp-btn text-[11px] h-6 px-2.5 gap-1.5 ${viewMode === 'EVOLUTION' ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
                     >
                         <TrendingUp size={10} /> Community Evolution
                     </button>
@@ -140,21 +140,21 @@ export default function TimelineWorkspace() {
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => { setIsPlaying(false); setCurrentBucket(0); }}
-                                        className="tp-btn tp-btn-ghost text-[10px] h-7 px-2"
+                                        className="tp-btn tp-btn-ghost text-[11px] h-7 px-2"
                                         title="Reset to beginning"
                                     >
                                         <RotateCcw size={12} />
                                     </button>
                                     <button
                                         onClick={() => setIsPlaying(!isPlaying)}
-                                        className={`tp-btn text-[10px] h-7 px-3 gap-1.5 ${isPlaying ? 'tp-btn-amber' : 'tp-btn-primary'}`}
+                                        className={`tp-btn text-[11px] h-7 px-3 gap-1.5 ${isPlaying ? 'tp-btn-amber' : 'tp-btn-primary'}`}
                                     >
                                         {isPlaying ? <Pause size={12} /> : <Play size={12} />}
                                         <span>{isPlaying ? 'PAUSE' : 'PLAY REPLAY'}</span>
                                     </button>
                                     <button
                                         onClick={() => setPlaybackSpeed(playbackSpeed === 1000 ? 500 : playbackSpeed === 500 ? 250 : 1000)}
-                                        className="tp-btn tp-btn-ghost text-[10px] h-7 px-2 font-mono"
+                                        className="tp-btn tp-btn-ghost text-[11px] h-7 px-2 font-mono"
                                     >
                                         {playbackSpeed === 1000 ? '1.0x' : playbackSpeed === 500 ? '2.0x' : '4.0x'}
                                     </button>
@@ -163,7 +163,7 @@ export default function TimelineWorkspace() {
 
                             {/* Bucket Stepper Track */}
                             <div className="space-y-1 pt-2">
-                                <div className="flex justify-between text-[10px] font-mono text-fg-faint">
+                                <div className="flex justify-between text-[11px] font-mono text-fg-faint">
                                     <span>EARLIEST: {formatTimestamp(tempInfo?.earliest)}</span>
                                     <span className="text-primary font-bold">
                                         CURRENT SNAPSHOT: {formatTimestamp(activeTimestamp)}
@@ -210,17 +210,17 @@ export default function TimelineWorkspace() {
                                     </div>
                                     <div className="flex justify-between text-[11px]">
                                         <span className="text-fg-secondary">Temporal Leakage:</span>
-                                        <span className="tp-badge tp-badge-green font-mono text-[9px]">CLEAN (0 FUTURE EDGES)</span>
+                                        <span className="tp-badge tp-badge-green font-mono text-[11px]">CLEAN (0 FUTURE EDGES)</span>
                                     </div>
                                 </div>
 
                                 {/* Active entity types in window */}
                                 {buckets[currentBucket]?.node_types && (
                                     <div className="pt-2 border-t border-border-subtle space-y-1.5">
-                                        <div className="text-[10px] font-mono text-fg-faint">ACTIVE ENTITY TYPES</div>
+                                        <div className="text-[11px] font-mono text-fg-faint">ACTIVE ENTITY TYPES</div>
                                         <div className="flex flex-wrap gap-1">
                                             {Object.entries(buckets[currentBucket].node_types).map(([type, count]) => (
-                                                <span key={type} className="text-[9px] font-mono px-2 py-0.5 rounded bg-bg-surface border border-border-subtle text-fg-secondary">
+                                                <span key={type} className="text-[11px] font-mono px-2 py-0.5 rounded bg-bg-surface border border-border-subtle text-fg-secondary">
                                                     {type}: <strong>{count}</strong>
                                                 </span>
                                             ))}
@@ -233,7 +233,7 @@ export default function TimelineWorkspace() {
                             <div className="tp-panel p-4 md:col-span-2 space-y-2">
                                 <div className="flex items-center justify-between">
                                     <span className="tp-section-label">ACTIVE RELATIONSHIPS IN WINDOW</span>
-                                    <span className="text-[9px] font-mono text-fg-faint">
+                                    <span className="text-[11px] font-mono text-fg-faint">
                                         SHOWING FIRST {Math.min(snapshotData?.edges?.length || 0, 10)}
                                     </span>
                                 </div>
@@ -248,14 +248,14 @@ export default function TimelineWorkspace() {
                                                 <span className="font-mono text-fg-primary truncate max-w-[150px]">{edge.target_name || edge.target}</span>
                                             </div>
                                             {edge.timestamp && (
-                                                <span className="text-[9px] font-mono text-fg-faint">
+                                                <span className="text-[11px] font-mono text-fg-faint">
                                                     {formatTimestamp(edge.timestamp)}
                                                 </span>
                                             )}
                                         </div>
                                     ))}
                                     {(!snapshotData?.edges || snapshotData.edges.length === 0) && (
-                                        <div className="text-center py-6 text-fg-faint text-[10px] font-mono">
+                                        <div className="text-center py-6 text-fg-faint text-[11px] font-mono">
                                             NO RELATIONSHIPS RECORDED IN THIS TIME BUCKET
                                         </div>
                                     )}
@@ -281,7 +281,7 @@ export default function TimelineWorkspace() {
                                     <select
                                         value={diffStart}
                                         onChange={(e) => setDiffStart(e.target.value)}
-                                        className="tp-input text-[10px] font-mono h-7"
+                                        className="tp-input text-[11px] font-mono h-7"
                                     >
                                         <option value="">Select Point A (Start)...</option>
                                         {timestamps.map((t, idx) => (
@@ -292,7 +292,7 @@ export default function TimelineWorkspace() {
                                     <select
                                         value={diffEnd}
                                         onChange={(e) => setDiffEnd(e.target.value)}
-                                        className="tp-input text-[10px] font-mono h-7"
+                                        className="tp-input text-[11px] font-mono h-7"
                                     >
                                         <option value="">Select Point B (End)...</option>
                                         {timestamps.map((t, idx) => (
@@ -307,32 +307,32 @@ export default function TimelineWorkspace() {
                         {isDiffLoading ? (
                             <div className="tp-panel p-6 flex flex-col items-center justify-center gap-2">
                                 <div className="tp-progress tp-progress-indeterminate" style={{ width: 160 }} />
-                                <span className="text-[10px] font-mono text-fg-faint">COMPUTING STRUCTURAL GRAPH DELTA...</span>
+                                <span className="text-[11px] font-mono text-fg-faint">COMPUTING STRUCTURAL GRAPH DELTA...</span>
                             </div>
                         ) : diffData ? (
                             <div className="space-y-4">
                                 {/* Metric Cards */}
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                     <div className="tp-panel p-3 bg-bg-surface">
-                                        <div className="text-[9px] font-mono text-fg-faint">NEW NODES EMERGED</div>
+                                        <div className="text-[11px] font-mono text-fg-faint">NEW NODES EMERGED</div>
                                         <div className="text-[18px] font-mono font-bold text-green">
                                             +{diffData.added_nodes?.length || diffData.nodes_added || 0}
                                         </div>
                                     </div>
                                     <div className="tp-panel p-3 bg-bg-surface">
-                                        <div className="text-[9px] font-mono text-fg-faint">NEW RELATIONSHIPS</div>
+                                        <div className="text-[11px] font-mono text-fg-faint">NEW RELATIONSHIPS</div>
                                         <div className="text-[18px] font-mono font-bold text-teal">
                                             +{diffData.added_edges?.length || diffData.edges_added || 0}
                                         </div>
                                     </div>
                                     <div className="tp-panel p-3 bg-bg-surface">
-                                        <div className="text-[9px] font-mono text-fg-faint">PERSISTED EDGES</div>
+                                        <div className="text-[11px] font-mono text-fg-faint">PERSISTED EDGES</div>
                                         <div className="text-[18px] font-mono font-bold text-fg-primary">
                                             {diffData.persisted_edges || 0}
                                         </div>
                                     </div>
                                     <div className="tp-panel p-3 bg-bg-surface">
-                                        <div className="text-[9px] font-mono text-fg-faint">GROWTH RATE</div>
+                                        <div className="text-[11px] font-mono text-fg-faint">GROWTH RATE</div>
                                         <div className="text-[18px] font-mono font-bold text-primary">
                                             {diffData.growth_rate ? `${(diffData.growth_rate * 100).toFixed(0)}%` : '+100%'}
                                         </div>
@@ -351,7 +351,7 @@ export default function TimelineWorkspace() {
                                                 </div>
                                             ))}
                                             {(!diffData.added_nodes || diffData.added_nodes.length === 0) && (
-                                                <div className="text-center py-4 text-fg-faint text-[10px] font-mono">
+                                                <div className="text-center py-4 text-fg-faint text-[11px] font-mono">
                                                     NO NEW NODES
                                                 </div>
                                             )}
@@ -372,7 +372,7 @@ export default function TimelineWorkspace() {
                                                 </div>
                                             ))}
                                             {(!diffData.added_edges || diffData.added_edges.length === 0) && (
-                                                <div className="text-center py-4 text-fg-faint text-[10px] font-mono">
+                                                <div className="text-center py-4 text-fg-faint text-[11px] font-mono">
                                                     NO NEW RELATIONSHIPS
                                                 </div>
                                             )}
@@ -401,7 +401,7 @@ export default function TimelineWorkspace() {
                                 {(evolutionData?.steps || []).map((step, idx) => (
                                     <div key={idx} className="p-3 rounded bg-bg-surface border border-border-subtle flex items-center justify-between">
                                         <div className="space-y-0.5">
-                                            <div className="text-[10px] font-mono text-fg-faint">
+                                            <div className="text-[11px] font-mono text-fg-faint">
                                                 WINDOW {idx + 1}: {formatTimestamp(step.start)} → {formatTimestamp(step.end)}
                                             </div>
                                             <div className="text-[12px] font-bold text-fg-primary">
@@ -409,7 +409,7 @@ export default function TimelineWorkspace() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <span className="tp-badge tp-badge-purple text-[9px]">
+                                            <span className="tp-badge tp-badge-purple text-[11px]">
                                                 MODULARITY: {(step.modularity || 0.65).toFixed(2)}
                                             </span>
                                         </div>

@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
 import { useFindings, useFindingDetail } from '@/api/xai';
-import { Brain, ChevronRight, AlertTriangle, Clock, Target, FileText } from 'lucide-react';
+import { Brain, ChevronRight, AlertTriangle, Clock, Target, FileText, Info } from 'lucide-react';
 import { formatNumber } from '@/utils/format';
 import { getConfidenceColor } from '@/components/app-shell';
+import { StatusLabel } from '@/components/ui';
 
 function ConfidenceBar({ value, height = 3 }) {
     const color = getConfidenceColor(value);
@@ -21,7 +22,7 @@ function FindingRow({ finding }) {
         <Link href={`/findings/${finding.finding_id || finding.id}`}>
             <div className="flex items-center gap-4 px-4 py-2.5 border-b border-border-subtle hover:bg-bg-hover cursor-pointer transition-colors">
                 {/* ID */}
-                <span className="font-mono text-[10px] text-fg-faint w-20 shrink-0">
+                <span className="font-mono text-[11px] text-fg-faint w-20 shrink-0">
                     {finding.finding_id || finding.id}
                 </span>
 
@@ -35,7 +36,7 @@ function FindingRow({ finding }) {
                     <div className="text-[11px] text-fg-primary font-medium truncate">
                         {finding.subject_label || finding.subject_id || 'Unknown'}
                     </div>
-                    <div className="text-[10px] text-fg-faint truncate">
+                    <div className="text-[11px] text-fg-faint truncate">
                         {finding.method || 'Analysis finding'}
                     </div>
                 </div>
@@ -43,21 +44,22 @@ function FindingRow({ finding }) {
                 {/* Evidence counts */}
                 <div className="flex items-center gap-3 shrink-0">
                     {finding.observed?.length > 0 && (
-                        <span className="text-[9px] font-mono text-green">
+                        <span className="text-[11px] font-mono text-green">
                             {finding.observed.length} observed
                         </span>
                     )}
                     {finding.counter_evidence_ids?.length > 0 && (
-                        <span className="text-[9px] font-mono text-red">
+                        <span className="text-[11px] font-mono text-red">
                             {finding.counter_evidence_ids.length} counter
                         </span>
                     )}
                 </div>
 
-                {/* Confidence */}
-                <div className="w-24 shrink-0">
+                {/* Confidence & Epistemic Status */}
+                <div className="w-32 shrink-0">
                     <div className="flex items-center justify-between mb-0.5">
-                        <span className="font-mono text-[10px] font-semibold" style={{color: confColor}}>
+                        <StatusLabel status="inferred" className="!text-[11px] !py-0 !px-1" />
+                        <span className="font-mono text-[11px] font-semibold" style={{color: confColor}}>
                             {(conf * 100).toFixed(0)}%
                         </span>
                     </div>
@@ -113,7 +115,7 @@ export default function HypothesesWorkspace() {
                     <span className="text-[11px] font-semibold text-fg-primary">HYPOTHESES</span>
                 </div>
                 <div className="w-px h-4 bg-border-default" />
-                <div className="flex items-center gap-4 text-[10px] font-mono">
+                <div className="flex items-center gap-4 text-[11px] font-mono">
                     <span className="text-fg-faint">{stats.total} TOTAL</span>
                     <span className="text-blue">{stats.open} OPEN</span>
                     <span className="text-amber">{stats.highConf} HIGH CONFIDENCE</span>
@@ -123,7 +125,7 @@ export default function HypothesesWorkspace() {
                 <div className="flex items-center gap-1">
                     {['ALL', 'HIGH', 'OPEN', 'REVIEW'].map(s => (
                         <button key={s} onClick={() => setFilterStatus(s)}
-                            className={`tp-btn text-[9px] h-5 px-2 ${filterStatus === s ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
+                            className={`tp-btn text-[11px] h-5 px-2 ${filterStatus === s ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
                             {s}
                         </button>
                     ))}
@@ -136,18 +138,18 @@ export default function HypothesesWorkspace() {
                     <div className="flex flex-col items-center justify-center h-full text-center">
                         <Brain size={24} className="text-fg-faint mb-3" />
                         <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">NO HYPOTHESES DETECTED</span>
-                        <span className="text-[10px] text-fg-faint mt-1">The current evidence does not support a strong inference</span>
+                        <span className="text-[11px] text-fg-faint mt-1">The current evidence does not support a strong inference</span>
                     </div>
                 ) : (
                     <>
                         {/* Table header */}
                         <div className="flex items-center gap-4 px-4 py-1.5 border-b border-border-default bg-bg-panel sticky top-0 z-1">
-                            <span className="font-mono text-[9px] text-fg-faint w-20 shrink-0">ID</span>
-                            <span className="font-mono text-[9px] text-fg-faint shrink-0" style={{width: 100}}>TYPE</span>
-                            <span className="font-mono text-[9px] text-fg-faint flex-1">SUBJECT</span>
-                            <span className="font-mono text-[9px] text-fg-faint shrink-0">EVIDENCE</span>
-                            <span className="font-mono text-[9px] text-fg-faint w-24 shrink-0">CONFIDENCE</span>
-                            <span className="font-mono text-[9px] text-fg-faint shrink-0">STATUS</span>
+                            <span className="font-mono text-[11px] text-fg-faint w-20 shrink-0">ID</span>
+                            <span className="font-mono text-[11px] text-fg-faint shrink-0" style={{width: 100}}>TYPE</span>
+                            <span className="font-mono text-[11px] text-fg-faint flex-1">SUBJECT</span>
+                            <span className="font-mono text-[11px] text-fg-faint shrink-0">EVIDENCE</span>
+                            <span className="font-mono text-[11px] text-fg-faint w-24 shrink-0">CONFIDENCE</span>
+                            <span className="font-mono text-[11px] text-fg-faint shrink-0">STATUS</span>
                             <span className="w-3" />
                         </div>
                         {filtered.map((f, i) => (

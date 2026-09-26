@@ -109,7 +109,7 @@ export default function EntitiesWorkspace() {
                     ))}
                 </select>
                 <div className="flex-1" />
-                <span className="text-[10px] font-mono text-fg-faint">{filtered.length} shown</span>
+                <span className="text-[11px] font-mono text-fg-faint">{filtered.length} shown</span>
             </div>
 
             {/* Table */}

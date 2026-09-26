@@ -31,7 +31,7 @@ export default function EvidenceWorkspace() {
                     <div className="flex gap-1">
                         {['search', 'node', 'detail'].map(mode => (
                             <button key={mode} onClick={() => setSearchMode(mode)}
-                                className={`tp-btn text-[9px] h-5 px-2 ${searchMode === mode ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
+                                className={`tp-btn text-[11px] h-5 px-2 ${searchMode === mode ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
                                 {mode.toUpperCase()}
                             </button>
                         ))}
@@ -90,9 +90,9 @@ export default function EvidenceWorkspace() {
                                             <td>
                                                 <span className="tp-badge tp-badge-blue">{ev.source_type || 'RECORD'}</span>
                                             </td>
-                                            <td className="font-mono text-fg-secondary group-hover:text-primary transition-colors text-[10px]">{ev.source_record_id || '—'}</td>
+                                            <td className="font-mono text-fg-secondary group-hover:text-primary transition-colors text-[11px]">{ev.source_record_id || '—'}</td>
                                             <td className="text-fg-secondary max-w-xs truncate">{ev.text_excerpt || '—'}</td>
-                                            <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(ev.timestamp)}</td>
+                                            <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(ev.timestamp)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -115,10 +115,10 @@ export default function EvidenceWorkspace() {
                                         onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSelectedEvidence(ev); setInspectorOpen(true); setSearchMode('detail'); }}>
                                         <div className="flex items-center gap-2 mb-1">
                                             <span className="tp-badge tp-badge-blue" style={{fontSize: '8px'}}>{ev.source_type}</span>
-                                            <span className="font-mono text-[9px] text-fg-faint">{ev.evidence_id}</span>
+                                            <span className="font-mono text-[11px] text-fg-faint">{ev.evidence_id}</span>
                                         </div>
                                         <div className="text-[11px] text-fg-secondary group-hover:text-fg-primary">{ev.text_excerpt}</div>
-                                        <div className="text-[9px] font-mono text-fg-faint mt-1">{formatTimestamp(ev.timestamp)}</div>
+                                        <div className="text-[11px] font-mono text-fg-faint mt-1">{formatTimestamp(ev.timestamp)}</div>
                                     </div>
                                 ))}
                             </div>
@@ -157,7 +157,7 @@ export default function EvidenceWorkspace() {
                             {detail.hash && (
                                 <div>
                                     <div className="tp-section-label mb-1">HASH</div>
-                                    <div className="text-[10px] font-mono text-fg-faint break-all">{detail.hash}</div>
+                                    <div className="text-[11px] font-mono text-fg-faint break-all">{detail.hash}</div>
                                 </div>
                             )}
                         </div>

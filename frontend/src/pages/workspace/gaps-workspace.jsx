@@ -42,7 +42,7 @@ export default function GapsWorkspace() {
                         The system explicitly highlights what remains unknown, unresolved, or contradictory rather than manufacturing false certainty.
                     </p>
                 </div>
-                <div className="text-[10px] font-mono text-fg-faint">
+                <div className="text-[11px] font-mono text-fg-faint">
                     UNCERTAINTY AS A FEATURE · PRINCIPLE 3
                 </div>
             </div>
@@ -64,7 +64,7 @@ export default function GapsWorkspace() {
                         <span>Initiate Tower Review</span>
                         <ArrowRight size={12} />
                     </button>
-                    <span className="text-[10px] font-mono text-fg-faint">Estimated review time: ~4 mins</span>
+                    <span className="text-[11px] font-mono text-fg-faint">Estimated review time: ~4 mins</span>
                 </div>
             </div>
 
@@ -72,7 +72,7 @@ export default function GapsWorkspace() {
             <div className="tp-panel">
                 <div className="tp-panel-header">
                     <span className="text-[11px] font-semibold text-fg-primary">OPEN ANALYTICAL GAPS QUEUE</span>
-                    <span className="text-[10px] font-mono text-fg-faint">{gaps.length} IDENTIFIED GAPS</span>
+                    <span className="text-[11px] font-mono text-fg-faint">{gaps.length} IDENTIFIED GAPS</span>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="tp-table">
@@ -105,13 +105,13 @@ export default function GapsWorkspace() {
                                     </td>
                                     <td>
                                         {actionStatus[i] ? (
-                                            <span className="text-green text-[10px] font-mono font-semibold flex items-center gap-1">
+                                            <span className="text-green text-[11px] font-mono font-semibold flex items-center gap-1">
                                                 <CheckCircle2 size={11} /> REQUESTED
                                             </span>
                                         ) : (
                                             <button
                                                 onClick={() => handleAction(i, gap.request)}
-                                                className="tp-btn h-5 text-[10px]"
+                                                className="tp-btn h-5 text-[11px]"
                                             >
                                                 Request
                                             </button>

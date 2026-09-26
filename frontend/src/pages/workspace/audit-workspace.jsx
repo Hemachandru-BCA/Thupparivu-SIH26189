@@ -29,13 +29,13 @@ export default function AuditWorkspace() {
                 <div className="flex gap-0.5">
                     {types.map(t => (
                         <button key={t} onClick={() => setFilterType(t)}
-                            className={`tp-btn text-[9px] h-5 px-2 ${filterType === t ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
+                            className={`tp-btn text-[11px] h-5 px-2 ${filterType === t ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
                             {t}
                         </button>
                     ))}
                 </div>
                 <div className="flex-1" />
-                <button onClick={() => refetch()} className="tp-btn tp-btn-ghost text-[10px] h-6">
+                <button onClick={() => refetch()} className="tp-btn tp-btn-ghost text-[11px] h-6">
                     <RefreshCw size={10} /> Refresh
                 </button>
             </div>
@@ -52,7 +52,7 @@ export default function AuditWorkspace() {
                     <tbody>
                         {filtered.map((entry, i) => (
                             <tr key={i}>
-                                <td className="font-mono text-fg-faint text-[10px]">{formatTimestamp(entry.timestamp)}</td>
+                                <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(entry.timestamp)}</td>
                                 <td>
                                     <span className={`tp-badge ${
                                         (entry.actor || entry.type) === 'USER' ? 'tp-badge-blue' :
@@ -66,7 +66,7 @@ export default function AuditWorkspace() {
                             </tr>
                         ))}
                         {filtered.length === 0 && (
-                            <tr><td colSpan={3} className="text-center py-8 text-fg-faint text-[10px]">No audit entries found</td></tr>
+                            <tr><td colSpan={3} className="text-center py-8 text-fg-faint text-[11px]">No audit entries found</td></tr>
                         )}
                     </tbody>
                 </table>

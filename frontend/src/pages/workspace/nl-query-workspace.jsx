@@ -50,12 +50,12 @@ function InterpretationView({ interpretation }) {
             <div className="flex items-center justify-between cursor-pointer" onClick={() => setExpanded(!expanded)}>
                 <div className="flex items-center gap-2">
                     <Eye size={12} className="text-primary" />
-                    <span className="text-[10px] font-semibold text-fg-primary">INTERPRETED AS</span>
+                    <span className="text-[11px] font-semibold text-fg-primary">INTERPRETED AS</span>
                 </div>
                 {expanded ? <ChevronDown size={12} className="text-fg-faint" /> : <ChevronRight size={12} className="text-fg-faint" />}
             </div>
             {expanded && (
-                <div className="grid grid-cols-2 gap-1.5 text-[10px]">
+                <div className="grid grid-cols-2 gap-1.5 text-[11px]">
                     {interpretation.intent && <div><span className="text-fg-faint">Intent:</span> <span className="text-fg-secondary">{interpretation.intent}</span></div>}
                     {interpretation.entities?.length > 0 && <div><span className="text-fg-faint">Entities:</span> <span className="text-fg-secondary">{interpretation.entities.join(', ')}</span></div>}
                     {interpretation.relationship_types?.length > 0 && <div><span className="text-fg-faint">Relationships:</span> <span className="text-fg-secondary">{interpretation.relationship_types.join(', ')}</span></div>}
@@ -75,16 +75,16 @@ function InterpretationView({ interpretation }) {
 function ResultItem({ item, index }) {
     return (
         <div className="flex items-start gap-2 border-b border-border-subtle pb-1.5 px-1">
-            <span className="mt-0.5 text-[9px] font-mono text-primary">{index + 1}</span>
+            <span className="mt-0.5 text-[11px] font-mono text-primary">{index + 1}</span>
             <div className="flex-1 min-w-0">
-                <div className="text-[10px] text-fg-secondary">{item.label || item.id || item.evidence_id}</div>
+                <div className="text-[11px] text-fg-secondary">{item.label || item.id || item.evidence_id}</div>
                 <div className="flex gap-1 mt-0.5 flex-wrap">
                     {item.type && <span className="tp-badge tp-badge-blue">{item.type}</span>}
                     {item.relation && <span className="tp-badge tp-badge-green">{item.relation}</span>}
-                    {item.confidence && <span className="text-[9px] text-fg-faint font-mono">conf: {(item.confidence * 100).toFixed(0)}%</span>}
+                    {item.confidence && <span className="text-[11px] text-fg-faint font-mono">conf: {(item.confidence * 100).toFixed(0)}%</span>}
                     {item.source && <span className="tp-badge tp-badge-neutral">{item.source}</span>}
                 </div>
-                {item.description && <div className="mt-0.5 text-[9px] text-fg-faint">{item.description}</div>}
+                {item.description && <div className="mt-0.5 text-[11px] text-fg-faint">{item.description}</div>}
             </div>
         </div>
     );
@@ -94,10 +94,10 @@ function HistoryItem({ entry, onRerun }) {
     return (
         <div className="border border-border-subtle bg-bg-root p-2 space-y-1">
             <div className="flex items-center justify-between gap-2">
-                <span className="text-[10px] text-fg-secondary truncate">{entry.query}</span>
-                <button onClick={() => onRerun(entry.query)} className="tp-button h-5 text-[9px]">Re-run</button>
+                <span className="text-[11px] text-fg-secondary truncate">{entry.query}</span>
+                <button onClick={() => onRerun(entry.query)} className="tp-button h-5 text-[11px]">Re-run</button>
             </div>
-            <div className="text-[9px] text-fg-faint">{entry.result_count} results · {entry.interpretation?.intent || '—'}</div>
+            <div className="text-[11px] text-fg-faint">{entry.result_count} results · {entry.interpretation?.intent || '—'}</div>
         </div>
     );
 }
@@ -147,9 +147,9 @@ export default function NLQueryWorkspace() {
                         <Brain size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">ANALYST QUERY</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Ask analytical questions in natural language — structured queries, deterministic execution.</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Ask analytical questions in natural language — structured queries, deterministic execution.</p>
                 </div>
-                <span className="text-[9px] text-fg-faint font-mono">{activeCase?.id || 'CASE-0421'}</span>
+                <span className="text-[11px] text-fg-faint font-mono">{activeCase?.id || 'CASE-0421'}</span>
             </div>
 
             <div className="grid gap-3 p-3 xl:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)]">
@@ -170,7 +170,7 @@ export default function NLQueryWorkspace() {
                             <button
                                 onClick={() => runQuery()}
                                 disabled={loading || !query.trim()}
-                                className="tp-button tp-button-primary h-8 mt-auto flex items-center gap-1 text-[10px]"
+                                className="tp-button tp-button-primary h-8 mt-auto flex items-center gap-1 text-[11px]"
                             >
                                 <Send size={12} />
                                 {loading ? 'Running...' : 'Ask'}
@@ -179,10 +179,10 @@ export default function NLQueryWorkspace() {
                         {/* Demo queries */}
                         {demoQueries.length > 0 && (
                             <div className="mt-3">
-                                <div className="text-[9px] text-fg-faint mb-1">TRY THESE</div>
+                                <div className="text-[11px] text-fg-faint mb-1">TRY THESE</div>
                                 <div className="flex flex-wrap gap-1">
                                     {demoQueries.map((dq, i) => (
-                                        <button key={i} onClick={() => { setQuery(dq.query); runQuery(dq.query); }} className="tp-button h-6 text-[9px]">
+                                        <button key={i} onClick={() => { setQuery(dq.query); runQuery(dq.query); }} className="tp-button h-6 text-[11px]">
                                             {dq.query}
                                         </button>
                                     ))}
@@ -193,7 +193,7 @@ export default function NLQueryWorkspace() {
 
                     {/* Error */}
                     {error && (
-                        <div className="border border-red-800 bg-red-950 p-2 text-[10px] text-red-300">{error}</div>
+                        <div className="border border-red-800 bg-red-950 p-2 text-[11px] text-red-300">{error}</div>
                     )}
 
                     {/* Interpretation */}
@@ -203,7 +203,7 @@ export default function NLQueryWorkspace() {
                     {result && (
                         <Panel title={`RESULTS — ${result.result_count || 0} items`} icon={Search}>
                             {result.original_query && result.original_query !== query && (
-                                <div className="mb-2 text-[9px] text-fg-faint">
+                                <div className="mb-2 text-[11px] text-fg-faint">
                                     Original: "{result.original_query}" → Resolved: "{result.resolved_query}"
                                 </div>
                             )}
@@ -212,11 +212,11 @@ export default function NLQueryWorkspace() {
                                     <ResultItem key={item.id || item.evidence_id || i} item={item} index={i} />
                                 ))}
                                 {(!result.results || result.results.length === 0) && !loading && (
-                                    <div className="text-[10px] text-fg-faint py-4 text-center">No results returned.</div>
+                                    <div className="text-[11px] text-fg-faint py-4 text-center">No results returned.</div>
                                 )}
                             </div>
                             {result.limitations?.length > 0 && (
-                                <div className="mt-3 text-[9px] text-fg-faint">
+                                <div className="mt-3 text-[11px] text-fg-faint">
                                     {result.limitations.map((l, i) => <div key={i}>• {l}</div>)}
                                 </div>
                             )}
@@ -232,7 +232,7 @@ export default function NLQueryWorkspace() {
                                 <HistoryItem key={i} entry={entry} onRerun={(q) => { setQuery(q); runQuery(q); }} />
                             ))}
                             {!history.length && (
-                                <div className="text-[10px] text-fg-faint py-4 text-center">No queries yet.</div>
+                                <div className="text-[11px] text-fg-faint py-4 text-center">No queries yet.</div>
                             )}
                         </div>
                     </Panel>
@@ -250,7 +250,7 @@ export default function NLQueryWorkspace() {
                                 { intent: 'contradiction', label: 'What contradicts this hypothesis?' },
                                 { intent: 'motif_search', label: 'Find patterns involving X' },
                             ].map(({ intent, label }) => (
-                                <div key={intent} className="flex items-center gap-2 text-[10px]">
+                                <div key={intent} className="flex items-center gap-2 text-[11px]">
                                     <span className="font-mono text-primary">{intent}</span>
                                     <span className="text-fg-faint">— {label}</span>
                                 </div>

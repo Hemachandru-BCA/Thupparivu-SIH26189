@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useFindings } from "@/api/xai";
 import { Brain, Search } from "lucide-react";
 import { getConfidenceColor } from "@/components/app-shell";
+import { StatusLabel } from "@/components/ui";
 
 export default function FindingDetailWorkspace() {
     // Actually this is the Findings List Workspace (formerly finding-detail-workspace.jsx which did both list & detail)
@@ -63,14 +64,17 @@ export default function FindingDetailWorkspace() {
                                     <td>
                                         <div className="flex flex-col gap-0.5">
                                             <span className="tp-badge tp-badge-purple">{finding.finding_type || "FINDING"}</span>
-                                            <span className="text-[10px] text-fg-muted truncate max-w-xs">{finding.method || "Analysis"}</span>
+                                            <span className="text-[11px] text-fg-muted truncate max-w-xs">{finding.method || "Analysis"}</span>
                                         </div>
                                     </td>
                                     <td className="font-medium text-fg-primary group-hover:text-primary transition-colors">{finding.subject_label || finding.subject_id}</td>
                                     <td>
-                                        <span className="font-mono text-[10px]" style={{color: getConfidenceColor(finding.confidence || 0)}}>
-                                            {((finding.confidence || 0) * 100).toFixed(1)}%
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <StatusLabel status="inferred" className="!text-[11px] !py-0 !px-1" />
+                                            <span className="font-mono text-[11px] font-semibold" style={{color: getConfidenceColor(finding.confidence || 0)}}>
+                                                {((finding.confidence || 0) * 100).toFixed(1)}%
+                                            </span>
+                                        </div>
                                     </td>
                                     <td className="font-mono text-fg-secondary">
                                         {(finding.supporting_evidence || []).length || 0}

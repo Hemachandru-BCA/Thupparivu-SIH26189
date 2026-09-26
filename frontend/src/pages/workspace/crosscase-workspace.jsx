@@ -49,8 +49,8 @@ function CaseNode({ caseData, isSource, onClick, selected }) {
                     {caseData.status || 'UNKNOWN'}
                 </span>
             </div>
-            <div className="text-[10px] text-fg-secondary truncate">{caseData.title || 'Untitled'}</div>
-            <div className="text-[9px] text-fg-faint mt-0.5 font-mono">{itemCount} entities · {caseData.priority || 'N/A'} priority</div>
+            <div className="text-[11px] text-fg-secondary truncate">{caseData.title || 'Untitled'}</div>
+            <div className="text-[11px] text-fg-faint mt-0.5 font-mono">{itemCount} entities · {caseData.priority || 'N/A'} priority</div>
         </button>
     );
 }
@@ -65,14 +65,14 @@ function SharedEntityRow({ entity, cases, onSelect }) {
             <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: getEntityTypeColor(entity.entity_type || 'PERSON') }} />
             <div className="flex-1 min-w-0">
                 <div className="text-[11px] text-fg-primary font-medium truncate">{entity.label || entity.entity_id?.slice(0, 16)}</div>
-                <div className="text-[9px] text-fg-faint font-mono">{entity.entity_id?.slice(0, 16)}…</div>
+                <div className="text-[11px] text-fg-faint font-mono">{entity.entity_id?.slice(0, 16)}…</div>
             </div>
             <div className="flex flex-wrap gap-1">
                 {(cases || entity.cases || []).map((c, i) => (
                     <span key={i} className="tp-badge tp-badge-neutral text-[8px]">{typeof c === 'string' ? c : c.id}</span>
                 ))}
             </div>
-            <div className="text-[9px] text-fg-faint font-mono">{(cases || entity.cases || []).length} cases</div>
+            <div className="text-[11px] text-fg-faint font-mono">{(cases || entity.cases || []).length} cases</div>
         </button>
     );
 }
@@ -103,7 +103,7 @@ function CaseConnectionGraph({ cases, sharedEntities }) {
         <div className="tp-panel p-3">
             <div className="tp-panel-header">
                 <span className="text-[11px] font-semibold text-fg-primary">CROSS-CASE CONNECTION GRAPH</span>
-                <span className="text-[10px] font-mono text-fg-faint">{connections.length} LINKS</span>
+                <span className="text-[11px] font-mono text-fg-faint">{connections.length} LINKS</span>
             </div>
             <div className="space-y-3 pt-2">
                 {connections.map((conn, i) => {
@@ -112,9 +112,9 @@ function CaseConnectionGraph({ cases, sharedEntities }) {
                         <div key={i} className="p-2.5 rounded border border-border-subtle bg-bg-surface space-y-2">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                    <span className="font-mono text-[10px] font-bold text-primary">{conn.cases[0]}</span>
+                                    <span className="font-mono text-[11px] font-bold text-primary">{conn.cases[0]}</span>
                                     <Link2 size={12} className="text-fg-faint" />
-                                    <span className="font-mono text-[10px] font-bold text-primary">{conn.cases[1]}</span>
+                                    <span className="font-mono text-[11px] font-bold text-primary">{conn.cases[1]}</span>
                                 </div>
                                 <div className="flex items-center gap-1">
                                     <span className={`tp-badge text-[8px] font-mono ${
@@ -127,12 +127,12 @@ function CaseConnectionGraph({ cases, sharedEntities }) {
                             </div>
                             <div className="flex flex-wrap gap-1">
                                 {conn.entities.map((e, j) => (
-                                    <span key={j} className="text-[9px] px-1.5 py-0.5 rounded bg-bg-panel text-fg-secondary border border-border-subtle font-mono">
+                                    <span key={j} className="text-[11px] px-1.5 py-0.5 rounded bg-bg-panel text-fg-secondary border border-border-subtle font-mono">
                                         {e.label || e.entity_id?.slice(0, 12)}
                                     </span>
                                 ))}
                             </div>
-                            <div className="text-[9px] text-fg-faint">
+                            <div className="text-[11px] text-fg-faint">
                                 Shared entities: {conn.entities.length}
                             </div>
                         </div>
@@ -175,7 +175,7 @@ export default function CrossCaseWorkspace() {
             <div className="flex-1 flex items-center justify-center">
                 <div className="flex flex-col gap-2 text-fg-secondary">
                     <div className="text-[11px] font-semibold tracking-wide text-fg-primary">LOADING CROSS-CASE DATA</div>
-                    <div className="text-[10px] text-fg-faint">Resolving shared entities across investigations…</div>
+                    <div className="text-[11px] text-fg-faint">Resolving shared entities across investigations…</div>
                 </div>
             </div>
         );
@@ -196,7 +196,7 @@ export default function CrossCaseWorkspace() {
                         Shared entities, organizations, and accounts reveal cross-case links.
                     </p>
                 </div>
-                <div className="flex items-center gap-3 text-[10px] font-mono text-fg-faint">
+                <div className="flex items-center gap-3 text-[11px] font-mono text-fg-faint">
                     <div>{caseCount} CASES</div>
                     <div className="w-px h-3 bg-border-subtle" />
                     <div>{totalReused} SHARED</div>
@@ -224,11 +224,11 @@ export default function CrossCaseWorkspace() {
                                     }}
                                 >
                                     <div className="flex items-center justify-between">
-                                        <span className="font-mono text-[10px] font-bold text-primary">{c.id}</span>
+                                        <span className="font-mono text-[11px] font-bold text-primary">{c.id}</span>
                                         <span className={`tp-badge text-[8px] ${c.status === 'ACTIVE' ? 'tp-badge-green' : 'tp-badge-neutral'}`}>{c.status}</span>
                                     </div>
-                                    <div className="text-[10px] text-fg-secondary mt-0.5 truncate">{c.title}</div>
-                                    <div className="text-[9px] text-fg-faint mt-0.5">
+                                    <div className="text-[11px] text-fg-secondary mt-0.5 truncate">{c.title}</div>
+                                    <div className="text-[11px] text-fg-faint mt-0.5">
                                         {itemCount} entities · {sharedWith} shared
                                     </div>
                                 </button>
@@ -236,7 +236,7 @@ export default function CrossCaseWorkspace() {
                         })}
                     </div>
                 ) : (
-                    <div className="text-[10px] text-fg-faint py-3 text-center">No cases found</div>
+                    <div className="text-[11px] text-fg-faint py-3 text-center">No cases found</div>
                 )}
             </div>
 
@@ -248,7 +248,7 @@ export default function CrossCaseWorkspace() {
                 <div className="tp-panel-header">
                     <span className="text-[11px] font-semibold text-fg-primary">SHARED ENTITIES ACROSS CASES</span>
                     <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono text-fg-faint">{filteredEntities.length} MATCHES</span>
+                        <span className="text-[11px] font-mono text-fg-faint">{filteredEntities.length} MATCHES</span>
                         <div className="relative">
                             <Search size={11} className="absolute left-1.5 top-1/2 -translate-y-1/2 text-fg-faint" />
                             <input
@@ -256,7 +256,7 @@ export default function CrossCaseWorkspace() {
                                 placeholder="Filter entities…"
                                 value={filter}
                                 onChange={(e) => setFilter(e.target.value)}
-                                className="tp-input h-5 text-[10px] pl-5 w-32"
+                                className="tp-input h-5 text-[11px] pl-5 w-32"
                             />
                         </div>
                     </div>
@@ -273,7 +273,7 @@ export default function CrossCaseWorkspace() {
                         ))}
                     </div>
                 ) : (
-                    <div className="p-6 text-center text-[10px] text-fg-faint">
+                    <div className="p-6 text-center text-[11px] text-fg-faint">
                         {filter ? 'No entities match the current filter.' : 'No shared entities detected between cases.'}
                     </div>
                 )}
@@ -281,7 +281,7 @@ export default function CrossCaseWorkspace() {
 
             {/* ── LEGEND ── */}
             <div className="tp-panel p-2.5">
-                <div className="flex items-center gap-4 text-[9px] text-fg-faint">
+                <div className="flex items-center gap-4 text-[11px] text-fg-faint">
                     <span className="font-semibold">INTERPRETATION GUIDE</span>
                     <span>• Heuristic link scores — not AI-generated</span>
                     <span>• Requires investigator review</span>

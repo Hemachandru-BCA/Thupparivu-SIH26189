@@ -25,7 +25,7 @@ const VIEW_MODES = [
 function PerfPanel({ stats, visible }) {
     if (!visible) return null;
     return (
-        <div className="absolute bottom-14 right-36 z-20 bg-bg-panel/90 border border-border-subtle rounded p-2 text-[9px] font-mono text-fg-faint space-y-0.5">
+        <div className="absolute bottom-14 right-36 z-20 bg-bg-panel/90 border border-border-subtle rounded p-2 text-[11px] font-mono text-fg-faint space-y-0.5">
             <div className="tp-section-label mb-1">GRAPH PERFORMANCE</div>
             {Object.entries(stats).map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4">
@@ -42,17 +42,17 @@ function CommunityCard({ community, onClick, selected }) {
         <button onClick={onClick}
             className={`tp-panel p-2.5 text-left w-full transition-colors ${selected ? 'ring-1 ring-primary' : 'hover:bg-bg-hover'}`}>
             <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-semibold text-fg-primary">Community {community.id}</span>
+                <span className="text-[11px] font-semibold text-fg-primary">Community {community.id}</span>
                 <span className="tp-badge tp-badge-neutral text-[8px]">{community.size}</span>
             </div>
             <div className="flex flex-wrap gap-1">
                 {(community.members || []).slice(0, 5).map((m, i) => (
-                    <span key={i} className="text-[9px] px-1 py-0.5 rounded bg-bg-surface text-fg-secondary border border-border-subtle font-mono">
+                    <span key={i} className="text-[11px] px-1 py-0.5 rounded bg-bg-surface text-fg-secondary border border-border-subtle font-mono">
                         {typeof m === 'string' ? m : (m.label || m.id || String(m))}
                     </span>
                 ))}
                 {community.size > 5 && (
-                    <span className="text-[9px] px-1 py-0.5 rounded bg-bg-surface text-fg-faint font-mono">+{community.size - 5}</span>
+                    <span className="text-[11px] px-1 py-0.5 rounded bg-bg-surface text-fg-faint font-mono">+{community.size - 5}</span>
                 )}
             </div>
         </button>
@@ -64,7 +64,7 @@ function LoadingState() {
         <div className="flex-1 flex items-center justify-center">
             <div className="flex flex-col gap-2 text-fg-secondary">
                 <div className="text-[11px] font-semibold tracking-wide text-fg-primary">BUILDING INVESTIGATION CONTEXT</div>
-                <div className="text-[10px] text-fg-faint">Resolving entities…</div>
+                <div className="text-[11px] text-fg-faint">Resolving entities…</div>
             </div>
         </div>
     );
@@ -75,8 +75,8 @@ function ErrorState({ message, onRetry }) {
         <div className="flex-1 flex items-center justify-center">
             <div className="tp-panel p-4 max-w-sm text-center space-y-3">
                 <div className="text-[12px] font-semibold text-amber-400">NETWORK EXPANSION FAILED</div>
-                <div className="text-[10px] text-fg-faint">{message}</div>
-                <button onClick={onRetry} className="tp-btn tp-btn-primary text-[10px] h-6 px-3">RETRY</button>
+                <div className="text-[11px] text-fg-faint">{message}</div>
+                <button onClick={onRetry} className="tp-btn tp-btn-primary text-[11px] h-6 px-3">RETRY</button>
             </div>
         </div>
     );
@@ -86,11 +86,11 @@ function TopConnections({ connections, onFocus }) {
     if (!connections || connections.length === 0) return null;
     return (
         <div className="absolute left-1/2 -translate-x-1/2 top-14 z-20 w-80 bg-bg-panel/95 border border-border-default rounded shadow-xl max-h-64 overflow-y-auto">
-            <div className="px-3 py-1.5 border-b border-border-subtle text-[9px] font-semibold text-fg-faint">TOP CONNECTIONS</div>
+            <div className="px-3 py-1.5 border-b border-border-subtle text-[11px] font-semibold text-fg-faint">TOP CONNECTIONS</div>
             {connections.map((c, i) => (
                 <button key={c.id} onClick={() => onFocus(c.id)}
                     className="w-full px-3 py-1.5 flex items-center gap-2 hover:bg-bg-hover text-left">
-                    <span className="font-mono text-[9px] text-fg-faint">{i + 1}.</span>
+                    <span className="font-mono text-[11px] text-fg-faint">{i + 1}.</span>
                     <span className="w-2 h-2 rounded-full" style={{ background: getEntityTypeColor(c.type) }} />
                     <span className="text-[11px] text-fg-primary flex-1">{c.label}</span>
                     <span className="tp-badge tp-badge-blue text-[8px]">{c.type || '—'}</span>
@@ -352,7 +352,7 @@ export default function NetworkWorkspace() {
                         <div className="space-y-1">
                             {VIEW_MODES.map((m) => (
                                 <button key={m.id} onClick={() => setViewMode(m.id)}
-                                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-[10px] transition-colors ${viewMode === m.id ? 'bg-bg-hover text-fg-primary' : 'text-fg-secondary hover:bg-bg-hover/60'}`}>
+                                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-[11px] transition-colors ${viewMode === m.id ? 'bg-bg-hover text-fg-primary' : 'text-fg-secondary hover:bg-bg-hover/60'}`}>
                                     <m.icon size={11} /> {m.label}
                                 </button>
                             ))}
@@ -370,7 +370,7 @@ export default function NetworkWorkspace() {
                             </button>
                         </div>
                         {focusNode && (
-                            <div className="p-1.5 rounded bg-bg-root border border-border-subtle text-[10px] space-y-1">
+                            <div className="p-1.5 rounded bg-bg-root border border-border-subtle text-[11px] space-y-1">
                                 <div className="text-[8px] font-mono text-fg-faint">FOCUSED ENTITY:</div>
                                 <div className="font-mono text-fg-primary truncate">{focusNode}</div>
                                 <div className="flex gap-1 pt-1">
@@ -420,7 +420,7 @@ export default function NetworkWorkspace() {
                                 <button
                                     key={cat.id}
                                     onClick={() => setRelationCategory(cat.id)}
-                                    className={`w-full text-left px-2 py-1 rounded text-[9px] font-mono transition-colors ${
+                                    className={`w-full text-left px-2 py-1 rounded text-[11px] font-mono transition-colors ${
                                         relationCategory === cat.id
                                             ? 'bg-primary/20 text-primary font-bold border border-primary/40'
                                             : 'text-fg-secondary hover:bg-bg-hover'
@@ -437,7 +437,7 @@ export default function NetworkWorkspace() {
                         <input type="range" min="1" max="3" value={depth}
                             onChange={e => setDepth(Number(e.target.value))}
                             className="w-full accent-primary" />
-                        <div className="flex justify-between text-[9px] font-mono text-fg-faint mt-0.5">
+                        <div className="flex justify-between text-[11px] font-mono text-fg-faint mt-0.5">
                             <span>1 hop</span><span>{depth} hops</span><span>3</span>
                         </div>
                     </div>
@@ -445,11 +445,11 @@ export default function NetworkWorkspace() {
                     <div className="px-3 py-2 border-b border-border-subtle">
                         <div className="tp-section-label mb-2">PINNED</div>
                         {pinnedNodes.length === 0 ? (
-                            <div className="text-[9px] text-fg-faint">Select a node, then pin it.</div>
+                            <div className="text-[11px] text-fg-faint">Select a node, then pin it.</div>
                         ) : (
                             <div className="space-y-1">
                                 {pinnedNodes.map((id) => (
-                                    <div key={id} className="flex items-center gap-1.5 text-[10px] font-mono text-fg-secondary">
+                                    <div key={id} className="flex items-center gap-1.5 text-[11px] font-mono text-fg-secondary">
                                         <Pin size={9} className="text-amber-400" />
                                         <span className="flex-1 truncate">{id}</span>
                                         <button onClick={() => handleTogglePin(id)} className="tp-btn tp-btn-ghost p-0"><X size={9} /></button>
@@ -462,12 +462,12 @@ export default function NetworkWorkspace() {
                     <div className="px-3 py-2 border-b border-border-subtle">
                         <div className="tp-section-label mb-2">LOADED NEIGHBORHOODS</div>
                         {expandedIds.size === 0 ? (
-                            <div className="text-[9px] text-fg-faint">No expansions yet.</div>
+                            <div className="text-[11px] text-fg-faint">No expansions yet.</div>
                         ) : (
                             <div className="space-y-1">
                                 {Array.from(expandedIds).map((id) => (
                                     <button key={id} onClick={() => graphRef.current?.zoomTo(id, 4)}
-                                        className="w-full flex items-center gap-1.5 text-[10px] font-mono text-fg-secondary hover:bg-bg-hover rounded px-1 py-0.5">
+                                        className="w-full flex items-center gap-1.5 text-[11px] font-mono text-fg-secondary hover:bg-bg-hover rounded px-1 py-0.5">
                                         <Crosshair size={9} className="text-primary" />
                                         <span className="flex-1 truncate">{id}</span>
                                     </button>
@@ -477,7 +477,7 @@ export default function NetworkWorkspace() {
                     </div>
 
                     <div className="px-3 py-2">
-                        <button onClick={() => setShowPerf(v => !v)} className="tp-btn tp-btn-ghost text-[9px] h-5 px-2">
+                        <button onClick={() => setShowPerf(v => !v)} className="tp-btn tp-btn-ghost text-[11px] h-5 px-2">
                             <BarChart3 size={9} /> {showPerf ? 'HIDE PERF' : 'SHOW PERF'}
                         </button>
                     </div>
@@ -487,19 +487,19 @@ export default function NetworkWorkspace() {
             {/* Center: graph canvas */}
             <div className="flex-1 flex flex-col min-w-0 relative">
                 <div className="flex items-center gap-1 px-3 py-1.5 border-b border-border-subtle bg-bg-surface">
-                    <button onClick={() => setShowFilters(v => !v)} className="tp-btn tp-btn-ghost text-[10px] h-6 px-2">
+                    <button onClick={() => setShowFilters(v => !v)} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2">
                         <Filter size={11} /> Filters
                     </button>
-                    <button onClick={() => graphRef.current?.fit()} className="tp-btn tp-btn-ghost text-[10px] h-6 px-2">
+                    <button onClick={() => graphRef.current?.fit()} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2">
                         <Maximize2 size={11} /> Fit
                     </button>
                     <div className="w-px h-4 bg-border-default mx-1" />
-                    <span className="text-[9px] font-mono text-fg-faint">
+                    <span className="text-[11px] font-mono text-fg-faint">
                         {formatNumber(graphNodeCount)} loaded · {formatNumber(graphEdgeCount)} edges · space = EXPAND
                     </span>
                     <div className="flex-1" />
                     {summary && (
-                        <span className="text-[9px] font-mono text-fg-faint">
+                        <span className="text-[11px] font-mono text-fg-faint">
                             TOTAL: {formatNumber(summary.node_count)} entities · {formatNumber(summary.community_count)} communities
                         </span>
                     )}
@@ -511,7 +511,7 @@ export default function NetworkWorkspace() {
                         <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-bg-panel/95 border border-primary/50 shadow-xl rounded px-4 py-2 flex items-center gap-3 animate-fade-in backdrop-blur-sm">
                             <div className="flex items-center gap-2">
                                 <Sparkles size={14} className="text-primary" />
-                                <span className="text-[10px] font-mono text-fg-faint">FOCUS MODE ACTIVE:</span>
+                                <span className="text-[11px] font-mono text-fg-faint">FOCUS MODE ACTIVE:</span>
                                 <span className="text-[12px] font-bold text-fg-primary font-mono">{focusNode}</span>
                             </div>
                             <div className="w-px h-4 bg-border-default" />
@@ -520,7 +520,7 @@ export default function NetworkWorkspace() {
                                     <button
                                         key={h}
                                         onClick={() => setDepth(h)}
-                                        className={`tp-btn text-[9px] h-5 px-1.5 ${depth === h ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
+                                        className={`tp-btn text-[11px] h-5 px-1.5 ${depth === h ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
                                     >
                                         {h}-HOP
                                     </button>
@@ -528,7 +528,7 @@ export default function NetworkWorkspace() {
                             </div>
                             <div className="w-px h-4 bg-border-default" />
                             <Link href={`/entity/${encodeURIComponent(focusNode)}`}>
-                                <button className="tp-btn tp-btn-ghost text-[10px] h-5 px-2 gap-1">
+                                <button className="tp-btn tp-btn-ghost text-[11px] h-5 px-2 gap-1">
                                     <span>WHY IMPORTANT?</span>
                                     <ArrowRight size={10} />
                                 </button>
@@ -560,7 +560,7 @@ export default function NetworkWorkspace() {
 
                             {!activeCommunity && (summary?.top_communities?.length > 0) && (
                                 <div className="absolute left-3 top-3 z-10 w-56 space-y-1.5 max-h-[70%] overflow-y-auto">
-                                    <div className="tp-section-label text-[9px] mb-1">COMMUNITIES — CLICK TO EXPAND</div>
+                                    <div className="tp-section-label text-[11px] mb-1">COMMUNITIES — CLICK TO EXPAND</div>
                                     {summary.top_communities.slice(0, 12).map((c) => (
                                         <CommunityCard key={c.id} community={c} onClick={() => openCommunity(c.id)} />
                                     ))}
@@ -570,15 +570,15 @@ export default function NetworkWorkspace() {
                             {activeCommunity && communityQuery.data && (
                                 <div className="absolute left-3 top-3 z-10 tp-panel p-2.5 w-56 space-y-1.5">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-[10px] font-semibold text-fg-primary">COMMUNITY {activeCommunity}</span>
+                                        <span className="text-[11px] font-semibold text-fg-primary">COMMUNITY {activeCommunity}</span>
                                         <button onClick={() => setActiveCommunity(null)} className="tp-btn tp-btn-ghost p-0.5"><X size={10} /></button>
                                     </div>
-                                    <div className="text-[9px] font-mono text-fg-faint">
+                                    <div className="text-[11px] font-mono text-fg-faint">
                                         {formatNumber(communityQuery.data.member_count)} entities · {formatNumber(communityQuery.data.edge_count)} relationships
                                         {communityQuery.data.truncated ? ' · truncated' : ''}
                                     </div>
                                     <button onClick={() => { setActiveCommunity(null); graphRef.current?.fit(); }}
-                                        className="tp-btn tp-btn-ghost text-[9px] h-5 px-2 w-full">
+                                        className="tp-btn tp-btn-ghost text-[11px] h-5 px-2 w-full">
                                         <Minimize2 size={9} /> BACK TO OVERVIEW
                                     </button>
                                 </div>
@@ -593,14 +593,14 @@ export default function NetworkWorkspace() {
                                 />
                             )}
 
-                            <div className="absolute bottom-3 left-3 z-10 text-[9px] font-mono text-fg-faint bg-bg-panel/80 px-2 py-1 rounded border border-border-subtle">
+                            <div className="absolute bottom-3 left-3 z-10 text-[11px] font-mono text-fg-faint bg-bg-panel/80 px-2 py-1 rounded border border-border-subtle">
                                 <span>{formatNumber(graphNodeCount)} loaded</span>
                                 <span className="mx-1">·</span>
                                 <span>{formatNumber(summary?.node_count || 0)} total (progressive)</span>
                             </div>
 
                             {pinnedNodes.length > 0 && (
-                                <div className="absolute bottom-3 right-3 z-10 text-[9px] font-mono bg-bg-panel/80 border border-border-subtle rounded p-1.5 space-y-0.5">
+                                <div className="absolute bottom-3 right-3 z-10 text-[11px] font-mono bg-bg-panel/80 border border-border-subtle rounded p-1.5 space-y-0.5">
                                     <div className="tp-section-label text-[8px]">PINNED</div>
                                     {pinnedNodes.map((id) => (
                                         <div key={id} className="flex items-center gap-1 text-fg-secondary">
@@ -630,16 +630,16 @@ export default function NetworkWorkspace() {
                             style={{ background: getEntityTypeColor(selectedNode.type) }} />
                         <div className="min-w-0">
                             <div className="text-[11px] font-semibold text-fg-primary truncate">{selectedNode.label}</div>
-                            <div className="text-[9px] font-mono text-fg-faint">{selectedNode.id} · {selectedNode.type || 'UNKNOWN'}</div>
+                            <div className="text-[11px] font-mono text-fg-faint">{selectedNode.id} · {selectedNode.type || 'UNKNOWN'}</div>
                         </div>
                         <div className="flex-1" />
-                        <div className="text-[9px] font-mono text-fg-secondary shrink-0">
+                        <div className="text-[11px] font-mono text-fg-secondary shrink-0">
                             {(evidence?.results || evidence?.items || evidence || []).length} evidence
                         </div>
-                        <button onClick={() => handleExpand(selectedNode.id)} className="tp-btn tp-btn-primary text-[9px] h-6 px-2 shrink-0">
+                        <button onClick={() => handleExpand(selectedNode.id)} className="tp-btn tp-btn-primary text-[11px] h-6 px-2 shrink-0">
                             <Expand size={9} /> EXPAND
                         </button>
-                        <button onClick={() => handleTogglePin(selectedNode.id)} className="tp-btn tp-btn-ghost text-[9px] h-6 px-2 shrink-0">
+                        <button onClick={() => handleTogglePin(selectedNode.id)} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2 shrink-0">
                             <Pin size={9} /> {pinnedNodes.includes(selectedNode.id) ? 'UNPIN' : 'PIN'}
                         </button>
                         <button onClick={() => setSelectedNode(null)} className="tp-btn tp-btn-ghost p-1 shrink-0">

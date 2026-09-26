@@ -4,6 +4,7 @@ import { useDossiers, useDossierDetail, generateDossier } from '@/api/xai';
 import { BookOpen, ChevronRight, Plus, FileText, AlertTriangle, Download, FileArchive, CheckCircle2 } from 'lucide-react';
 import { formatTimestamp } from '@/utils/format';
 import { requestJson } from '@/api/client';
+import { useToast } from '@/components/ui';
 
 export default function ReportsWorkspace() {
     const [, params] = useRoute('/dossiers/:id');
@@ -19,6 +20,7 @@ export default function ReportsWorkspace() {
     const [generating, setGenerating] = useState(false);
     const [exporting, setExporting] = useState(false);
     const [exportSuccess, setExportSuccess] = useState(false);
+    const { toast } = useToast();
 
     const { data: detailData } = useDossierDetail(selectedId);
     const detail = detailData?.result || detailData;
@@ -28,9 +30,11 @@ export default function ReportsWorkspace() {
         setGenerating(true);
         try {
             await generateDossier({ subject_id: generateTarget.trim() });
+            toast({ message: `Dossier generated for ${generateTarget.trim()}`, variant: 'success' });
             setGenerateTarget('');
         } catch (e) {
             console.error('Dossier generation failed:', e);
+            toast({ message: `Dossier generation failed: ${e.message || 'server error'}`, variant: 'error', duration: 6000 });
         } finally {
             setGenerating(false);
         }
@@ -82,7 +86,7 @@ export default function ReportsWorkspace() {
                     <button 
                         onClick={handleExportPack} 
                         disabled={exporting}
-                        className={`w-full tp-btn h-8 text-[10px] gap-2 ${exportSuccess ? 'tp-btn-green' : 'tp-btn-ghost hover:bg-bg-hover'}`}
+                        className={`w-full tp-btn h-8 text-[11px] gap-2 ${exportSuccess ? 'tp-btn-green' : 'tp-btn-ghost hover:bg-bg-hover'}`}
                     >
                         {exportSuccess ? <CheckCircle2 size={12} /> : <FileArchive size={12} />}
                         {exportSuccess ? 'EXPORT COMPLETE' : 'EXPORT FULL INVESTIGATION PACK'}
@@ -90,9 +94,9 @@ export default function ReportsWorkspace() {
                     <div className="flex gap-2 pt-1 border-t border-border-subtle">
                         <input value={generateTarget} onChange={e => setGenerateTarget(e.target.value)}
                             placeholder="Subject ID..."
-                            className="tp-input h-7 text-[10px] flex-1" />
+                            className="tp-input h-7 text-[11px] flex-1" />
                         <button onClick={handleGenerate} disabled={generating || !generateTarget.trim()}
-                            className="tp-btn tp-btn-primary text-[9px] h-7">
+                            className="tp-btn tp-btn-primary text-[11px] h-7">
                             <Plus size={10} /> Generate
                         </button>
                     </div>
@@ -103,8 +107,8 @@ export default function ReportsWorkspace() {
                     {dossiers.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-full text-center p-4">
                             <BookOpen size={20} className="text-fg-faint mb-2" />
-                            <span className="text-[10px] font-mono text-fg-faint uppercase">NO REPORTS</span>
-                            <span className="text-[9px] text-fg-faint mt-1">Generate a dossier to begin</span>
+                            <span className="text-[11px] font-mono text-fg-faint uppercase">NO REPORTS</span>
+                            <span className="text-[11px] text-fg-faint mt-1">Generate a dossier to begin</span>
                         </div>
                     ) : dossiers.map(d => (
                         <div key={d.id} onClick={() => setSelectedId(d.id)}
@@ -113,7 +117,7 @@ export default function ReportsWorkspace() {
                             <div className="flex items-start justify-between gap-2">
                                 <div className="min-w-0">
                                     <div className="text-[11px] text-fg-primary font-medium truncate">{d.title || d.id}</div>
-                                    <div className="text-[9px] text-fg-faint font-mono">{d.id}</div>
+                                    <div className="text-[11px] text-fg-faint font-mono">{d.id}</div>
                                 </div>
                                 <span className={`tp-badge shrink-0 ${
                                     d.status === 'reviewed' ? 'tp-badge-green' :
@@ -124,7 +128,7 @@ export default function ReportsWorkspace() {
                                 </span>
                             </div>
                             {d.confidence != null && (
-                                <div className="mt-1 text-[9px] font-mono text-fg-faint">
+                                <div className="mt-1 text-[11px] font-mono text-fg-faint">
                                     CONFIDENCE: {(d.confidence * 100).toFixed(0)}%
                                 </div>
                             )}
@@ -144,14 +148,14 @@ export default function ReportsWorkspace() {
                     <div className="max-w-3xl mx-auto p-6 space-y-6">
                         {/* Header */}
                         <div className="border-b border-border-subtle pb-4">
-                            <div className="font-mono text-[10px] text-fg-faint mb-1">{detail.id}</div>
+                            <div className="font-mono text-[11px] text-fg-faint mb-1">{detail.id}</div>
                             <h2 className="text-[16px] font-semibold text-fg-primary mb-2">{detail.title || 'Intelligence Dossier'}</h2>
                             <div className="flex items-center gap-3">
                                 <span className={`tp-badge ${detail.status === 'reviewed' ? 'tp-badge-green' : 'tp-badge-blue'}`}>
                                     {(detail.status || 'DRAFT').toUpperCase()}
                                 </span>
                                 {detail.confidence != null && (
-                                    <span className="text-[10px] font-mono text-fg-faint">
+                                    <span className="text-[11px] font-mono text-fg-faint">
                                         CONFIDENCE: {(detail.confidence * 100).toFixed(0)}%
                                     </span>
                                 )}
@@ -209,7 +213,7 @@ export default function ReportsWorkspace() {
                         {detail.human_review && (
                             <div className="tp-panel p-3 border-amber/20 bg-amber-bg">
                                 <div className="tp-section-label mb-1">HUMAN REVIEW</div>
-                                <div className="text-[10px] text-fg-secondary">
+                                <div className="text-[11px] text-fg-secondary">
                                     Required: {detail.human_review.required ? 'Yes' : 'No'}
                                     {detail.human_review.decision && ` · Decision: ${detail.human_review.decision}`}
                                 </div>

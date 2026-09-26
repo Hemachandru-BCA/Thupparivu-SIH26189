@@ -4,9 +4,9 @@
    All styling via CSS custom properties from index.css token system.
 ============================================================================= */
 
-import React, { createContext, useContext, useState, useCallback, useRef, useEffect, forwardRef, useMemo } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef, useEffect, forwardRef, useMemo, useId } from 'react';
 import { createPortal } from 'react-dom';
-import { ChevronDown, ChevronRight, X, Search, AlertTriangle, Info, CheckCircle2, XCircle, Clock, Loader2, ChevronUp, MoreHorizontal } from 'lucide-react';
+import { ChevronDown, ChevronRight, X, Search, AlertTriangle, Info, CheckCircle2, XCircle, Clock, Loader2, ChevronUp, MoreHorizontal, CheckCheck } from 'lucide-react';
 
 /* ---------------------------------------------------------------------------
    TOKENS — imported from index.css; components reference hsl(var(--xxx))
@@ -20,7 +20,7 @@ import { ChevronDown, ChevronRight, X, Search, AlertTriangle, Info, CheckCircle2
 const STATUS_STYLES = {
   observed:   { bg: 'bg-green-bg',   text: 'text-green',   border: 'border-green/30',  label: 'OBSERVED' },
   inferred:   { bg: 'bg-blue-bg',    text: 'text-blue',    border: 'border-blue/30',   label: 'INFERRED' },
-  unknown:    { bg: 'bg-[hsl(220,6%,18%)]', text: 'text-fg-muted', border: 'border-border-default', label: 'UNKNOWN' },
+  unknown:    { bg: 'bg-[hsl(220,10%,16%)]', text: 'text-fg-secondary', border: 'border-border-strong', label: 'UNKNOWN' },
   contradicted: { bg: 'bg-red-bg',   text: 'text-red',     border: 'border-red/30',    label: 'CONTRADICTED' },
   simulated:  { bg: 'bg-purple-bg',  text: 'text-purple',  border: 'border-purple/30', label: 'SIMULATED' },
   hypothesis: { bg: 'bg-amber-bg',   text: 'text-amber',   border: 'border-amber/30',  label: 'HYPOTHESIS' },
@@ -38,7 +38,7 @@ const STATUS_STYLES = {
 export function StatusLabel({ status, className = '' }) {
   const s = STATUS_STYLES[status?.toLowerCase()] || STATUS_STYLES.unknown;
   return (
-    <span className={`inline-flex items-center px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide rounded ${s.bg} ${s.text} ${s.border} border ${className}`}>
+    <span className={`inline-flex items-center px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide rounded ${s.bg} ${s.text} ${s.border} border ${className}`}>
       {s.label}
     </span>
   );
@@ -89,7 +89,7 @@ export function ConfidenceBreakdown({ components = {}, className = '' }) {
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <span className="text-[10px] text-fg-muted font-mono w-8 text-right">{pct}%</span>
+            <span className="text-[11px] text-fg-muted font-mono w-8 text-right">{pct}%</span>
           </div>
         );
       })}
@@ -255,17 +255,28 @@ export function Tabs({ tabs, active, onChange, className = '' }) {
    Right-side contextual inspector. 380–440px.
 --------------------------------------------------------------------------- */
 export function Drawer({ open, onClose, title, width = 400, children, footer }) {
+  const titleId = useId();
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [open, onClose]);
+
   if (!open) return null;
   return createPortal(
     <>
-      <div className="fixed inset-0 bg-black/40 z-50" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/40 z-50" onClick={onClose} aria-hidden="true" />
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
         className="fixed top-0 right-0 bottom-0 bg-bg-panel border-l border-border-default z-50 flex flex-col overflow-hidden animate-in"
         style={{ width: `${width}px`, maxWidth: '90vw' }}
       >
         <div className="flex items-center justify-between h-10 px-3 border-b border-border-default shrink-0">
-          <h3 className="text-[13px] font-semibold text-fg-primary truncate">{title}</h3>
-          <button onClick={onClose} className="text-fg-faint hover:text-fg-primary p-0.5 cursor-pointer" aria-label="Close">
+          <h3 id={titleId} className="text-[13px] font-semibold text-fg-primary truncate">{title}</h3>
+          <button onClick={onClose} className="text-fg-faint hover:text-fg-primary p-0.5 cursor-pointer" aria-label="Close (Escape)">
             <X size={14} />
           </button>
         </div>
@@ -281,19 +292,30 @@ export function Drawer({ open, onClose, title, width = 400, children, footer }) 
    DIALOG / MODAL
 --------------------------------------------------------------------------- */
 export function Dialog({ open, onClose, title, children, footer, width = 480 }) {
+  const titleId = useId();
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [open, onClose]);
+
   if (!open) return null;
   return createPortal(
     <>
-      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} />
-      <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+      <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} aria-hidden="true" />
+      <div className="fixed inset-0 flex items-center justify-center z-50 p-4" role="presentation">
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
           className="bg-bg-panel border border-border-default rounded-sm shadow-lg flex flex-col max-h-[80vh]"
           style={{ width: `${width}px`, maxWidth: '95vw' }}
           onClick={e => e.stopPropagation()}
         >
           <div className="flex items-center justify-between h-10 px-4 border-b border-border-default shrink-0">
-            <h3 className="text-[13px] font-semibold text-fg-primary">{title}</h3>
-            <button onClick={onClose} className="text-fg-faint hover:text-fg-primary p-0.5 cursor-pointer" aria-label="Close">
+            <h3 id={titleId} className="text-[13px] font-semibold text-fg-primary">{title}</h3>
+            <button onClick={onClose} className="text-fg-faint hover:text-fg-primary p-0.5 cursor-pointer" aria-label="Close (Escape)">
               <X size={14} />
             </button>
           </div>
@@ -313,7 +335,7 @@ export function DataGrid({ columns = [], rows = [], onRowClick, emptyMessage = '
   const rowH = compact ? 'h-8' : 'h-10';
   if (!rows.length) {
     return (
-      <div className={`text-center py-8 text-[12px] text-fg-muted ${className}`}>
+      <div className={`text-center py-8 text-[13px] text-fg-muted ${className}`}>
         {emptyMessage}
       </div>
     );
@@ -326,7 +348,7 @@ export function DataGrid({ columns = [], rows = [], onRowClick, emptyMessage = '
             {columns.map((col, i) => (
               <th
                 key={col.key || i}
-                className={`text-left font-medium text-fg-muted uppercase tracking-wide px-3 ${rowH} ${col.align === 'right' ? 'text-right' : ''}`}
+                className={`text-left font-semibold text-fg-secondary uppercase tracking-wide px-3 ${rowH} ${col.align === 'right' ? 'text-right' : ''}`}
                 style={col.width ? { width: col.width } : undefined}
               >
                 {col.label}
@@ -418,7 +440,7 @@ export function MetadataGroup({ items = [], className = '', horizontal = false }
     <dl className={`space-y-1 ${className}`}>
       {items.map(({ label, value, mono }, i) => (
         <div key={i} className="flex items-baseline gap-2">
-          <dt className="text-[10px] text-fg-faint uppercase tracking-wide w-24 shrink-0">{label}</dt>
+          <dt className="text-[11px] text-fg-faint uppercase tracking-wide w-24 shrink-0">{label}</dt>
           <dd className={`text-[12px] text-fg-primary ${mono ? 'font-mono' : ''} truncate`}>{value ?? '—'}</dd>
         </div>
       ))}
@@ -518,7 +540,7 @@ export function EmptyGraphState({ action }) {
 export function CompactMetric({ label, value, className = '' }) {
   return (
     <div className={`flex items-baseline gap-1.5 ${className}`}>
-      <span className="text-[10px] text-fg-faint uppercase tracking-wide">{label}</span>
+      <span className="text-[11px] text-fg-faint uppercase tracking-wide">{label}</span>
       <span className="text-[13px] font-semibold text-fg-primary font-mono">{value ?? '—'}</span>
     </div>
   );
@@ -529,8 +551,78 @@ export function CompactMetric({ label, value, className = '' }) {
 --------------------------------------------------------------------------- */
 export function Tag({ children, className = '' }) {
   return (
-    <span className={`inline-flex items-center px-1.5 py-0 text-[10px] font-medium bg-[hsl(220,10%,16%)] text-fg-secondary border border-border-default rounded-sm ${className}`}>
+    <span className={`inline-flex items-center px-1.5 py-0 text-[11px] font-medium bg-[hsl(220,10%,16%)] text-fg-secondary border border-border-default rounded-sm ${className}`}>
       {children}
     </span>
   );
+}
+
+/* ---------------------------------------------------------------------------
+   TOAST — lightweight transient notification system
+   Usage: const { toast } = useToast();
+          toast({ message: 'Saved', variant: 'success' });
+   Mount <ToastContainer /> once in App root.
+--------------------------------------------------------------------------- */
+const ToastContext = createContext(null);
+
+const TOAST_VARIANTS = {
+  success: { bg: 'bg-green-bg', border: 'border-green/40', icon: CheckCircle2, iconCls: 'text-green', textCls: 'text-green' },
+  error:   { bg: 'bg-red-bg',   border: 'border-red/40',   icon: XCircle,      iconCls: 'text-red',   textCls: 'text-fg-primary' },
+  warning: { bg: 'bg-amber-bg', border: 'border-amber/40', icon: AlertTriangle, iconCls: 'text-amber', textCls: 'text-fg-primary' },
+  info:    { bg: 'bg-blue-bg',  border: 'border-blue/40',  icon: Info,         iconCls: 'text-blue',  textCls: 'text-fg-primary' },
+};
+
+export function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
+  const counter = useRef(0);
+
+  const toast = useCallback(({ message, variant = 'info', duration = 4000 }) => {
+    const id = ++counter.current;
+    setToasts(prev => [...prev, { id, message, variant }]);
+    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), duration);
+  }, []);
+
+  const dismiss = useCallback((id) => setToasts(prev => prev.filter(t => t.id !== id)), []);
+
+  return (
+    <ToastContext.Provider value={{ toast }}>
+      {children}
+      {createPortal(
+        <div
+          aria-live="polite"
+          aria-label="Notifications"
+          className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 pointer-events-none"
+        >
+          {toasts.map(t => {
+            const v = TOAST_VARIANTS[t.variant] || TOAST_VARIANTS.info;
+            const Icon = v.icon;
+            return (
+              <div
+                key={t.id}
+                role="status"
+                className={`flex items-start gap-2.5 px-3 py-2.5 rounded border ${v.bg} ${v.border} shadow-lg pointer-events-auto min-w-[240px] max-w-[380px] animate-in`}
+              >
+                <Icon size={14} className={`${v.iconCls} shrink-0 mt-0.5`} />
+                <span className={`text-[12px] flex-1 leading-snug ${v.textCls}`}>{t.message}</span>
+                <button
+                  onClick={() => dismiss(t.id)}
+                  className="text-fg-faint hover:text-fg-primary p-0.5 shrink-0 cursor-pointer"
+                  aria-label="Dismiss notification"
+                >
+                  <X size={11} />
+                </button>
+              </div>
+            );
+          })}
+        </div>,
+        document.body
+      )}
+    </ToastContext.Provider>
+  );
+}
+
+export function useToast() {
+  const ctx = useContext(ToastContext);
+  if (!ctx) throw new Error('useToast must be used inside <ToastProvider>');
+  return ctx;
 }

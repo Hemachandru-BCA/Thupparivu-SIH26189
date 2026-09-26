@@ -269,7 +269,7 @@ export function Shell({ children }) {
           {NAV_SECTIONS.map((section) => (
             <div key={section.id}>
               {!collapsed ? (
-                <div className="px-2.5 pb-1 font-mono-ui text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/45 flex items-center gap-1.5">
+                <div className="px-2.5 pb-1 font-mono-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/45 flex items-center gap-1.5">
                   <span className="h-1 w-1 rounded-full bg-cyan-500/40" />
                   {section.title}
                 </div>
@@ -303,7 +303,7 @@ export function Shell({ children }) {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.9)]" />
                 </span>
-                <span className="font-mono-ui text-[9px] font-medium tracking-wider text-muted-foreground/80">
+                <span className="font-mono-ui text-[11px] font-medium tracking-wider text-muted-foreground/80">
                   LIVE CLUSTER
                 </span>
               </div>
@@ -369,7 +369,7 @@ export function Shell({ children }) {
             </button>
 
             <div className="flex items-center gap-2 min-w-0">
-              <span className="font-mono-ui text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-400 shrink-0">
+              <span className="font-mono-ui text-[11px] font-semibold uppercase tracking-[0.16em] text-cyan-400 shrink-0">
                 {routeMeta.section}
               </span>
               <span className="text-muted-foreground/30 font-mono-ui text-[11px] shrink-0">/</span>
@@ -379,7 +379,7 @@ export function Shell({ children }) {
               {routeMeta.detailId && (
                 <>
                   <span className="text-muted-foreground/30 font-mono-ui text-[11px] shrink-0">/</span>
-                  <span className="font-mono-ui text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 shrink-0 truncate max-w-[140px]">
+                  <span className="font-mono-ui text-[11px] px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 shrink-0 truncate max-w-[140px]">
                     {routeMeta.detailId}
                   </span>
                 </>
@@ -410,7 +410,7 @@ export function Shell({ children }) {
                   <X size={12} />
                 </button>
               ) : (
-                <kbd className="hidden md:inline-flex items-center font-mono-ui text-[9px] px-1.5 py-0.5 rounded border border-border/60 bg-muted/40 text-muted-foreground/60 shrink-0">
+                <kbd className="hidden md:inline-flex items-center font-mono-ui text-[11px] px-1.5 py-0.5 rounded border border-border/60 bg-muted/40 text-muted-foreground/60 shrink-0">
                   ⌘K
                 </kbd>
               )}
@@ -420,10 +420,10 @@ export function Shell({ children }) {
             {searchFocused && globalQuery.trim().length > 1 && (
               <div className="absolute left-0 right-0 top-10 z-50 overflow-hidden rounded-lg border border-[#223048] bg-[#0d1424] shadow-2xl backdrop-blur-md">
                 <div className="border-b border-[#1b2538] px-3 py-2 flex items-center justify-between bg-[#080d18]">
-                  <span className="font-mono-ui text-[9px] uppercase tracking-wider text-muted-foreground">
+                  <span className="font-mono-ui text-[11px] uppercase tracking-wider text-muted-foreground">
                     Search Results: <span className="text-cyan-400 font-semibold">{debouncedGlobalQuery}</span>
                   </span>
-                  <span className="font-mono-ui text-[9px] text-muted-foreground/50">ESC to close</span>
+                  <span className="font-mono-ui text-[11px] text-muted-foreground/50">ESC to close</span>
                 </div>
 
                 <div className="max-h-72 overflow-y-auto p-1.5 divide-y divide-border/20">
@@ -446,14 +446,14 @@ export function Shell({ children }) {
                         }}
                         className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-white/[0.05] transition-colors group"
                       >
-                        <div className="grid h-7 w-7 shrink-0 place-items-center rounded bg-cyan-500/10 border border-cyan-500/25 font-mono-ui text-[10px] font-bold text-cyan-400 group-hover:border-cyan-400">
+                        <div className="grid h-7 w-7 shrink-0 place-items-center rounded bg-cyan-500/10 border border-cyan-500/25 font-mono-ui text-[11px] font-bold text-cyan-400 group-hover:border-cyan-400">
                           {(entity.name || entity.id).slice(0, 2).toUpperCase()}
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="truncate text-xs font-semibold text-foreground group-hover:text-cyan-400 transition-colors">
                             {entity.name || entity.id}
                           </div>
-                          <div className="flex items-center gap-2 font-mono-ui text-[9px] uppercase text-muted-foreground/70">
+                          <div className="flex items-center gap-2 font-mono-ui text-[11px] uppercase text-muted-foreground/70">
                             <span>{entity.type || entity.category || 'entity'}</span>
                             <span>·</span>
                             <span className="truncate">{entity.id}</span>
@@ -473,7 +473,7 @@ export function Shell({ children }) {
                   <Link
                     href={`/search?q=${encodeURIComponent(debouncedGlobalQuery)}`}
                     onClick={() => setSearchFocused(false)}
-                    className="inline-flex items-center gap-1 font-mono-ui text-[10px] text-cyan-400 hover:underline"
+                    className="inline-flex items-center gap-1 font-mono-ui text-[11px] text-cyan-400 hover:underline"
                   >
                     Open advanced search <ArrowRight size={11} />
                   </Link>
@@ -486,7 +486,7 @@ export function Shell({ children }) {
           <div className="flex items-center gap-2.5 shrink-0">
             {/* System Status Pill */}
             <div
-              className="hidden sm:flex items-center gap-2 rounded-md border border-emerald-500/25 bg-emerald-500/5 px-2.5 py-1 text-[10px] font-mono-ui text-emerald-400"
+              className="hidden sm:flex items-center gap-2 rounded-md border border-emerald-500/25 bg-emerald-500/5 px-2.5 py-1 text-[11px] font-mono-ui text-emerald-400"
               title={`API connection active · ${nodeCount != null ? formatNumber(nodeCount) : '…'} nodes in graph`}
             >
               <span className="relative flex h-2 w-2">
@@ -515,10 +515,10 @@ export function Shell({ children }) {
               {notificationsOpen && (
                 <div className="absolute right-0 top-10 z-50 w-80 overflow-hidden rounded-lg border border-[#223048] bg-[#0d1424] shadow-2xl">
                   <div className="border-b border-[#1b2538] px-3.5 py-2.5 flex items-center justify-between bg-[#080d18]">
-                    <div className="font-mono-ui text-[10px] font-semibold uppercase tracking-wider text-foreground">
+                    <div className="font-mono-ui text-[11px] font-semibold uppercase tracking-wider text-foreground">
                       Operational Feeds
                     </div>
-                    <span className="font-mono-ui text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    <span className="font-mono-ui text-[11px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
                       3 PENDING
                     </span>
                   </div>
@@ -532,7 +532,7 @@ export function Shell({ children }) {
                       <p className="mt-1 text-muted-foreground text-[11px] leading-relaxed">
                         Intermediary candidate <span className="font-mono-ui text-foreground">e1e815f1</span> between Community 5 & 8 ready for review.
                       </p>
-                      <div className="mt-1.5 flex items-center gap-2 font-mono-ui text-[9px] text-muted-foreground/60">
+                      <div className="mt-1.5 flex items-center gap-2 font-mono-ui text-[11px] text-muted-foreground/60">
                         <span>Confidence: 0.529</span>
                         <span>·</span>
                         <Link href="/ghosts" onClick={() => setNotificationsOpen(false)} className="text-cyan-400 hover:underline">
@@ -549,7 +549,7 @@ export function Shell({ children }) {
                       <p className="mt-1 text-muted-foreground text-[11px] leading-relaxed">
                         Integrity contract pass: 30 evidence-grounded claims anchored.
                       </p>
-                      <div className="mt-1.5 font-mono-ui text-[9px] text-muted-foreground/60">
+                      <div className="mt-1.5 font-mono-ui text-[11px] text-muted-foreground/60">
                         <Link href="/findings" onClick={() => setNotificationsOpen(false)} className="text-cyan-400 hover:underline">
                           Review findings register
                         </Link>
@@ -564,7 +564,7 @@ export function Shell({ children }) {
                       <p className="mt-1 text-muted-foreground text-[11px] leading-relaxed">
                         Removal scenario for node <span className="font-mono-ui text-foreground">06a1573c</span> baseline ready.
                       </p>
-                      <div className="mt-1.5 font-mono-ui text-[9px] text-muted-foreground/60">
+                      <div className="mt-1.5 font-mono-ui text-[11px] text-muted-foreground/60">
                         <Link href="/simulation" onClick={() => setNotificationsOpen(false)} className="text-cyan-400 hover:underline">
                           Open sandbox
                         </Link>
@@ -576,7 +576,7 @@ export function Shell({ children }) {
                     <button
                       type="button"
                       onClick={() => setNotificationsOpen(false)}
-                      className="font-mono-ui text-[10px] text-muted-foreground hover:text-foreground"
+                      className="font-mono-ui text-[11px] text-muted-foreground hover:text-foreground"
                     >
                       Dismiss alerts
                     </button>
@@ -589,7 +589,7 @@ export function Shell({ children }) {
 
             {/* User / Session Badge */}
             <div className="flex items-center gap-2 pl-1">
-              <div className="grid h-7 w-7 place-items-center rounded border border-cyan-500/35 bg-cyan-500/10 font-mono-ui text-[10px] font-bold text-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.15)]">
+              <div className="grid h-7 w-7 place-items-center rounded border border-cyan-500/35 bg-cyan-500/10 font-mono-ui text-[11px] font-bold text-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.15)]">
                 AR
               </div>
               <div className="hidden lg:block leading-none text-left">
@@ -651,7 +651,7 @@ export function SectionHeading({ eyebrow, title, description, action }) {
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-[#1a2232]/80 pb-4">
       <div>
         {eyebrow && (
-          <div className="mb-1.5 font-mono-ui text-[9px] uppercase tracking-[0.2em] text-cyan-400 font-semibold flex items-center gap-1.5">
+          <div className="mb-1.5 font-mono-ui text-[11px] uppercase tracking-[0.2em] text-cyan-400 font-semibold flex items-center gap-1.5">
             <span className="h-1 w-1 rounded-full bg-cyan-400 shadow-[0_0_4px_rgba(34,211,238,0.8)]" />
             {eyebrow}
           </div>
@@ -691,7 +691,7 @@ export function Metric({ label, value, detail, accent = 'primary', icon: Icon })
   return (
     <div className="rounded-lg border border-[#1a2333] bg-[#0c121e]/90 p-4 transition-all hover:border-cyan-500/35 hover:shadow-[0_0_15px_rgba(34,211,238,0.06)]">
       <div className="flex items-start justify-between">
-        <div className="font-mono-ui text-[9px] uppercase tracking-[0.16em] text-muted-foreground/75">
+        <div className="font-mono-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground/75">
           {label}
         </div>
         {Icon && (
@@ -765,7 +765,7 @@ export function Pill({ children, tone = 'neutral' }) {
   };
   return (
     <span
-      className={`inline-flex items-center gap-1 border rounded px-1.5 py-0.5 font-mono-ui text-[9px] font-semibold uppercase tracking-wider ${
+      className={`inline-flex items-center gap-1 border rounded px-1.5 py-0.5 font-mono-ui text-[11px] font-semibold uppercase tracking-wider ${
         tones[tone] || tones.neutral
       }`}
     >
@@ -805,7 +805,7 @@ export function ConfidenceIndicator({ value, label = 'confidence' }) {
   const normalized = Math.max(0, Math.min(1, Number(value) || 0));
   return (
     <div className="sg-confidence" aria-label={`${label}: ${Math.round(normalized * 100)} percent`}>
-      <div className="flex items-center justify-between font-mono-ui text-[9px] uppercase tracking-wide text-muted-foreground">
+      <div className="flex items-center justify-between font-mono-ui text-[11px] uppercase tracking-wide text-muted-foreground">
         <span>{label}</span>
         <span className="text-cyan-400 font-semibold">{Math.round(normalized * 100)}%</span>
       </div>

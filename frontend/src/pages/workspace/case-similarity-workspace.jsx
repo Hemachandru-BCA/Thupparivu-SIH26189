@@ -18,7 +18,7 @@ function Panel({ title, icon: Icon, children, className = '' }) {
 function Stat({ label, value, accent }) {
     return (
         <div className="border border-border-subtle bg-bg-root px-2 py-2">
-            <div className="text-[9px] uppercase tracking-wide text-fg-faint">{label}</div>
+            <div className="text-[11px] uppercase tracking-wide text-fg-faint">{label}</div>
             <div className={`mt-1 text-[16px] font-mono ${accent || 'text-fg-primary'}`}>{value}</div>
         </div>
     );
@@ -28,7 +28,7 @@ function SimilarityBar({ label, value }) {
     const pct = Math.round((value || 0) * 100);
     return (
         <div className="space-y-0.5">
-            <div className="flex items-center justify-between text-[9px] text-fg-secondary">
+            <div className="flex items-center justify-between text-[11px] text-fg-secondary">
                 <span>{label}</span>
                 <span className="font-mono">{pct}%</span>
             </div>
@@ -47,16 +47,16 @@ function SimilarityCard({ item, onCompare }) {
                 <div className="flex items-center gap-2">
                     <Network size={13} className="text-primary" />
                     <div>
-                        <div className="text-[10px] font-semibold text-fg-primary">{item.case_id}</div>
-                        <div className="text-[9px] text-fg-faint">{item.title || 'Similar case'}</div>
+                        <div className="text-[11px] font-semibold text-fg-primary">{item.case_id}</div>
+                        <div className="text-[11px] text-fg-faint">{item.title || 'Similar case'}</div>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="tp-badge tp-badge-blue font-mono">{Math.round(item.overall_similarity * 100)}%</span>
-                    <button className="tp-button tp-button-ghost text-[9px] px-2 py-0.5" onClick={() => onCompare(item.case_id)}>COMPARE</button>
+                    <button className="tp-button tp-button-ghost text-[11px] px-2 py-0.5" onClick={() => onCompare(item.case_id)}>COMPARE</button>
                 </div>
             </div>
-            <button className="mt-1.5 text-[9px] text-primary flex items-center gap-1" onClick={() => setExpanded(!expanded)}>
+            <button className="mt-1.5 text-[11px] text-primary flex items-center gap-1" onClick={() => setExpanded(!expanded)}>
                 {expanded ? 'Hide' : 'Show'} dimensions
             </button>
             {expanded && (
@@ -66,9 +66,9 @@ function SimilarityCard({ item, onCompare }) {
                     ))}
                     {item.similarities?.slice(0, 5).map((sim) => (
                         <div key={sim.dimension} className="border-t border-border-subtle pt-1">
-                            <div className="text-[9px] font-semibold text-fg-secondary">{sim.dimension.replace(/_/g, ' ')}</div>
+                            <div className="text-[11px] font-semibold text-fg-secondary">{sim.dimension.replace(/_/g, ' ')}</div>
                             {sim.similarities?.slice(0, 3).map((s) => (
-                                <div key={s.feature} className="flex justify-between text-[9px] text-fg-faint">
+                                <div key={s.feature} className="flex justify-between text-[11px] text-fg-faint">
                                     <span>{s.feature}</span>
                                     <span className="font-mono">{Math.round(s.score * 100)}%</span>
                                 </div>
@@ -117,7 +117,7 @@ export default function CaseSimilarityWorkspace() {
                         <Dna size={15} className="text-primary" />
                         <h1 className="text-[13px] font-semibold tracking-wide text-fg-primary">CASE SIMILARITY / NETWORK DNA</h1>
                     </div>
-                    <p className="mt-1 text-[10px] text-fg-faint">Have we seen a network like this before?</p>
+                    <p className="mt-1 text-[11px] text-fg-faint">Have we seen a network like this before?</p>
                 </div>
                 <span className="tp-badge tp-badge-blue">{caseId}</span>
             </div>
@@ -129,14 +129,14 @@ export default function CaseSimilarityWorkspace() {
                         {fpLoading ? (
                             <div className="h-20 animate-pulse bg-bg-hover" />
                         ) : fingerprint?.error ? (
-                            <div className="text-[10px] text-fg-faint">{fingerprint.error}</div>
+                            <div className="text-[11px] text-fg-faint">{fingerprint.error}</div>
                         ) : (
                             <>
                                 <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
                                     {dnaStats.map((s) => <Stat key={s.label} label={s.label} value={s.value} />)}
                                 </div>
                                 {fingerprint?.limitations?.[0] && (
-                                    <div className="mt-2 text-[9px] text-fg-faint">{fingerprint.limitations[0]}</div>
+                                    <div className="mt-2 text-[11px] text-fg-faint">{fingerprint.limitations[0]}</div>
                                 )}
                             </>
                         )}
@@ -157,7 +157,7 @@ export default function CaseSimilarityWorkspace() {
                                 {[1, 2, 3].map((i) => <div key={i} className="h-12 animate-pulse bg-bg-hover" />)}
                             </div>
                         ) : similarCases.length === 0 ? (
-                            <div className="text-[10px] text-fg-faint">No similar cases found.</div>
+                            <div className="text-[11px] text-fg-faint">No similar cases found.</div>
                         ) : (
                             <div className="space-y-2">
                                 {similarCases.map((item) => (
@@ -177,7 +177,7 @@ export default function CaseSimilarityWorkspace() {
                             <select
                                 value={compareTarget}
                                 onChange={(e) => setCompareTarget(e.target.value)}
-                                className="tp-input h-7 text-[10px] flex-1"
+                                className="tp-input h-7 text-[11px] flex-1"
                             >
                                 <option value="">Select case to compare</option>
                                 {similarCases.map((s) => (
@@ -189,10 +189,10 @@ export default function CaseSimilarityWorkspace() {
                             <div className="space-y-3">
                                 <div className="grid grid-cols-2 gap-2">
                                     <div className="border border-border-subtle bg-bg-root p-2">
-                                        <div className="text-[9px] text-fg-faint font-semibold">{compareData.case_a}</div>
+                                        <div className="text-[11px] text-fg-faint font-semibold">{compareData.case_a}</div>
                                         <div className="mt-1 space-y-1">
                                             {compareData.comparison?.map((c) => (
-                                                <div key={c.feature} className="flex justify-between text-[9px]">
+                                                <div key={c.feature} className="flex justify-between text-[11px]">
                                                     <span className="text-fg-secondary">{c.feature.replace(/_/g, ' ')}</span>
                                                     <span className="font-mono text-fg-primary">{c.case_a_value ?? '—'}</span>
                                                 </div>
@@ -200,10 +200,10 @@ export default function CaseSimilarityWorkspace() {
                                         </div>
                                     </div>
                                     <div className="border border-border-subtle bg-bg-root p-2">
-                                        <div className="text-[9px] text-fg-faint font-semibold">{compareData.case_b}</div>
+                                        <div className="text-[11px] text-fg-faint font-semibold">{compareData.case_b}</div>
                                         <div className="mt-1 space-y-1">
                                             {compareData.comparison?.map((c) => (
-                                                <div key={c.feature} className="flex justify-between text-[9px]">
+                                                <div key={c.feature} className="flex justify-between text-[11px]">
                                                     <span className="text-fg-secondary">{c.feature.replace(/_/g, ' ')}</span>
                                                     <span className="font-mono text-fg-primary">{c.case_b_value ?? '—'}</span>
                                                 </div>
@@ -212,7 +212,7 @@ export default function CaseSimilarityWorkspace() {
                                     </div>
                                 </div>
                                 {compareData.explanation && (
-                                    <div className="border-l-2 border-primary pl-2 text-[10px] text-fg-secondary">
+                                    <div className="border-l-2 border-primary pl-2 text-[11px] text-fg-secondary">
                                         {compareData.explanation}
                                     </div>
                                 )}
@@ -225,7 +225,7 @@ export default function CaseSimilarityWorkspace() {
                                 )}
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint">Select a similar case above to compare.</div>
+                            <div className="text-[11px] text-fg-faint">Select a similar case above to compare.</div>
                         )}
                     </Panel>
 
@@ -234,21 +234,21 @@ export default function CaseSimilarityWorkspace() {
                             <div className="space-y-2">
                                 {compareData.similarities[0].similarities.filter((s) => s.score > 0.7).slice(0, 4).map((s) => (
                                     <div key={s.feature} className="flex items-start gap-2 border-b border-border-subtle pb-1">
-                                        <span className="text-[10px] text-green-400">+</span>
-                                        <span className="text-[10px] text-fg-secondary">Similar {s.feature.replace(/_/g, ' ')}</span>
-                                        <span className="text-[9px] font-mono text-fg-faint ml-auto">{Math.round(s.score * 100)}%</span>
+                                        <span className="text-[11px] text-green-400">+</span>
+                                        <span className="text-[11px] text-fg-secondary">Similar {s.feature.replace(/_/g, ' ')}</span>
+                                        <span className="text-[11px] font-mono text-fg-faint ml-auto">{Math.round(s.score * 100)}%</span>
                                     </div>
                                 ))}
                                 {compareData.similarities[0].similarities.filter((s) => s.score < 0.5).slice(0, 4).map((s) => (
                                     <div key={s.feature} className="flex items-start gap-2 border-b border-border-subtle pb-1">
-                                        <span className="text-[10px] text-amber-400">-</span>
-                                        <span className="text-[10px] text-fg-secondary">Different {s.feature.replace(/_/g, ' ')}</span>
-                                        <span className="text-[9px] font-mono text-fg-faint ml-auto">{Math.round(s.score * 100)}%</span>
+                                        <span className="text-[11px] text-amber-400">-</span>
+                                        <span className="text-[11px] text-fg-secondary">Different {s.feature.replace(/_/g, ' ')}</span>
+                                        <span className="text-[11px] font-mono text-fg-faint ml-auto">{Math.round(s.score * 100)}%</span>
                                     </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="text-[10px] text-fg-faint">Select two cases to see why they are similar or different.</div>
+                            <div className="text-[11px] text-fg-faint">Select two cases to see why they are similar or different.</div>
                         )}
                     </Panel>
                 </div>

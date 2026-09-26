@@ -184,7 +184,7 @@ export function ExplorerPage() {
                         <div className="flex items-center gap-2 font-mono-ui text-[11px] font-bold tracking-wider text-cyan-400 uppercase">
                             <Network size={14} /> Explorer Scope
                         </div>
-                        <span className="font-mono-ui text-[9px] text-[#64748b]">
+                        <span className="font-mono-ui text-[11px] text-[#64748b]">
                             {overview.data?.entities_count ?? '—'} Entities
                         </span>
                     </div>
@@ -192,7 +192,7 @@ export function ExplorerPage() {
 
                 <div className="flex-1 space-y-4 overflow-y-auto p-3.5 scrollbar-thin scrollbar-thumb-white/10">
                     <div>
-                        <label className="mb-1 block font-mono-ui text-[9px] uppercase tracking-wider text-muted-foreground">
+                        <label className="mb-1 block font-mono-ui text-[11px] uppercase tracking-wider text-muted-foreground">
                             Focus Node / Search
                         </label>
                         <div className="relative">
@@ -228,7 +228,7 @@ export function ExplorerPage() {
                     </div>
 
                     <div className="space-y-2 rounded-md border border-[#182334] bg-[#0c121e]/60 p-2.5">
-                        <div className="flex items-center justify-between font-mono-ui text-[9px] uppercase text-muted-foreground">
+                        <div className="flex items-center justify-between font-mono-ui text-[11px] uppercase text-muted-foreground">
                             <span>Hops Depth: {depth}</span>
                             <input
                                 type="range"
@@ -239,7 +239,7 @@ export function ExplorerPage() {
                                 className="w-24 accent-cyan-400"
                             />
                         </div>
-                        <div className="flex items-center justify-between font-mono-ui text-[9px] uppercase text-muted-foreground">
+                        <div className="flex items-center justify-between font-mono-ui text-[11px] uppercase text-muted-foreground">
                             <span>Node Cap: {maxNodes}</span>
                             <input
                                 type="range"
@@ -254,7 +254,7 @@ export function ExplorerPage() {
                     </div>
 
                     <div>
-                        <label className="mb-1.5 block font-mono-ui text-[9px] uppercase tracking-wider text-muted-foreground">
+                        <label className="mb-1.5 block font-mono-ui text-[11px] uppercase tracking-wider text-muted-foreground">
                             Entity Filter
                         </label>
                         <div className="flex flex-wrap gap-1">
@@ -263,7 +263,7 @@ export function ExplorerPage() {
                                     key={t}
                                     type="button"
                                     onClick={() => setTypeFilter(t)}
-                                    className={`rounded px-2 py-0.5 font-mono-ui text-[9px] uppercase transition-colors ${
+                                    className={`rounded px-2 py-0.5 font-mono-ui text-[11px] uppercase transition-colors ${
                                         typeFilter === t
                                             ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 font-bold'
                                             : 'bg-[#111827] text-muted-foreground hover:text-foreground border border-transparent'
@@ -300,7 +300,7 @@ export function ExplorerPage() {
 
                     <div className="rounded-md border border-[#1e293b] bg-[#0a0f1d] p-2.5">
                         <div className="mb-2 flex items-center justify-between">
-                            <span className="font-mono-ui text-[9px] font-bold uppercase text-amber-400">Sandbox Impact</span>
+                            <span className="font-mono-ui text-[11px] font-bold uppercase text-amber-400">Sandbox Impact</span>
                             <Zap size={12} className="text-amber-400" />
                         </div>
                         <button
@@ -312,7 +312,7 @@ export function ExplorerPage() {
                             {simLoading ? 'Simulating…' : 'Simulate Node Removal'}
                         </button>
                         {simulation && (
-                            <div className="mt-2 space-y-1 font-mono-ui text-[9px] text-muted-foreground border-t border-[#1e293b] pt-2">
+                            <div className="mt-2 space-y-1 font-mono-ui text-[11px] text-muted-foreground border-t border-[#1e293b] pt-2">
                                 <div className="flex justify-between">
                                     <span>Fragmentation:</span>
                                     <span className="text-white font-bold">{fmt(simulation.fragmentation_score)}</span>
@@ -417,7 +417,7 @@ export function ExplorerPage() {
                         </div>
 
                         <div className="rounded-md border border-[#1a2436] bg-[#0c121e] p-3">
-                            <div className="mb-2 font-mono-ui text-[9px] font-bold uppercase tracking-wider text-cyan-400">
+                            <div className="mb-2 font-mono-ui text-[11px] font-bold uppercase tracking-wider text-cyan-400">
                                 Topological Centrality
                             </div>
                             <div className="space-y-2">
@@ -432,7 +432,7 @@ export function ExplorerPage() {
 
                         <div className="rounded-md border border-[#1a2436] bg-[#0c121e] p-3">
                             <div className="mb-2 flex items-center justify-between">
-                                <span className="font-mono-ui text-[9px] font-bold uppercase tracking-wider text-cyan-400">
+                                <span className="font-mono-ui text-[11px] font-bold uppercase tracking-wider text-cyan-400">
                                     Linked Findings ({relatedFindings.length})
                                 </span>
                                 <ShieldAlert size={12} className="text-cyan-400" />
@@ -445,7 +445,7 @@ export function ExplorerPage() {
                                         <div key={f.finding_id} className="rounded border border-[#182334] bg-[#090d16] p-2 text-xs">
                                             <div className="flex items-center justify-between gap-1 mb-1">
                                                 <Pill tone={f.status === 'CONTRADICTED' ? 'rose' : 'amber'}>{f.status || 'FINDING'}</Pill>
-                                                <span className="font-mono-ui text-[9px] text-cyan-400">
+                                                <span className="font-mono-ui text-[11px] text-cyan-400">
                                                     {((f.confidence ?? 0) * 100).toFixed(0)}% conf
                                                 </span>
                                             </div>
@@ -497,7 +497,7 @@ export function ExplorerPage() {
                                 <button
                                     type="button"
                                     onClick={() => setActiveBottomTab('timeline')}
-                                    className={`font-mono-ui text-[9px] uppercase px-2 py-0.5 rounded ${
+                                    className={`font-mono-ui text-[11px] uppercase px-2 py-0.5 rounded ${
                                         activeBottomTab === 'timeline' ? 'bg-cyan-500/20 text-cyan-400' : 'text-muted-foreground'
                                     }`}
                                 >
@@ -506,7 +506,7 @@ export function ExplorerPage() {
                                 <button
                                     type="button"
                                     onClick={() => setActiveBottomTab('evidence')}
-                                    className={`font-mono-ui text-[9px] uppercase px-2 py-0.5 rounded ${
+                                    className={`font-mono-ui text-[11px] uppercase px-2 py-0.5 rounded ${
                                         activeBottomTab === 'evidence' ? 'bg-cyan-500/20 text-cyan-400' : 'text-muted-foreground'
                                     }`}
                                 >
@@ -515,7 +515,7 @@ export function ExplorerPage() {
                             </div>
                         )}
                     </div>
-                    <span className="font-mono-ui text-[9px] text-[#556784]">
+                    <span className="font-mono-ui text-[11px] text-[#556784]">
                         {selectedNode ? `Context: ${selectedNode.label || selectedNode.id}` : 'Select a node for timeline'}
                     </span>
                 </div>
@@ -539,7 +539,7 @@ export function ExplorerPage() {
                                             <button
                                                 type="button"
                                                 onClick={() => navigate(`/evidence?focus=${encodeURIComponent(t.evidence_id)}`)}
-                                                className="font-mono-ui text-[9px] text-cyan-400 hover:underline"
+                                                className="font-mono-ui text-[11px] text-cyan-400 hover:underline"
                                             >
                                                 TRACE →
                                             </button>
@@ -555,7 +555,7 @@ export function ExplorerPage() {
                                             <Pill tone="neutral">{e.source_type}</Pill>
                                             <span className="text-foreground/90 truncate max-w-lg">{e.text_excerpt}</span>
                                         </div>
-                                        <span className="font-mono-ui text-[9px] text-muted-foreground">{e.source_record_id}</span>
+                                        <span className="font-mono-ui text-[11px] text-muted-foreground">{e.source_record_id}</span>
                                     </div>
                                 ))}
                             </div>

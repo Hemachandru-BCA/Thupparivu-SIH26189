@@ -14,24 +14,35 @@ function toError(value) {
     }
 }
 function DefaultFallback({ error, resetError }) {
-    return (<div className="min-h-screen w-full flex items-center justify-center bg-gray-50 p-6">
-      <div className="max-w-lg w-full text-center">
-        <h1 className="text-xl font-semibold text-gray-900">
-          Something went wrong
-        </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          This part of the app hit an error. The rest of the app is still
-          running.
-        </p>
-        {/* Dev only: messages can carry API responses and other internals. */}
-        {import.meta.env.DEV ? (<pre className="mt-4 overflow-x-auto rounded bg-gray-100 p-3 text-left text-xs text-gray-800">
-            {error.message || String(error)}
-          </pre>) : null}
-        <button type="button" onClick={resetError} className="mt-4 rounded bg-gray-900 px-4 py-2 text-sm text-white hover:bg-gray-700">
-          Try again
-        </button>
-      </div>
-    </div>);
+    return (
+        <div className="min-h-screen w-full flex items-center justify-center bg-bg-root p-6">
+            <div className="max-w-lg w-full text-center">
+                <div className="w-12 h-12 rounded bg-red-bg border border-red/30 flex items-center justify-center mx-auto mb-4">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-red">
+                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+                <h1 className="text-[16px] font-semibold text-fg-primary">
+                    Component error
+                </h1>
+                <p className="mt-2 text-[13px] text-fg-secondary">
+                    This panel hit an unexpected error. The rest of the workstation is still running.
+                </p>
+                {import.meta.env.DEV ? (
+                    <pre className="mt-4 overflow-x-auto rounded border border-border-default bg-bg-elevated p-3 text-left text-[11px] font-mono text-fg-secondary whitespace-pre-wrap">
+                        {error.message || String(error)}
+                    </pre>
+                ) : null}
+                <button
+                    type="button"
+                    onClick={resetError}
+                    className="mt-5 rounded border border-border-default bg-bg-elevated hover:bg-bg-hover px-4 py-2 text-[13px] text-fg-primary transition-colors cursor-pointer"
+                >
+                    Retry
+                </button>
+            </div>
+        </div>
+    );
 }
 export class ErrorBoundary extends Component {
     state = { error: null };
