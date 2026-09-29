@@ -1,162 +1,165 @@
-import { useState, useMemo } from 'react';
-import { Link } from 'wouter';
-import { useFindings, useFindingDetail } from '@/api/xai';
-import { Brain, ChevronRight, AlertTriangle, Clock, Target, FileText, Info } from 'lucide-react';
-import { formatNumber } from '@/utils/format';
-import { getConfidenceColor } from '@/components/app-shell';
-import { StatusLabel } from '@/components/ui';
-
-function ConfidenceBar({ value, height = 3 }) {
-    const color = getConfidenceColor(value);
-    return (
-        <div className="tp-confidence-bar" style={{ height }}>
-            <div className="tp-confidence-fill" style={{ width: `${value * 100}%`, background: color }} />
-        </div>
-    );
-}
-
-function FindingRow({ finding }) {
-    const conf = finding.confidence || 0;
-    const confColor = getConfidenceColor(conf);
-    return (
-        <Link href={`/findings/${finding.finding_id || finding.id}`}>
-            <div className="flex items-center gap-4 px-4 py-2.5 border-b border-border-subtle hover:bg-bg-hover cursor-pointer transition-colors">
-                {/* ID */}
-                <span className="font-mono text-[11px] text-fg-faint w-20 shrink-0">
-                    {finding.finding_id || finding.id}
-                </span>
-
-                {/* Type */}
-                <span className="tp-badge tp-badge-purple shrink-0" style={{maxWidth: 100}}>
-                    {finding.finding_type || 'FINDING'}
-                </span>
-
-                {/* Subject */}
-                <div className="flex-1 min-w-0">
-                    <div className="text-[11px] text-fg-primary font-medium truncate">
-                        {finding.subject_label || finding.subject_id || 'Unknown'}
-                    </div>
-                    <div className="text-[11px] text-fg-faint truncate">
-                        {finding.method || 'Analysis finding'}
-                    </div>
-                </div>
-
-                {/* Evidence counts */}
-                <div className="flex items-center gap-3 shrink-0">
-                    {finding.observed?.length > 0 && (
-                        <span className="text-[11px] font-mono text-green">
-                            {finding.observed.length} observed
-                        </span>
-                    )}
-                    {finding.counter_evidence_ids?.length > 0 && (
-                        <span className="text-[11px] font-mono text-red">
-                            {finding.counter_evidence_ids.length} counter
-                        </span>
-                    )}
-                </div>
-
-                {/* Confidence & Epistemic Status */}
-                <div className="w-32 shrink-0">
-                    <div className="flex items-center justify-between mb-0.5">
-                        <StatusLabel status="inferred" className="!text-[11px] !py-0 !px-1" />
-                        <span className="font-mono text-[11px] font-semibold" style={{color: confColor}}>
-                            {(conf * 100).toFixed(0)}%
-                        </span>
-                    </div>
-                    <ConfidenceBar value={conf} />
-                </div>
-
-                {/* Status */}
-                <span className={`tp-badge shrink-0 ${
-                    finding.status === 'open' ? 'tp-badge-blue' :
-                    finding.status === 'review' ? 'tp-badge-amber' :
-                    'tp-badge-neutral'
-                }`}>
-                    {finding.status || 'OPEN'}
-                </span>
-
-                <ChevronRight size={12} className="text-fg-faint shrink-0" />
-            </div>
-        </Link>
-    );
-}
+/**
+ * Findings Workspace — SentinelGraph Investigative Workbench
+ * Matches PDF Spec §8: Findings screen & Decision UX.
+ * Primary detail state: FND-003 (Potential intermediary bridging communities 0 and 6).
+ * Decision Gate with rationale + counter-evidence confirmation.
+ */
+import React, { useState } from 'react';
+import { Brain, Shield, CheckCircle2, XCircle, AlertTriangle, FileText, ChevronRight } from 'lucide-react';
+import { SYNTHETIC_FINDINGS } from '@/state/synthetic-case-data';
+import { StatusMark, ConfidenceBand, DecisionGate, EvidenceReference } from '@/components/shared';
 
 export default function HypothesesWorkspace() {
-    const { data: findingsData, isLoading } = useFindings();
-    const findings = findingsData?.results || findingsData?.items || findingsData || [];
-    const [filterStatus, setFilterStatus] = useState('ALL');
+    const [selectedFindingId, setSelectedFindingId] = useState('FND-003');
+    const [auditLogNotice, setAuditLogNotice] = useState(null);
 
-    const stats = useMemo(() => {
-        const total = findings.length;
-        const open = findings.filter(f => f.status === 'open' || !f.status).length;
-        const highConf = findings.filter(f => (f.confidence || 0) >= 0.75).length;
-        const review = findings.filter(f => f.status === 'review').length;
-        return { total, open, highConf, review };
-    }, [findings]);
+    const finding = SYNTHETIC_FINDINGS.find(f => f.id === selectedFindingId) || SYNTHETIC_FINDINGS[0];
 
-    const filtered = useMemo(() => {
-        if (filterStatus === 'ALL') return findings;
-        if (filterStatus === 'HIGH') return findings.filter(f => (f.confidence || 0) >= 0.75);
-        return findings.filter(f => f.status === filterStatus.toLowerCase());
-    }, [findings, filterStatus]);
-
-    if (isLoading) return (
-        <div className="flex items-center justify-center h-full">
-            <div className="tp-progress tp-progress-indeterminate" style={{width: 200}} />
-        </div>
-    );
+    const handleDecisionRecorded = (decisionData) => {
+        setAuditLogNotice(`Decision recorded for ${finding.id} (${decisionData.decision}) at ${decisionData.timestamp} by ${decisionData.actor}. Rationale logged to immutable audit trail.`);
+    };
 
     return (
-        <div className="h-full flex flex-col overflow-hidden animate-fade-in">
-            {/* Header stats */}
-            <div className="flex items-center gap-4 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
-                <div className="flex items-center gap-2">
-                    <Brain size={13} className="text-purple" />
-                    <span className="text-[11px] font-semibold text-fg-primary">HYPOTHESES</span>
+        <div className="flex h-full overflow-hidden animate-fade-in bg-[hsl(var(--bg-root))]">
+            {/* Left: Findings list */}
+            <div className="w-80 bg-[hsl(var(--bg-surface))] border-r border-[hsl(var(--border-subtle))] flex flex-col shrink-0">
+                <div className="p-4 border-b border-[hsl(var(--border-subtle))] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <Brain size={16} className="text-[hsl(var(--primary))]" />
+                        <span className="text-[14px] font-semibold text-[hsl(var(--fg-primary))]">Findings</span>
+                    </div>
+                    <span className="sg-badge sg-badge-neutral">{SYNTHETIC_FINDINGS.length}</span>
                 </div>
-                <div className="w-px h-4 bg-border-default" />
-                <div className="flex items-center gap-4 text-[11px] font-mono">
-                    <span className="text-fg-faint">{stats.total} TOTAL</span>
-                    <span className="text-blue">{stats.open} OPEN</span>
-                    <span className="text-amber">{stats.highConf} HIGH CONFIDENCE</span>
-                    {stats.review > 0 && <span className="text-amber">{stats.review} REVIEW</span>}
-                </div>
-                <div className="flex-1" />
-                <div className="flex items-center gap-1">
-                    {['ALL', 'HIGH', 'OPEN', 'REVIEW'].map(s => (
-                        <button key={s} onClick={() => setFilterStatus(s)}
-                            className={`tp-btn text-[11px] h-5 px-2 ${filterStatus === s ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
-                            {s}
-                        </button>
-                    ))}
+                <div className="flex-1 overflow-y-auto divide-y divide-[hsl(var(--border-subtle))]">
+                    {SYNTHETIC_FINDINGS.map(f => {
+                        const isSelected = f.id === finding.id;
+                        return (
+                            <div
+                                key={f.id}
+                                className={`p-4 cursor-pointer transition-colors ${isSelected ? 'bg-[hsl(var(--bg-selected))]/60 border-l-2 border-[hsl(var(--primary))]' : 'hover:bg-[hsl(var(--bg-hover))]'}`}
+                                onClick={() => setSelectedFindingId(f.id)}
+                            >
+                                <div className="flex items-center justify-between mb-1">
+                                    <span className="font-mono text-[12px] font-semibold text-[hsl(var(--primary))]">{f.id}</span>
+                                    <ConfidenceBand level={f.confidence} />
+                                </div>
+                                <div className="text-[12px] font-medium text-[hsl(var(--fg-primary))] line-clamp-2 mb-2">
+                                    {f.title}
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <StatusMark status={f.status} />
+                                    <span className="text-[10px] text-[hsl(var(--fg-faint))] font-mono">{f.type}</span>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Findings table */}
-            <div className="flex-1 overflow-y-auto">
-                {filtered.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center h-full text-center">
-                        <Brain size={24} className="text-fg-faint mb-3" />
-                        <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">NO HYPOTHESES DETECTED</span>
-                        <span className="text-[11px] text-fg-faint mt-1">The current evidence does not support a strong inference</span>
-                    </div>
-                ) : (
-                    <>
-                        {/* Table header */}
-                        <div className="flex items-center gap-4 px-4 py-1.5 border-b border-border-default bg-bg-panel sticky top-0 z-1">
-                            <span className="font-mono text-[11px] text-fg-faint w-20 shrink-0">ID</span>
-                            <span className="font-mono text-[11px] text-fg-faint shrink-0" style={{width: 100}}>TYPE</span>
-                            <span className="font-mono text-[11px] text-fg-faint flex-1">SUBJECT</span>
-                            <span className="font-mono text-[11px] text-fg-faint shrink-0">EVIDENCE</span>
-                            <span className="font-mono text-[11px] text-fg-faint w-24 shrink-0">CONFIDENCE</span>
-                            <span className="font-mono text-[11px] text-fg-faint shrink-0">STATUS</span>
-                            <span className="w-3" />
+            {/* Right: Finding Detail + Decision UX */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                {auditLogNotice && (
+                    <div className="sg-info-banner">
+                        <CheckCircle2 size={16} className="text-[hsl(var(--green))]" />
+                        <div>
+                            <div className="font-semibold">Successfully written to audit log</div>
+                            <div className="text-[11px]">{auditLogNotice}</div>
                         </div>
-                        {filtered.map((f, i) => (
-                            <FindingRow key={f.finding_id || f.id || i} finding={f} />
-                        ))}
-                    </>
+                    </div>
                 )}
+
+                {/* Header card */}
+                <div className="sg-card p-5 space-y-3">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <span className="font-mono text-[14px] font-bold text-[hsl(var(--primary))]">{finding.id}</span>
+                            <span className="text-[hsl(var(--fg-faint))]">·</span>
+                            <span className="text-[12px] font-semibold uppercase tracking-wider text-[hsl(var(--fg-muted))]">{finding.type}</span>
+                        </div>
+                        <StatusMark status={finding.status} />
+                    </div>
+                    <h1 className="text-[18px] font-semibold text-[hsl(var(--fg-primary))]">{finding.title}</h1>
+                    <p className="text-[13px] text-[hsl(var(--fg-secondary))] leading-relaxed bg-[hsl(var(--bg-panel))] p-3 rounded border border-[hsl(var(--border-subtle))]">
+                        <strong className="text-[hsl(var(--fg-primary))]">Claim:</strong> {finding.claim}
+                    </p>
+                </div>
+
+                {/* Evidence & Component Breakdown */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="sg-card p-5 space-y-4">
+                        <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Supporting & Counter Evidence</div>
+                        <div className="space-y-3 text-[12px]">
+                            <div>
+                                <span className="text-[hsl(var(--fg-muted))] block mb-1">Supporting evidence records:</span>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {finding.supporting_evidence.map(id => (
+                                        <EvidenceReference key={id} id={id} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <span className="text-[hsl(var(--fg-muted))] block mb-1">Counter-evidence records:</span>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {finding.counter_evidence.map(id => (
+                                        <EvidenceReference key={id} id={id} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <span className="text-[hsl(var(--fg-muted))] block mb-1">Unknown factor:</span>
+                                <div className="text-[hsl(var(--fg-primary))] bg-[hsl(var(--amber-bg))] p-2 rounded border border-[hsl(var(--amber-border))] text-[11px]">
+                                    {finding.unknown}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="sg-card p-5 space-y-4">
+                        <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Assessment Breakdown</div>
+                        <div className="space-y-2 text-[12px]">
+                            <div className="flex items-center justify-between pb-2 border-b border-[hsl(var(--border-subtle))]">
+                                <span className="text-[hsl(var(--fg-muted))]">Heuristic confidence band:</span>
+                                <ConfidenceBand level={finding.assessment.band} />
+                            </div>
+                            <div className="flex items-center justify-between pb-2 border-b border-[hsl(var(--border-subtle))]">
+                                <span className="text-[hsl(var(--fg-muted))]">Composite score:</span>
+                                <span className="font-mono font-semibold text-[hsl(var(--primary))]">{finding.assessment.heuristic_score}</span>
+                            </div>
+                            <div className="text-[10px] text-[hsl(var(--fg-faint))] italic">
+                                "{finding.assessment.disclaimer}"
+                            </div>
+                            <div className="space-y-1.5 pt-2">
+                                <div className="text-[11px] font-medium text-[hsl(var(--fg-primary))]">Component support:</div>
+                                {Object.entries(finding.assessment.components).map(([k, v]) => (
+                                    <div key={k} className="text-[11px] flex justify-between gap-2">
+                                        <span className="text-[hsl(var(--fg-muted))] capitalize">{k.replace('_', ' ')}:</span>
+                                        <span className="text-right text-[hsl(var(--fg-secondary))] truncate max-w-[200px]" title={v}>{v}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* What would change this assessment */}
+                <div className="sg-card p-5 space-y-3">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">What would change this assessment</div>
+                    <ul className="space-y-1.5 text-[12px] list-disc list-inside text-[hsl(var(--fg-secondary))]">
+                        {finding.change_conditions.map((cond, i) => (
+                            <li key={i}>{cond}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Controlled Decision Flow Gate */}
+                <DecisionGate
+                    requirements={[
+                        { label: 'Supporting evidence records verified', met: true },
+                        { label: 'Counter-evidence record EV-19882 inspected', met: true },
+                        { label: 'Analyst credential (A. Rao · Editor) verified', met: true }
+                    ]}
+                    onDecision={handleDecisionRecorded}
+                />
             </div>
         </div>
     );

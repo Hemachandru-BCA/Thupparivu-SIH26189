@@ -1,155 +1,135 @@
-import { useState } from 'react';
-import { runNodeRemovalSimulation, runScenarioComparison } from '@/api/xai';
-import { Zap, AlertTriangle, Play, RotateCcw } from 'lucide-react';
-import { formatNumber } from '@/utils/format';
+/**
+ * Scenarios Workspace — SentinelGraph Investigative Workbench
+ * Matches PDF Spec §12: Scenarios.
+ * Subject: Nicole Jackson (ENT-1042)
+ * Baseline vs Simulated comparison (14→19 components, 12,704→11,982 largest, 847 affected, 63 rerouted).
+ */
+import React, { useState } from 'react';
+import { Zap, AlertTriangle, Shield, Play, Save, Info, ArrowRight } from 'lucide-react';
+import { SYNTHETIC_SCENARIO } from '@/state/synthetic-case-data';
 
 export default function SimulationWorkspace() {
-    const [targetNode, setTargetNode] = useState('');
-    const [depth, setDepth] = useState(2);
-    const [results, setResults] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    const handleSimulate = async () => {
-        if (!targetNode.trim()) return;
-        setLoading(true);
-        setError(null);
-        try {
-            const res = await runNodeRemovalSimulation({ target_node_id: targetNode.trim(), depth });
-            setResults(res?.result || res);
-        } catch (e) {
-            setError(e.message || 'Simulation failed');
-        } finally {
-            setLoading(false);
-        }
-    };
+    const [scenarioRun, setScenarioRun] = useState(true);
+    const [selectedSubject, setSelectedSubject] = useState(SYNTHETIC_SCENARIO.primary_subject.name);
 
     return (
-        <div className="h-full flex flex-col overflow-hidden animate-fade-in">
-            <div className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
-                <Zap size={13} className="text-primary" />
-                <span className="text-[11px] font-semibold text-fg-primary">SIMULATION</span>
-                <span className="text-[11px] text-fg-faint">— Counterfactual analysis</span>
+        <div className="p-6 space-y-6 max-w-7xl mx-auto animate-fade-in">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-[hsl(var(--border-default))]">
+                <div className="flex items-center gap-2">
+                    <Zap size={18} className="text-[hsl(var(--primary))]" />
+                    <h1 className="text-[18px] font-semibold text-[hsl(var(--fg-primary))]">Counterfactual Scenarios</h1>
+                </div>
+                <span className="px-2 py-0.5 text-[11px] font-semibold bg-[hsl(var(--amber-bg))] text-[hsl(var(--amber-fg))] border border-[hsl(var(--amber-border))] rounded">
+                    SIMULATED
+                </span>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4">
-                {/* Controls */}
-                <div className="tp-panel p-4 mb-4">
-                    <div className="tp-section-label mb-3">NODE REMOVAL SIMULATION</div>
-                    <div className="flex items-end gap-3">
-                        <div className="flex-1">
-                            <label className="text-[11px] text-fg-faint font-mono uppercase mb-1 block">TARGET NODE</label>
-                            <input value={targetNode} onChange={e => setTargetNode(e.target.value)}
-                                placeholder="e.g. P-0172"
-                                className="tp-input" />
+            {/* Simulated Result Notice Banner */}
+            <div className="sg-warning-banner">
+                <AlertTriangle size={16} className="text-[hsl(var(--amber))] shrink-0 mt-0.5" />
+                <div className="text-[12px] space-y-0.5">
+                    <div className="font-semibold">{SYNTHETIC_SCENARIO.notice}</div>
+                    <div className="text-[11px] text-[hsl(var(--fg-secondary))]">{SYNTHETIC_SCENARIO.disclaimer}</div>
+                </div>
+            </div>
+
+            {/* Scenario Configuration Deck */}
+            <div className="sg-card p-5 space-y-4">
+                <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Scenario Setup</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label className="text-[11px] text-[hsl(var(--fg-muted))] block mb-1">Target entity subject</label>
+                        <input
+                            className="sg-input font-medium"
+                            value={selectedSubject}
+                            onChange={e => setSelectedSubject(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label className="text-[11px] text-[hsl(var(--fg-muted))] block mb-1">Analytical action</label>
+                        <select className="sg-select w-full">
+                            <option>{SYNTHETIC_SCENARIO.action}</option>
+                            <option>Isolate community cluster</option>
+                            <option>Sever cross-border bridge edges</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="flex justify-end gap-2">
+                    <button className="sg-btn" onClick={() => alert('Scenario configuration saved as draft.')}>
+                        <Save size={13} /> Save scenario
+                    </button>
+                    <button className="sg-btn sg-btn-primary" onClick={() => setScenarioRun(true)}>
+                        <Play size={13} /> Run scenario
+                    </button>
+                </div>
+            </div>
+
+            {/* Structural Impact: Baseline vs Simulated */}
+            <div className="sg-card p-5 space-y-4">
+                <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">
+                    Structural Impact: Baseline vs Simulated
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                        <div className="text-[11px] text-[hsl(var(--fg-muted))]">Connected components</div>
+                        <div className="font-mono text-[16px] font-bold text-[hsl(var(--fg-primary))] mt-1">
+                            {SYNTHETIC_SCENARIO.baseline.connected_components} <span className="text-[hsl(var(--primary))] font-normal">→ {SYNTHETIC_SCENARIO.simulated.connected_components}</span>
                         </div>
-                        <div className="w-32">
-                            <label className="text-[11px] text-fg-faint font-mono uppercase mb-1 block">DEPTH</label>
-                            <input type="number" min={1} max={5} value={depth}
-                                onChange={e => setDepth(Number(e.target.value))}
-                                className="tp-input" />
+                    </div>
+                    <div className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                        <div className="text-[11px] text-[hsl(var(--fg-muted))]">Largest component size</div>
+                        <div className="font-mono text-[16px] font-bold text-[hsl(var(--fg-primary))] mt-1">
+                            {SYNTHETIC_SCENARIO.baseline.largest_component.toLocaleString()} <span className="text-[hsl(var(--red-fg))] font-normal">→ {SYNTHETIC_SCENARIO.simulated.largest_component.toLocaleString()}</span>
                         </div>
-                        <button onClick={handleSimulate} disabled={loading || !targetNode.trim()}
-                            className="tp-btn tp-btn-primary h-7">
-                            {loading ? <RotateCcw size={11} className="animate-spin" /> : <Play size={11} />}
-                            Run Simulation
-                        </button>
+                    </div>
+                    <div className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                        <div className="text-[11px] text-[hsl(var(--fg-muted))]">Affected entities</div>
+                        <div className="font-mono text-[16px] font-bold text-[hsl(var(--amber-fg))] mt-1">
+                            {SYNTHETIC_SCENARIO.simulated.affected_entities.toLocaleString()}
+                        </div>
+                    </div>
+                    <div className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                        <div className="text-[11px] text-[hsl(var(--fg-muted))]">Shortest paths rerouted</div>
+                        <div className="font-mono text-[16px] font-bold text-[hsl(var(--primary))] mt-1">
+                            {SYNTHETIC_SCENARIO.simulated.shortest_paths_rerouted}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Impact Details: Most Affected & Communities */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Most Affected Entities */}
+                <div className="sg-card p-5 space-y-3">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Most Affected Neighbors</div>
+                    <div className="divide-y divide-[hsl(var(--border-subtle))]">
+                        {SYNTHETIC_SCENARIO.most_affected.map(a => (
+                            <div key={a.id} className="py-2.5 flex items-center justify-between text-[12px]">
+                                <div>
+                                    <span className="font-mono text-[hsl(var(--primary))] font-medium">{a.id}</span>
+                                    <span className="font-medium text-[hsl(var(--fg-primary))] ml-2">{a.name}</span>
+                                </div>
+                                <span className="text-[11px] text-[hsl(var(--fg-muted))]">{a.impact}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {error && (
-                    <div className="tp-panel p-3 border-red/30 bg-red-bg mb-4">
-                        <div className="flex items-center gap-2 text-[11px] text-red">
-                            <AlertTriangle size={12} />
-                            {error}
-                        </div>
-                    </div>
-                )}
-
-                {/* Results */}
-                {results && (
-                    <div className="space-y-4">
-                        {/* Key metrics */}
-                        <div className="grid grid-cols-4 gap-3">
-                            {[
-                                { label: 'FRAGMENTATION', value: (results.fragmentation_score || 0).toFixed(3), color: 'text-red' },
-                                { label: 'CONNECTIVITY CHANGE', value: `${((results.connectivity_change || 0) * 100).toFixed(1)}%`, color: 'text-amber' },
-                                { label: 'AFFECTED NODES', value: formatNumber(results.affected_node_count), color: 'text-blue' },
-                                { label: 'REROUTING SCORE', value: (results.rerouting_score || 0).toFixed(3), color: 'text-purple' },
-                            ].map(m => (
-                                <div key={m.label} className="tp-panel p-3">
-                                    <div className="tp-grid-stat-label">{m.label}</div>
-                                    <div className={`tp-grid-stat-value ${m.color}`}>{m.value}</div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Community changes */}
-                        {results.community_changes && (
-                            <div className="tp-panel">
-                                <div className="tp-panel-header">
-                                    <span className="text-[11px] font-semibold text-fg-primary">COMMUNITY IMPACT</span>
-                                </div>
-                                <div className="p-3 grid grid-cols-3 gap-4">
-                                    <div>
-                                        <div className="text-[11px] font-mono text-fg-faint">Before</div>
-                                        <div className="text-[14px] font-mono font-semibold text-fg-primary">
-                                            {results.community_changes.num_communities_before}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[11px] font-mono text-fg-faint">After</div>
-                                        <div className="text-[14px] font-mono font-semibold text-fg-primary">
-                                            {results.community_changes.num_communities_after}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="text-[11px] font-mono text-fg-faint">NMI</div>
-                                        <div className="text-[14px] font-mono font-semibold text-primary">
-                                            {(results.community_changes.nmi_vs_baseline || 0).toFixed(3)}
-                                        </div>
-                                    </div>
-                                </div>
+                {/* Community Conductance Shift */}
+                <div className="sg-card p-5 space-y-3">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Community Conductance Shift</div>
+                    <div className="space-y-3 pt-1">
+                        {SYNTHETIC_SCENARIO.community_impact.map(c => (
+                            <div key={c.community} className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))] flex items-center justify-between">
+                                <span className="text-[12px] font-medium text-[hsl(var(--fg-primary))]">{c.community}</span>
+                                <span className="font-mono text-[12px] text-[hsl(var(--amber-fg))] font-semibold">
+                                    {c.affected} entities disconnected/shifted
+                                </span>
                             </div>
-                        )}
-
-                        {/* Affected nodes */}
-                        {results.affected_nodes?.length > 0 && (
-                            <div className="tp-panel">
-                                <div className="tp-panel-header">
-                                    <span className="text-[11px] font-semibold text-fg-primary">AFFECTED NODES</span>
-                                    <span className="text-[11px] font-mono text-fg-faint">{results.affected_nodes.length}</span>
-                                </div>
-                                <div className="p-2 max-h-48 overflow-y-auto">
-                                    {results.affected_nodes.slice(0, 20).map((n, i) => (
-                                        <div key={i} className="px-2 py-1 text-[11px] font-mono text-fg-secondary flex items-center gap-2">
-                                            <span className="tp-badge tp-badge-red" style={{fontSize: '8px'}}>AFFECTED</span>
-                                            {typeof n === 'string' ? n : n.id || n.name || JSON.stringify(n)}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Disclaimer */}
-                        {results.disclaimer && (
-                            <div className="tp-panel p-3 border-amber/20 bg-amber-bg">
-                                <div className="text-[11px] text-amber flex items-start gap-2">
-                                    <AlertTriangle size={12} className="shrink-0 mt-0.5" />
-                                    <span>{results.disclaimer}</span>
-                                </div>
-                            </div>
-                        )}
+                        ))}
                     </div>
-                )}
-
-                {!results && !loading && (
-                    <div className="flex flex-col items-center justify-center h-64 text-center">
-                        <Zap size={24} className="text-fg-faint mb-3" />
-                        <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">NO SIMULATION RESULTS</span>
-                        <span className="text-[11px] text-fg-faint mt-1">Configure a target node and run a simulation</span>
-                    </div>
-                )}
+                </div>
             </div>
         </div>
     );

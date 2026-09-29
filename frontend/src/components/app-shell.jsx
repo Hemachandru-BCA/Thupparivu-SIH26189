@@ -1,245 +1,323 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * AppShell — SentinelGraph Investigative Workbench
+ * Navy sidebar + topbar + footer with light content canvas.
+ * Navigation groups per UX spec §3.
+ */
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'wouter';
 import {
-    Network, Users, Clock, FileText, Brain,
-    AlertTriangle, Zap, DollarSign, FolderOpen,
-    BookOpen, Settings, ChevronLeft,
-    ChevronRight, Search, MessageSquare,
-    LayoutGrid, Layers, Target, Scale,
-    BarChart3, Focus, Waypoints, Activity, Database, Shield, UserCheck
+    LayoutGrid, FolderOpen, Network, Users,
+    Brain, DollarSign, Clock, Zap,
+    FileText, BookOpen, MessageSquare,
+    Activity, Settings, ChevronLeft, ChevronRight,
+    Search, Bell, User, ChevronDown, HelpCircle
 } from 'lucide-react';
 import { useInvestigation } from '@/state/investigation-context';
+import { GLOBAL_CASES } from '@/state/synthetic-case-data';
 import { CommandPalette } from '@/components/command-palette';
-import { useGetGraphOverview, useHealthCheck } from '@/api/graph';
+
 export { formatNumber, formatTimestamp, formatShortDate } from '@/utils/format';
 
-/* ── Navigation sections — exact reference ── */
+/* ── Legacy Compat Exports ── */
+export const getConfidenceColor = (conf) => {
+    if (typeof conf === 'number') {
+        if (conf >= 80) return 'hsl(var(--green-fg))';
+        if (conf >= 50) return 'hsl(var(--blue-fg))';
+        return 'hsl(var(--amber-fg))';
+    }
+    if (typeof conf === 'string') {
+        const c = conf.toLowerCase();
+        if (c === 'high') return 'hsl(var(--green-fg))';
+        if (c === 'moderate') return 'hsl(var(--blue-fg))';
+        return 'hsl(var(--amber-fg))';
+    }
+    return 'hsl(var(--amber-fg))';
+};
+export const getEntityTypeColor = () => 'hsl(var(--primary))';
+export const ALL_NAV_ITEMS = [];
+
+/* ── Navigation per spec §3 ── */
 export const NAV_SECTIONS = [
-    { id: 'workspace', label: 'WORKSPACE', items: [
-        { path: '/', label: 'Overview', icon: LayoutGrid, title: 'Investigation Overview' },
-        { path: '/cases', label: 'Cases', icon: FolderOpen, title: 'All Cases' },
-        { path: '/network', label: 'Network Explorer', icon: Network, title: 'Link Analysis & Graph' },
-        { path: '/entities', label: 'Search', icon: Users, title: 'Entity Directory & Search' },
-    ]},
-    { id: 'intelligence', label: 'INTELLIGENCE', items: [
-        { path: '/ghosts', label: 'Ghost Hypotheses', icon: AlertTriangle, title: 'Ghost Candidate Review' },
-        { path: '/findings', label: 'Findings', icon: Brain, title: 'Analytical Findings' },
-        { path: '/financial', label: 'Financial Intelligence', icon: DollarSign, title: 'Fund Flow Tracing' },
-    ]},
-    { id: 'evidence', label: 'EVIDENCE & ANALYSIS', items: [
-        { path: '/evidence', label: 'Evidence', icon: FileText, title: 'Evidence Register' },
-        { path: '/timeline', label: 'Timeline', icon: Clock, title: 'Temporal Event Replay' },
-        { path: '/simulation', label: 'Counterfactuals', icon: Zap, title: 'Node Removal Scenarios' },
-        { path: '/analytics', label: 'Graph Analytics', icon: BarChart3, title: 'Centrality & Topology' },
-    ]},
-    { id: 'copilot', label: 'COPILOT & OUTPUT', items: [
-        { path: '/copilot', label: 'Copilot', icon: MessageSquare, title: 'AI Assistant' },
-        { path: '/dossiers', label: 'Dossiers / Reports', icon: BookOpen, title: 'Report Packs' },
-    ]},
-    { id: 'system', label: 'SYSTEM', items: [
-        { path: '/audit', label: 'Activity / Audit', icon: Activity, title: 'System Audit Trail' },
-        { path: '/pipeline', label: 'Pipeline', icon: Database, title: 'Ingestion Console' },
-        { path: '/settings', label: 'Settings', icon: Settings, title: 'Workstation Settings' },
-    ]}
+    {
+        id: 'investigate', label: 'INVESTIGATE', items: [
+            { path: '/', label: 'Overview', icon: LayoutGrid },
+            { path: '/cases', label: 'Cases', icon: FolderOpen },
+            { path: '/network', label: 'Network', icon: Network },
+            { path: '/entities', label: 'Entities', icon: Users },
+        ]
+    },
+    {
+        id: 'analyse', label: 'ANALYSE', items: [
+            { path: '/findings', label: 'Findings', icon: Brain },
+            { path: '/financial', label: 'Fund tracing', icon: DollarSign },
+            { path: '/timeline', label: 'Timeline', icon: Clock },
+            { path: '/simulation', label: 'Scenarios', icon: Zap },
+        ]
+    },
+    {
+        id: 'evidence', label: 'EVIDENCE', items: [
+            { path: '/evidence', label: 'Evidence register', icon: FileText },
+        ]
+    },
+    {
+        id: 'output', label: 'OUTPUT', items: [
+            { path: '/reports', label: 'Dossiers', icon: BookOpen },
+            { path: '/copilot', label: 'Copilot', icon: MessageSquare },
+        ]
+    },
+    {
+        id: 'admin', label: 'ADMINISTRATION', items: [
+            { path: '/audit', label: 'Audit & pipeline', icon: Activity },
+            { path: '/settings', label: 'Settings', icon: Settings },
+        ]
+    },
 ];
 
-export const ALL_NAV_ITEMS = NAV_SECTIONS.flatMap(s => s.items);
+function CaseSwitcher() {
+    const { activeCase, setActiveCase } = useInvestigation();
+    const [open, setOpen] = useState(false);
 
-const CASE_STATUS_COLORS = {
-    ACTIVE: 'text-green border-green/30 bg-green-bg',
-    PENDING: 'text-amber border-amber/30 bg-amber-bg',
-    CLOSED: 'text-fg-muted border-border-default bg-bg-panel',
-};
-
-export function getEntityTypeColor(type) {
-    const map = {
-        PERSON: 'var(--entity-person)',
-        PHONE: 'var(--entity-phone)',
-        VEHICLE: 'var(--entity-vehicle)',
-        LOCATION: 'var(--entity-location)',
-        ORGANIZATION: 'var(--entity-org)',
-        ACCOUNT: 'var(--entity-account)',
-        DEVICE: 'var(--entity-device)',
-        EVENT: 'var(--entity-event)',
+    const handleSelect = (c) => {
+        setActiveCase(c);
+        setOpen(false);
     };
-    return map[type?.toUpperCase()] || 'var(--primary)';
-}
-
-export function getConfidenceColor(conf) {
-    if (conf >= 0.85) return 'hsl(var(--green))';
-    if (conf >= 0.65) return 'hsl(var(--blue))';
-    if (conf >= 0.45) return 'hsl(var(--amber))';
-    return 'hsl(var(--red))';
-}
-
-/* ── App Shell ── */
-export function AppShell({ children }) {
-    const [location] = useLocation();
-    const { activeCase, setCommandPaletteOpen, selectedEntity } = useInvestigation();
-    const [railCollapsed, setRailCollapsed] = useState(() => {
-        try { return localStorage.getItem('sg-rail-collapsed') === 'true'; } catch { return false; }
-    });
-    useEffect(() => {
-        try { localStorage.setItem('sg-rail-collapsed', String(railCollapsed)); } catch {}
-    }, [railCollapsed]);
-
-    const { data: healthData } = useHealthCheck();
-    const { data: overview } = useGetGraphOverview();
-
-    const healthStatus = healthData ? (healthData.ok ? 'ok' : 'degraded') : 'loading';
-    const nodeCount = overview?.nodeCount ?? overview?.totalNodes ?? null;
-
-    useEffect(() => {
-        const handler = (e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                e.preventDefault();
-                setCommandPaletteOpen(true);
-            }
-            if (e.key === '/' && e.target === document.body) {
-                e.preventDefault();
-                setCommandPaletteOpen(true);
-            }
-        };
-        window.addEventListener('keydown', handler);
-        return () => window.removeEventListener('keydown', handler);
-    }, [setCommandPaletteOpen]);
-
-    const currentItem = ALL_NAV_ITEMS.find(item => item.path === location) || ALL_NAV_ITEMS[0];
-    const pageTitle = currentItem?.label || 'Investigation Overview';
 
     return (
-        <div className="flex flex-col h-screen w-screen bg-bg-root text-fg-primary overflow-hidden select-none">
-            {/* ── TOP BAR ── */}
-            <header className="flex items-center h-10 px-4 bg-bg-surface border-b border-border-default shrink-0 justify-between z-30">
-                {/* Left: Breadcrumb + Screen Title */}
-                <div className="flex items-center gap-3 min-w-0">
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono text-fg-muted">
-                        <span>Workspace</span>
-                        <span>/</span>
-                        <span className="text-primary font-semibold">{activeCase?.id || 'CASE-0421'}</span>
-                    </div>
-                    <div className="w-px h-3.5 bg-border-default" />
-                    <h1 className="text-[13px] font-semibold text-fg-primary uppercase font-mono tracking-wide truncate">
-                        {pageTitle}
-                    </h1>
-                </div>
-
-                {/* Center: Global Search Input */}
-                <button
-                    onClick={() => setCommandPaletteOpen(true)}
-                    className="flex items-center gap-2 px-3 py-1 rounded bg-bg-panel border border-border-default text-fg-faint text-[11px] font-mono hover:border-primary/50 hover:text-fg-secondary transition-colors w-72 justify-between cursor-pointer"
-                >
-                    <div className="flex items-center gap-1.5">
-                        <Search size={12} className="text-fg-faint" />
-                        <span>Search entities, findings, evidence...</span>
-                    </div>
-                    <kbd className="px-1 py-0.5 rounded bg-bg-elevated border border-border-subtle text-[9px] font-mono text-fg-muted">⌘K</kbd>
-                </button>
-
-                {/* Right: Primary Action + Case Status */}
-                <div className="flex items-center gap-3">
-                    <Link href="/network">
-                        <button className="tp-btn tp-btn-primary flex items-center gap-1.5 text-[11px] py-1 px-2.5 font-mono">
-                            <Network size={12} /><span>Open network</span>
-                        </button>
-                    </Link>
-                    <div className="flex items-center gap-1.5 text-[11px] font-mono bg-bg-panel px-2 py-0.5 rounded border border-border-default" title={`API ${healthStatus}`}>
-                        <div className={`w-1.5 h-1.5 rounded-full ${healthStatus === 'ok' ? 'bg-green' : 'bg-amber'}`} />
-                        <span className="text-fg-muted">{activeCase?.status || 'ACTIVE'}</span>
-                    </div>
-                </div>
-            </header>
-
-            {/* ── MAIN LAYOUT ── */}
-            <div className="flex flex-1 overflow-hidden">
-                {/* LEFT SIDEBAR */}
-                <nav className={`flex flex-col border-r border-border-default bg-bg-surface shrink-0 transition-all duration-150 overflow-y-auto overflow-x-hidden ${railCollapsed ? 'w-12' : 'w-56'}`}>
-                    {/* Top Branding */}
-                    <div className="p-3 border-b border-border-default shrink-0 bg-bg-panel">
-                        <Link href="/" className="flex items-center gap-2 hover:opacity-90 cursor-pointer">
-                            <div className="w-6 h-6 rounded bg-primary flex items-center justify-center text-primary-fg font-mono font-bold text-[11px] tracking-tighter shrink-0">SG</div>
-                            {!railCollapsed && (
-                                <div className="min-w-0">
-                                    <div className="text-[12px] font-bold text-fg-primary tracking-tight leading-tight">SentinelGraph AI</div>
-                                    <div className="text-[9px] font-mono text-fg-faint uppercase tracking-widest">INVESTIGATIVE WORKBENCH</div>
-                                </div>
-                            )}
-                        </Link>
-                    </div>
-
-                    {/* Active Case Header Box */}
-                    {!railCollapsed && activeCase && (
-                        <div className="p-3 border-b border-border-default bg-bg-root shrink-0 space-y-1">
-                            <div className="text-[9px] font-mono text-fg-faint uppercase tracking-wider font-semibold">CURRENT CASE</div>
-                            <div className="text-[11px] font-mono font-bold text-primary">{activeCase.id}</div>
-                            <div className="text-[11px] font-medium text-fg-primary leading-tight truncate">{activeCase.title}</div>
+        <div className="relative">
+            <button
+                className="flex items-center gap-2 px-2 py-1 rounded text-[12px] hover:bg-[hsl(var(--chrome-bg-hover))] transition-colors"
+                onClick={() => setOpen(!open)}
+            >
+                <span className="font-mono font-medium text-[hsl(var(--chrome-fg))]">{activeCase.id}</span>
+                <ChevronDown size={12} className="text-[hsl(var(--chrome-fg-faint))]" />
+            </button>
+            {open && (
+                <>
+                    <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+                    <div className="absolute top-full left-0 mt-1 w-72 bg-[hsl(var(--bg-surface))] border border-[hsl(var(--border-default))] rounded-md shadow-lg z-50 overflow-hidden">
+                        <div className="px-3 py-2 text-[10px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider border-b border-[hsl(var(--border-subtle))]">
+                            Switch case workspace
                         </div>
-                    )}
-
-                    {/* Navigation Items */}
-                    <div className="flex-1 py-2 space-y-3 overflow-y-auto">
-                        {NAV_SECTIONS.map((section) => (
-                            <div key={section.id} className="px-2">
-                                {!railCollapsed && (
-                                    <div className="px-2 mb-1 text-[9px] font-mono text-fg-faint uppercase tracking-widest font-semibold">
-                                        {section.label}
-                                    </div>
-                                )}
-                                <div className="space-y-0.5">
-                                    {section.items.map((item) => {
-                                        const Icon = item.icon;
-                                        const isActive = location === item.path;
-                                        return (
-                                            <Link key={item.path} href={item.path}>
-                                                <div
-                                                    className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-sm text-[12px] transition-colors cursor-pointer group ${
-                                                        isActive
-                                                            ? 'bg-primary/15 text-primary font-semibold border-l-2 border-primary'
-                                                            : 'text-fg-secondary hover:bg-bg-hover hover:text-fg-primary'
-                                                    }`}
-                                                    title={railCollapsed ? item.title || item.label : undefined}
-                                                >
-                                                    <Icon size={14} className={`shrink-0 ${isActive ? 'text-primary' : 'text-fg-faint group-hover:text-fg-secondary'}`} />
-                                                    {!railCollapsed && <span className="truncate">{item.label}</span>}
-                                                </div>
-                                            </Link>
-                                        );
-                                    })}
+                        {GLOBAL_CASES.map(c => (
+                            <button
+                                key={c.id}
+                                className={`w-full text-left px-3 py-2 hover:bg-[hsl(var(--bg-hover))] transition-colors border-b border-[hsl(var(--border-subtle))] ${c.id === activeCase.id ? 'bg-[hsl(var(--bg-selected))]' : ''}`}
+                                onClick={() => handleSelect(c)}
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span className="font-mono text-[12px] font-medium text-[hsl(var(--fg-primary))]">{c.id}</span>
+                                    <span className={`text-[10px] px-1.5 py-0.5 rounded ${c.status === 'ACTIVE' ? 'bg-[hsl(var(--green-bg))] text-[hsl(var(--green-fg))]' : 'bg-[hsl(var(--amber-bg))] text-[hsl(var(--amber-fg))]'}`}>
+                                        {c.status}
+                                    </span>
                                 </div>
+                                <div className="text-[11px] text-[hsl(var(--fg-muted))] mt-0.5 truncate">{c.title}</div>
+                                <div className="text-[10px] text-[hsl(var(--fg-faint))] mt-0.5">{c.lead} · {c.entities_count.toLocaleString()} entities</div>
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
+export function AppShell({ children }) {
+    const [location] = useLocation();
+    const { activeCase, commandPaletteOpen, setCommandPaletteOpen } = useInvestigation();
+    const [collapsed, setCollapsed] = useState(false);
+    const [shortcutHelpOpen, setShortcutHelpOpen] = useState(false);
+
+    // Keyboard shortcuts per spec §3
+    useEffect(() => {
+        let gPending = false;
+        let gTimer = null;
+
+        function handleKeyDown(e) {
+            const tag = document.activeElement?.tagName;
+            const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || document.activeElement?.isContentEditable;
+
+            // Ctrl/Cmd+K — command palette (always)
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                setCommandPaletteOpen(prev => !prev);
+                return;
+            }
+
+            // Esc — close drawer/dialog
+            if (e.key === 'Escape') {
+                setCommandPaletteOpen(false);
+                setShortcutHelpOpen(false);
+                return;
+            }
+
+            // Don't trigger shortcuts in inputs
+            if (isInput) return;
+
+            // Shift+? — shortcut help
+            if (e.key === '?' && e.shiftKey) {
+                e.preventDefault();
+                setShortcutHelpOpen(prev => !prev);
+                return;
+            }
+
+            // E — export current view
+            if (e.key === 'e' || e.key === 'E') {
+                // Handled by individual pages
+                return;
+            }
+
+            // G then <key> navigation
+            if (e.key === 'g' || e.key === 'G') {
+                if (!gPending) {
+                    gPending = true;
+                    gTimer = setTimeout(() => { gPending = false; }, 800);
+                    return;
+                }
+            }
+
+            if (gPending) {
+                gPending = false;
+                clearTimeout(gTimer);
+                const nav = { n: '/network', f: '/findings' };
+                const target = nav[e.key.toLowerCase()];
+                if (target) {
+                    e.preventDefault();
+                    window.location.hash = target;
+                }
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            clearTimeout(gTimer);
+        };
+    }, [setCommandPaletteOpen]);
+
+    return (
+        <div className="flex flex-col h-screen overflow-hidden">
+            {/* Top bar */}
+            <div className="sg-topbar">
+                <div className="flex items-center gap-3 flex-1">
+                    <span className="text-[13px] font-semibold text-[hsl(var(--chrome-fg))]">SentinelGraph</span>
+                    <span className="text-[hsl(var(--chrome-border))]">|</span>
+                    <CaseSwitcher />
+                </div>
+                <button
+                    className="flex items-center gap-1.5 px-2 py-1 rounded text-[11px] text-[hsl(var(--chrome-fg-faint))] hover:text-[hsl(var(--chrome-fg))] hover:bg-[hsl(var(--chrome-bg-hover))] transition-colors"
+                    onClick={() => setCommandPaletteOpen(true)}
+                >
+                    <Search size={13} />
+                    <span className="font-mono text-[10px] px-1 py-0.5 rounded bg-[hsl(var(--chrome-bg-hover))]">⌘K</span>
+                </button>
+                <button className="relative p-1.5 rounded text-[hsl(var(--chrome-fg-faint))] hover:text-[hsl(var(--chrome-fg))] hover:bg-[hsl(var(--chrome-bg-hover))] transition-colors">
+                    <Bell size={15} />
+                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[hsl(var(--red))] text-white text-[9px] font-bold rounded-full flex items-center justify-center">3</span>
+                </button>
+                <div className="flex items-center gap-2 pl-3 border-l border-[hsl(var(--chrome-border))]">
+                    <div className="w-6 h-6 rounded-full bg-[hsl(var(--chrome-bg-hover))] flex items-center justify-center">
+                        <User size={13} className="text-[hsl(var(--chrome-fg-muted))]" />
+                    </div>
+                    <div className="text-right">
+                        <div className="text-[11px] font-medium text-[hsl(var(--chrome-fg))]">A. Rao</div>
+                        <div className="text-[9px] text-[hsl(var(--chrome-fg-faint))]">Lead analyst · Editor</div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Body */}
+            <div className="flex flex-1 overflow-hidden">
+                {/* Sidebar */}
+                <nav className={`sg-sidebar ${collapsed ? 'collapsed' : ''}`}>
+                    <div className="flex-1 overflow-y-auto py-2">
+                        {NAV_SECTIONS.map(section => (
+                            <div key={section.id}>
+                                {!collapsed && (
+                                    <div className="sg-nav-group-label">{section.label}</div>
+                                )}
+                                {section.items.map(item => {
+                                    const isActive = location === item.path || (item.path !== '/' && location.startsWith(item.path));
+                                    return (
+                                        <Link key={item.path} href={item.path}>
+                                            <div className={`sg-nav-item ${isActive ? 'active' : ''}`}>
+                                                <item.icon size={15} />
+                                                {!collapsed && <span>{item.label}</span>}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         ))}
                     </div>
-
-                    {/* Bottom Analyst Profile */}
-                    <div className="p-3 border-t border-border-default shrink-0 bg-bg-panel flex items-center justify-between">
-                        {!railCollapsed ? (
-                            <div className="flex items-center gap-2 min-w-0">
-                                <div className="w-6 h-6 rounded-full bg-primary-bg border border-primary/30 flex items-center justify-center text-[10px] font-mono text-primary font-bold shrink-0">AR</div>
-                                <div className="min-w-0">
-                                    <div className="text-[11px] font-semibold text-fg-primary truncate">A. Rao</div>
-                                    <div className="text-[9px] font-mono text-fg-faint truncate">Lead Analyst</div>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="w-6 h-6 rounded-full bg-primary-bg border border-primary/30 flex items-center justify-center text-[10px] font-mono text-primary font-bold mx-auto">AR</div>
-                        )}
+                    <div className="border-t border-[hsl(var(--chrome-border))] py-1">
                         <button
-                            onClick={() => setRailCollapsed(!railCollapsed)}
-                            className="text-fg-faint hover:text-fg-primary p-1 cursor-pointer"
-                            title={railCollapsed ? 'Expand navigation' : 'Collapse navigation'}
+                            className="sg-nav-item w-full"
+                            onClick={() => setCollapsed(!collapsed)}
+                            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
                         >
-                            {railCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
+                            {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+                            {!collapsed && <span className="text-[11px]">Collapse</span>}
                         </button>
                     </div>
                 </nav>
 
-                {/* CONTENT AREA */}
-                <main className="flex-1 overflow-hidden relative bg-bg-root">
+                {/* Content */}
+                <main className="flex-1 overflow-auto bg-[hsl(var(--bg-root))]">
                     {children}
                 </main>
             </div>
 
-            <CommandPalette />
+            {/* Footer */}
+            <footer className="sg-footer">
+                <span>UTC</span>
+                <span>·</span>
+                <span>Data as of 26 Sep 2026, 04:58 UTC</span>
+                <span>·</span>
+                <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--green))]" style={{ animation: 'pulse-dot 2s infinite' }} />
+                    {activeCase.pipeline} {activeCase.pipeline_state}
+                </span>
+                <span>·</span>
+                <span>Synthetic data — not derived from real persons or transactions</span>
+                <div className="flex-1" />
+                <button
+                    className="hover:text-[hsl(var(--chrome-fg-muted))] transition-colors"
+                    onClick={() => setShortcutHelpOpen(true)}
+                    title="Keyboard shortcuts (Shift+?)"
+                >
+                    <HelpCircle size={12} />
+                </button>
+            </footer>
+
+            {/* Command palette */}
+            {commandPaletteOpen && <CommandPalette />}
+
+            {/* Shortcut help dialog */}
+            {shortcutHelpOpen && (
+                <div className="sg-overlay" onClick={() => setShortcutHelpOpen(false)}>
+                    <div className="sg-dialog p-5" onClick={e => e.stopPropagation()}>
+                        <div className="text-[14px] font-semibold mb-4">Keyboard shortcuts</div>
+                        <div className="space-y-2 text-[12px]">
+                            {[
+                                ['⌘K / Ctrl+K', 'Command palette'],
+                                ['G then N', 'Go to Network'],
+                                ['G then F', 'Go to Findings'],
+                                ['J / K', 'Navigate list items'],
+                                ['Enter', 'Open selected row'],
+                                ['E', 'Export current view'],
+                                ['Esc', 'Close drawer / dialog'],
+                                ['Shift+?', 'This help'],
+                            ].map(([key, desc]) => (
+                                <div key={key} className="flex items-center justify-between">
+                                    <span className="text-[hsl(var(--fg-secondary))]">{desc}</span>
+                                    <kbd className="font-mono text-[11px] px-1.5 py-0.5 bg-[hsl(var(--bg-hover))] border border-[hsl(var(--border-default))] rounded">{key}</kbd>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="sg-btn sg-btn-ghost mt-4 w-full justify-center" onClick={() => setShortcutHelpOpen(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,167 +1,202 @@
-import { useState, useMemo } from 'react';
-import { useEvidenceSearch, useEvidenceDetail, useEvidenceForNode } from '@/api/xai';
-import { FileText, Search, Filter, ChevronRight, ExternalLink, Hash } from 'lucide-react';
-import { formatTimestamp } from '@/utils/format';
-import { useInvestigation } from '@/state/investigation-context';
+/**
+ * Evidence Workspace — SentinelGraph Investigative Workbench
+ * Matches PDF Spec §10: Evidence Register.
+ * Columns: EVIDENCE, SOURCE, TYPE, TIMESTAMP (UTC), STATUS, LINKED
+ * Detail drawer for EV-24091 with SHA-256 provenance hash, lineage, linked entities.
+ */
+import React, { useState } from 'react';
+import { FileText, Search, Download, Shield, ExternalLink, CheckCircle2, ChevronRight, Hash } from 'lucide-react';
+import { SYNTHETIC_EVIDENCE } from '@/state/synthetic-case-data';
+import { StatusMark, Pagination } from '@/components/shared';
 
 export default function EvidenceWorkspace() {
-    const [searchQuery, setSearchQuery] = useState('');
-    const { setSelectedEvidence, setInspectorOpen } = useInvestigation();
-    const [selectedId, setSelectedId] = useState(null);
-    const [searchMode, setSearchMode] = useState('search'); // 'search' | 'node' | 'detail'
-    const [nodeId, setNodeId] = useState('');
+    const [selectedEvidenceId, setSelectedEvidenceId] = useState('EV-24091');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedType, setSelectedType] = useState('ALL');
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
-    const { data: searchResults } = useEvidenceSearch(searchQuery.length > 1 ? searchQuery : null);
-    const { data: detailData } = useEvidenceDetail(selectedId);
-    const { data: nodeEvidence } = useEvidenceForNode(nodeId || null);
+    const types = ['ALL', 'Transaction source record', 'Corporate Filing', 'Wire Instruction', 'Regulatory Notice', 'Bank Registry Excerpt', 'Digital Forensics'];
 
-    const results = searchResults?.results || searchResults?.items || searchResults || [];
-    const detail = detailData?.result || detailData;
-    const nodeEv = nodeEvidence?.results || nodeEvidence?.items || nodeEvidence || [];
+    const filtered = SYNTHETIC_EVIDENCE.filter(e => {
+        const matchesSearch = e.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            e.source.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesType = selectedType === 'ALL' || e.type === selectedType;
+        return matchesSearch && matchesType;
+    });
+
+    const selectedEvidence = SYNTHETIC_EVIDENCE.find(e => e.id === selectedEvidenceId) || SYNTHETIC_EVIDENCE[0];
+
+    const handleExportRegister = () => {
+        const payload = {
+            export_type: 'EVIDENCE_REGISTER',
+            total_records: 40292,
+            exported_at: new Date().toISOString(),
+            actor: 'A. Rao',
+            records: filtered
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `evidence_register_${Date.now()}.json`;
+        a.click();
+    };
 
     return (
-        <div className="h-full flex overflow-hidden animate-fade-in">
-            {/* Left: Evidence list */}
-            <div className="flex-1 flex flex-col min-w-0">
-                {/* Toolbar */}
-                <div className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
-                    <FileText size={13} className="text-primary" />
-                    <span className="text-[11px] font-semibold text-fg-primary">EVIDENCE</span>
-                    <div className="w-px h-4 bg-border-default" />
-                    <div className="flex gap-1">
-                        {['search', 'node', 'detail'].map(mode => (
-                            <button key={mode} onClick={() => setSearchMode(mode)}
-                                className={`tp-btn text-[11px] h-5 px-2 ${searchMode === mode ? 'tp-btn-primary' : 'tp-btn-ghost'}`}>
-                                {mode.toUpperCase()}
-                            </button>
-                        ))}
+        <div className="flex h-full overflow-hidden animate-fade-in bg-[hsl(var(--bg-root))]">
+            {/* Main Table Area */}
+            <div className="flex-1 flex flex-col min-w-0 overflow-hidden border-r border-[hsl(var(--border-subtle))]">
+                {/* Header & Controls */}
+                <div className="p-4 bg-[hsl(var(--bg-surface))] border-b border-[hsl(var(--border-subtle))] space-y-3">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <FileText size={16} className="text-[hsl(var(--primary))]" />
+                            <h1 className="text-[16px] font-semibold text-[hsl(var(--fg-primary))]">Evidence Register</h1>
+                            <span className="sg-badge sg-badge-neutral">40,292 total records</span>
+                        </div>
+                        <button className="sg-btn sg-btn-sm" onClick={handleExportRegister}>
+                            <Download size={12} />
+                            Export register
+                        </button>
                     </div>
-                    <div className="flex-1" />
-                    {searchMode === 'search' && (
-                        <div className="relative max-w-sm">
-                            <Search size={11} className="absolute left-2 top-1/2 -translate-y-1/2 text-fg-faint" />
-                            <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                                placeholder="Search evidence..."
-                                className="tp-input pl-7 h-7 text-[11px]" />
+
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="relative flex-1 min-w-[200px]">
+                            <Search size={13} className="absolute left-2.5 top-2 text-[hsl(var(--fg-faint))]" />
+                            <input
+                                className="sg-input pl-8"
+                                placeholder="Search by evidence ID or description…"
+                                value={searchTerm}
+                                onChange={e => setSearchTerm(e.target.value)}
+                            />
                         </div>
-                    )}
-                    {searchMode === 'node' && (
                         <div className="flex items-center gap-2">
-                            <input value={nodeId} onChange={e => setNodeId(e.target.value)}
-                                placeholder="Node ID (e.g. P-0172)"
-                                className="tp-input h-7 text-[11px] w-48" />
+                            <label className="text-[11px] text-[hsl(var(--fg-muted))]">Type:</label>
+                            <select
+                                className="sg-select text-[12px]"
+                                value={selectedType}
+                                onChange={e => setSelectedType(e.target.value)}
+                            >
+                                {types.map(t => <option key={t} value={t}>{t}</option>)}
+                            </select>
                         </div>
-                    )}
-                    {searchMode === 'detail' && (
-                        <div className="flex items-center gap-2">
-                            <input value={selectedId || ''} onChange={e => setSelectedId(e.target.value)}
-                                placeholder="Evidence ID (e.g. EV-0182)"
-                                className="tp-input h-7 text-[11px] w-48" />
-                        </div>
-                    )}
+                    </div>
                 </div>
 
-                {/* Results */}
-                <div className="flex-1 overflow-y-auto">
-                    {searchMode === 'search' && (
-                        results.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center h-full text-center">
-                                <FileText size={24} className="text-fg-faint mb-3" />
-                                <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">
-                                    {searchQuery.length > 1 ? 'NO EVIDENCE MATCHES' : 'ENTER A SEARCH QUERY'}
-                                </span>
-                            </div>
-                        ) : (
-                            <table className="tp-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>TYPE</th>
-                                        <th>SOURCE</th>
-                                        <th>TEXT</th>
-                                        <th>TIMESTAMP</th>
+                {/* Table */}
+                <div className="flex-1 overflow-auto bg-[hsl(var(--bg-surface))]">
+                    <table className="sg-table">
+                        <thead>
+                            <tr>
+                                <th>EVIDENCE</th>
+                                <th>SOURCE</th>
+                                <th>TYPE</th>
+                                <th>TIMESTAMP (UTC)</th>
+                                <th>STATUS</th>
+                                <th>LINKED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filtered.map(e => {
+                                const isSelected = e.id === selectedEvidence.id;
+                                return (
+                                    <tr
+                                        key={e.id}
+                                        className={isSelected ? 'selected' : ''}
+                                        onClick={() => setSelectedEvidenceId(e.id)}
+                                    >
+                                        <td>
+                                            <div className="font-mono text-[12px] font-semibold text-[hsl(var(--primary))]">{e.id}</div>
+                                            <div className="text-[11px] text-[hsl(var(--fg-muted))] truncate max-w-xs">{e.title}</div>
+                                        </td>
+                                        <td className="text-[12px] text-[hsl(var(--fg-secondary))] truncate max-w-[150px]">{e.source}</td>
+                                        <td><span className="sg-badge sg-badge-neutral">{e.type}</span></td>
+                                        <td className="font-mono text-[11px] text-[hsl(var(--fg-muted))]">{e.timestamp.replace('T', ' ').slice(0, 16)}</td>
+                                        <td><StatusMark status={e.status} /></td>
+                                        <td>
+                                            <span className="text-[11px] font-mono text-[hsl(var(--fg-muted))]">
+                                                {e.linked_entities?.length || 0} ent · {e.linked_findings?.length || 0} fnd
+                                            </span>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {results.map((ev, i) => (
-                                        <tr key={ev.evidence_id || i} className="cursor-pointer group"
-                                            onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSelectedEvidence(ev); setInspectorOpen(true); setSearchMode('detail'); }}>
-                                            <td className="font-mono text-fg-faint" style={{maxWidth: 160}}>{ev.evidence_id || ev.id}</td>
-                                            <td>
-                                                <span className="tp-badge tp-badge-blue">{ev.source_type || 'RECORD'}</span>
-                                            </td>
-                                            <td className="font-mono text-fg-secondary group-hover:text-primary transition-colors text-[11px]">{ev.source_record_id || '—'}</td>
-                                            <td className="text-fg-secondary max-w-xs truncate">{ev.text_excerpt || '—'}</td>
-                                            <td className="font-mono text-fg-faint text-[11px]">{formatTimestamp(ev.timestamp)}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        )
-                    )}
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
 
-                    {searchMode === 'node' && (
-                        nodeEv.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center h-full text-center">
-                                <FileText size={24} className="text-fg-faint mb-3" />
-                                <span className="text-[11px] font-mono text-fg-faint uppercase tracking-wider">
-                                    {nodeId ? 'NO EVIDENCE FOR THIS NODE' : 'ENTER A NODE ID'}
-                                </span>
-                            </div>
-                        ) : (
-                            <div className="p-3 space-y-2">
-                                {nodeEv.map((ev, i) => (
-                                    <div key={ev.evidence_id || i} className="tp-panel p-3 cursor-pointer hover:border-primary/50 transition-colors group"
-                                        onClick={() => { setSelectedId(ev.evidence_id || ev.id); setSelectedEvidence(ev); setInspectorOpen(true); setSearchMode('detail'); }}>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <span className="tp-badge tp-badge-blue" style={{fontSize: '8px'}}>{ev.source_type}</span>
-                                            <span className="font-mono text-[11px] text-fg-faint">{ev.evidence_id}</span>
-                                        </div>
-                                        <div className="text-[11px] text-fg-secondary group-hover:text-fg-primary">{ev.text_excerpt}</div>
-                                        <div className="text-[11px] font-mono text-fg-faint mt-1">{formatTimestamp(ev.timestamp)}</div>
-                                    </div>
+                {/* Pagination */}
+                <Pagination
+                    page={page}
+                    pageSize={pageSize}
+                    total={40292}
+                    onPageChange={p => setPage(p)}
+                    onPageSizeChange={s => setPageSize(s)}
+                />
+            </div>
+
+            {/* Selected Evidence Detail Drawer */}
+            <div className="w-96 bg-[hsl(var(--bg-surface))] flex flex-col shrink-0 overflow-y-auto border-l border-[hsl(var(--border-subtle))] p-5 space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--border-subtle))]">
+                    <div>
+                        <div className="font-mono text-[14px] font-bold text-[hsl(var(--primary))]">{selectedEvidence.id}</div>
+                        <div className="text-[11px] text-[hsl(var(--fg-muted))] mt-0.5">{selectedEvidence.type}</div>
+                    </div>
+                    <StatusMark status={selectedEvidence.status} />
+                </div>
+
+                {/* Verification & SHA-256 Provenance */}
+                <div className="p-3 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))] space-y-2">
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[hsl(var(--green-fg))]">
+                        <CheckCircle2 size={13} />
+                        <span>{selectedEvidence.verification}</span>
+                    </div>
+                    <div className="space-y-1">
+                        <div className="text-[10px] uppercase font-mono text-[hsl(var(--fg-muted))]">SHA-256 Digest</div>
+                        <div className="font-mono text-[10px] break-all bg-[hsl(var(--bg-surface))] p-1.5 rounded border border-[hsl(var(--border-subtle))] text-[hsl(var(--fg-secondary))]">
+                            {selectedEvidence.sha256}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Provenance Lineage */}
+                <div className="space-y-1.5">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Source Lineage</div>
+                    <div className="text-[12px] text-[hsl(var(--fg-secondary))] leading-relaxed">
+                        {selectedEvidence.source_lineage}
+                    </div>
+                    <div className="text-[11px] text-[hsl(var(--fg-muted))] pt-1">
+                        {selectedEvidence.provenance_details}
+                    </div>
+                </div>
+
+                {/* Linked Nodes */}
+                <div className="space-y-3 pt-3 border-t border-[hsl(var(--border-subtle))]">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Linked Case Objects</div>
+                    <div className="space-y-2 text-[12px]">
+                        <div>
+                            <span className="text-[hsl(var(--fg-muted))] block mb-1">Entities:</span>
+                            <div className="flex flex-wrap gap-1">
+                                {selectedEvidence.linked_entities?.map(ent => (
+                                    <span key={ent} className="px-1.5 py-0.5 font-mono text-[11px] bg-[hsl(var(--bg-hover))] rounded border border-[hsl(var(--border-default))]">
+                                        {ent}
+                                    </span>
                                 ))}
                             </div>
-                        )
-                    )}
-
-                    {searchMode === 'detail' && detail && (
-                        <div className="p-4 space-y-4">
-                            <div>
-                                <div className="tp-section-label mb-1">EVIDENCE ID</div>
-                                <div className="font-mono text-[13px] text-fg-primary">{detail.evidence_id || detail.id}</div>
-                            </div>
-                            <div>
-                                <div className="tp-section-label mb-1">SOURCE</div>
-                                <div className="flex items-center gap-2">
-                                    <span className="tp-badge tp-badge-blue">{detail.source_type}</span>
-                                    <span className="font-mono text-[11px] text-fg-secondary">{detail.source_record_id}</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="tp-section-label mb-1">TIMESTAMP</div>
-                                <div className="font-mono text-[11px] text-fg-secondary">{formatTimestamp(detail.timestamp)}</div>
-                            </div>
-                            <div>
-                                <div className="tp-section-label mb-1">TEXT EXCERPT</div>
-                                <div className="text-[12px] text-fg-secondary leading-relaxed border-l-2 border-border-default pl-3">
-                                    {detail.text_excerpt}
-                                </div>
-                            </div>
-                            {detail.provenance && (
-                                <div>
-                                    <div className="tp-section-label mb-1">PROVENANCE</div>
-                                    <div className="text-[11px] font-mono text-fg-secondary">{detail.provenance}</div>
-                                </div>
-                            )}
-                            {detail.hash && (
-                                <div>
-                                    <div className="tp-section-label mb-1">HASH</div>
-                                    <div className="text-[11px] font-mono text-fg-faint break-all">{detail.hash}</div>
-                                </div>
-                            )}
                         </div>
-                    )}
+                        <div>
+                            <span className="text-[hsl(var(--fg-muted))] block mb-1">Findings:</span>
+                            <div className="flex flex-wrap gap-1">
+                                {selectedEvidence.linked_findings?.map(fnd => (
+                                    <span key={fnd} className="px-1.5 py-0.5 font-mono text-[11px] bg-[hsl(var(--primary-bg))] text-[hsl(var(--primary))] rounded border border-[hsl(var(--primary-border))]">
+                                        {fnd}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

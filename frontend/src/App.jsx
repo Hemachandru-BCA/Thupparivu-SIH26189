@@ -127,13 +127,13 @@ function App() {
             </WouterRouter>
             <Toaster
                 position="bottom-right"
-                theme="dark"
+                theme="light"
                 toastOptions={{
                     style: {
-                        background: 'hsl(var(--bg-elevated))',
-                        border: '1px solid hsl(var(--border-default))',
-                        color: 'hsl(var(--fg-primary))',
-                        fontFamily: 'var(--font-sans)',
+                        background: 'hsl(0 0% 100%)',
+                        border: '1px solid hsl(220 14% 86%)',
+                        color: 'hsl(220 20% 14%)',
+                        fontFamily: 'IBM Plex Sans, system-ui, sans-serif',
                         fontSize: '12px',
                     },
                 }}

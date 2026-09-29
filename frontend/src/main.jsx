@@ -4,7 +4,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { ToastProvider } from '@/components/ui';
 import { setBaseUrl } from '@/api/client';
 import './index.css';
-document.documentElement.classList.add('dark');
+// Light theme — no dark class needed
 
 // Same-origin by default (Vite dev server proxies /api → local backend).
 // Override with VITE_API_BASE_URL / VITE_API_URL when deployed.

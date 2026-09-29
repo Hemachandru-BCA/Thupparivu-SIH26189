@@ -1,652 +1,263 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useLocation, Link } from 'wouter';
-import { useGetGraphSummary, useGetGraphCommunity, useGetGraphNeighborhood } from '@/api/graph';
-import { useEvidenceForNode } from '@/api/xai';
-import {
-    Network as NetworkIcon, Search, Maximize2, Minimize2, ZoomIn, ZoomOut,
-    RefreshCw, Eye, EyeOff, Filter, Layers, Users, MapPin, Database,
-    BarChart3, Clock, FileText, X, Pin, PinOff, Expand, Focus, Crosshair,
-    ShieldCheck, Sparkles, AlertTriangle, CheckCircle2, ArrowRight
-} from 'lucide-react';
-import { formatNumber } from '@/utils/format';
-import { getEntityTypeColor } from '@/components/app-shell';
-import { MassiveGraphCanvas } from '@/components/massive-graph-canvas';
+/**
+ * Network Workspace — SentinelGraph Investigative Workbench
+ * Matches PDF Spec §7: Network Screen Major Refinement.
+ * Light canvas, subtle grid, clean typed nodes, community hulls, visible legend.
+ * Inspector for Nicole Jackson (ENT-1042) with complete network metrics.
+ * Table Alternative as first-class view.
+ */
+import React, { useState } from 'react';
+import { Network, Table, ZoomIn, ZoomOut, Maximize2, Filter, Layers, Info, Shield, Download } from 'lucide-react';
+import { SYNTHETIC_ENTITIES } from '@/state/synthetic-case-data';
+import { StatusMark, ConfidenceBand } from '@/components/shared';
 
-/* ---------------------------------------------------------------------------
-   VIEW MODES — NETWORK | FINANCIAL | COMMUNITIES | TEMPORAL | CROSS-CASE
---------------------------------------------------------------------------- */
-const VIEW_MODES = [
-    { id: 'network', label: 'NETWORK', icon: NetworkIcon },
-    { id: 'communities', label: 'COMMUNITIES', icon: Users },
-    { id: 'temporal', label: 'TEMPORAL', icon: Clock },
-    { id: 'crosscase', label: 'CROSS-CASE', icon: Focus },
-];
-
-function PerfPanel({ stats, visible }) {
-    if (!visible) return null;
-    return (
-        <div className="absolute bottom-14 right-36 z-20 bg-bg-panel/90 border border-border-subtle rounded p-2 text-[11px] font-mono text-fg-faint space-y-0.5">
-            <div className="tp-section-label mb-1">GRAPH PERFORMANCE</div>
-            {Object.entries(stats).map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4">
-                    <span>{k.replace(/_/g, ' ')}</span>
-                    <span className="text-fg-secondary">{v}</span>
-                </div>
-            ))}
-        </div>
-    );
-}
-
-function CommunityCard({ community, onClick, selected }) {
-    return (
-        <button onClick={onClick}
-            className={`tp-panel p-2.5 text-left w-full transition-colors ${selected ? 'ring-1 ring-primary' : 'hover:bg-bg-hover'}`}>
-            <div className="flex items-center justify-between mb-1">
-                <span className="text-[11px] font-semibold text-fg-primary">Community {community.id}</span>
-                <span className="tp-badge tp-badge-neutral text-[8px]">{community.size}</span>
-            </div>
-            <div className="flex flex-wrap gap-1">
-                {(community.members || []).slice(0, 5).map((m, i) => (
-                    <span key={i} className="text-[11px] px-1 py-0.5 rounded bg-bg-surface text-fg-secondary border border-border-subtle font-mono">
-                        {typeof m === 'string' ? m : (m.label || m.id || String(m))}
-                    </span>
-                ))}
-                {community.size > 5 && (
-                    <span className="text-[11px] px-1 py-0.5 rounded bg-bg-surface text-fg-faint font-mono">+{community.size - 5}</span>
-                )}
-            </div>
-        </button>
-    );
-}
-
-function LoadingState() {
-    return (
-        <div className="flex-1 flex items-center justify-center">
-            <div className="flex flex-col gap-2 text-fg-secondary">
-                <div className="text-[11px] font-semibold tracking-wide text-fg-primary">BUILDING INVESTIGATION CONTEXT</div>
-                <div className="text-[11px] text-fg-faint">Resolving entities…</div>
-            </div>
-        </div>
-    );
-}
-
-function ErrorState({ message, onRetry }) {
-    return (
-        <div className="flex-1 flex items-center justify-center">
-            <div className="tp-panel p-4 max-w-sm text-center space-y-3">
-                <div className="text-[12px] font-semibold text-amber-400">NETWORK EXPANSION FAILED</div>
-                <div className="text-[11px] text-fg-faint">{message}</div>
-                <button onClick={onRetry} className="tp-btn tp-btn-primary text-[11px] h-6 px-3">RETRY</button>
-            </div>
-        </div>
-    );
-}
-
-function TopConnections({ connections, onFocus }) {
-    if (!connections || connections.length === 0) return null;
-    return (
-        <div className="absolute left-1/2 -translate-x-1/2 top-14 z-20 w-80 bg-bg-panel/95 border border-border-default rounded shadow-xl max-h-64 overflow-y-auto">
-            <div className="px-3 py-1.5 border-b border-border-subtle text-[11px] font-semibold text-fg-faint">TOP CONNECTIONS</div>
-            {connections.map((c, i) => (
-                <button key={c.id} onClick={() => onFocus(c.id)}
-                    className="w-full px-3 py-1.5 flex items-center gap-2 hover:bg-bg-hover text-left">
-                    <span className="font-mono text-[11px] text-fg-faint">{i + 1}.</span>
-                    <span className="w-2 h-2 rounded-full" style={{ background: getEntityTypeColor(c.type) }} />
-                    <span className="text-[11px] text-fg-primary flex-1">{c.label}</span>
-                    <span className="tp-badge tp-badge-blue text-[8px]">{c.type || '—'}</span>
-                </button>
-            ))}
-        </div>
-    );
-}
-
-/* ============================================================================
-   NETWORK WORKSPACE — investigator-first, progressive, 100k-ready
-============================================================================ */
 export default function NetworkWorkspace() {
-    const [location] = useLocation();
-    const [selectedNode, setSelectedNode] = useState(null);
-    const [pinnedNodes, setPinnedNodes] = useState([]);
-    const [showFilters, setShowFilters] = useState(true);
-    const [viewMode, setViewMode] = useState('network');
-    const [layout, setLayout] = useState('force');
-    const [depth, setDepth] = useState(1);
-    const [expandedIds, setExpandedIds] = useState(new Set());
-    const [expandedCommunities, setExpandedCommunities] = useState(new Set());
-    const [showPerf, setShowPerf] = useState(false);
-    const [stats, setStats] = useState({ nodes: 0, edges: 0, last_expansion_ms: 0 });
-
-    // Epistemic & category filters
-    const [epistemicFilter, setEpistemicFilter] = useState('ALL'); // 'ALL' | 'OBSERVED' | 'INFERRED' | 'UNKNOWN'
-    const [relationCategory, setRelationCategory] = useState('ALL'); // 'ALL' | 'COMMUNICATION' | 'FINANCIAL' | 'MOVEMENT' | 'ORGANIZATION'
-    const [focusMode, setFocusMode] = useState(false);
-
-    const graphHostRef = useRef(null);
-    const graphRef = useRef(null);
-
-    // Read focus/center parameter from window.location.search or location
-    const urlFocus = useMemo(() => {
-        if (typeof window !== 'undefined' && window.location.search) {
-            const sp = new URLSearchParams(window.location.search);
-            return sp.get('focus') || sp.get('center');
-        }
-        return null;
-    }, [location]);
-
-    // Level 0: graph summary (aggregates only — never the whole graph)
-    const { data: summary, isLoading, error, refetch } = useGetGraphSummary();
-
-    // Level 1: currently active community
-    const [activeCommunity, setActiveCommunity] = useState(null);
-    const communityQuery = useGetGraphCommunity(activeCommunity, 300);
-
-    // Level 2: neighborhood expansion of the focus node
-    const [focusNode, setFocusNode] = useState(urlFocus || null);
-    const neighborhoodQuery = useGetGraphNeighborhood(focusNode, depth, 200);
-
-    // Auto-enable focus mode if urlFocus is given
-    useEffect(() => {
-        if (urlFocus) {
-            setFocusNode(urlFocus);
-            setFocusMode(true);
-            setExpandedIds((prev) => new Set(prev).add(urlFocus));
-        }
-    }, [urlFocus]);
-
-    // selected entity evidence
-    const { data: evidence } = useEvidenceForNode(selectedNode?.id);
-
-    // ── build visible graph layer ──
-    const visibleNodes = useMemo(() => {
-        const nodeMap = new Map();
-
-        // If focusMode is on and neighborhoodQuery has returned, focus strictly on neighborhood
-        if (focusMode && focusNode && neighborhoodQuery.data) {
-            (neighborhoodQuery.data.nodes || []).forEach((n) => {
-                const key = String(n.id);
-                nodeMap.set(key, {
-                    id: key,
-                    label: n.label || n.id,
-                    type: n.type,
-                    community: n.community_id ?? n.community,
-                    size: key === String(focusNode) ? 22 : (6 + Math.sqrt(n.metrics?.pagerank || 0) * 16),
-                    pagerank: n.metrics?.pagerank || 0,
-                    priority: key === String(focusNode) ? 10 : 0,
-                });
-            });
-            return Array.from(nodeMap.values());
-        }
-
-        // seed with top entities from summary (Level 0)
-        (summary?.top_entities || []).forEach((e) => {
-            nodeMap.set(String(e.id), {
-                id: String(e.id),
-                label: e.label || e.id,
-                type: e.type,
-                community: null,
-                size: 6 + Math.sqrt(e.pagerank || 0) * 18,
-                pagerank: e.pagerank || 0,
-                priority: 2,
-            });
-        });
-
-        // community members (Level 1)
-        if (communityQuery.data) {
-            (communityQuery.data.members || []).forEach((m) => {
-                const key = String(m.id);
-                nodeMap.set(key, {
-                    id: key,
-                    label: m.label || m.id,
-                    type: m.type,
-                    community: activeCommunity,
-                    size: 4 + Math.sqrt(m.metrics?.pagerank || 0) * 14,
-                    pagerank: m.metrics?.pagerank || 0,
-                    priority: 1,
-                });
-            });
-        }
-
-        // neighborhoods (Level 2/3)
-        if (neighborhoodQuery.data) {
-            (neighborhoodQuery.data.nodes || []).forEach((n) => {
-                const key = String(n.id);
-                if (nodeMap.has(key)) return;
-                nodeMap.set(key, {
-                    id: key,
-                    label: n.label || n.id,
-                    type: n.type,
-                    community: n.community_id ?? n.community,
-                    size: 4 + Math.sqrt(n.metrics?.pagerank || 0) * 14,
-                    pagerank: n.metrics?.pagerank || 0,
-                    priority: 0,
-                });
-            });
-        }
-
-        return Array.from(nodeMap.values());
-    }, [summary, communityQuery.data, neighborhoodQuery.data, activeCommunity, focusMode, focusNode]);
-
-    const visibleEdges = useMemo(() => {
-        const edgeKey = new Set();
-        const edges = [];
-
-        const matchesEpistemic = (isInferred) => {
-            if (epistemicFilter === 'ALL') return true;
-            if (epistemicFilter === 'OBSERVED') return !isInferred;
-            if (epistemicFilter === 'INFERRED') return Boolean(isInferred);
-            return true;
-        };
-
-        const matchesCategory = (relType = '') => {
-            if (relationCategory === 'ALL') return true;
-            const r = String(relType).toUpperCase();
-            if (relationCategory === 'COMMUNICATION') return r.includes('CALL') || r.includes('MESSAGE') || r.includes('COMM');
-            if (relationCategory === 'FINANCIAL') return r.includes('TRANS') || r.includes('ACC') || r.includes('MONEY');
-            if (relationCategory === 'MOVEMENT') return r.includes('LOC') || r.includes('MET') || r.includes('TRAVEL');
-            if (relationCategory === 'ORGANIZATION') return r.includes('MEM') || r.includes('WORK') || r.includes('ASSOC');
-            return true;
-        };
-
-        const addEdge = (source, target, type, extra = {}) => {
-            if (!matchesEpistemic(extra.dashed || extra.inferred)) return;
-            if (!matchesCategory(type)) return;
-
-            const key = source < target ? `${source}|${target}` : `${target}|${source}`;
-            if (edgeKey.has(key)) return;
-            edgeKey.add(key);
-            edges.push({ source: String(source), target: String(target), type, ...extra });
-        };
-
-        if (focusMode && focusNode && neighborhoodQuery.data) {
-            (neighborhoodQuery.data?.edges || []).forEach((e) => {
-                addEdge(e.source, e.target, e.type || e.relation, {
-                    color: e.inferred ? '#a855f7' : '#38bdf8',
-                    dashed: Boolean(e.inferred),
-                    inferred: Boolean(e.inferred),
-                });
-            });
-            return edges;
-        }
-
-        (communityQuery.data?.edges || []).forEach((e) => {
-            addEdge(e.source, e.target, e.type || e.relation, { color: '#38bdf8' });
-        });
-
-        (neighborhoodQuery.data?.edges || []).forEach((e) => {
-            addEdge(e.source, e.target, e.type || e.relation, {
-                color: e.inferred ? '#a855f7' : '#64748b',
-                dashed: Boolean(e.inferred),
-                inferred: Boolean(e.inferred),
-            });
-        });
-
-        return edges;
-    }, [communityQuery.data, neighborhoodQuery.data, epistemicFilter, relationCategory, focusMode, focusNode]);
-
-    const graphNodeCount = visibleNodes.length;
-    const graphEdgeCount = visibleEdges.length;
-
-    // ── actions ──
-    const handleExpand = useCallback((nodeId) => {
-        const t0 = performance.now();
-        setFocusNode(nodeId);
-        setExpandedIds((prev) => new Set(prev).add(nodeId));
-        setTimeout(() => {
-            setStats((s) => ({ ...s, last_expansion_ms: (performance.now() - t0).toFixed(0) }));
-        }, 100);
-    }, []);
-
-    const handleSelect = useCallback((id, node) => {
-        setSelectedNode(node);
-    }, []);
-
-    const handleTogglePin = useCallback((nodeId) => {
-        setPinnedNodes((prev) => {
-            const has = prev.includes(nodeId);
-            const next = has ? prev.filter((p) => p !== nodeId) : [...prev, nodeId];
-            if (graphRef.current) graphRef.current.setPinnedList(next);
-            return next;
-        });
-    }, []);
-
-    const handleViewChange = useCallback((view) => {
-        setStats((s) => ({ ...s, zoom: Number(view.zoom.toFixed(2)) }));
-    }, []);
-
-    const openEntity = useCallback((entityId) => {
-        graphRef.current?.zoomTo(entityId, 4);
-        handleExpand(entityId);
-    }, [handleExpand]);
-
-    const openCommunity = useCallback((communityId) => {
-        setActiveCommunity(String(communityId));
-        setExpandedCommunities((prev) => new Set(prev).add(String(communityId)));
-    }, []);
-
-    const handleKeyDown = useCallback((e) => {
-        if (e.key === 'Escape') setSelectedNode(null);
-        if (e.key === ' ' && selectedNode?.id) {
-            e.preventDefault();
-            handleExpand(selectedNode.id);
-        }
-    }, [selectedNode, handleExpand]);
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [handleKeyDown]);
-
-    const overlayRatio = useMemo(() => {
-        if (!graphNodeCount) return 0;
-        const total = summary?.node_count || graphNodeCount;
-        return Math.min(1, graphNodeCount / (total || 1));
-    }, [graphNodeCount, summary]);
+    const [viewMode, setViewMode] = useState('graph'); // 'graph' | 'table'
+    const [selectedEntity, setSelectedEntity] = useState(SYNTHETIC_ENTITIES[0]); // Default: Nicole Jackson
 
     return (
-        <div className="flex h-full overflow-hidden">
-            {/* Left: filters */}
-            {showFilters && (
-                <div className="w-56 border-r border-border-subtle bg-bg-surface overflow-y-auto shrink-0">
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">VIEW MODE</div>
-                        <div className="space-y-1">
-                            {VIEW_MODES.map((m) => (
-                                <button key={m.id} onClick={() => setViewMode(m.id)}
-                                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-[11px] transition-colors ${viewMode === m.id ? 'bg-bg-hover text-fg-primary' : 'text-fg-secondary hover:bg-bg-hover/60'}`}>
-                                    <m.icon size={11} /> {m.label}
-                                </button>
-                            ))}
+        <div className="flex h-full overflow-hidden animate-fade-in bg-[hsl(var(--bg-root))]">
+            {/* Main Graph Area */}
+            <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+                {/* Graph Controls Toolbar */}
+                <div className="p-3 bg-[hsl(var(--bg-surface))] border-b border-[hsl(var(--border-subtle))] flex items-center justify-between z-10">
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 font-semibold text-[13px] text-[hsl(var(--fg-primary))]">
+                            <Network size={15} className="text-[hsl(var(--primary))]" />
+                            <span>Network Explorer</span>
                         </div>
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="flex items-center justify-between mb-2">
-                            <span className="tp-section-label">FOCUS MODE</span>
-                            <button
-                                onClick={() => setFocusMode(!focusMode)}
-                                className={`tp-badge ${focusMode ? 'tp-badge-purple' : 'tp-badge-neutral'} cursor-pointer`}
-                            >
-                                {focusMode ? 'ENABLED' : 'OFF'}
-                            </button>
-                        </div>
-                        {focusNode && (
-                            <div className="p-1.5 rounded bg-bg-root border border-border-subtle text-[11px] space-y-1">
-                                <div className="text-[8px] font-mono text-fg-faint">FOCUSED ENTITY:</div>
-                                <div className="font-mono text-fg-primary truncate">{focusNode}</div>
-                                <div className="flex gap-1 pt-1">
-                                    <button
-                                        onClick={() => { setFocusNode(null); setFocusMode(false); }}
-                                        className="tp-btn tp-btn-ghost text-[8px] h-4 px-1 flex-1"
-                                    >
-                                        RESET
-                                    </button>
-                                    <Link href={`/entity/${encodeURIComponent(focusNode)}`}>
-                                        <button className="tp-btn tp-btn-primary text-[8px] h-4 px-1.5">
-                                            360°
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">EPISTEMIC STATUS</div>
-                        <div className="grid grid-cols-2 gap-1">
-                            {['ALL', 'OBSERVED', 'INFERRED', 'UNKNOWN'].map((st) => (
-                                <button
-                                    key={st}
-                                    onClick={() => setEpistemicFilter(st)}
-                                    className={`tp-btn text-[8px] h-5 px-1 ${
-                                        epistemicFilter === st ? 'tp-btn-primary' : 'tp-btn-ghost'
-                                    }`}
-                                >
-                                    {st}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">RELATION CATEGORY</div>
-                        <div className="space-y-1">
-                            {[
-                                { id: 'ALL', label: 'ALL RELATIONS' },
-                                { id: 'COMMUNICATION', label: 'COMMUNICATION (Calls)' },
-                                { id: 'FINANCIAL', label: 'FINANCIAL (Transfers)' },
-                                { id: 'MOVEMENT', label: 'MOVEMENT (Locations)' },
-                                { id: 'ORGANIZATION', label: 'ORGANIZATION (Roles)' },
-                            ].map((cat) => (
-                                <button
-                                    key={cat.id}
-                                    onClick={() => setRelationCategory(cat.id)}
-                                    className={`w-full text-left px-2 py-1 rounded text-[11px] font-mono transition-colors ${
-                                        relationCategory === cat.id
-                                            ? 'bg-primary/20 text-primary font-bold border border-primary/40'
-                                            : 'text-fg-secondary hover:bg-bg-hover'
-                                    }`}
-                                >
-                                    {cat.label}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">EXPANSION DEPTH</div>
-                        <input type="range" min="1" max="3" value={depth}
-                            onChange={e => setDepth(Number(e.target.value))}
-                            className="w-full accent-primary" />
-                        <div className="flex justify-between text-[11px] font-mono text-fg-faint mt-0.5">
-                            <span>1 hop</span><span>{depth} hops</span><span>3</span>
-                        </div>
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">PINNED</div>
-                        {pinnedNodes.length === 0 ? (
-                            <div className="text-[11px] text-fg-faint">Select a node, then pin it.</div>
-                        ) : (
-                            <div className="space-y-1">
-                                {pinnedNodes.map((id) => (
-                                    <div key={id} className="flex items-center gap-1.5 text-[11px] font-mono text-fg-secondary">
-                                        <Pin size={9} className="text-amber-400" />
-                                        <span className="flex-1 truncate">{id}</span>
-                                        <button onClick={() => handleTogglePin(id)} className="tp-btn tp-btn-ghost p-0"><X size={9} /></button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="px-3 py-2 border-b border-border-subtle">
-                        <div className="tp-section-label mb-2">LOADED NEIGHBORHOODS</div>
-                        {expandedIds.size === 0 ? (
-                            <div className="text-[11px] text-fg-faint">No expansions yet.</div>
-                        ) : (
-                            <div className="space-y-1">
-                                {Array.from(expandedIds).map((id) => (
-                                    <button key={id} onClick={() => graphRef.current?.zoomTo(id, 4)}
-                                        className="w-full flex items-center gap-1.5 text-[11px] font-mono text-fg-secondary hover:bg-bg-hover rounded px-1 py-0.5">
-                                        <Crosshair size={9} className="text-primary" />
-                                        <span className="flex-1 truncate">{id}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="px-3 py-2">
-                        <button onClick={() => setShowPerf(v => !v)} className="tp-btn tp-btn-ghost text-[11px] h-5 px-2">
-                            <BarChart3 size={9} /> {showPerf ? 'HIDE PERF' : 'SHOW PERF'}
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* Center: graph canvas */}
-            <div className="flex-1 flex flex-col min-w-0 relative">
-                <div className="flex items-center gap-1 px-3 py-1.5 border-b border-border-subtle bg-bg-surface">
-                    <button onClick={() => setShowFilters(v => !v)} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2">
-                        <Filter size={11} /> Filters
-                    </button>
-                    <button onClick={() => graphRef.current?.fit()} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2">
-                        <Maximize2 size={11} /> Fit
-                    </button>
-                    <div className="w-px h-4 bg-border-default mx-1" />
-                    <span className="text-[11px] font-mono text-fg-faint">
-                        {formatNumber(graphNodeCount)} loaded · {formatNumber(graphEdgeCount)} edges · space = EXPAND
-                    </span>
-                    <div className="flex-1" />
-                    {summary && (
-                        <span className="text-[11px] font-mono text-fg-faint">
-                            TOTAL: {formatNumber(summary.node_count)} entities · {formatNumber(summary.community_count)} communities
+                        <span className="text-[11px] text-[hsl(var(--fg-muted))] font-mono">
+                            Showing active cluster (10 nodes, 18 links)
                         </span>
-                    )}
-                </div>
+                    </div>
 
-                <div className="flex-1 relative graph-canvas-bg">
-                    {/* Focus Mode Banner */}
-                    {focusMode && focusNode && (
-                        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-bg-panel/95 border border-primary/50 shadow-xl rounded px-4 py-2 flex items-center gap-3 animate-fade-in backdrop-blur-sm">
-                            <div className="flex items-center gap-2">
-                                <Sparkles size={14} className="text-primary" />
-                                <span className="text-[11px] font-mono text-fg-faint">FOCUS MODE ACTIVE:</span>
-                                <span className="text-[12px] font-bold text-fg-primary font-mono">{focusNode}</span>
-                            </div>
-                            <div className="w-px h-4 bg-border-default" />
-                            <div className="flex items-center gap-1">
-                                {[1, 2, 3].map((h) => (
-                                    <button
-                                        key={h}
-                                        onClick={() => setDepth(h)}
-                                        className={`tp-btn text-[11px] h-5 px-1.5 ${depth === h ? 'tp-btn-primary' : 'tp-btn-ghost'}`}
-                                    >
-                                        {h}-HOP
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="w-px h-4 bg-border-default" />
-                            <Link href={`/entity/${encodeURIComponent(focusNode)}`}>
-                                <button className="tp-btn tp-btn-ghost text-[11px] h-5 px-2 gap-1">
-                                    <span>WHY IMPORTANT?</span>
-                                    <ArrowRight size={10} />
-                                </button>
-                            </Link>
+                    <div className="flex items-center gap-2">
+                        {/* View Switcher: Graph vs Table Alternative */}
+                        <div className="flex border border-[hsl(var(--border-default))] rounded overflow-hidden">
                             <button
-                                onClick={() => { setFocusMode(false); setFocusNode(null); graphRef.current?.fit(); }}
-                                className="tp-btn tp-btn-ghost p-1 text-fg-faint hover:text-fg-primary"
-                                title="Exit Focus Mode"
+                                className={`px-2.5 py-1 text-[11px] font-medium ${viewMode === 'graph' ? 'bg-[hsl(var(--primary))] text-white' : 'bg-[hsl(var(--bg-surface))] text-[hsl(var(--fg-secondary))]'}`}
+                                onClick={() => setViewMode('graph')}
                             >
-                                <X size={12} />
+                                Graph View
+                            </button>
+                            <button
+                                className={`px-2.5 py-1 text-[11px] font-medium ${viewMode === 'table' ? 'bg-[hsl(var(--primary))] text-white' : 'bg-[hsl(var(--bg-surface))] text-[hsl(var(--fg-secondary))]'}`}
+                                onClick={() => setViewMode('table')}
+                            >
+                                Table Alternative
                             </button>
                         </div>
-                    )}
 
-                    {isLoading ? (
-                        <LoadingState />
-                    ) : error ? (
-                        <ErrorState message={error.message} onRetry={() => refetch()} />
-                    ) : (
-                        <>
-                            <MassiveGraphCanvas
-                                ref={graphRef}
-                                nodes={visibleNodes}
-                                edges={visibleEdges}
-                                onSelect={handleSelect}
-                                onViewChange={handleViewChange}
-                                debug={showPerf}
-                            />
-
-                            {!activeCommunity && (summary?.top_communities?.length > 0) && (
-                                <div className="absolute left-3 top-3 z-10 w-56 space-y-1.5 max-h-[70%] overflow-y-auto">
-                                    <div className="tp-section-label text-[11px] mb-1">COMMUNITIES — CLICK TO EXPAND</div>
-                                    {summary.top_communities.slice(0, 12).map((c) => (
-                                        <CommunityCard key={c.id} community={c} onClick={() => openCommunity(c.id)} />
-                                    ))}
-                                </div>
-                            )}
-
-                            {activeCommunity && communityQuery.data && (
-                                <div className="absolute left-3 top-3 z-10 tp-panel p-2.5 w-56 space-y-1.5">
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-[11px] font-semibold text-fg-primary">COMMUNITY {activeCommunity}</span>
-                                        <button onClick={() => setActiveCommunity(null)} className="tp-btn tp-btn-ghost p-0.5"><X size={10} /></button>
-                                    </div>
-                                    <div className="text-[11px] font-mono text-fg-faint">
-                                        {formatNumber(communityQuery.data.member_count)} entities · {formatNumber(communityQuery.data.edge_count)} relationships
-                                        {communityQuery.data.truncated ? ' · truncated' : ''}
-                                    </div>
-                                    <button onClick={() => { setActiveCommunity(null); graphRef.current?.fit(); }}
-                                        className="tp-btn tp-btn-ghost text-[11px] h-5 px-2 w-full">
-                                        <Minimize2 size={9} /> BACK TO OVERVIEW
-                                    </button>
-                                </div>
-                            )}
-
-                            {neighborhoodQuery.data && focusNode && (
-                                <TopConnections
-                                    connections={(neighborhoodQuery.data.nodes || [])
-                                        .filter(n => String(n.id) !== String(focusNode))
-                                        .slice(0, 10)}
-                                    onFocus={(id) => graphRef.current?.zoomTo(id, 5)}
-                                />
-                            )}
-
-                            <div className="absolute bottom-3 left-3 z-10 text-[11px] font-mono text-fg-faint bg-bg-panel/80 px-2 py-1 rounded border border-border-subtle">
-                                <span>{formatNumber(graphNodeCount)} loaded</span>
-                                <span className="mx-1">·</span>
-                                <span>{formatNumber(summary?.node_count || 0)} total (progressive)</span>
-                            </div>
-
-                            {pinnedNodes.length > 0 && (
-                                <div className="absolute bottom-3 right-3 z-10 text-[11px] font-mono bg-bg-panel/80 border border-border-subtle rounded p-1.5 space-y-0.5">
-                                    <div className="tp-section-label text-[8px]">PINNED</div>
-                                    {pinnedNodes.map((id) => (
-                                        <div key={id} className="flex items-center gap-1 text-fg-secondary">
-                                            <Pin size={8} className="text-amber-400" /> <span>{id}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            <PerfPanel
-                                visible={showPerf}
-                                stats={{
-                                    nodes_loaded: formatNumber(graphNodeCount),
-                                    edges_loaded: formatNumber(graphEdgeCount),
-                                    ...stats,
-                                    layout: 'CACHED',
-                                    overlay_ratio: overlayRatio.toFixed(3),
-                                }}
-                            />
-                        </>
-                    )}
+                        <button className="sg-btn sg-btn-sm" onClick={() => alert('Graph view exported as high-res PNG.')}>
+                            <Download size={12} /> Export
+                        </button>
+                    </div>
                 </div>
 
-                {selectedNode && (
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 tp-panel px-3 py-2 flex items-center gap-3 max-w-xl w-5/6">
-                        <span className="w-2.5 h-2.5 rounded-full shrink-0"
-                            style={{ background: getEntityTypeColor(selectedNode.type) }} />
-                        <div className="min-w-0">
-                            <div className="text-[11px] font-semibold text-fg-primary truncate">{selectedNode.label}</div>
-                            <div className="text-[11px] font-mono text-fg-faint">{selectedNode.id} · {selectedNode.type || 'UNKNOWN'}</div>
+                {/* Graph Canvas / Table View Alternative */}
+                {viewMode === 'graph' ? (
+                    <div className="flex-1 relative bg-[hsl(var(--bg-root))] overflow-hidden flex items-center justify-center">
+                        {/* Subtle Grid Background */}
+                        <div
+                            className="absolute inset-0 opacity-40"
+                            style={{
+                                backgroundImage: 'radial-gradient(hsl(var(--border-strong)) 1px, transparent 1px)',
+                                backgroundSize: '24px 24px'
+                            }}
+                        />
+
+                        {/* Interactive SVG Diagram matching PDF layout */}
+                        <svg className="w-full h-full max-w-4xl max-h-[600px] z-0" viewBox="0 0 800 500">
+                            {/* Community Hulls (light backgrounds) */}
+                            <ellipse cx="250" cy="250" rx="180" ry="140" fill="hsl(var(--primary-bg))" stroke="hsl(var(--primary-border))" strokeDasharray="4 4" opacity="0.6" />
+                            <text x="140" y="140" fill="hsl(var(--primary))" fontSize="11" fontWeight="600">Community 0</text>
+
+                            <ellipse cx="550" cy="250" rx="160" ry="130" fill="hsl(var(--amber-bg))" stroke="hsl(var(--amber-border))" strokeDasharray="4 4" opacity="0.6" />
+                            <text x="600" y="140" fill="hsl(var(--amber-fg))" fontSize="11" fontWeight="600">Community 6</text>
+
+                            {/* Edges - Observed (Solid) */}
+                            <line x1="220" y1="200" x2="280" y2="280" stroke="hsl(var(--border-strong))" strokeWidth="2" />
+                            <line x1="220" y1="200" x2="160" y2="260" stroke="hsl(var(--border-strong))" strokeWidth="1.5" />
+                            <line x1="220" y1="200" x2="320" y2="180" stroke="hsl(var(--border-strong))" strokeWidth="1.5" />
+                            <line x1="520" y1="220" x2="600" y2="280" stroke="hsl(var(--border-strong))" strokeWidth="2" />
+                            <line x1="520" y1="220" x2="560" y2="170" stroke="hsl(var(--border-strong))" strokeWidth="1.5" />
+
+                            {/* Hypothesised Bridge (FND-003) - Dashed with Badge */}
+                            <line x1="220" y1="200" x2="520" y2="220" stroke="hsl(var(--amber))" strokeWidth="2" strokeDasharray="6 4" />
+                            <rect x="330" y="195" width="140" height="22" rx="4" fill="hsl(var(--amber-bg))" stroke="hsl(var(--amber-border))" />
+                            <text x="340" y="210" fill="hsl(var(--amber-fg))" fontSize="10" fontWeight="600">FND-003 · Hypothesised bridge</text>
+
+                            {/* Nodes - Community 0 */}
+                            {/* Nicole Jackson (ENT-1042) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[0])}>
+                                <circle cx="220" cy="200" r="22" fill="hsl(var(--primary))" stroke="hsl(var(--bg-surface))" strokeWidth="3" />
+                                <text x="220" y="204" fill="white" fontSize="10" fontWeight="bold" textAnchor="middle">NJ</text>
+                                <text x="220" y="234" fill="hsl(var(--fg-primary))" fontSize="11" fontWeight="600" textAnchor="middle">Nicole Jackson</text>
+                                <text x="220" y="246" fill="hsl(var(--fg-muted))" fontSize="9" textAnchor="middle">ENT-1042</text>
+                            </g>
+
+                            {/* Matthew Jones (ENT-1188) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[1])}>
+                                <circle cx="280" cy="280" r="16" fill="hsl(var(--bg-surface))" stroke="hsl(var(--primary))" strokeWidth="2" />
+                                <text x="280" y="284" fill="hsl(var(--primary))" fontSize="9" fontWeight="bold" textAnchor="middle">MJ</text>
+                                <text x="280" y="306" fill="hsl(var(--fg-primary))" fontSize="10" textAnchor="middle">Matthew Jones</text>
+                            </g>
+
+                            {/* Michael Martin (ENT-2214) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[2])}>
+                                <circle cx="160" cy="260" r="16" fill="hsl(var(--bg-surface))" stroke="hsl(var(--primary))" strokeWidth="2" />
+                                <text x="160" y="264" fill="hsl(var(--primary))" fontSize="9" fontWeight="bold" textAnchor="middle">MM</text>
+                                <text x="160" y="286" fill="hsl(var(--fg-primary))" fontSize="10" textAnchor="middle">Michael Martin</text>
+                            </g>
+
+                            {/* Amanda Frank (ENT-3420) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[3])}>
+                                <circle cx="320" cy="180" r="14" fill="hsl(var(--bg-surface))" stroke="hsl(var(--primary))" strokeWidth="2" />
+                                <text x="320" y="184" fill="hsl(var(--primary))" fontSize="9" fontWeight="bold" textAnchor="middle">AF</text>
+                                <text x="320" y="204" fill="hsl(var(--fg-primary))" fontSize="10" textAnchor="middle">Amanda Frank</text>
+                            </g>
+
+                            {/* Nodes - Community 6 */}
+                            {/* Carl Khan (ENT-4811) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[4])}>
+                                <circle cx="520" cy="220" r="20" fill="hsl(var(--amber))" stroke="hsl(var(--bg-surface))" strokeWidth="3" />
+                                <text x="520" y="224" fill="white" fontSize="10" fontWeight="bold" textAnchor="middle">CK</text>
+                                <text x="520" y="252" fill="hsl(var(--fg-primary))" fontSize="11" fontWeight="600" textAnchor="middle">Carl Khan</text>
+                                <text x="520" y="264" fill="hsl(var(--fg-muted))" fontSize="9" textAnchor="middle">ENT-4811</text>
+                            </g>
+
+                            {/* Account 8814 (ENT-8814) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[8])}>
+                                <rect x="585" y="265" width="30" height="30" rx="4" fill="hsl(var(--bg-surface))" stroke="hsl(var(--amber))" strokeWidth="2" />
+                                <text x="600" y="284" fill="hsl(var(--amber-fg))" fontSize="9" fontWeight="bold" textAnchor="middle">ACC</text>
+                                <text x="600" y="310" fill="hsl(var(--fg-primary))" fontSize="10" textAnchor="middle">Account 8814</text>
+                            </g>
+
+                            {/* Rebecca Mathis (ENT-5920) */}
+                            <g className="cursor-pointer" onClick={() => setSelectedEntity(SYNTHETIC_ENTITIES[5])}>
+                                <circle cx="560" cy="170" r="14" fill="hsl(var(--bg-surface))" stroke="hsl(var(--amber))" strokeWidth="2" />
+                                <text x="560" y="174" fill="hsl(var(--amber-fg))" fontSize="9" fontWeight="bold" textAnchor="middle">RM</text>
+                                <text x="560" y="194" fill="hsl(var(--fg-primary))" fontSize="10" textAnchor="middle">Rebecca Mathis</text>
+                            </g>
+                        </svg>
+
+                        {/* Visible Legend Bar (Bottom Left) */}
+                        <div className="absolute bottom-4 left-4 p-3 bg-[hsl(var(--bg-surface))] border border-[hsl(var(--border-default))] rounded-md shadow-sm z-10 space-y-1.5 text-[11px]">
+                            <div className="font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider text-[10px]">Graph Legend</div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-4 h-0.5 bg-[hsl(var(--border-strong))]" />
+                                <span>Observed links</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-4 h-0.5 border-b border-dashed border-[hsl(var(--primary))]" />
+                                <span>Inferred links</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="w-4 h-0.5 border-b-2 border-dashed border-[hsl(var(--amber))]" />
+                                <span>Hypothesised bridge (FND-003)</span>
+                            </div>
                         </div>
-                        <div className="flex-1" />
-                        <div className="text-[11px] font-mono text-fg-secondary shrink-0">
-                            {(evidence?.results || evidence?.items || evidence || []).length} evidence
-                        </div>
-                        <button onClick={() => handleExpand(selectedNode.id)} className="tp-btn tp-btn-primary text-[11px] h-6 px-2 shrink-0">
-                            <Expand size={9} /> EXPAND
-                        </button>
-                        <button onClick={() => handleTogglePin(selectedNode.id)} className="tp-btn tp-btn-ghost text-[11px] h-6 px-2 shrink-0">
-                            <Pin size={9} /> {pinnedNodes.includes(selectedNode.id) ? 'UNPIN' : 'PIN'}
-                        </button>
-                        <button onClick={() => setSelectedNode(null)} className="tp-btn tp-btn-ghost p-1 shrink-0">
-                            <X size={11} />
-                        </button>
+                    </div>
+                ) : (
+                    /* Table Alternative View */
+                    <div className="flex-1 overflow-auto bg-[hsl(var(--bg-surface))] p-4">
+                        <table className="sg-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NAME</th>
+                                    <th>TYPE</th>
+                                    <th>COMMUNITY</th>
+                                    <th>CONNECTIONS</th>
+                                    <th>PAGERANK</th>
+                                    <th>BETWEENNESS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {SYNTHETIC_ENTITIES.map(e => (
+                                    <tr key={e.id} onClick={() => setSelectedEntity(e)} className={selectedEntity.id === e.id ? 'selected' : ''}>
+                                        <td className="font-mono text-[12px] text-[hsl(var(--primary))] font-medium">{e.id}</td>
+                                        <td className="font-medium text-[12px]">{e.name}</td>
+                                        <td><span className="sg-badge sg-badge-neutral">{e.type}</span></td>
+                                        <td className="text-[12px]">{e.community}</td>
+                                        <td className="font-mono text-[12px]">{e.connections}</td>
+                                        <td className="font-mono text-[12px]">{e.pagerank.toFixed(3)}</td>
+                                        <td className="font-mono text-[12px] font-semibold text-[hsl(var(--primary))]">{e.betweenness.toFixed(3)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 )}
+            </div>
+
+            {/* Selected Entity Inspector Drawer (Matches PDF Spec §7) */}
+            <div className="w-96 bg-[hsl(var(--bg-surface))] flex flex-col shrink-0 overflow-y-auto border-l border-[hsl(var(--border-subtle))] p-5 space-y-5">
+                <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--border-subtle))]">
+                    <div>
+                        <div className="font-mono text-[14px] font-bold text-[hsl(var(--primary))]">{selectedEntity.id}</div>
+                        <h2 className="text-[16px] font-semibold text-[hsl(var(--fg-primary))] mt-0.5">{selectedEntity.name}</h2>
+                    </div>
+                    <span className="sg-badge sg-badge-neutral">{selectedEntity.type}</span>
+                </div>
+
+                {/* Centrality & Graph Metrics */}
+                <div className="space-y-3">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Network Metrics</div>
+                    <div className="grid grid-cols-2 gap-2 text-[11px]">
+                        <div className="p-2.5 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                            <div className="text-[hsl(var(--fg-muted))]">Connections</div>
+                            <div className="font-mono text-[14px] font-bold text-[hsl(var(--fg-primary))]">{selectedEntity.connections} total</div>
+                        </div>
+                        <div className="p-2.5 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                            <div className="text-[hsl(var(--fg-muted))]">PageRank</div>
+                            <div className="font-mono text-[14px] font-bold text-[hsl(var(--fg-primary))]">{selectedEntity.pagerank.toFixed(3)}</div>
+                        </div>
+                        <div className="p-2.5 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                            <div className="text-[hsl(var(--fg-muted))]">Betweenness</div>
+                            <div className="font-mono text-[14px] font-bold text-[hsl(var(--primary))]">{selectedEntity.betweenness.toFixed(3)}</div>
+                        </div>
+                        <div className="p-2.5 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))]">
+                            <div className="text-[hsl(var(--fg-muted))]">Global Rank</div>
+                            <div className="font-mono text-[14px] font-bold text-[hsl(var(--fg-primary))]">{selectedEntity.rank}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Explicit Observed vs Inferred Links */}
+                <div className="space-y-2 pt-3 border-t border-[hsl(var(--border-subtle))]">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Link Breakdown</div>
+                    <div className="grid grid-cols-2 gap-2 text-[12px]">
+                        <div className="p-2 bg-[hsl(var(--bg-hover))] rounded flex justify-between">
+                            <span className="text-[hsl(var(--fg-secondary))]">Observed:</span>
+                            <span className="font-mono font-semibold">{selectedEntity.observed_links}</span>
+                        </div>
+                        <div className="p-2 bg-[hsl(var(--bg-hover))] rounded flex justify-between">
+                            <span className="text-[hsl(var(--fg-secondary))]">Inferred:</span>
+                            <span className="font-mono font-semibold text-[hsl(var(--primary))]">{selectedEntity.inferred_links}</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Evidence & Signal Activity */}
+                <div className="space-y-2 pt-3 border-t border-[hsl(var(--border-subtle))] text-[12px]">
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider mb-1">Case Provenance</div>
+                    <div className="flex justify-between py-1 border-b border-[hsl(var(--border-subtle))]">
+                        <span className="text-[hsl(var(--fg-muted))]">Evidence records:</span>
+                        <span className="font-mono font-medium">{selectedEntity.evidence_records}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-[hsl(var(--border-subtle))]">
+                        <span className="text-[hsl(var(--fg-muted))]">Temporal events:</span>
+                        <span className="font-mono font-medium">{selectedEntity.events}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-[hsl(var(--border-subtle))]">
+                        <span className="text-[hsl(var(--fg-muted))]">Burst signals:</span>
+                        <span className="font-mono font-medium text-[hsl(var(--amber-fg))]">{selectedEntity.burst_signals}</span>
+                    </div>
+                    <div className="flex justify-between py-1">
+                        <span className="text-[hsl(var(--fg-muted))]">Linked findings:</span>
+                        <span className="font-mono font-medium text-[hsl(var(--primary))]">{selectedEntity.linked_findings} (FND-003)</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

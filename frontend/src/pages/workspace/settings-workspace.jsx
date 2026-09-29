@@ -1,98 +1,47 @@
-import { useHealthCheck } from '@/api/graph';
-import { Settings, CheckCircle, XCircle, Server, Monitor } from 'lucide-react';
+/**
+ * Settings Workspace — SentinelGraph Investigative Workbench
+ * Matches light theme styling and enterprise workbench configuration.
+ */
+import React from 'react';
+import { Settings, Server, Shield, CheckCircle2 } from 'lucide-react';
+import { StatusMark } from '@/components/shared';
 
 export default function SettingsWorkspace() {
-    const { data: health, isLoading } = useHealthCheck();
-
     return (
-        <div className="h-full flex flex-col overflow-hidden animate-fade-in">
-            <div className="flex items-center gap-3 px-4 py-2 border-b border-border-subtle bg-bg-surface shrink-0">
-                <Settings size={13} className="text-fg-muted" />
-                <span className="text-[11px] font-semibold text-fg-primary">SETTINGS</span>
+        <div className="p-6 space-y-6 max-w-4xl mx-auto animate-fade-in">
+            <div className="flex items-center gap-2 pb-4 border-b border-[hsl(var(--border-default))]">
+                <Settings size={18} className="text-[hsl(var(--primary))]" />
+                <h1 className="text-[18px] font-semibold text-[hsl(var(--fg-primary))]">System & Workbench Settings</h1>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 max-w-2xl space-y-4">
-                {/* API Connection */}
-                <div className="tp-panel">
-                    <div className="tp-panel-header">
-                        <span className="text-[11px] font-semibold text-fg-primary">API CONNECTION</span>
+            <div className="sg-card p-5 space-y-4">
+                <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Investigator Profile</div>
+                <div className="grid grid-cols-2 gap-4 text-[12px]">
+                    <div>
+                        <span className="text-[hsl(var(--fg-muted))] block mb-1">Authenticated Analyst:</span>
+                        <div className="font-semibold text-[hsl(var(--fg-primary))]">A. Rao (Lead analyst · Editor)</div>
                     </div>
-                    <div className="p-3 space-y-2">
-                        <div className="flex items-center gap-2">
-                            {health?.status === 'ok'
-                                ? <CheckCircle size={12} className="text-green" />
-                                : <XCircle size={12} className="text-red" />}
-                            <span className="text-[11px] text-fg-secondary">
-                                {health?.status === 'ok' ? 'Connected' : 'Unreachable'}
-                            </span>
-                        </div>
-                        {health && (
-                            <div className="text-[11px] font-mono text-fg-faint space-y-1">
-                                <div>Status: {health.status}</div>
-                                {health.version && <div>Version: {health.version}</div>}
-                                {health.dataset && <div>Dataset: {health.dataset}</div>}
-                            </div>
-                        )}
+                    <div>
+                        <span className="text-[hsl(var(--fg-muted))] block mb-1">Role Permissions:</span>
+                        <div className="text-[hsl(var(--fg-secondary))]">Dossier Approval, Case Export, Pipeline Tracing</div>
                     </div>
                 </div>
+            </div>
 
-                {/* System Info */}
-                <div className="tp-panel">
-                    <div className="tp-panel-header">
-                        <span className="text-[11px] font-semibold text-fg-primary">SYSTEM INFORMATION</span>
+            <div className="sg-card p-5 space-y-4">
+                <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">System Environment</div>
+                <div className="space-y-3 text-[12px]">
+                    <div className="flex items-center justify-between pb-2 border-b border-[hsl(var(--border-subtle))]">
+                        <span className="text-[hsl(var(--fg-secondary))]">API Gateway Endpoint:</span>
+                        <span className="font-mono text-[hsl(var(--fg-primary))]">https://api.sentinelgraph.internal/v1</span>
                     </div>
-                    <div className="p-3 space-y-2 text-[11px]">
-                        <div className="flex justify-between">
-                            <span className="text-fg-faint">Application</span>
-                            <span className="text-fg-secondary font-mono">Thupparivu SIH-26189</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-fg-faint">Version</span>
-                            <span className="text-fg-secondary font-mono">1.0.0</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-fg-faint">Frontend</span>
-                            <span className="text-fg-secondary font-mono">React + Vite</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-fg-faint">Backend</span>
-                            <span className="text-fg-secondary font-mono">FastAPI + Python</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-fg-faint">Graph Engine</span>
-                            <span className="text-fg-secondary font-mono">Cytoscape.js</span>
-                        </div>
+                    <div className="flex items-center justify-between pb-2 border-b border-[hsl(var(--border-subtle))]">
+                        <span className="text-[hsl(var(--fg-secondary))]">Graph Store Backend:</span>
+                        <span className="font-mono text-[hsl(var(--fg-primary))]">Indexed Graph Engine (JOB-9421)</span>
                     </div>
-                </div>
-
-                {/* Graph Preferences */}
-                <div className="tp-panel">
-                    <div className="tp-panel-header">
-                        <span className="text-[11px] font-semibold text-fg-primary">WORKSPACE PREFERENCES</span>
-                    </div>
-                    <div className="p-3 space-y-3">
-                        <div>
-                            <label className="text-[11px] text-fg-faint font-mono uppercase block mb-1">DEFAULT EXPANSION DEPTH</label>
-                            <select className="tp-select w-32" defaultValue="2">
-                                <option value="1">1 hop</option>
-                                <option value="2">2 hops</option>
-                                <option value="3">3 hops</option>
-                                <option value="4">4 hops</option>
-                                <option value="5">5 hops</option>
-                            </select>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-[11px] text-fg-secondary">Show entity IDs in graph</span>
-                            <input type="checkbox" defaultChecked className="accent-primary" />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-[11px] text-fg-secondary">Animate graph layout</span>
-                            <input type="checkbox" defaultChecked className="accent-primary" />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-[11px] text-fg-secondary">Compact data tables</span>
-                            <input type="checkbox" defaultChecked className="accent-primary" />
-                        </div>
+                    <div className="flex items-center justify-between">
+                        <span className="text-[hsl(var(--fg-secondary))]">Connection State:</span>
+                        <StatusMark status="active" label="Connected & Synchronized (UTC)" />
                     </div>
                 </div>
             </div>

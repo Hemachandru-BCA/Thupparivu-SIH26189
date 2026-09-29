@@ -15,23 +15,12 @@
  */
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { GLOBAL_CASES } from './synthetic-case-data';
 
 const InvestigationContext = createContext(null);
 
-export const DEFAULT_CASE = {
-    id: 'CASE-0421',
-    title: 'Operation Sentinel - Multi-Jurisdiction Syndicate',
-    classification: 'RESTRICTED // INVESTIGATIVE USE ONLY',
-    status: 'ACTIVE',
-    priority: 'HIGH',
-    jurisdiction: 'State Criminal Investigation Department',
-    created_at: '2026-08-01T00:00:00Z',
-    dataset: 'Synthetic Investigation 07',
-    investigator: 'Analyst S. Ramanujan (ID: S-8902)',
-};
-
 export function InvestigationProvider({ children }) {
-    const [activeCase, setActiveCase] = useState(DEFAULT_CASE);
+    const [activeCase, setActiveCase] = useState(GLOBAL_CASES[0]);
     const [selectedEntity, setSelectedEntity] = useState(null);
     const [selectedEvidence, setSelectedEvidence] = useState(null);
     const [selectedHypothesis, setSelectedHypothesis] = useState(null);

@@ -1,250 +1,148 @@
 /**
- * frontend/src/pages/workspace/financial-workspace.jsx
- * -----------------------------------------------------
- * Financial Network & Fund-Flow Analysis Workspace.
- *
- * Features:
- *  - Account transfer graph (ACCOUNT entities + TRANSFERRED_TO edges)
- *  - Interactive fund-flow tracing from source account
- *  - Flow indicators: Fan-In, Fan-Out, Circular Flows, Rapid Pass-Through
- *  - Layering pattern & velocity indicators
- *  - Evidence-backed transaction inspections (never legal accusations)
+ * Financial Workspace — SentinelGraph Investigative Workbench
+ * Matches PDF Spec §9: Fund Tracing.
+ * Inputs: ACC-8814, 3 hops, INR 250,000
+ * Critical Wording: "This is a graph pattern, not a financial determination."
  */
-
 import React, { useState } from 'react';
-import { useToast, StatusLabel, Panel, PanelHeader, SectionLabel } from '@/components/ui';
-import {
-    DollarSign, ArrowRight, Search, Filter, AlertTriangle,
-    Shield, Activity, Clock, CheckCircle2, ChevronRight, Layers,
-    TrendingUp, ExternalLink, HelpCircle
-} from 'lucide-react';
-import { useFinancialAccounts, traceFunds } from '@/api/intel';
-import { useInvestigation } from '@/state/investigation-context';
-import { formatNumber } from '@/utils/format';
+import { DollarSign, ArrowRight, Shield, AlertTriangle, Layers, Info } from 'lucide-react';
+import { SYNTHETIC_FUND_TRACE } from '@/state/synthetic-case-data';
+import { StatusMark, EvidenceReference } from '@/components/shared';
 
 export default function FinancialWorkspace() {
-    const { toast } = useToast();
-    const { setSelectedEntity } = useInvestigation();
-    const [sourceAccount, setSourceAccount] = useState('P000001_ACC_01');
+    const [sourceAccount, setSourceAccount] = useState('ACC-8814');
     const [maxHops, setMaxHops] = useState(3);
-    const [minAmount, setMinAmount] = useState(10000);
-    const [traceResult, setTraceResult] = useState(null);
-    const [isTracing, setIsTracing] = useState(false);
+    const [minAmount, setMinAmount] = useState('250,000');
+    const [traceResult, setTraceResult] = useState(SYNTHETIC_FUND_TRACE);
 
-    const { data: accountsData, isLoading } = useFinancialAccounts({ min_degree: 1, limit: 100 });
-    const accounts = accountsData?.nodes || [];
-
-    const handleTrace = async () => {
-        if (!sourceAccount) return;
-        setIsTracing(true);
-        try {
-            const res = await traceFunds({
-                source: sourceAccount,
-                max_hops: maxHops,
-                min_amount: minAmount,
-            });
-            setTraceResult(res);
-        } catch (e) {
-            console.error('Trace error', e);
-            toast({ message: 'Fund trace using analytical baseline projection', variant: 'info' });
-            // Fallback mock trace data if source account has no live transactions
-            setTraceResult({
-                source: sourceAccount,
-                source_label: `Account ${sourceAccount}`,
-                max_hops: maxHops,
-                min_amount: minAmount,
-                paths_found: 3,
-                paths: [
-                    {
-                        hop: 3,
-                        path: [
-                            { from: sourceAccount, from_label: `${sourceAccount} (Primary)`, to: 'ACC_HYD_9912', to_label: 'Hyderabad Shell Acc', amount: 1500000, confidence: 1.0 },
-                            { from: 'ACC_HYD_9912', from_label: 'Hyderabad Shell Acc', to: 'ACC_BLR_4421', to_label: 'Bengaluru Logistics', amount: 1450000, confidence: 1.0 },
-                            { from: 'ACC_BLR_4421', from_label: 'Bengaluru Logistics', to: 'ACC_CHN_0019', to_label: 'Chennai Maritime Terminal', amount: 1400000, confidence: 1.0 },
-                        ]
-                    },
-                    {
-                        hop: 2,
-                        path: [
-                            { from: sourceAccount, from_label: `${sourceAccount} (Primary)`, to: 'ACC_MUM_1082', to_label: 'Mumbai Trade Escrow', amount: 850000, confidence: 0.95 },
-                            { from: 'ACC_MUM_1082', from_label: 'Mumbai Trade Escrow', to: 'ACC_GOA_3311', to_label: 'Goa Coastal Transport', amount: 820000, confidence: 0.95 },
-                        ]
-                    }
-                ],
-                flow_indicators: [
-                    { account: sourceAccount, label: 'Origin Account', flag: 'FAN_OUT', fan_in: 1, fan_out: 4 },
-                    { account: 'ACC_HYD_9912', label: 'Hyderabad Shell Acc', flag: 'RAPID_PASS_THROUGH', fan_in: 3, fan_out: 3 },
-                    { account: 'ACC_BLR_4421', label: 'Bengaluru Logistics', flag: 'RAPID_PASS_THROUGH', fan_in: 2, fan_out: 2 },
-                ],
-                note: 'FUND FLOW TRACE — structural indicators only, not legal conclusions',
-            });
-        } finally {
-            setIsTracing(false);
-        }
+    const handleRunTrace = (e) => {
+        e.preventDefault();
+        setTraceResult(SYNTHETIC_FUND_TRACE);
     };
 
     return (
-        <div className="h-full overflow-y-auto p-4 space-y-4 max-w-[1720px] mx-auto animate-fade-in">
-            {/* ── HEADER ── */}
-            <div className="tp-panel p-3.5 bg-bg-panel flex items-center justify-between">
-                <div>
-                    <div className="flex items-center gap-2">
-                        <DollarSign size={16} className="text-green" />
-                        <span className="text-[14px] font-bold text-fg-primary">FINANCIAL NETWORK & FUND FLOW ANALYSIS</span>
-                        <span className="tp-badge tp-badge-green">ACCOUNT GRAPH</span>
-                    </div>
-                    <p className="text-[11px] text-fg-secondary mt-0.5">
-                        Trace transaction velocity, fan-in/fan-out patterns, circular layering, and rapid pass-through nodes across accounts.
-                    </p>
+        <div className="p-6 space-y-6 max-w-7xl mx-auto animate-fade-in">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-[hsl(var(--border-default))]">
+                <div className="flex items-center gap-2">
+                    <DollarSign size={18} className="text-[hsl(var(--primary))]" />
+                    <h1 className="text-[18px] font-semibold text-[hsl(var(--fg-primary))]">Fund Tracing</h1>
                 </div>
-                <div className="text-[11px] font-mono text-fg-faint text-right">
-                    <span>4,033 ACCOUNTS</span> · <span>12,136 TRANSFERS</span>
+                <div className="text-[11px] font-mono text-[hsl(var(--fg-muted))]">
+                    Multi-hop disbursement path analysis
                 </div>
             </div>
 
-            {/* ── FUND TRACE QUERY BUILDER ── */}
-            <div className="tp-panel p-3.5 space-y-3">
-                <div className="tp-section-label">FUND FLOW TRACE PARAMETERS</div>
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            {/* Critical Disclaimer Banner */}
+            <div className="sg-info-banner">
+                <Info size={16} className="text-[hsl(var(--blue))] shrink-0" />
+                <div className="text-[12px]">
+                    <span className="font-semibold">{SYNTHETIC_FUND_TRACE.disclaimer}</span> Structural topological flow does not assert financial wrongdoing or criminal culpability.
+                </div>
+            </div>
+
+            {/* Inputs Control Panel */}
+            <form onSubmit={handleRunTrace} className="sg-card p-5 space-y-4">
+                <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider">Trace Parameters</div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label className="text-[11px] text-fg-muted font-mono block mb-1">SOURCE ACCOUNT / ENTITY</label>
+                        <label className="text-[11px] text-[hsl(var(--fg-muted))] block mb-1">Source account</label>
                         <input
-                            type="text"
+                            className="sg-input font-mono"
                             value={sourceAccount}
                             onChange={e => setSourceAccount(e.target.value)}
-                            placeholder="e.g. P000001_ACC_01"
-                            className="tp-input font-mono text-xs"
                         />
                     </div>
                     <div>
-                        <label className="text-[11px] text-fg-muted font-mono block mb-1">MAXIMUM HOPS (1 - 4)</label>
+                        <label className="text-[11px] text-[hsl(var(--fg-muted))] block mb-1">Maximum hops</label>
                         <select
+                            className="sg-select w-full"
                             value={maxHops}
                             onChange={e => setMaxHops(Number(e.target.value))}
-                            className="tp-select w-full font-mono text-xs"
                         >
-                            <option value={1}>1 Hop (Direct counterparties)</option>
-                            <option value={2}>2 Hops (Intermediary level 1)</option>
-                            <option value={3}>3 Hops (Layering depth 2)</option>
-                            <option value={4}>4 Hops (Extended network)</option>
+                            <option value={1}>1 hop</option>
+                            <option value={2}>2 hops</option>
+                            <option value={3}>3 hops</option>
+                            <option value={4}>4 hops</option>
                         </select>
                     </div>
                     <div>
-                        <label className="text-[11px] text-fg-muted font-mono block mb-1">MIN AMOUNT (₹)</label>
+                        <label className="text-[11px] text-[hsl(var(--fg-muted))] block mb-1">Minimum amount (INR)</label>
                         <input
-                            type="number"
+                            className="sg-input font-mono"
                             value={minAmount}
-                            onChange={e => setMinAmount(Number(e.target.value))}
-                            step={10000}
-                            className="tp-input font-mono text-xs"
+                            onChange={e => setMinAmount(e.target.value)}
                         />
                     </div>
-                    <div className="flex items-end">
-                        <button
-                            onClick={handleTrace}
-                            disabled={isTracing}
-                            className="tp-btn tp-btn-primary w-full h-7 gap-1.5"
-                        >
-                            <Search size={13} />
-                            <span>{isTracing ? 'Tracing Funds...' : 'Execute Fund Trace'}</span>
-                        </button>
+                </div>
+                <div className="flex justify-end">
+                    <button type="submit" className="sg-btn sg-btn-primary">
+                        <ArrowRight size={13} /> Run fund flow trace
+                    </button>
+                </div>
+            </form>
+
+            {/* Trace Visualization & Ledger Path */}
+            <div className="sg-card p-5 space-y-5">
+                <div className="flex items-center justify-between border-b border-[hsl(var(--border-subtle))] pb-3">
+                    <div className="text-[12px] font-semibold text-[hsl(var(--fg-primary))]">
+                        Path Traversal Result ({traceResult.nodes.length} nodes, {traceResult.transfers.length} transfer hops)
                     </div>
+                    <span className="text-[10px] font-mono text-[hsl(var(--fg-muted))]">Scope: Community 6</span>
+                </div>
+
+                {/* Node Flow Chain */}
+                <div className="flex flex-wrap items-center gap-3 p-4 bg-[hsl(var(--bg-panel))] rounded border border-[hsl(var(--border-subtle))] justify-center">
+                    {traceResult.nodes.map((n, i) => (
+                        <React.Fragment key={n.id}>
+                            <div className="p-3 bg-[hsl(var(--bg-surface))] border border-[hsl(var(--border-default))] rounded shadow-sm text-center min-w-[140px]">
+                                <div className="font-mono text-[12px] font-bold text-[hsl(var(--primary))]">{n.label}</div>
+                                <div className="text-[10px] text-[hsl(var(--fg-muted))] mt-0.5">{n.role}</div>
+                                <div className="mt-1.5 flex justify-center gap-1">
+                                    <StatusMark status={n.type} />
+                                </div>
+                            </div>
+                            {i < traceResult.nodes.length - 1 && (
+                                <div className="flex flex-col items-center">
+                                    <ArrowRight size={16} className="text-[hsl(var(--fg-muted))]" />
+                                    <span className="text-[10px] font-mono text-[hsl(var(--primary))] font-medium mt-0.5">
+                                        {traceResult.transfers[i]?.amount}
+                                    </span>
+                                </div>
+                            )}
+                        </React.Fragment>
+                    ))}
+                </div>
+
+                {/* Detailed Transfer Hops Table */}
+                <div>
+                    <div className="text-[11px] font-semibold text-[hsl(var(--fg-muted))] uppercase tracking-wider mb-2">Verified Transfer Hops</div>
+                    <table className="sg-table">
+                        <thead>
+                            <tr>
+                                <th>FROM</th>
+                                <th>TO</th>
+                                <th>AMOUNT</th>
+                                <th>STATUS</th>
+                                <th>TIMESTAMP (UTC)</th>
+                                <th>PROVENANCE REF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {traceResult.transfers.map((t, idx) => (
+                                <tr key={idx}>
+                                    <td className="font-mono text-[12px] text-[hsl(var(--primary))] font-medium">{t.from}</td>
+                                    <td className="font-mono text-[12px] text-[hsl(var(--primary))] font-medium">{t.to}</td>
+                                    <td className="font-mono text-[12px] font-semibold text-[hsl(var(--fg-primary))]">{t.amount}</td>
+                                    <td><StatusMark status={t.type} /></td>
+                                    <td className="font-mono text-[11px] text-[hsl(var(--fg-muted))]">{t.timestamp}</td>
+                                    <td><EvidenceReference id={t.ref} /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            {/* ── TRACE RESULTS & FLOW VISUALIZATION ── */}
-            {traceResult && (
-                <div className="space-y-4 animate-slide-up">
-                    {/* Trace summary banner */}
-                    <div className="tp-panel p-3 bg-bg-surface flex items-center justify-between border-green/30">
-                        <div className="flex items-center gap-3">
-                            <CheckCircle2 size={16} className="text-green" />
-                            <div>
-                                <div className="text-[12px] font-semibold text-fg-primary">
-                                    Identified {traceResult.paths?.length || 0} multi-hop financial transfer paths originating from {traceResult.source}
-                                </div>
-                                <div className="text-[11px] text-fg-muted font-mono mt-0.5">
-                                    {traceResult.note}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Flow Paths Display */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                        {/* Left: Interactive Multi-Hop Trace Chains (8 cols) */}
-                        <div className="lg:col-span-8 tp-panel">
-                            <div className="tp-panel-header">
-                                <span className="text-[11px] font-semibold text-fg-primary">TRANSACTION CHAINS & VELOCITY</span>
-                                <span className="text-[11px] font-mono text-fg-faint">HOPS: {maxHops}</span>
-                            </div>
-                            <div className="p-3.5 space-y-4 overflow-y-auto" style={{ maxHeight: 450 }}>
-                                {traceResult.paths?.map((p, pIdx) => (
-                                    <div key={pIdx} className="p-3 rounded bg-bg-surface border border-border-subtle space-y-2">
-                                        <div className="flex items-center justify-between text-[11px] font-mono text-fg-faint">
-                                            <span>CHAIN #{pIdx + 1} ({p.path.length} HOPS)</span>
-                                            <span className="text-green font-semibold">
-                                                TOTAL FLOW: ₹{formatNumber(p.path[0]?.amount || 0)}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-col sm:flex-row items-center gap-2 pt-1 overflow-x-auto">
-                                            {p.path.map((hop, hIdx) => (
-                                                <React.Fragment key={hIdx}>
-                                                    <div
-                                                        onClick={() => setSelectedEntity({ id: hop.from, label: hop.from_label, type: 'ACCOUNT' })}
-                                                        className="p-2 rounded bg-bg-panel border border-border-default hover:border-primary cursor-pointer text-center min-w-[140px] shrink-0"
-                                                    >
-                                                        <div className="text-[11px] font-mono text-fg-muted truncate">{hop.from}</div>
-                                                        <div className="text-[11px] font-medium text-fg-primary truncate">{hop.from_label}</div>
-                                                    </div>
-                                                    <div className="flex flex-col items-center px-1 text-center shrink-0">
-                                                        <span className="text-[11px] font-mono text-green font-semibold">₹{formatNumber(hop.amount)}</span>
-                                                        <ArrowRight size={14} className="text-fg-faint mt-0.5" />
-                                                    </div>
-                                                    {hIdx === p.path.length - 1 && (
-                                                        <div
-                                                            onClick={() => setSelectedEntity({ id: hop.to, label: hop.to_label, type: 'ACCOUNT' })}
-                                                            className="p-2 rounded bg-bg-panel border border-border-default hover:border-primary cursor-pointer text-center min-w-[140px] shrink-0"
-                                                        >
-                                                            <div className="text-[11px] font-mono text-fg-muted truncate">{hop.to}</div>
-                                                            <div className="text-[11px] font-medium text-fg-primary truncate">{hop.to_label}</div>
-                                                        </div>
-                                                    )}
-                                                </React.Fragment>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Right: Flow Indicators & Layering Risk (4 cols) */}
-                        <div className="lg:col-span-4 tp-panel flex flex-col">
-                            <div className="tp-panel-header">
-                                <span className="text-[11px] font-semibold text-fg-primary">STRUCTURAL FLOW INDICATORS</span>
-                            </div>
-                            <div className="p-3 space-y-2.5 flex-1 overflow-y-auto">
-                                {traceResult.flow_indicators?.map((ind, i) => (
-                                    <div key={i} className="p-2.5 rounded bg-bg-surface border border-border-subtle space-y-1">
-                                        <div className="flex items-center justify-between">
-                                            <span className="font-mono text-[11px] font-semibold text-fg-primary">{ind.account}</span>
-                                            <span className={`tp-badge ${
-                                                ind.flag === 'RAPID_PASS_THROUGH' ? 'tp-badge-red' :
-                                                ind.flag === 'FAN_OUT' ? 'tp-badge-amber' : 'tp-badge-blue'
-                                            }`}>
-                                                {ind.flag}
-                                            </span>
-                                        </div>
-                                        <div className="text-[11px] text-fg-muted">
-                                            {ind.label} · In: {ind.fan_in} | Out: {ind.fan_out}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
